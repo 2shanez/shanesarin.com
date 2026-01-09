@@ -3,9 +3,9 @@ import type { Site, Metadata, Socials } from "@types";
 export const SITE: Site = {
   NAME: "Shane Sarin",
   EMAIL: "shanesarin.@gmail.com",
-  NUM_POSTS_ON_HOMEPAGE: 3,
-  NUM_WORKS_ON_HOMEPAGE: 2,
-  NUM_PROJECTS_ON_HOMEPAGE: 3,
+  NUM_POSTS_ON_HOMEPAGE: 0,
+  NUM_WORKS_ON_HOMEPAGE: 0,
+  NUM_PROJECTS_ON_HOMEPAGE: 0,
 };
 
 export const HOME: Metadata = {
