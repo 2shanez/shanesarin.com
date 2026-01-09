@@ -10,7 +10,7 @@ export const SITE: Site = {
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Astro Nano is a minimal and lightweight blog and portfolio.",
+  DESCRIPTION: "Shane Sarin",
 };
 
 export const BLOG: Metadata = {
@@ -31,14 +31,14 @@ export const PROJECTS: Metadata = {
 export const SOCIALS: Socials = [
   { 
     NAME: "twitter-x",
-    HREF: "https://twitter.com/markhorn_dev",
+    HREF: "https://x.com/BlockShane_",
   },
   { 
     NAME: "github",
-    HREF: "https://github.com/markhorn-dev"
+    HREF: "https://github.com/2shanez"
   },
   { 
     NAME: "linkedin",
-    HREF: "https://www.linkedin.com/in/markhorn-dev",
+    HREF: "https://www.linkedin.com/in/shane-sarin/",
   }
 ];
