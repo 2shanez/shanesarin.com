@@ -4,7 +4,7 @@ import PageLayout from "@layouts/PageLayout.astro";
 import Link from "@components/Link.astro";
 ---
 
-<PageLayout title="Collection" description="The 2667 Collection - Select Works - NFTs by Shane Sarin">
+<PageLayout title="Collection" description="The 2667 Collection - NFTs by Shane Sarin">
   <Container>
     <div class="space-y-12">
       <div class="space-y-4">
@@ -241,6 +241,31 @@ import Link from "@components/Link.astro";
               <h3 class="font-semibold text-black dark:text-white">Iridescent Imagination</h3>
               <p class="text-sm text-neutral-600 dark:text-neutral-400">Mad Dog Jones</p>
               <p class="text-xs text-neutral-500 dark:text-neutral-500">#243/250</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- The 2020 Collection: Beeple Everydays -->
+      <section class="animate space-y-6">
+        <div class="space-y-3">
+          <h2 class="text-2xl font-semibold text-black dark:text-white">The 2020 Collection: Beeple Everydays</h2>
+          <p class="text-neutral-600 dark:text-neutral-400">by Beeple</p>
+          <p class="text-neutral-700 dark:text-neutral-300">Released on NiftyGateway in December 2020, The 2020 Collection assembles 722 unique NFTs from Beeple's daily "Everydays" series, transforming one-a-day surreal visions into a cyberpunk NFT archive. Works span editions like "BULL RUN" (271 pieces), "INTO THE ETHER" (207 pieces), "INFECTED" (123 pieces), and "Beeple Everydays - Raw" (100 pieces).</p>
+          <Link href="https://beeple-collect.com/collection-all/2020-collection/" external>Learn more →</Link>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="group">
+            <div class="aspect-square overflow-hidden rounded-lg bg-black">
+              <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                <source src="/collection/bullrun.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="mt-3">
+              <h3 class="font-semibold text-black dark:text-white">BULL RUN</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">Beeple</p>
+              <p class="text-xs text-neutral-500 dark:text-neutral-500">#14/271</p>
             </div>
           </div>
         </div>
