@@ -1,6 +1,6 @@
 ---
 company: "Consensys"
-role: "Product Growth & Business Development"
+role: "Product Growth"
 dateStart: "01/01/2023"
 dateEnd: "12/31/2025"
 ---
