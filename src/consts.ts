@@ -5,7 +5,7 @@ export const SITE: Site = {
   EMAIL: "shanesarin@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 0,
   NUM_WORKS_ON_HOMEPAGE: 0,
-  NUM_PROJECTS_ON_HOMEPAGE: 0,
+  NUM_PROJECTS_ON_HOMEPAGE: 1,
 };
 
 export const HOME: Metadata = {
