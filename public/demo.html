@@ -1066,6 +1066,11 @@
             transform: scale(0.96);
         }
 
+        .reward-card:hover .reward-emoji {
+            transform: scale(1.1);
+            transition: transform 0.3s;
+        }
+
         .reward-emoji {
             width: 54px;
             height: 54px;
@@ -1163,6 +1168,16 @@
             font-weight: 800;
             font-size: 14px;
             border: 2px solid rgba(255,255,255,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .pick.selected + .pick .team-logo,
+        .pick:first-child.selected ~ .pick:last-child {
+            opacity: 0.7;
+        }
+
+        .pick.selected .team-logo {
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
         .team-name {
@@ -2877,6 +2892,26 @@
             document.getElementById('toastIcon').textContent = msg.charAt(0);
             t.classList.add('visible');
             setTimeout(() => t.classList.remove('visible'), 3000);
+        }
+
+        // Show welcome modal for new users
+        if (!localStorage.getItem('veritas_welcomed')) {
+            setTimeout(() => {
+                if (document.getElementById('app').classList.contains('active')) {
+                    document.getElementById('modalBody').innerHTML = `
+                        <div class="modal-emoji">🎉</div>
+                        <h2 class="modal-heading">Welcome to Veritas!</h2>
+                        <p class="modal-sub">Your verified alumni journey starts now</p>
+                        <div style="text-align:left;margin:24px 0;">
+                            <div style="display:flex;gap:14px;margin-bottom:16px;"><span style="font-size:24px;">🎓</span><div><strong>Verified Credential</strong><br><span style="color:var(--text-secondary);font-size:14px;">Your degree is now a digital asset</span></div></div>
+                            <div style="display:flex;gap:14px;margin-bottom:16px;"><span style="font-size:24px;">💎</span><div><strong>Earn Points</strong><br><span style="color:var(--text-secondary);font-size:14px;">Engage, predict, and refer to earn</span></div></div>
+                            <div style="display:flex;gap:14px;"><span style="font-size:24px;">🎁</span><div><strong>Redeem Rewards</strong><br><span style="color:var(--text-secondary);font-size:14px;">Exchange points for premium perks</span></div></div>
+                        </div>
+                        <button class="modal-cta" onclick="localStorage.setItem('veritas_welcomed','1');closeModal(event);">Let's Go!</button>
+                    `;
+                    document.getElementById('modal').classList.add('open');
+                }
+            }, 800);
         }
 
         // Haptic
