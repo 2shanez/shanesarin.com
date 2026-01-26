@@ -2771,7 +2771,14 @@
             });
             btn.classList.add('selected');
             btn.querySelector('.pick-sub').textContent = 'Your pick';
-            toast('🏀 Prediction saved!');
+            
+            // Animate selection
+            btn.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 150);
+            
+            toast('🏀 Prediction locked in!');
         }
 
         // AI
@@ -2846,9 +2853,31 @@
         }
 
         function redeemReward(name) {
-            document.getElementById('modal').classList.remove('open');
-            toast(`🎉 ${name} redeemed!`);
+            // Show success animation
+            document.getElementById('modalBody').innerHTML = `
+                <div style="padding: 40px 0;">
+                    <div style="font-size: 80px; margin-bottom: 24px; animation: successBounce 0.6s ease;">✅</div>
+                    <h2 class="modal-heading">Reward Redeemed!</h2>
+                    <p style="color: var(--text-secondary); margin-top: 8px;">${name} is on its way</p>
+                    <p style="color: var(--success); margin-top: 16px; font-weight: 600;">Check your email for details</p>
+                </div>
+            `;
+            setTimeout(() => {
+                document.getElementById('modal').classList.remove('open');
+                toast(`🎉 ${name} redeemed!`);
+            }, 2000);
         }
+
+        // Add CSS animation for success
+        const successStyle = document.createElement('style');
+        successStyle.textContent = `
+            @keyframes successBounce {
+                0% { transform: scale(0); }
+                50% { transform: scale(1.2); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(successStyle);
 
         // Alumni filter
         function setFilter(el, filter) {
