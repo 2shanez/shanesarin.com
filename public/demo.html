@@ -1959,10 +1959,28 @@
             <div class="screen active" id="screen-home">
                 <div class="greeting">
                     <div>
-                        <h1>Hey, Shane 👋</h1>
+                        <h1 class="greeting-title">Hey, Shane 👋</h1>
                         <p>Your verified credential is working for you</p>
                     </div>
                     <div class="greeting-avatar" onclick="switchTab('profile')">SS</div>
+                </div>
+
+                <!-- Daily Streak Banner -->
+                <div style="margin: 16px 20px 0; padding: 16px 20px; background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05)); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: var(--radius); display: flex; align-items: center; gap: 14px;">
+                    <div style="font-size: 32px;">🔥</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; font-size: 15px; margin-bottom: 2px;">7 Day Streak!</div>
+                        <div style="font-size: 13px; color: var(--text-secondary);">Keep it up! +50 bonus points tomorrow</div>
+                    </div>
+                    <div style="display: flex; gap: 4px;">
+                        <span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span>
+                        <span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span>
+                        <span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span>
+                        <span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span>
+                        <span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span>
+                        <span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span>
+                        <span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span>
+                    </div>
                 </div>
 
                 <div class="credential-wrap">
@@ -2463,7 +2481,12 @@
                 <div class="profile-hero">
                     <div class="profile-avatar">SS</div>
                     <h1 class="profile-name">Shane Sarin</h1>
-                    <p class="profile-degree">UNC '20 • Economics</p>
+                    <p class="profile-degree">UNC Chapel Hill '20 • Economics</p>
+                    <div style="display: flex; gap: 8px; justify-content: center; margin-top: 12px; flex-wrap: wrap;">
+                        <span style="background: var(--success-bg); color: var(--success); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 500;">✓ Verified Alumni</span>
+                        <span style="background: var(--accent-glow); color: var(--accent); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 500;">🏆 Gold Member</span>
+                        <span style="background: var(--info-bg); color: var(--info); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 500;">🔥 7 Day Streak</span>
+                    </div>
                     <div class="profile-stats">
                         <div class="profile-stat">
                             <div class="profile-stat-val">12,450</div>
