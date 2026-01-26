@@ -1,89 +1,94 @@
 ---
 title: "Prism"
-description: "The Trust Layer for AI-Generated Content"
+description: "The Verification Layer for News"
 date: 2025-01-15
 status: "concept"
-tags: ["ai", "trust", "provenance", "compliance", "infrastructure"]
+tags: ["blockchain", "truth", "verification", "news", "decentralized"]
 demo: "/demos/prism.html"
 featured: true
 ---
 
-# Prism – The Trust Layer for AI-Generated Content
+# Prism – The Verification Layer for News
 
-**Prism** is the cryptographic trust infrastructure for the AI age. As synthetic media proliferates—text, images, video, code—trust is collapsing. Prism provides the full-stack solution: provenance verification, compliance automation, and creator attribution.
+**Prism** is decentralized truth infrastructure where news and claims are cryptographically verified by reputation-staked attesters. No single arbiter. Consensus of trusted sources. Immutable record.
 
-## The Thesis
+## The Core Insight
 
-Every stakeholder in the content ecosystem faces the same problem:
+**Truth should be verifiable, not just claimed.**
 
-- **Regulators**: EU AI Act requires AI content labeling. Non-compliance means fines up to €35M.
-- **Platforms**: Deepfakes spread faster than detection. Users demand authenticity.
-- **Enterprises**: Can't verify AI usage in content supply chains.
-- **Creators**: Their work trains AI models without consent or compensation.
+Current fact-checking is broken:
+- **Centralized**: A handful of organizations decide truth. Who fact-checks the fact-checkers?
+- **Slow**: Fact-checks arrive days after misinformation goes viral
+- **No stakes**: Wrong? No consequences. No reputation on the line.
+- **Opaque**: Hidden methodology. No audit trail. Editable history.
 
-## Products
+Prism fixes this with a protocol-level approach to verification.
 
-### 1. Provenance API
-Cryptographic signatures for content origin. Know exactly what created it, what AI was used, and the full chain of custody.
+## How It Works
 
-- C2PA-compliant content credentials
-- AI model identification & version tracking
-- Training data lineage verification
-- Tamper-evident signatures
+### 1. Claim Submitted
+Anyone can submit a claim for verification—breaking news, viral posts, political statements, scientific claims.
 
-### 2. Verification SDK
-Drop-in verification for any platform. Display provenance, detect AI content, and auto-label for compliance.
+### 2. Attesters Verify
+Verified organizations (journalists, institutions, experts) investigate and stake their reputation on a verdict: TRUE, FALSE, or UNVERIFIABLE.
 
-- React, Vue, Swift, Android SDKs
-- Multi-modal detection (text, image, video, audio)
-- 99.7% detection accuracy
-- Sub-100ms verification
+### 3. Consensus Sealed
+When enough trusted attesters agree, consensus forms. The verdict and all attestations are permanently recorded on-chain.
 
-### 3. Creator Attribution
-Track and compensate creators whose work trained AI models. The consent layer the industry needs.
+## The Attester Network
 
-- Training data fingerprinting
-- Attribution graph visualization
-- Automated royalty distribution
-- Creator opt-in/opt-out registry
+Prism uses a tiered network of verified organizations:
 
-### 4. Compliance Dashboard
-Enterprise-grade auditing for AI usage. Stay ahead of EU AI Act, state regulations, and industry standards.
+| Tier | Type | Examples |
+|------|------|----------|
+| Tier 1 | Major News Organizations | Reuters, AP, BBC, NYT, WSJ |
+| Tier 2 | Domain Experts | Harvard, WHO, Nature, IEEE |
+| Tier 3 | Fact-Checkers | Snopes, PolitiFact, AFP Fact Check |
+| Tier 4 | Community Validators | Verified journalists, researchers |
 
-- Real-time compliance monitoring
-- Automated labeling workflows
-- Audit trail exports
-- Multi-jurisdiction support
+## Economics: Skin in the Game
 
-## Why Now
+The key innovation is **reputation staking**:
 
-- **EU AI Act** taking effect (2024-2026 rollout)
-- **NYT vs OpenAI** lawsuit set precedent for training data liability
-- **Deepfake crisis** accelerating faster than solutions
-- **C2PA standard** exists but needs a business layer
+- **Reputation Score**: Every attestation stakes your reputation. Accurate = score rises. Wrong = score falls.
+- **Verification Rewards**: Accurate attesters earn PRISM tokens from the verification pool.
+- **Slashing**: Consistently wrong attestations trigger reputation slashing. Stakes are real.
+- **Speed Bonuses**: First accurate attesters on breaking news earn bonus rewards.
+- **Tier Advancement**: High-performers advance tiers. More influence, more rewards.
 
-## Competitive Landscape
+## Why Blockchain?
 
-| Company | Focus | Gap |
-|---------|-------|-----|
-| C2PA | Standard | Not a product |
-| Hive Moderation | Detection only | No provenance |
-| Reality Defender | Deepfake detection | No compliance |
-| Truepic | Photo authentication | Limited scope |
-| **Prism** | Full-stack trust infrastructure | ✓ |
+- **Immutability**: Can't edit history. What's recorded stays recorded.
+- **Transparency**: All attestations are public and auditable.
+- **Decentralization**: No single point of control or failure.
+- **Programmable Incentives**: Smart contracts automate reputation and rewards.
+- **Censorship Resistance**: Truth can't be silenced.
 
-## Business Model
+## Better Than Traditional Fact-Checking
 
-- **API calls**: Per-verification pricing
-- **Enterprise SaaS**: Compliance dashboards
-- **Platform licensing**: Social networks, publishers
-- **Data marketplace**: Provenance data for researchers/regulators
+| Feature | Prism | Traditional | Social |
+|---------|-------|-------------|--------|
+| Multiple verifiers | ✓ | ✗ | ✗ |
+| Reputation at stake | ✓ | ✗ | ✗ |
+| Immutable audit trail | ✓ | ✗ | ✗ |
+| Real-time verification | ✓ | ✗ | ~ |
+| Transparent methodology | ✓ | ~ | ✗ |
+| Economic incentives | ✓ | ✗ | ✗ |
+| Censorship resistant | ✓ | ✗ | ✗ |
+
+## Use Cases
+
+- **Breaking News**: Real-time verification as events unfold
+- **Political Claims**: Instant fact-checking of statements
+- **Viral Content**: Verify before you share
+- **Scientific Claims**: Expert-verified research findings
+- **Platform Integration**: APIs for social networks to display trust scores
 
 ## The Vision
 
-Prism becomes the trust primitive that every piece of content passes through. Just as Stripe became infrastructure for payments and Plaid for financial data, Prism becomes infrastructure for content authenticity.
+Wikipedia showed that distributed knowledge creation works. Prism applies the same principle to real-time truth verification—with economic incentives that make accuracy profitable.
 
-The platforms that solve content authenticity will win the next decade.
+The internet needs a trust layer. Prism is building it.
 
 ---
 
