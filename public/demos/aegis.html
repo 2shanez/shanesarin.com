@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aegis – The Operating System for Your AI Life</title>
+  <meta name="description" content="Aegis is the platform that lets your AI agents securely act in the real world. Your agents, your control, your data. The infrastructure for personal AI.">
+  <meta name="theme-color" content="#09090b">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Aegis – Personal AI Agent Platform">
+  <meta property="og:description" content="The operating system for your AI life. Secure infrastructure for AI agents that act on your behalf.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og-image.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%238b5cf6' rx='20' width='100' height='100'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white'>◈</text></svg>">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg: #09090b;
+      --bg-2: #0c0c0e;
+      --bg-3: #111113;
+      --bg-4: #18181b;
+      --bg-5: #1f1f23;
+      --border: rgba(255,255,255,0.06);
+      --border-2: rgba(255,255,255,0.1);
+      --border-3: rgba(255,255,255,0.15);
+      --text: #fafafa;
+      --text-2: #a1a1aa;
+      --text-3: #71717a;
+      --text-4: #52525b;
+      --accent: #8b5cf6;
+      --accent-2: #a78bfa;
+      --accent-3: #c4b5fd;
+      --accent-glow: rgba(139,92,246,0.15);
+      --green: #22c55e;
+      --yellow: #f59e0b;
+      --gold: #fbbf24;
+      --red: #ef4444;
+      --teal: #14b8a6;
+      --blue: #3b82f6;
+      --pink: #ec4899;
+      --gradient: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);
+      --gradient-warm: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+      --gradient-mixed: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f472b6 100%);
+      --gradient-security: linear-gradient(135deg, #22c55e 0%, #14b8a6 100%);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes orbFloat { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -20px); } }
+    @keyframes agentPulse { 0%, 100% { box-shadow: 0 0 20px var(--accent-glow), inset 0 0 20px transparent; } 50% { box-shadow: 0 0 40px var(--accent-glow), inset 0 0 20px var(--accent-glow); } }
+    
+    .anim { opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.3s; }
+    .d4 { animation-delay: 0.4s; }
+    .d5 { animation-delay: 0.5s; }
+    .d6 { animation-delay: 0.6s; }
+    
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      transition: all 0.3s;
+    }
+    
+    nav.scrolled {
+      padding: 0.75rem 1.5rem;
+      background: rgba(9,9,11,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+    
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 14px rgba(139,92,246,0.35);
+      position: relative;
+    }
+    
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: var(--gradient);
+      border-radius: 12px;
+      opacity: 0.3;
+      filter: blur(8px);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      padding: 0.25rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+    
+    .nav-links a {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--bg-5);
+    }
+    
+    .nav-cta { display: flex; gap: 0.75rem; }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-ghost { background: transparent; color: var(--text-2); }
+    .btn-ghost:hover { color: var(--text); }
+    
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+    
+    .btn-primary:hover {
+      background: #e4e4e7;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    
+    .btn-outline:hover {
+      background: var(--bg-4);
+      border-color: var(--border-3);
+    }
+    
+    .btn-accent {
+      background: var(--gradient);
+      color: white;
+    }
+    
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -8px rgba(139,92,246,0.45);
+    }
+    
+    .btn-warm {
+      background: var(--gradient-warm);
+      color: white;
+    }
+    
+    .btn-warm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -8px rgba(236,72,153,0.45);
+    }
+    
+    .btn-lg { padding: 0.875rem 1.75rem; font-size: 0.9375rem; }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-orb {
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(236,72,153,0.08) 30%, rgba(244,114,182,0.04) 60%, transparent 70%);
+      animation: glow 8s ease-in-out infinite, orbFloat 12s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.375rem 1rem 0.375rem 0.5rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      margin-bottom: 1.75rem;
+    }
+    
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 2s infinite;
+    }
+    
+    .badge-label {
+      background: var(--accent-glow);
+      color: var(--accent-2);
+      padding: 0.125rem 0.5rem;
+      border-radius: 100px;
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.75rem, 7vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero h1 .grad {
+      background: var(--gradient-mixed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-sub {
+      font-size: clamp(1.0625rem, 2vw, 1.25rem);
+      color: var(--text-2);
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+    
+    /* Agent Demo Visual */
+    .agent-demo {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .agent-core {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 2rem;
+      background: var(--bg-3);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      position: relative;
+      animation: agentPulse 3s ease-in-out infinite;
+    }
+    
+    .agent-core::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border: 2px dashed var(--border-2);
+      border-radius: 50%;
+      animation: rotate 20s linear infinite;
+    }
+    
+    .agent-core-icon {
+      font-size: 2.5rem;
+    }
+    
+    .agent-connections {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .agent-connection {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--text-2);
+      transition: all 0.3s;
+    }
+    
+    .agent-connection:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    .agent-connection .icon {
+      font-size: 1rem;
+    }
+    
+    .agent-connection.active {
+      border-color: var(--green);
+      background: rgba(34,197,94,0.1);
+    }
+    
+    .agent-connection.active::after {
+      content: '✓';
+      font-size: 0.625rem;
+      color: var(--green);
+      margin-left: 0.25rem;
+    }
+    
+    /* Section styles */
+    .section {
+      padding: 7rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-head {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+    }
+    
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .section-tag::before, .section-tag::after {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.35;
+    }
+    
+    .section-tag.green { color: var(--green); }
+    .section-tag.green::before, .section-tag.green::after { background: var(--green); }
+    
+    .section-tag.pink { color: var(--pink); }
+    .section-tag.pink::before, .section-tag.pink::after { background: var(--pink); }
+    
+    .section-head h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .section-head p {
+      font-size: 1rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+    
+    /* Problem */
+    .problem {
+      padding: 6rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .problem-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .problem-side {
+      padding: 2rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+    
+    .problem-side h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: var(--red);
+    }
+    
+    .problem-side.solution h4 {
+      color: var(--green);
+    }
+    
+    .problem-list {
+      list-style: none;
+    }
+    
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--text-2);
+    }
+    
+    .problem-list li:last-child { border-bottom: none; }
+    
+    .problem-list li::before {
+      content: '✗';
+      color: var(--red);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .problem-side.solution .problem-list li::before {
+      content: '✓';
+      color: var(--green);
+    }
+    
+    /* Capabilities Section */
+    .capabilities {
+      padding: 7rem 1.5rem;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .capabilities-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    
+    .cap-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cap-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--accent-glow) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: var(--radius-lg);
+    }
+    
+    .cap-card:hover {
+      border-color: rgba(139,92,246,0.3);
+      transform: translateY(-4px);
+    }
+    
+    .cap-card:hover::before { opacity: 1; }
+    
+    .cap-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cap-card h3 {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cap-card > p {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cap-features {
+      list-style: none;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cap-features li {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      padding: 0.375rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .cap-features li::before {
+      content: '◇';
+      color: var(--accent);
+      font-size: 0.5rem;
+    }
+    
+    /* Security Section */
+    .security {
+      padding: 7rem 1.5rem;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .security::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 400px;
+      background: radial-gradient(ellipse at top, rgba(34,197,94,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .security-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .security-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      margin-top: 3rem;
+      align-items: center;
+    }
+    
+    .security-visual {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+    
+    .permission-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .permission-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.3s;
+    }
+    
+    .permission-item:hover {
+      border-color: var(--border-2);
+    }
+    
+    .permission-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 1.125rem;
+    }
+    
+    .permission-icon.calendar { background: rgba(59,130,246,0.15); }
+    .permission-icon.email { background: rgba(236,72,153,0.15); }
+    .permission-icon.banking { background: rgba(34,197,94,0.15); }
+    .permission-icon.health { background: rgba(245,158,11,0.15); }
+    
+    .permission-content { flex: 1; }
+    .permission-content h5 { font-size: 0.875rem; font-weight: 600; }
+    .permission-content p { font-size: 0.75rem; color: var(--text-4); }
+    
+    .permission-status {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      padding: 0.25rem 0.625rem;
+      border-radius: 100px;
+    }
+    
+    .permission-status.allowed {
+      background: rgba(34,197,94,0.15);
+      color: var(--green);
+    }
+    
+    .permission-status.limited {
+      background: rgba(245,158,11,0.15);
+      color: var(--yellow);
+    }
+    
+    .permission-status.blocked {
+      background: rgba(239,68,68,0.15);
+      color: var(--red);
+    }
+    
+    .security-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .sec-feature {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .sec-feature-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    
+    .sec-feature h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    
+    .sec-feature p {
+      font-size: 0.875rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+    
+    /* Integration Ecosystem */
+    .integrations {
+      padding: 7rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .integrations-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .integration-categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    
+    .int-category {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .int-category h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    
+    .int-icons {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .int-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      transition: all 0.3s;
+    }
+    
+    .int-icon:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    /* Live Demo */
+    .demo {
+      padding: 7rem 1.5rem;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .demo::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(139,92,246,0.08) 0%, rgba(236,72,153,0.05) 50%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .demo-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .demo-terminal {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    
+    .demo-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .demo-dots {
+      display: flex;
+      gap: 0.375rem;
+    }
+    
+    .demo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-5);
+    }
+    
+    .demo-dot.red { background: #ef4444; }
+    .demo-dot.yellow { background: #f59e0b; }
+    .demo-dot.green { background: #22c55e; }
+    
+    .demo-title {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    .demo-body {
+      padding: 1.5rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8125rem;
+      line-height: 2;
+    }
+    
+    .demo-line {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.25rem 0;
+    }
+    
+    .demo-prompt { color: var(--accent-2); }
+    .demo-user { color: var(--text); }
+    .demo-agent { color: var(--green); }
+    .demo-action { color: var(--yellow); }
+    .demo-system { color: var(--text-4); font-style: italic; }
+    
+    .demo-typing::after {
+      content: '▋';
+      animation: pulse 1s infinite;
+    }
+    
+    /* Pricing */
+    .pricing {
+      padding: 7rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .pricing-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    
+    .price-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .price-card:hover { border-color: var(--border-2); }
+    
+    .price-card.pop {
+      border-color: var(--accent);
+      background: linear-gradient(180deg, var(--accent-glow) 0%, var(--bg) 100%);
+      box-shadow: 0 0 60px -20px rgba(139,92,246,0.3);
+      transform: scale(1.02);
+    }
+    
+    .price-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient);
+      color: white;
+      font-size: 0.625rem;
+      font-weight: 700;
+      padding: 0.3125rem 0.875rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .price-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    
+    .price-val {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    
+    .price-val span {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-4);
+    }
+    
+    .price-desc {
+      font-size: 0.75rem;
+      color: var(--text-4);
+      margin-bottom: 1.5rem;
+    }
+    
+    .price-list {
+      list-style: none;
+      margin-bottom: 1.75rem;
+    }
+    
+    .price-list li {
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      padding: 0.4375rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+    
+    .price-list li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+    
+    .price-card .btn { width: 100%; }
+    
+    /* Stats */
+    .stats {
+      padding: 4.5rem 1.5rem;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .stats-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    
+    .stat { text-align: center; }
+    
+    .stat-val {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .stat-lbl {
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      margin-top: 0.25rem;
+    }
+    
+    /* CTA */
+    .cta {
+      padding: 9rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, rgba(236,72,153,0.05) 50%, transparent 70%);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    
+    .cta h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .cta p {
+      font-size: 1rem;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 3.5rem 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer-top {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+    }
+    
+    .footer-brand p {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      margin-top: 0.875rem;
+      max-width: 260px;
+      line-height: 1.6;
+    }
+    
+    .footer-col h4 {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-col a {
+      display: block;
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      text-decoration: none;
+      padding: 0.3125rem 0;
+      transition: color 0.2s;
+    }
+    
+    .footer-col a:hover { color: var(--text-2); }
+    
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    .footer-badges {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .footer-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: var(--text-3);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .problem-grid { grid-template-columns: 1fr; }
+      .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
+      .security-grid { grid-template-columns: 1fr; }
+      .integration-categories { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+    
+    @media (max-width: 768px) {
+      .hero { padding: 6rem 1rem 3rem; }
+      .hero-cta { flex-direction: column; width: 100%; max-width: 280px; margin-left: auto; margin-right: auto; }
+      .hero-cta .btn { width: 100%; }
+      .capabilities-grid, .integration-categories, .pricing-grid, .stats-grid { grid-template-columns: 1fr; }
+      .price-card.pop { transform: none; order: -1; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .agent-connections { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        Aegis
+      </a>
+      <div class="nav-links">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#security">Security</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">Log In</a>
+        <a href="#" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-orb"></div>
+    <div class="hero-content">
+      <div class="badge anim">
+        <span class="badge-dot"></span>
+        <span class="badge-label">Beta</span>
+        The future of personal computing
+      </div>
+      <h1 class="anim d1">The operating system<br>for <span class="grad">your AI life</span></h1>
+      <p class="hero-sub anim d2">Everyone will have AI agents acting on their behalf. Aegis is the platform that lets your agents securely act in the real world—your agents, your control, your data.</p>
+      <div class="hero-cta anim d3">
+        <a href="#" class="btn btn-accent btn-lg">Deploy Your First Agent →</a>
+        <a href="#demo" class="btn btn-outline btn-lg">Watch Demo</a>
+      </div>
+      
+      <!-- Agent Visual -->
+      <div class="agent-demo anim d4">
+        <div class="agent-core">
+          <div class="agent-core-icon">🤖</div>
+        </div>
+        <div class="agent-connections">
+          <div class="agent-connection active">
+            <span class="icon">📅</span>
+            Calendar
+          </div>
+          <div class="agent-connection active">
+            <span class="icon">✉️</span>
+            Email
+          </div>
+          <div class="agent-connection">
+            <span class="icon">🏦</span>
+            Banking
+          </div>
+          <div class="agent-connection active">
+            <span class="icon">🏠</span>
+            Smart Home
+          </div>
+          <div class="agent-connection">
+            <span class="icon">❤️</span>
+            Health
+          </div>
+          <div class="agent-connection active">
+            <span class="icon">📝</span>
+            Tasks
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="problem">
+    <div class="problem-inner">
+      <div class="section-head">
+        <span class="section-tag">The Problem</span>
+        <h2>AI agents have no safe way to act</h2>
+        <p>The agents exist. The infrastructure doesn't. Without proper permissions, identity, and security—agents are either useless or dangerous.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-side">
+          <h4>🚫 Without Aegis</h4>
+          <ul class="problem-list">
+            <li>Share passwords with AI to access services</li>
+            <li>No granular permissions—all or nothing access</li>
+            <li>Can't verify what actions agents actually took</li>
+            <li>No way to revoke or limit agent access</li>
+            <li>Every integration is a custom hack</li>
+          </ul>
+        </div>
+        <div class="problem-side solution">
+          <h4>✓ With Aegis</h4>
+          <ul class="problem-list">
+            <li>Secure OAuth-style agent authorization</li>
+            <li>Fine-grained, revocable permissions</li>
+            <li>Complete audit trail of all agent actions</li>
+            <li>Time-limited, scoped access tokens</li>
+            <li>Universal integration protocol</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities Section -->
+  <section class="capabilities" id="capabilities">
+    <div class="capabilities-inner">
+      <div class="section-head">
+        <span class="section-tag">Agent Capabilities</span>
+        <h2>What your agents can do</h2>
+        <p>Aegis enables a new category of AI-powered automation. Your agents work for you, 24/7, with capabilities you control.</p>
+      </div>
+      
+      <div class="capabilities-grid">
+        <div class="cap-card">
+          <div class="cap-icon">📅</div>
+          <h3>Calendar & Scheduling</h3>
+          <p>Smart scheduling that respects your preferences, finds optimal meeting times, and handles rescheduling automatically.</p>
+          <ul class="cap-features">
+            <li>Intelligent scheduling optimization</li>
+            <li>Buffer time preferences</li>
+            <li>Timezone-aware booking</li>
+            <li>Conflict resolution</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">✉️</div>
+          <h3>Email Management</h3>
+          <p>Triage your inbox, draft responses, schedule sends, and keep you focused on what matters.</p>
+          <ul class="cap-features">
+            <li>Smart priority sorting</li>
+            <li>Draft contextual replies</li>
+            <li>Follow-up reminders</li>
+            <li>Unsubscribe automation</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">💰</div>
+          <h3>Financial Tasks</h3>
+          <p>Bill payments, expense tracking, subscription management—all with read-only or approved-action modes.</p>
+          <ul class="cap-features">
+            <li>Bill payment reminders</li>
+            <li>Subscription optimization</li>
+            <li>Expense categorization</li>
+            <li>Budget alerts</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">🏠</div>
+          <h3>Smart Home</h3>
+          <p>Coordinated automation across all your devices with context-aware rules and natural language control.</p>
+          <ul class="cap-features">
+            <li>Cross-device coordination</li>
+            <li>Energy optimization</li>
+            <li>Presence awareness</li>
+            <li>Natural language control</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">🛒</div>
+          <h3>Shopping & Errands</h3>
+          <p>Research products, track prices, place orders, and coordinate deliveries on your behalf.</p>
+          <ul class="cap-features">
+            <li>Price monitoring</li>
+            <li>Reorder essentials</li>
+            <li>Delivery coordination</li>
+            <li>Return processing</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">📊</div>
+          <h3>Research & Insights</h3>
+          <p>Deep research on any topic, synthesized into actionable insights and delivered when you need them.</p>
+          <ul class="cap-features">
+            <li>Multi-source research</li>
+            <li>Competitive analysis</li>
+            <li>News monitoring</li>
+            <li>Custom alerts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security Section -->
+  <section class="security" id="security">
+    <div class="security-inner">
+      <div class="section-head">
+        <span class="section-tag green">Security Model</span>
+        <h2>Trust, but verify. Always.</h2>
+        <p>Aegis implements the principle of least privilege for AI. Your agents get exactly the permissions they need—nothing more, nothing less.</p>
+      </div>
+      
+      <div class="security-grid">
+        <div class="security-visual">
+          <div class="permission-flow">
+            <div class="permission-item">
+              <div class="permission-icon calendar">📅</div>
+              <div class="permission-content">
+                <h5>Google Calendar</h5>
+                <p>Read events, create events (work hours only)</p>
+              </div>
+              <span class="permission-status allowed">✓ Allowed</span>
+            </div>
+            <div class="permission-item">
+              <div class="permission-icon email">✉️</div>
+              <div class="permission-content">
+                <h5>Gmail</h5>
+                <p>Read, draft replies (no send without approval)</p>
+              </div>
+              <span class="permission-status limited">⚡ Limited</span>
+            </div>
+            <div class="permission-item">
+              <div class="permission-icon banking">🏦</div>
+              <div class="permission-content">
+                <h5>Chase Bank</h5>
+                <p>Read balance only, no transactions</p>
+              </div>
+              <span class="permission-status limited">⚡ Read Only</span>
+            </div>
+            <div class="permission-item">
+              <div class="permission-icon health">❤️</div>
+              <div class="permission-content">
+                <h5>Health Data</h5>
+                <p>Blocked by user preference</p>
+              </div>
+              <span class="permission-status blocked">✗ Blocked</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="security-features">
+          <div class="sec-feature">
+            <div class="sec-feature-icon">🔐</div>
+            <div>
+              <h4>Zero-Knowledge Architecture</h4>
+              <p>Your credentials never touch our servers. Agents authenticate directly with services using secure, scoped tokens.</p>
+            </div>
+          </div>
+          <div class="sec-feature">
+            <div class="sec-feature-icon">📜</div>
+            <div>
+              <h4>Complete Audit Trail</h4>
+              <p>Every action your agent takes is logged with cryptographic proof. Review, verify, and export anytime.</p>
+            </div>
+          </div>
+          <div class="sec-feature">
+            <div class="sec-feature-icon">⏱️</div>
+            <div>
+              <h4>Time-Bounded Permissions</h4>
+              <p>Set expiration dates on any permission. Access automatically revokes—no cleanup required.</p>
+            </div>
+          </div>
+          <div class="sec-feature">
+            <div class="sec-feature-icon">🛑</div>
+            <div>
+              <h4>Instant Kill Switch</h4>
+              <p>One click to pause all agent activity. Emergency stop that actually works, every time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integrations Section -->
+  <section class="integrations" id="integrations">
+    <div class="integrations-inner">
+      <div class="section-head">
+        <span class="section-tag pink">Integration Ecosystem</span>
+        <h2>Connect to your world</h2>
+        <p>200+ integrations out of the box. Build custom connectors with our SDK. If it has an API, your agent can use it.</p>
+      </div>
+      
+      <div class="integration-categories">
+        <div class="int-category">
+          <h4>Productivity</h4>
+          <div class="int-icons">
+            <div class="int-icon">📅</div>
+            <div class="int-icon">✉️</div>
+            <div class="int-icon">📝</div>
+            <div class="int-icon">💬</div>
+          </div>
+        </div>
+        <div class="int-category">
+          <h4>Finance</h4>
+          <div class="int-icons">
+            <div class="int-icon">🏦</div>
+            <div class="int-icon">💳</div>
+            <div class="int-icon">📈</div>
+            <div class="int-icon">🧾</div>
+          </div>
+        </div>
+        <div class="int-category">
+          <h4>Smart Home</h4>
+          <div class="int-icons">
+            <div class="int-icon">💡</div>
+            <div class="int-icon">🌡️</div>
+            <div class="int-icon">🔒</div>
+            <div class="int-icon">📹</div>
+          </div>
+        </div>
+        <div class="int-category">
+          <h4>Health & Fitness</h4>
+          <div class="int-icons">
+            <div class="int-icon">⌚</div>
+            <div class="int-icon">🏃</div>
+            <div class="int-icon">💊</div>
+            <div class="int-icon">🧘</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Demo Section -->
+  <section class="demo" id="demo">
+    <div class="demo-inner">
+      <div class="section-head">
+        <span class="section-tag">Live Demo</span>
+        <h2>Watch an agent in action</h2>
+        <p>A real agent managing real tasks. No scripted demos—just AI working the way it should.</p>
+      </div>
+      
+      <div class="demo-terminal">
+        <div class="demo-header">
+          <div class="demo-dots">
+            <div class="demo-dot red"></div>
+            <div class="demo-dot yellow"></div>
+            <div class="demo-dot green"></div>
+          </div>
+          <span class="demo-title">aegis-agent — personal-assistant</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-line">
+            <span class="demo-prompt">[you]</span>
+            <span class="demo-user">Schedule a dentist appointment sometime next week, morning preferred</span>
+          </div>
+          <div class="demo-line">
+            <span class="demo-prompt">[aegis]</span>
+            <span class="demo-system">Checking calendar availability for next week...</span>
+          </div>
+          <div class="demo-line">
+            <span class="demo-prompt">[aegis]</span>
+            <span class="demo-system">Found openings: Mon 9am, Tue 10am, Thu 8am</span>
+          </div>
+          <div class="demo-line">
+            <span class="demo-prompt">[aegis]</span>
+            <span class="demo-system">Contacting Dr. Miller's office via email...</span>
+          </div>
+          <div class="demo-line">
+            <span class="demo-prompt">[agent]</span>
+            <span class="demo-agent">I've sent an appointment request to Dr. Miller's office for Tuesday 10am (your least busy morning). I'll confirm once they respond. Would you like me to add a 30-min buffer before your 11:30 meeting?</span>
+          </div>
+          <div class="demo-line">
+            <span class="demo-prompt">[you]</span>
+            <span class="demo-user">Yes, and remind me to floss more</span>
+          </div>
+          <div class="demo-line">
+            <span class="demo-prompt">[agent]</span>
+            <span class="demo-agent demo-typing">Done. I've also set a gentle daily reminder at 9pm. Your dental hygiene is now my problem too </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-val">200+</div>
+        <div class="stat-lbl">Integrations</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">2.4M</div>
+        <div class="stat-lbl">Tasks completed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">99.97%</div>
+        <div class="stat-lbl">Uptime</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">0</div>
+        <div class="stat-lbl">Security breaches</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="pricing-inner">
+      <div class="section-head">
+        <span class="section-tag">Pricing</span>
+        <h2>Start free, scale as you grow</h2>
+        <p>Your AI agents work 24/7. Shouldn't your pricing be simple too?</p>
+      </div>
+      
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Personal</h3>
+          <div class="price-val">$0<span>/month</span></div>
+          <p class="price-desc">For trying out AI agents</p>
+          <ul class="price-list">
+            <li>1 active agent</li>
+            <li>100 actions/month</li>
+            <li>5 integrations</li>
+            <li>7-day audit history</li>
+            <li>Community support</li>
+          </ul>
+          <a href="#" class="btn btn-outline">Get Started Free</a>
+        </div>
+        
+        <div class="price-card pop">
+          <span class="price-badge">Most Popular</span>
+          <h3>Pro</h3>
+          <div class="price-val">$29<span>/month</span></div>
+          <p class="price-desc">For power users</p>
+          <ul class="price-list">
+            <li>5 active agents</li>
+            <li>Unlimited actions</li>
+            <li>All integrations</li>
+            <li>90-day audit history</li>
+            <li>Priority support</li>
+            <li>Custom agent training</li>
+          </ul>
+          <a href="#" class="btn btn-accent">Start Pro Trial</a>
+        </div>
+        
+        <div class="price-card">
+          <h3>Team</h3>
+          <div class="price-val">$99<span>/month</span></div>
+          <p class="price-desc">For households & small teams</p>
+          <ul class="price-list">
+            <li>Unlimited agents</li>
+            <li>Unlimited actions</li>
+            <li>Shared agent library</li>
+            <li>1-year audit history</li>
+            <li>Dedicated support</li>
+            <li>Advanced permissions</li>
+            <li>SSO integration</li>
+          </ul>
+          <a href="#" class="btn btn-outline">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <h2>The future of personal AI starts now</h2>
+      <p>Join thousands who've already deployed their first agent. It takes 5 minutes to set up, and you'll wonder how you ever lived without it.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-accent btn-lg">Deploy Your Agent →</a>
+        <a href="#" class="btn btn-outline btn-lg">Talk to Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <div class="logo-mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          Aegis
+        </a>
+        <p>The operating system for your AI life. Secure infrastructure for agents that act on your behalf.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#security">Security</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Documentation</a>
+        <a href="#">API Reference</a>
+        <a href="#">Tutorials</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Aegis. All rights reserved.</span>
+      <div class="footer-badges">
+        <span class="footer-badge">🔒 SOC 2 Type II</span>
+        <span class="footer-badge">🇪🇺 GDPR Compliant</span>
+        <span class="footer-badge">🛡️ Zero Trust</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    
+    // Animate agent connections
+    const connections = document.querySelectorAll('.agent-connection');
+    let idx = 0;
+    setInterval(() => {
+      connections.forEach(c => c.classList.remove('active'));
+      const activeCount = 3 + Math.floor(Math.random() * 3);
+      const shuffled = [...connections].sort(() => Math.random() - 0.5);
+      shuffled.slice(0, activeCount).forEach(c => c.classList.add('active'));
+    }, 3000);
+  </script>
+</body>
+</html>

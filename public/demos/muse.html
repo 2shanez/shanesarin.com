@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muse – The AI Studio for Creators</title>
+  <meta name="description" content="Muse is the unified AI studio for creators. Ideate, create, and monetize — all in one place. The future of creative work is here.">
+  <meta name="theme-color" content="#0a0a0f">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Muse – The AI Studio for Creators">
+  <meta property="og:description" content="Ideate, create, monetize. One AI-native platform for everything creators need.">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23ff6b6b'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%2306b6d4'/></linearGradient></defs><rect fill='url(%23g)' rx='20' width='100' height='100'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white'>✦</text></svg>">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg: #0a0a0f;
+      --bg-2: #0f0f17;
+      --bg-3: #15151f;
+      --bg-4: #1a1a27;
+      --bg-5: #22222f;
+      --border: rgba(255,255,255,0.06);
+      --border-2: rgba(255,255,255,0.1);
+      --border-3: rgba(255,255,255,0.15);
+      --text: #fafafa;
+      --text-2: #a1a1aa;
+      --text-3: #71717a;
+      --text-4: #52525b;
+      
+      /* Vibrant creator palette */
+      --coral: #ff6b6b;
+      --coral-light: #ff8787;
+      --purple: #a855f7;
+      --purple-light: #c084fc;
+      --cyan: #06b6d4;
+      --cyan-light: #22d3ee;
+      --gold: #fbbf24;
+      --gold-light: #fcd34d;
+      --green: #10b981;
+      --pink: #ec4899;
+      --orange: #f97316;
+      
+      --gradient-hero: linear-gradient(135deg, #ff6b6b 0%, #a855f7 35%, #06b6d4 70%, #10b981 100%);
+      --gradient-btn: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #ff6b6b 100%);
+      --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #a855f7 100%);
+      --gradient-gold: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
+      --glow-purple: rgba(168,85,247,0.2);
+      --glow-cyan: rgba(6,182,212,0.15);
+      --glow-coral: rgba(255,107,107,0.15);
+      
+      --radius: 14px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    
+    /* Grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes morphBlob { 0%, 100% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; } 50% { border-radius: 30% 60% 70% 40%/50% 60% 30% 60%; } }
+    
+    .anim { opacity: 0; animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.3s; }
+    .d4 { animation-delay: 0.4s; }
+    .d5 { animation-delay: 0.5s; }
+    .d6 { animation-delay: 0.6s; }
+    
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      transition: all 0.3s;
+    }
+    
+    nav.scrolled {
+      padding: 0.75rem 1.5rem;
+      background: rgba(10,10,15,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.375rem;
+      color: var(--text);
+    }
+    
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--gradient-btn);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 20px var(--glow-purple);
+      position: relative;
+    }
+    
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: var(--gradient-btn);
+      border-radius: 14px;
+      opacity: 0.4;
+      filter: blur(12px);
+      z-index: -1;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.25rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+    
+    .nav-links a {
+      padding: 0.5rem 1.125rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--bg-5);
+    }
+    
+    .nav-cta { display: flex; gap: 0.75rem; align-items: center; }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    
+    .btn-ghost { background: transparent; color: var(--text-2); }
+    .btn-ghost:hover { color: var(--text); }
+    
+    .btn-primary {
+      background: var(--gradient-btn);
+      color: white;
+      box-shadow: 0 4px 20px var(--glow-purple);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--glow-purple);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    
+    .btn-outline:hover {
+      background: var(--bg-4);
+      border-color: var(--border-3);
+    }
+    
+    .btn-lg { padding: 1rem 2rem; font-size: 1rem; border-radius: 14px; }
+    
+    .btn-white {
+      background: white;
+      color: var(--bg);
+    }
+    
+    .btn-white:hover {
+      background: #f4f4f5;
+      transform: translateY(-2px);
+    }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Animated background blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: morphBlob 15s ease-in-out infinite, glow 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    .hero-blob-1 {
+      width: 600px;
+      height: 600px;
+      background: var(--coral);
+      top: -200px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+    
+    .hero-blob-2 {
+      width: 500px;
+      height: 500px;
+      background: var(--purple);
+      top: 100px;
+      right: -150px;
+      animation-delay: -5s;
+    }
+    
+    .hero-blob-3 {
+      width: 400px;
+      height: 400px;
+      background: var(--cyan);
+      bottom: 50px;
+      left: 20%;
+      animation-delay: -10s;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.5rem 1.25rem 0.5rem 0.625rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border-2);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+    }
+    
+    .badge-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--green);
+      animation: pulse 2s infinite;
+    }
+    
+    .badge-new {
+      background: var(--gradient-btn);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero h1 .grad {
+      background: var(--gradient-hero);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient 8s ease infinite;
+    }
+    
+    .hero-sub {
+      font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+      color: var(--text-2);
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+    
+    /* Creator types */
+    .creator-types {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .creator-type {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9375rem;
+      color: var(--text-3);
+    }
+    
+    .creator-type span {
+      font-size: 1.25rem;
+    }
+    
+    /* Problem Section */
+    .problem {
+      padding: 7rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .problem-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .section-head {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+    
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+      color: var(--purple-light);
+    }
+    
+    .section-tag::before, .section-tag::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--purple);
+      opacity: 0.4;
+    }
+    
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    
+    .section-head p {
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+    
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .pain-card {
+      padding: 2rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
+    .pain-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+    }
+    
+    .pain-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .pain-card h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .pain-card p {
+      font-size: 0.9375rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+    
+    .pain-tools {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .pain-tool {
+      padding: 0.375rem 0.75rem;
+      background: var(--bg-4);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--text-3);
+    }
+    
+    /* Solution - The Studio */
+    .studio {
+      padding: 8rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .studio::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, var(--glow-purple) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .studio-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .studio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    
+    .studio-card {
+      padding: 2.5rem 2rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    
+    .studio-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-btn);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .studio-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px -20px var(--glow-purple);
+    }
+    
+    .studio-card:hover::before { opacity: 1; }
+    
+    .studio-card.featured {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, var(--bg-2) 100%);
+      border-color: rgba(168,85,247,0.2);
+    }
+    
+    .studio-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .studio-card:nth-child(1) .studio-icon { background: rgba(255,107,107,0.15); border: 1px solid rgba(255,107,107,0.2); }
+    .studio-card:nth-child(2) .studio-icon { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.2); }
+    .studio-card:nth-child(3) .studio-icon { background: rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.2); }
+    .studio-card:nth-child(4) .studio-icon { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.2); }
+    .studio-card:nth-child(5) .studio-icon { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.2); }
+    
+    .studio-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
+    .studio-card > p {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    
+    .studio-features {
+      list-style: none;
+    }
+    
+    .studio-features li {
+      font-size: 0.875rem;
+      color: var(--text-3);
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+    
+    .studio-features li::before {
+      content: '✦';
+      font-size: 0.625rem;
+      color: var(--purple);
+    }
+    
+    /* AI Capabilities */
+    .ai-section {
+      padding: 7rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .ai-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-tag.coral { color: var(--coral-light); }
+    .section-tag.coral::before, .section-tag.coral::after { background: var(--coral); }
+    
+    .ai-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 4rem;
+      align-items: center;
+    }
+    
+    .ai-demo {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      position: relative;
+    }
+    
+    .ai-demo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    
+    .ai-demo-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .ai-demo-title .icon {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-btn);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+    }
+    
+    .ai-status-live {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--green);
+      font-weight: 600;
+    }
+    
+    .ai-status-live .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .ai-prompt {
+      background: var(--bg-3);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      border-left: 3px solid var(--purple);
+    }
+    
+    .ai-output {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    
+    .ai-output-item {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--bg-4) 0%, var(--bg-3) 100%);
+      border-radius: var(--radius);
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .ai-output-item::after {
+      content: '✓';
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      width: 24px;
+      height: 24px;
+      background: var(--green);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
+      color: white;
+    }
+    
+    .ai-list {
+      list-style: none;
+    }
+    
+    .ai-list-item {
+      display: flex;
+      gap: 1.25rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .ai-list-item:last-child { border-bottom: none; }
+    
+    .ai-list-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .ai-list-content h4 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin-bottom: 0.375rem;
+    }
+    
+    .ai-list-content p {
+      font-size: 0.9375rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+    
+    /* Monetization */
+    .monetize {
+      padding: 8rem 1.5rem;
+      position: relative;
+    }
+    
+    .monetize::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 500px;
+      background: radial-gradient(ellipse at bottom, rgba(251,191,36,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .monetize-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .section-tag.gold { color: var(--gold-light); }
+    .section-tag.gold::before, .section-tag.gold::after { background: var(--gold); }
+    
+    .monetize-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 3.5rem;
+    }
+    
+    .monetize-card {
+      padding: 2rem 1.5rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
+    .monetize-card:hover {
+      border-color: rgba(251,191,36,0.3);
+      transform: translateY(-4px);
+    }
+    
+    .monetize-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.25rem;
+      background: rgba(251,191,36,0.1);
+      border: 1px solid rgba(251,191,36,0.2);
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 1.75rem;
+    }
+    
+    .monetize-card h3 {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .monetize-card p {
+      font-size: 0.875rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+    
+    .monetize-stat {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.375rem 0.875rem;
+      background: rgba(16,185,129,0.1);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--green);
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      padding: 6rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .testimonials-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-tag.cyan { color: var(--cyan-light); }
+    .section-tag.cyan::before, .section-tag.cyan::after { background: var(--cyan); }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    
+    .testimonial {
+      padding: 2rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+    
+    .testimonial-content {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-2);
+      margin-bottom: 1.5rem;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    
+    .testimonial:nth-child(1) .testimonial-avatar { background: linear-gradient(135deg, var(--coral), var(--pink)); }
+    .testimonial:nth-child(2) .testimonial-avatar { background: linear-gradient(135deg, var(--purple), var(--cyan)); }
+    .testimonial:nth-child(3) .testimonial-avatar { background: linear-gradient(135deg, var(--cyan), var(--green)); }
+    
+    .testimonial-info h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+    }
+    
+    .testimonial-info p {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+    }
+    
+    .testimonial-stats {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .testimonial-stat {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+    }
+    
+    .testimonial-stat strong {
+      color: var(--gold);
+    }
+    
+    /* Pricing */
+    .pricing {
+      padding: 8rem 1.5rem;
+    }
+    
+    .pricing-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    
+    .price-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .price-card:hover { border-color: var(--border-2); }
+    
+    .price-card.pop {
+      border-color: var(--purple);
+      background: linear-gradient(180deg, rgba(168,85,247,0.08) 0%, var(--bg-2) 100%);
+      box-shadow: 0 0 80px -20px var(--glow-purple);
+      transform: scale(1.03);
+    }
+    
+    .price-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient-btn);
+      color: white;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      padding: 0.375rem 1rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .price-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .price-val {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.25rem;
+    }
+    
+    .price-val span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-4);
+    }
+    
+    .price-desc {
+      font-size: 0.875rem;
+      color: var(--text-4);
+      margin-bottom: 2rem;
+    }
+    
+    .price-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    
+    .price-list li {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .price-list li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+    
+    .price-card .btn { width: 100%; }
+    
+    /* Stats Banner */
+    .stats-banner {
+      padding: 5rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .stats-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    
+    .stat { text-align: center; }
+    
+    .stat-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.25rem, 5vw, 3rem);
+      font-weight: 700;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .stat-lbl {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      margin-top: 0.25rem;
+    }
+    
+    /* CTA */
+    .cta {
+      padding: 10rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    
+    .cta-blob-1 {
+      width: 500px;
+      height: 500px;
+      background: var(--purple);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .cta-blob-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--coral);
+      top: 30%;
+      left: 20%;
+    }
+    
+    .cta-blob-3 {
+      width: 300px;
+      height: 300px;
+      background: var(--cyan);
+      bottom: 20%;
+      right: 20%;
+    }
+    
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .cta h2 {
+      font-size: clamp(2.25rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    
+    .cta h2 .grad {
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .cta p {
+      font-size: 1.125rem;
+      color: var(--text-2);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 4rem 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer-top {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, 1fr);
+      gap: 3rem;
+      padding-bottom: 3rem;
+    }
+    
+    .footer-brand p {
+      font-size: 0.9375rem;
+      color: var(--text-3);
+      margin-top: 1rem;
+      max-width: 280px;
+      line-height: 1.7;
+    }
+    
+    .footer-col h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+    }
+    
+    .footer-col a {
+      display: block;
+      font-size: 0.9375rem;
+      color: var(--text-3);
+      text-decoration: none;
+      padding: 0.375rem 0;
+      transition: color 0.2s;
+    }
+    
+    .footer-col a:hover { color: var(--text-2); }
+    
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-copy {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+    }
+    
+    .footer-socials {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .footer-social {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 1.125rem;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .footer-social:hover {
+      background: var(--bg-5);
+      color: var(--text);
+      border-color: var(--border-2);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .pain-grid { grid-template-columns: repeat(2, 1fr); }
+      .studio-grid { grid-template-columns: 1fr; }
+      .studio-card.featured { grid-column: span 1; }
+      .ai-showcase { grid-template-columns: 1fr; gap: 2rem; }
+      .monetize-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .price-card.pop { transform: none; order: -1; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+    
+    @media (max-width: 768px) {
+      .hero { padding: 6rem 1rem 3rem; }
+      .hero-cta { flex-direction: column; width: 100%; max-width: 320px; margin-left: auto; margin-right: auto; }
+      .hero-cta .btn { width: 100%; }
+      .pain-grid, .monetize-grid, .stats-grid { grid-template-columns: 1fr; }
+      .ai-output { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .cta-buttons { flex-direction: column; align-items: center; max-width: 320px; margin: 0 auto; }
+      .cta-buttons .btn { width: 100%; }
+      .creator-types { flex-direction: column; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">✦</div>
+        Muse
+      </a>
+      <div class="nav-links">
+        <a href="#studio">Studio</a>
+        <a href="#ai">AI Tools</a>
+        <a href="#monetize">Monetize</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">Log In</a>
+        <a href="#" class="btn btn-primary">Start Creating →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+    
+    <div class="hero-content">
+      <div class="badge anim">
+        <span class="badge-dot"></span>
+        <span class="badge-new">New</span>
+        The AI studio for creators
+      </div>
+      <h1 class="anim d1">Create anything.<br><span class="grad">All in one place.</span></h1>
+      <p class="hero-sub anim d2">Muse is the unified AI platform where creators ideate, create, and monetize. Stop juggling 10 different tools — everything you need, powered by AI.</p>
+      <div class="hero-cta anim d3">
+        <a href="#" class="btn btn-primary btn-lg">Start Creating Free →</a>
+        <a href="#" class="btn btn-outline btn-lg">Watch Demo</a>
+      </div>
+      
+      <div class="creator-types anim d4">
+        <div class="creator-type"><span>🎨</span> Artists</div>
+        <div class="creator-type"><span>✍️</span> Writers</div>
+        <div class="creator-type"><span>🎬</span> Filmmakers</div>
+        <div class="creator-type"><span>🎵</span> Musicians</div>
+        <div class="creator-type"><span>📱</span> Influencers</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="problem">
+    <div class="problem-inner">
+      <div class="section-head">
+        <span class="section-tag">The Problem</span>
+        <h2>Your creative workflow is broken</h2>
+        <p>The average creator uses 8+ different tools. Context switching kills creativity. And you're paying for all of them separately.</p>
+      </div>
+      
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-icon">🔀</div>
+          <h3>Fragmented Tools</h3>
+          <p>One app for writing, another for images, another for video. Nothing talks to each other.</p>
+          <div class="pain-tools">
+            <span class="pain-tool">ChatGPT</span>
+            <span class="pain-tool">Midjourney</span>
+            <span class="pain-tool">CapCut</span>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">💸</div>
+          <h3>Death by Subscriptions</h3>
+          <p>$20 here, $30 there. Before you know it, you're paying $200/month for scattered tools.</p>
+          <div class="pain-tools">
+            <span class="pain-tool">$20</span>
+            <span class="pain-tool">$30</span>
+            <span class="pain-tool">$40</span>
+            <span class="pain-tool">$50...</span>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">🧠</div>
+          <h3>Context Switching Tax</h3>
+          <p>Every time you switch tools, you lose momentum. Your creative flow dies a little.</p>
+          <div class="pain-tools">
+            <span class="pain-tool">23 min</span>
+            <span class="pain-tool">to refocus</span>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">📊</div>
+          <h3>Monetization Maze</h3>
+          <p>Patreon takes 8-12%. YouTube takes 45%. You're building on rented land.</p>
+          <div class="pain-tools">
+            <span class="pain-tool">Platform cuts</span>
+            <span class="pain-tool">Algorithm changes</span>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">🔒</div>
+          <h3>No Ownership</h3>
+          <p>Your content lives on platforms you don't control. One ban and years of work vanish.</p>
+          <div class="pain-tools">
+            <span class="pain-tool">Deplatformed</span>
+            <span class="pain-tool">Demonetized</span>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">⏰</div>
+          <h3>Time Sink</h3>
+          <p>Hours spent on busywork instead of creating. Editing, formatting, posting, repeat.</p>
+          <div class="pain-tools">
+            <span class="pain-tool">70%</span>
+            <span class="pain-tool">non-creative work</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Studio - The Solution -->
+  <section class="studio" id="studio">
+    <div class="studio-inner">
+      <div class="section-head">
+        <span class="section-tag">The Solution</span>
+        <h2>One studio. Infinite creativity.</h2>
+        <p>Muse brings every creative tool into one AI-native workspace. Write, design, edit video, compose music — all with AI assistance that understands your vision.</p>
+      </div>
+      
+      <div class="studio-grid">
+        <div class="studio-card featured">
+          <div class="studio-icon">✍️</div>
+          <h3>AI Writing Studio</h3>
+          <p>From blog posts to scripts to social captions. AI that writes in your voice, with your style.</p>
+          <ul class="studio-features">
+            <li>Long-form articles with research</li>
+            <li>Social media content calendar</li>
+            <li>Script writing with scene breaks</li>
+            <li>SEO optimization built-in</li>
+            <li>Tone matching from your samples</li>
+          </ul>
+        </div>
+        <div class="studio-card">
+          <div class="studio-icon">🎨</div>
+          <h3>Visual Studio</h3>
+          <p>Generate images, edit photos, create thumbnails. Consistent brand aesthetics, every time.</p>
+          <ul class="studio-features">
+            <li>Text-to-image generation</li>
+            <li>Brand style consistency</li>
+            <li>Batch thumbnail creation</li>
+            <li>Background removal & editing</li>
+          </ul>
+        </div>
+        <div class="studio-card">
+          <div class="studio-icon">🎬</div>
+          <h3>Video Studio</h3>
+          <p>AI-powered video editing that cuts hours of work. Auto-captions, cuts, and effects.</p>
+          <ul class="studio-features">
+            <li>Auto-cut awkward pauses</li>
+            <li>AI captions in 50+ languages</li>
+            <li>B-roll suggestions</li>
+            <li>Vertical/horizontal repurposing</li>
+          </ul>
+        </div>
+        <div class="studio-card">
+          <div class="studio-icon">🎵</div>
+          <h3>Audio Studio</h3>
+          <p>Podcasts, voiceovers, music. Clean audio, custom soundtracks, voice cloning.</p>
+          <ul class="studio-features">
+            <li>Noise removal & enhancement</li>
+            <li>AI voice generation</li>
+            <li>Royalty-free music creation</li>
+            <li>Multi-track editing</li>
+          </ul>
+        </div>
+        <div class="studio-card">
+          <div class="studio-icon">🚀</div>
+          <h3>Publishing Hub</h3>
+          <p>One click to everywhere. Schedule, post, and analyze across all platforms.</p>
+          <ul class="studio-features">
+            <li>Cross-platform posting</li>
+            <li>Smart scheduling</li>
+            <li>Analytics dashboard</li>
+            <li>Engagement automation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Capabilities -->
+  <section class="ai-section" id="ai">
+    <div class="ai-inner">
+      <div class="section-head">
+        <span class="section-tag coral">AI Superpowers</span>
+        <h2>Create 10x faster with AI</h2>
+        <p>State-of-the-art AI models fine-tuned for creators. Generate, iterate, perfect — in seconds, not hours.</p>
+      </div>
+      
+      <div class="ai-showcase">
+        <div class="ai-demo">
+          <div class="ai-demo-header">
+            <div class="ai-demo-title">
+              <span class="icon">✦</span>
+              Muse AI
+            </div>
+            <div class="ai-status-live">
+              <span class="dot"></span>
+              Generating
+            </div>
+          </div>
+          <div class="ai-prompt">
+            "Create 4 thumbnail concepts for my video about morning routines — energetic, modern, with bold typography"
+          </div>
+          <div class="ai-output">
+            <div class="ai-output-item">🌅</div>
+            <div class="ai-output-item">☀️</div>
+            <div class="ai-output-item">⚡</div>
+            <div class="ai-output-item">🚀</div>
+          </div>
+        </div>
+        
+        <div class="ai-list">
+          <div class="ai-list-item">
+            <div class="ai-list-icon">🎯</div>
+            <div class="ai-list-content">
+              <h4>Context-Aware Generation</h4>
+              <p>AI that remembers your brand, style, and past work. Every output feels authentically you.</p>
+            </div>
+          </div>
+          <div class="ai-list-item">
+            <div class="ai-list-icon">🔄</div>
+            <div class="ai-list-content">
+              <h4>Instant Iteration</h4>
+              <p>Don't like something? Just describe what to change. AI refines until it's perfect.</p>
+            </div>
+          </div>
+          <div class="ai-list-item">
+            <div class="ai-list-icon">🌍</div>
+            <div class="ai-list-content">
+              <h4>Multi-Language Magic</h4>
+              <p>Create in English, publish in 50+ languages. Captions, voiceovers, translations — automatic.</p>
+            </div>
+          </div>
+          <div class="ai-list-item">
+            <div class="ai-list-icon">📈</div>
+            <div class="ai-list-content">
+              <h4>Performance Predictions</h4>
+              <p>AI analyzes your content and predicts engagement. Optimize before you post.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Monetization -->
+  <section class="monetize" id="monetize">
+    <div class="monetize-inner">
+      <div class="section-head">
+        <span class="section-tag gold">Monetize</span>
+        <h2>Get paid what you deserve</h2>
+        <p>Direct-to-fan monetization with lower fees, real ownership, and no middlemen taking your cut.</p>
+      </div>
+      
+      <div class="monetize-grid">
+        <div class="monetize-card">
+          <div class="monetize-icon">🏪</div>
+          <h3>Creator Storefront</h3>
+          <p>Sell digital products, courses, and memberships. One-click checkout, instant delivery.</p>
+          <span class="monetize-stat">Only 3% fees</span>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">🎫</div>
+          <h3>Memberships & Tiers</h3>
+          <p>Build recurring revenue with fan subscriptions. Exclusive content, community access.</p>
+          <span class="monetize-stat">Keep 95%</span>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">🔗</div>
+          <h3>Ownership Layer</h3>
+          <p>Optional Web3 tools for true ownership. NFTs, royalty splits, provenance tracking.</p>
+          <span class="monetize-stat">Your IP, forever</span>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">📊</div>
+          <h3>Revenue Analytics</h3>
+          <p>See what's working. Track sales, conversions, and fan LTV in real-time.</p>
+          <span class="monetize-stat">Data-driven</span>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">🤝</div>
+          <h3>Brand Deals Hub</h3>
+          <p>Get matched with sponsors. AI handles outreach, negotiation assistance included.</p>
+          <span class="monetize-stat">3x more deals</span>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">💎</div>
+          <h3>Tip Jar & Tips</h3>
+          <p>Let fans support you directly. Zero-friction payments, instant access.</p>
+          <span class="monetize-stat">Instant payout</span>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">📚</div>
+          <h3>Course Builder</h3>
+          <p>Turn your expertise into courses. AI helps structure, script, and produce.</p>
+          <span class="monetize-stat">$997 avg price</span>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">🎁</div>
+          <h3>Digital Downloads</h3>
+          <p>Sell presets, templates, ebooks, assets. Automated delivery, no inventory.</p>
+          <span class="monetize-stat">Passive income</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-head">
+        <span class="section-tag cyan">Creator Stories</span>
+        <h2>Loved by creators everywhere</h2>
+        <p>Join thousands of creators who've transformed their workflow with Muse.</p>
+      </div>
+      
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <p class="testimonial-content">"I used to spend 6 hours editing a 10-minute video. With Muse, it's under 2 hours. The AI just gets what I'm trying to do. Game changer."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">S</div>
+            <div class="testimonial-info">
+              <h4>Sarah Chen</h4>
+              <p>Tech YouTuber • 450K subs</p>
+            </div>
+          </div>
+          <div class="testimonial-stats">
+            <span class="testimonial-stat"><strong>3x</strong> faster editing</span>
+            <span class="testimonial-stat"><strong>2x</strong> upload frequency</span>
+          </div>
+        </div>
+        <div class="testimonial">
+          <p class="testimonial-content">"Finally, one place for everything. I was paying $180/month across 6 different tools. Muse replaced all of them and costs less."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">M</div>
+            <div class="testimonial-info">
+              <h4>Marcus Rivera</h4>
+              <p>Newsletter Writer • 85K readers</p>
+            </div>
+          </div>
+          <div class="testimonial-stats">
+            <span class="testimonial-stat"><strong>$180</strong> → <strong>$29</strong>/mo</span>
+            <span class="testimonial-stat"><strong>6</strong> tools → <strong>1</strong></span>
+          </div>
+        </div>
+        <div class="testimonial">
+          <p class="testimonial-content">"The monetization tools are insane. I launched a digital product in Muse and made $12K in the first week. No coding, no Gumroad, no Stripe setup."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div class="testimonial-info">
+              <h4>Aisha Patel</h4>
+              <p>Digital Artist • 120K followers</p>
+            </div>
+          </div>
+          <div class="testimonial-stats">
+            <span class="testimonial-stat"><strong>$12K</strong> first week</span>
+            <span class="testimonial-stat"><strong>97%</strong> kept</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-banner">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-val">250K+</div>
+        <div class="stat-lbl">Creators</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">$47M</div>
+        <div class="stat-lbl">Creator earnings</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">12M</div>
+        <div class="stat-lbl">Pieces of content</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">4.9★</div>
+        <div class="stat-lbl">Average rating</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="pricing-inner">
+      <div class="section-head">
+        <span class="section-tag">Pricing</span>
+        <h2>Simple pricing. No surprises.</h2>
+        <p>Start free. Upgrade when you're ready. Cancel anytime.</p>
+      </div>
+      
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Free</h3>
+          <div class="price-val">$0<span>/mo</span></div>
+          <p class="price-desc">Perfect for getting started</p>
+          <ul class="price-list">
+            <li>100 AI generations/month</li>
+            <li>Basic writing & image tools</li>
+            <li>5GB cloud storage</li>
+            <li>Community support</li>
+            <li>Muse watermark on exports</li>
+          </ul>
+          <a href="#" class="btn btn-outline">Get Started Free</a>
+        </div>
+        <div class="price-card pop">
+          <span class="price-badge">Most Popular</span>
+          <h3>Pro</h3>
+          <div class="price-val">$29<span>/mo</span></div>
+          <p class="price-desc">For serious creators</p>
+          <ul class="price-list">
+            <li>Unlimited AI generations</li>
+            <li>All creative studios</li>
+            <li>100GB cloud storage</li>
+            <li>Priority support</li>
+            <li>No watermarks</li>
+            <li>Publishing hub</li>
+            <li>Basic monetization tools</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Start Pro Trial →</a>
+        </div>
+        <div class="price-card">
+          <h3>Business</h3>
+          <div class="price-val">$99<span>/mo</span></div>
+          <p class="price-desc">For teams & power creators</p>
+          <ul class="price-list">
+            <li>Everything in Pro</li>
+            <li>Unlimited cloud storage</li>
+            <li>Team collaboration (5 seats)</li>
+            <li>Advanced monetization</li>
+            <li>Custom AI training</li>
+            <li>API access</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a href="#" class="btn btn-outline">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-blob cta-blob-1"></div>
+    <div class="cta-blob cta-blob-2"></div>
+    <div class="cta-blob cta-blob-3"></div>
+    
+    <div class="cta-inner">
+      <h2>Ready to create<br><span class="grad">without limits?</span></h2>
+      <p>Join 250,000+ creators who've found their muse. Start free today — no credit card required.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary btn-lg">Start Creating Free →</a>
+        <a href="#" class="btn btn-outline btn-lg">Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <div class="logo-mark">✦</div>
+          Muse
+        </a>
+        <p>The AI-native creative studio for the next generation of creators.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#">Writing Studio</a>
+        <a href="#">Visual Studio</a>
+        <a href="#">Video Studio</a>
+        <a href="#">Audio Studio</a>
+        <a href="#">Publishing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Monetize</h4>
+        <a href="#">Storefront</a>
+        <a href="#">Memberships</a>
+        <a href="#">Course Builder</a>
+        <a href="#">Brand Deals</a>
+        <a href="#">Analytics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Documentation</a>
+        <a href="#">Creator Academy</a>
+        <a href="#">Blog</a>
+        <a href="#">Community</a>
+        <a href="#">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Muse. A 2667 Ventures project.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social">𝕏</a>
+        <a href="#" class="footer-social">📸</a>
+        <a href="#" class="footer-social">🎬</a>
+        <a href="#" class="footer-social">💬</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    
+    // Intersection Observer for animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('anim');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.pain-card, .studio-card, .monetize-card, .testimonial, .price-card').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
