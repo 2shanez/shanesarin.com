@@ -6,14 +6,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0a0e1a">
-    <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Veritas&quot;,&quot;short_name&quot;:&quot;Veritas&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%230a0e1a&quot;,&quot;theme_color&quot;:&quot;%230a0e1a&quot;}">
     <title>Veritas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0f172a;
             --bg: #0a0e1a;
             --bg-elevated: #111827;
             --card: #1a2235;
@@ -42,8 +40,8 @@
             --radius-lg: 24px;
             --shadow: 0 4px 24px rgba(0,0,0,0.3);
             --shadow-lg: 0 12px 48px rgba(0,0,0,0.4);
-            --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
@@ -53,41 +51,22 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
         }
 
-        html {
-            height: 100%;
-            height: -webkit-fill-available;
-        }
+        html { height: 100%; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100%;
-            min-height: -webkit-fill-available;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overscroll-behavior-y: none;
+            overscroll-behavior: none;
         }
 
-        /* Smooth scroll */
-        * {
-            scroll-behavior: smooth;
-        }
-
-        /* Hide scrollbars but keep functionality */
-        ::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Selection */
-        ::selection {
-            background: var(--accent);
-            color: var(--bg);
-        }
+        ::-webkit-scrollbar { display: none; }
+        * { scrollbar-width: none; }
 
         /* ===== SPLASH ===== */
         .splash {
@@ -99,13 +78,12 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s;
+            transition: opacity 0.6s, visibility 0.6s;
         }
 
         .splash.hidden {
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
         }
 
         .splash-logo {
@@ -120,54 +98,53 @@
             font-weight: 800;
             color: var(--bg);
             box-shadow: 0 12px 48px var(--accent-glow);
-            animation: logoPulse 2s ease-in-out infinite;
+            animation: pulse 2s infinite;
         }
 
-        @keyframes logoPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 12px 48px var(--accent-glow); }
-            50% { transform: scale(1.02); box-shadow: 0 16px 64px rgba(212, 168, 75, 0.35); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
         }
 
-        .splash-brand {
+        .splash-text {
             margin-top: 20px;
             font-size: 32px;
             font-weight: 700;
-            letter-spacing: -0.5px;
             opacity: 0;
-            animation: fadeUp 0.6s 0.3s ease forwards;
+            animation: fadeUp 0.5s 0.2s forwards;
         }
 
-        .splash-tagline {
+        .splash-sub {
             margin-top: 8px;
-            font-size: 15px;
             color: var(--text-muted);
+            font-size: 15px;
             opacity: 0;
-            animation: fadeUp 0.6s 0.5s ease forwards;
+            animation: fadeUp 0.5s 0.4s forwards;
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(10px); }
         }
 
-        .splash-progress {
+        .splash-bar {
             position: absolute;
-            bottom: 120px;
-            width: 120px;
+            bottom: 100px;
+            width: 100px;
             height: 4px;
             background: var(--border-light);
             border-radius: 2px;
             overflow: hidden;
         }
 
-        .splash-progress-bar {
+        .splash-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            animation: progress 2s ease-out forwards;
+            background: var(--accent);
+            animation: load 2s forwards;
         }
 
-        @keyframes progress {
-            from { width: 0%; }
+        @keyframes load {
+            from { width: 0; }
             to { width: 100%; }
         }
 
@@ -182,20 +159,12 @@
             padding-top: var(--safe-top);
         }
 
-        .onboarding.active {
-            display: flex;
-        }
-
-        .onboard-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+        .onboarding.active { display: flex; }
 
         .onboard-slides {
             flex: 1;
             position: relative;
+            overflow: hidden;
         }
 
         .onboard-slide {
@@ -208,53 +177,51 @@
             padding: 40px 32px;
             text-align: center;
             opacity: 0;
-            transform: translateX(100%) scale(0.95);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
+            transform: translateX(100%);
+            transition: all 0.5s var(--ease);
         }
 
         .onboard-slide.active {
             opacity: 1;
-            transform: translateX(0) scale(1);
-            pointer-events: auto;
+            transform: translateX(0);
         }
 
         .onboard-slide.prev {
-            transform: translateX(-100%) scale(0.95);
+            transform: translateX(-30%);
+            opacity: 0;
         }
 
-        .onboard-visual {
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(145deg, var(--card), var(--bg-elevated));
+        .onboard-icon {
+            width: 160px;
+            height: 160px;
+            background: var(--card);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 72px;
+            font-size: 64px;
             margin-bottom: 40px;
             border: 1px solid var(--border-light);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
-            animation: float 4s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: float 4s infinite ease-in-out;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-10px); }
         }
 
         .onboard-title {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             margin-bottom: 12px;
-            letter-spacing: -0.5px;
         }
 
         .onboard-desc {
             font-size: 16px;
             color: var(--text-secondary);
             line-height: 1.6;
-            max-width: 300px;
+            max-width: 280px;
         }
 
         .onboard-footer {
@@ -273,7 +240,7 @@
             height: 8px;
             border-radius: 4px;
             background: var(--border-light);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
         }
 
         .onboard-dot.active {
@@ -281,69 +248,42 @@
             background: var(--accent);
         }
 
-        .btn-primary {
+        .btn {
             width: 100%;
-            background: linear-gradient(145deg, var(--accent), var(--accent-light));
-            color: var(--bg);
-            border: none;
-            padding: 18px 32px;
+            padding: 18px;
             border-radius: var(--radius);
             font-size: 17px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
-            transition: all var(--transition);
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, var(--accent), var(--accent-light));
+            color: var(--bg);
             box-shadow: 0 8px 24px var(--accent-glow);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            transform: translateX(100%);
         }
 
         .btn-primary:active {
             transform: scale(0.98);
-            box-shadow: 0 4px 16px var(--accent-glow);
         }
 
-        .btn-secondary {
-            width: 100%;
+        .btn-ghost {
             background: none;
-            border: none;
             color: var(--text-muted);
-            font-size: 15px;
-            font-family: inherit;
-            cursor: pointer;
-            padding: 16px;
             margin-top: 8px;
-            transition: color var(--transition);
         }
 
-        .btn-secondary:hover {
-            color: var(--text);
-        }
-
-        /* ===== APP SHELL ===== */
+        /* ===== APP ===== */
         .app {
             display: none;
             flex-direction: column;
             min-height: 100vh;
-            min-height: -webkit-fill-available;
         }
 
-        .app.active {
-            display: flex;
-        }
+        .app.active { display: flex; }
 
         /* ===== HEADER ===== */
         .header {
@@ -352,20 +292,14 @@
             left: 0;
             right: 0;
             z-index: 100;
-            background: rgba(10, 14, 26, 0.85);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            background: rgba(10, 14, 26, 0.88);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border-bottom: 1px solid var(--border);
             padding: calc(12px + var(--safe-top)) 20px 12px;
-            transition: all 0.3s;
         }
 
-        .header.scrolled {
-            background: rgba(10, 14, 26, 0.95);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-        }
-
-        .header-content {
+        .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -390,13 +324,11 @@
             font-size: 20px;
             font-weight: 800;
             color: var(--bg);
-            box-shadow: 0 4px 16px var(--accent-glow);
         }
 
-        .header-title {
+        .header-brand {
             font-size: 20px;
             font-weight: 700;
-            letter-spacing: -0.3px;
         }
 
         .header-right {
@@ -405,38 +337,7 @@
             gap: 10px;
         }
 
-        .header-btn {
-            width: 44px;
-            height: 44px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            cursor: pointer;
-            position: relative;
-            transition: all var(--transition);
-        }
-
-        .header-btn:active {
-            transform: scale(0.92);
-            background: var(--card-hover);
-        }
-
-        .header-btn .badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 10px;
-            height: 10px;
-            background: var(--error);
-            border-radius: 50%;
-            border: 2px solid var(--bg);
-        }
-
-        .points-chip {
+        .points-badge {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -446,16 +347,39 @@
             border-radius: 50px;
             font-weight: 600;
             font-size: 14px;
-            cursor: pointer;
-            transition: all var(--transition);
         }
 
-        .points-chip:active {
-            transform: scale(0.96);
-        }
-
-        .points-chip .value {
+        .points-badge .num {
             color: var(--accent);
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:active {
+            transform: scale(0.92);
+        }
+
+        .icon-btn .dot {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--error);
+            border-radius: 50%;
         }
 
         /* ===== MAIN ===== */
@@ -469,78 +393,46 @@
 
         .screen {
             display: none;
-            animation: screenIn 0.4s ease;
+            animation: screenIn 0.35s var(--ease);
         }
 
-        .screen.active {
-            display: block;
-        }
+        .screen.active { display: block; }
 
         @keyframes screenIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(8px);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Pull to refresh indicator */
-        .ptr-indicator {
-            position: fixed;
-            top: calc(80px + var(--safe-top));
-            left: 50%;
-            transform: translateX(-50%) translateY(-60px) scale(0.8);
-            width: 40px;
-            height: 40px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            opacity: 0;
-            transition: all 0.3s;
-            z-index: 99;
+        /* ===== SKELETON ===== */
+        .skeleton {
+            background: linear-gradient(90deg, var(--card) 25%, var(--card-hover) 50%, var(--card) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--radius-sm);
         }
 
-        .ptr-indicator.visible {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0) scale(1);
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        .ptr-indicator.loading {
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: translateX(-50%) rotate(360deg); }
-        }
-
-        /* ===== HOME SCREEN ===== */
-        .greeting-section {
+        /* ===== HOME ===== */
+        .greeting {
             padding: 20px 20px 0;
-        }
-
-        .greeting-row {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
 
-        .greeting-text h1 {
+        .greeting h1 {
             font-size: 26px;
             font-weight: 700;
-            letter-spacing: -0.5px;
             margin-bottom: 4px;
         }
 
-        .greeting-text p {
-            font-size: 14px;
+        .greeting p {
             color: var(--text-secondary);
+            font-size: 14px;
         }
 
         .greeting-avatar {
@@ -554,78 +446,50 @@
             font-weight: 700;
             font-size: 18px;
             border: 2px solid var(--accent);
-            box-shadow: 0 4px 16px rgba(75, 156, 211, 0.3);
             cursor: pointer;
-            transition: all var(--transition);
         }
 
-        .greeting-avatar:active {
-            transform: scale(0.95);
-        }
-
-        /* Credential Card */
-        .credential-section {
+        /* Credential */
+        .credential-wrap {
             padding: 20px;
         }
 
-        .credential-card {
-            background: linear-gradient(155deg, var(--unc-dark) 0%, #0c1524 50%, rgba(212, 168, 75, 0.12) 100%);
+        .credential {
+            background: linear-gradient(155deg, var(--unc-dark) 0%, #0c1524 50%, rgba(212, 168, 75, 0.1) 100%);
             border-radius: var(--radius-lg);
             padding: 24px;
             border: 1px solid rgba(75, 156, 211, 0.2);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .credential-card:active {
-            transform: scale(0.985);
-        }
-
-        .credential-card::before {
+        .credential::before {
             content: '';
             position: absolute;
             top: -50%;
             right: -30%;
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, rgba(75, 156, 211, 0.12) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .credential-card::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -20%;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .credential-inner {
-            position: relative;
-            z-index: 1;
+            background: radial-gradient(circle, rgba(75, 156, 211, 0.1) 0%, transparent 70%);
         }
 
         .credential-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            position: relative;
         }
 
-        .credential-school {
+        .school-row {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
         .school-seal {
-            width: 56px;
-            height: 56px;
+            width: 54px;
+            height: 54px;
             background: var(--unc);
             border-radius: 50%;
             display: flex;
@@ -634,21 +498,19 @@
             font-weight: 800;
             font-size: 14px;
             border: 2px solid rgba(255,255,255,0.2);
-            box-shadow: 0 6px 20px rgba(75, 156, 211, 0.35);
         }
 
-        .school-text h3 {
+        .school-info h3 {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 2px;
         }
 
-        .school-text p {
+        .school-info p {
             font-size: 13px;
             color: var(--text-secondary);
         }
 
-        .verified-seal {
+        .verified-pill {
             display: flex;
             align-items: center;
             gap: 5px;
@@ -657,28 +519,24 @@
             border-radius: 50px;
             font-size: 12px;
             font-weight: 600;
-            box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
         }
 
-        .credential-degree {
-            margin-bottom: 16px;
-        }
-
-        .credential-degree h2 {
-            font-size: 22px;
+        .credential h2 {
+            font-size: 21px;
             font-weight: 700;
-            letter-spacing: -0.3px;
-            line-height: 1.3;
+            margin-bottom: 12px;
+            position: relative;
         }
 
         .credential-meta {
             display: flex;
-            gap: 20px;
-            margin-bottom: 16px;
             flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
+            position: relative;
         }
 
-        .meta-item {
+        .meta-tag {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -686,25 +544,25 @@
             color: var(--text-secondary);
         }
 
-        .credential-bottom {
+        .credential-foot {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 16px;
+            padding-top: 14px;
             border-top: 1px solid rgba(255,255,255,0.08);
+            position: relative;
         }
 
-        .credential-id {
-            font-family: 'SF Mono', 'Fira Code', Monaco, monospace;
+        .cred-id {
+            font-family: monospace;
             font-size: 11px;
             color: var(--text-muted);
             background: rgba(0,0,0,0.3);
             padding: 8px 12px;
             border-radius: 8px;
-            letter-spacing: 0.5px;
         }
 
-        .credential-share {
+        .share-btn {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -716,26 +574,21 @@
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            transition: all var(--transition);
         }
 
-        .credential-share:active {
+        .share-btn:active {
             background: rgba(255,255,255,0.15);
-            transform: scale(0.96);
         }
 
-        /* Quick Actions */
-        .actions-section {
+        /* Actions Grid */
+        .actions {
             padding: 0 20px 24px;
-        }
-
-        .actions-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
         }
 
-        .action-item {
+        .action-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -745,10 +598,10 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             cursor: pointer;
-            transition: all var(--transition);
+            transition: all 0.2s;
         }
 
-        .action-item:active {
+        .action-btn:active {
             transform: scale(0.94);
             background: var(--card-hover);
         }
@@ -762,11 +615,6 @@
             align-items: center;
             justify-content: center;
             font-size: 22px;
-            transition: transform 0.3s;
-        }
-
-        .action-item:active .action-icon {
-            transform: scale(1.1);
         }
 
         .action-label {
@@ -775,18 +623,15 @@
             color: var(--text-secondary);
         }
 
-        /* Stats Row */
-        .stats-section {
-            padding: 0 20px 24px;
-        }
-
+        /* Stats */
         .stats-row {
+            padding: 0 20px 24px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
         }
 
-        .stat-card {
+        .stat-box {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
@@ -794,7 +639,7 @@
             text-align: center;
         }
 
-        .stat-value {
+        .stat-val {
             font-size: 24px;
             font-weight: 700;
             color: var(--accent);
@@ -809,7 +654,7 @@
         }
 
         /* Points Card */
-        .points-section {
+        .points-wrap {
             padding: 0 20px 24px;
         }
 
@@ -820,16 +665,11 @@
             padding: 24px;
         }
 
-        .points-header {
+        .points-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 24px;
-        }
-
-        .points-info {
-            display: flex;
-            flex-direction: column;
         }
 
         .points-label {
@@ -838,11 +678,10 @@
             margin-bottom: 6px;
         }
 
-        .points-value {
-            font-size: 40px;
+        .points-num {
+            font-size: 42px;
             font-weight: 800;
             color: var(--accent);
-            letter-spacing: -2px;
             line-height: 1;
         }
 
@@ -859,7 +698,7 @@
             border-radius: 50px;
         }
 
-        .tier-pill {
+        .tier-badge {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -869,10 +708,9 @@
             border-radius: 50px;
             font-weight: 700;
             font-size: 14px;
-            box-shadow: 0 6px 20px var(--accent-glow);
         }
 
-        .progress-area {
+        .progress-wrap {
             margin-bottom: 12px;
         }
 
@@ -881,14 +719,7 @@
             justify-content: space-between;
             margin-bottom: 10px;
             font-size: 13px;
-        }
-
-        .progress-labels span:first-child {
             color: var(--text-secondary);
-        }
-
-        .progress-labels span:last-child {
-            color: var(--text-muted);
         }
 
         .progress-track {
@@ -896,31 +727,21 @@
             background: rgba(255,255,255,0.06);
             border-radius: 6px;
             overflow: hidden;
-            position: relative;
         }
 
-        .progress-bar {
+        .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--accent), var(--accent-light));
             border-radius: 6px;
             position: relative;
-            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .progress-bar::after {
+        .progress-fill::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
-            animation: shimmer 2.5s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
         }
 
         .tier-track {
@@ -936,33 +757,35 @@
             gap: 4px;
         }
 
-        .tier-marker-icon {
+        .tier-marker .icon {
             font-size: 20px;
             opacity: 0.4;
-            transition: all var(--transition);
         }
 
-        .tier-marker.current .tier-marker-icon {
+        .tier-marker.active .icon {
             opacity: 1;
             transform: scale(1.15);
         }
 
-        .tier-marker-name {
+        .tier-marker .name {
             font-size: 11px;
             color: var(--text-muted);
-            font-weight: 500;
         }
 
-        .tier-marker.current .tier-marker-name {
+        .tier-marker.active .name {
             color: var(--accent);
         }
 
-        /* Section Header */
-        .section-header {
+        /* Achievements */
+        .achievements-section {
+            padding: 0 20px 24px;
+        }
+
+        .section-head {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px 14px;
+            margin-bottom: 14px;
         }
 
         .section-title {
@@ -973,49 +796,59 @@
             gap: 8px;
         }
 
-        .section-action {
+        .section-link {
             font-size: 14px;
             color: var(--accent);
             font-weight: 500;
-            cursor: pointer;
-            transition: opacity var(--transition);
         }
 
-        .section-action:active {
-            opacity: 0.7;
+        .achievements-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 4px;
         }
 
-        /* AI Assistant */
+        .achievement {
+            flex: 0 0 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 12px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .achievement.locked {
+            opacity: 0.5;
+        }
+
+        .achievement-icon {
+            font-size: 32px;
+        }
+
+        .achievement-name {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* AI */
         .ai-section {
             padding: 0 20px 24px;
         }
 
         .ai-card {
-            background: linear-gradient(145deg, rgba(99, 102, 241, 0.1) 0%, var(--card) 100%);
+            background: linear-gradient(145deg, rgba(99, 102, 241, 0.08) 0%, var(--card) 100%);
             border: 1px solid rgba(99, 102, 241, 0.2);
             border-radius: var(--radius-lg);
             padding: 20px;
-            position: relative;
-            overflow: hidden;
         }
 
-        .ai-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .ai-inner {
-            position: relative;
-            z-index: 1;
-        }
-
-        .ai-top {
+        .ai-head {
             display: flex;
             align-items: center;
             gap: 14px;
@@ -1031,13 +864,11 @@
             align-items: center;
             justify-content: center;
             font-size: 26px;
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
         }
 
-        .ai-meta h3 {
+        .ai-info h3 {
             font-size: 17px;
             font-weight: 600;
-            margin-bottom: 4px;
         }
 
         .ai-status {
@@ -1048,28 +879,28 @@
             color: var(--success);
         }
 
-        .ai-status-dot {
+        .ai-status .dot {
             width: 6px;
             height: 6px;
             background: var(--success);
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            animation: blink 2s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(0.9); }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        .ai-messages {
+        .ai-chat {
             background: rgba(0,0,0,0.25);
             border-radius: var(--radius);
-            max-height: 180px;
+            max-height: 200px;
             overflow-y: auto;
             margin-bottom: 16px;
         }
 
-        .ai-messages-inner {
+        .ai-messages {
             padding: 16px;
             display: flex;
             flex-direction: column;
@@ -1077,23 +908,23 @@
         }
 
         .ai-msg {
-            max-width: 90%;
+            max-width: 88%;
             padding: 12px 16px;
             border-radius: var(--radius);
             font-size: 14px;
             line-height: 1.5;
-            animation: msgIn 0.3s ease;
+            animation: msgIn 0.3s;
         }
 
         @keyframes msgIn {
-            from { opacity: 0; transform: translateY(8px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .ai-msg.bot {
             background: rgba(99, 102, 241, 0.15);
-            border-bottom-left-radius: 4px;
             align-self: flex-start;
+            border-bottom-left-radius: 4px;
             color: var(--text-secondary);
         }
 
@@ -1103,12 +934,12 @@
 
         .ai-msg.user {
             background: var(--info);
-            color: white;
-            border-bottom-right-radius: 4px;
             align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            color: white;
         }
 
-        .ai-input-area {
+        .ai-input-row {
             display: flex;
             gap: 10px;
         }
@@ -1123,12 +954,10 @@
             font-size: 15px;
             font-family: inherit;
             outline: none;
-            transition: all var(--transition);
         }
 
         .ai-input:focus {
             border-color: var(--info);
-            background: rgba(255,255,255,0.08);
         }
 
         .ai-input::placeholder {
@@ -1147,15 +976,13 @@
             font-size: 20px;
             color: white;
             cursor: pointer;
-            transition: all var(--transition);
-            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
         }
 
         .ai-send:active {
             transform: scale(0.94);
         }
 
-        .ai-suggestions {
+        .ai-pills {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
@@ -1170,15 +997,13 @@
             border-radius: 50px;
             font-size: 13px;
             cursor: pointer;
-            transition: all var(--transition);
         }
 
         .ai-pill:active {
             background: rgba(99, 102, 241, 0.2);
-            transform: scale(0.96);
         }
 
-        /* Rewards Carousel */
+        /* Rewards */
         .rewards-section {
             padding-bottom: 24px;
         }
@@ -1188,50 +1013,45 @@
             gap: 14px;
             padding: 0 20px;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
         }
 
         .reward-card {
-            flex: 0 0 150px;
-            scroll-snap-align: start;
+            flex: 0 0 145px;
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 20px 16px;
             text-align: center;
             cursor: pointer;
-            transition: all var(--transition);
+            transition: all 0.2s;
         }
 
         .reward-card:active {
             transform: scale(0.96);
-            background: var(--card-hover);
         }
 
-        .reward-icon-wrap {
-            width: 56px;
-            height: 56px;
+        .reward-emoji {
+            width: 54px;
+            height: 54px;
             background: var(--bg);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
-            margin: 0 auto 14px;
+            margin: 0 auto 12px;
         }
 
         .reward-name {
             font-weight: 600;
             font-size: 14px;
             margin-bottom: 4px;
-            line-height: 1.3;
         }
 
         .reward-brand {
             font-size: 12px;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .reward-price {
@@ -1240,7 +1060,7 @@
             gap: 4px;
             background: rgba(212, 168, 75, 0.1);
             color: var(--accent);
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 50px;
             font-size: 13px;
             font-weight: 700;
@@ -1251,7 +1071,7 @@
             padding: 0 20px 24px;
         }
 
-        .prediction-card {
+        .prediction {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
@@ -1259,14 +1079,13 @@
             margin-bottom: 12px;
         }
 
-        .prediction-card:last-child {
+        .prediction:last-child {
             margin-bottom: 0;
         }
 
         .prediction-top {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 16px;
         }
 
@@ -1283,7 +1102,7 @@
             color: var(--text-secondary);
         }
 
-        .prediction-teams {
+        .matchup {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1299,8 +1118,8 @@
         }
 
         .team-logo {
-            width: 60px;
-            height: 60px;
+            width: 58px;
+            height: 58px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1308,7 +1127,6 @@
             font-weight: 800;
             font-size: 14px;
             border: 2px solid rgba(255,255,255,0.15);
-            transition: all var(--transition);
         }
 
         .team-name {
@@ -1324,16 +1142,15 @@
         .versus {
             font-weight: 700;
             color: var(--text-muted);
-            font-size: 14px;
         }
 
-        .prediction-picks {
+        .picks {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
-        .pick-btn {
+        .pick {
             background: rgba(255,255,255,0.04);
             border: 1px solid var(--border);
             color: var(--text);
@@ -1342,7 +1159,6 @@
             font-size: 15px;
             font-weight: 500;
             cursor: pointer;
-            transition: all var(--transition);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1350,14 +1166,13 @@
             font-family: inherit;
         }
 
-        .pick-btn:active {
+        .pick:active {
             transform: scale(0.97);
         }
 
-        .pick-btn.selected {
-            background: rgba(212, 168, 75, 0.12);
+        .pick.selected {
+            background: rgba(212, 168, 75, 0.1);
             border-color: var(--accent);
-            box-shadow: 0 0 0 1px var(--accent);
         }
 
         .pick-sub {
@@ -1387,7 +1202,7 @@
             padding: 0 20px 24px;
         }
 
-        .event-card {
+        .event {
             display: flex;
             gap: 16px;
             background: var(--card);
@@ -1396,11 +1211,9 @@
             padding: 16px;
             margin-bottom: 12px;
             cursor: pointer;
-            transition: all var(--transition);
         }
 
-        .event-card:active {
-            transform: scale(0.985);
+        .event:active {
             background: var(--card-hover);
         }
 
@@ -1413,7 +1226,6 @@
             align-items: center;
             justify-content: center;
             padding: 10px;
-            flex-shrink: 0;
         }
 
         .event-month {
@@ -1421,7 +1233,6 @@
             color: var(--accent);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .event-day {
@@ -1431,7 +1242,6 @@
 
         .event-info {
             flex: 1;
-            min-width: 0;
         }
 
         .event-title {
@@ -1445,14 +1255,61 @@
             color: var(--text-muted);
         }
 
-        .event-badge {
+        .event-reward {
+            display: inline-block;
+            margin-top: 8px;
             font-size: 12px;
             background: var(--success-bg);
             color: var(--success);
             padding: 4px 10px;
             border-radius: 50px;
-            margin-top: 8px;
-            display: inline-block;
+        }
+
+        /* Activity */
+        .activity-section {
+            padding: 0 20px 24px;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--card);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .activity-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: var(--text-muted);
         }
 
         /* ===== BOTTOM NAV ===== */
@@ -1462,33 +1319,31 @@
             left: 0;
             right: 0;
             background: rgba(10, 14, 26, 0.92);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border-top: 1px solid var(--border);
             padding: 6px 0 calc(6px + var(--safe-bottom));
             z-index: 100;
         }
 
-        .nav-items {
+        .nav-row {
             display: flex;
             justify-content: space-around;
-            align-items: center;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        .nav-item {
+        .nav-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
             padding: 8px 20px;
             cursor: pointer;
-            transition: all var(--transition);
             position: relative;
         }
 
-        .nav-item::before {
+        .nav-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -1501,63 +1356,58 @@
             transition: transform 0.3s;
         }
 
-        .nav-item.active::before {
+        .nav-btn.active::before {
             transform: translateX(-50%) scaleX(1);
         }
 
         .nav-icon {
             font-size: 24px;
             opacity: 0.5;
-            transition: all var(--transition);
+            transition: all 0.2s;
         }
 
         .nav-label {
             font-size: 11px;
             font-weight: 500;
             color: var(--text-muted);
-            transition: all var(--transition);
         }
 
-        .nav-item.active .nav-icon {
+        .nav-btn.active .nav-icon {
             opacity: 1;
-            transform: scale(1.05);
         }
 
-        .nav-item.active .nav-label {
+        .nav-btn.active .nav-label {
             color: var(--accent);
         }
 
-        .nav-item:active {
+        .nav-btn:active {
             transform: scale(0.9);
         }
 
-        /* ===== REWARDS SCREEN ===== */
-        .rewards-page {
+        /* ===== REWARDS PAGE ===== */
+        .page-header {
             padding: 20px;
         }
 
-        .rewards-page h1 {
+        .page-header h1 {
             font-size: 28px;
             font-weight: 700;
-            letter-spacing: -0.5px;
             margin-bottom: 6px;
         }
 
-        .rewards-page > p {
+        .page-header p {
             color: var(--text-secondary);
             font-size: 15px;
-            margin-bottom: 24px;
         }
 
-        .category-scroll {
+        .categories {
             display: flex;
             gap: 10px;
-            margin-bottom: 24px;
+            padding: 0 20px 20px;
             overflow-x: auto;
-            padding-bottom: 4px;
         }
 
-        .category-chip {
+        .cat-chip {
             flex: 0 0 auto;
             padding: 11px 20px;
             background: var(--card);
@@ -1567,21 +1417,21 @@
             font-weight: 500;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: all var(--transition);
             white-space: nowrap;
         }
 
-        .category-chip.active {
+        .cat-chip.active {
             background: var(--accent);
             border-color: var(--accent);
             color: var(--bg);
         }
 
-        .category-chip:active {
+        .cat-chip:active {
             transform: scale(0.96);
         }
 
         .rewards-grid {
+            padding: 0 20px 24px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 14px;
@@ -1594,17 +1444,15 @@
             padding: 24px 16px;
             text-align: center;
             cursor: pointer;
-            transition: all var(--transition);
         }
 
         .reward-tile:active {
             transform: scale(0.97);
-            background: var(--card-hover);
         }
 
-        /* ===== NETWORK SCREEN ===== */
-        .network-page {
-            padding: 20px;
+        /* ===== NETWORK PAGE ===== */
+        .search-wrap {
+            padding: 0 20px 16px;
         }
 
         .search-box {
@@ -1615,8 +1463,6 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 14px 18px;
-            margin-bottom: 20px;
-            transition: all var(--transition);
         }
 
         .search-box:focus-within {
@@ -1637,19 +1483,14 @@
             color: var(--text-muted);
         }
 
-        .search-icon {
-            font-size: 20px;
-            color: var(--text-muted);
-        }
-
-        .filter-scroll {
+        .filters {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            padding: 0 20px 16px;
             overflow-x: auto;
         }
 
-        .filter-btn {
+        .filter {
             flex: 0 0 auto;
             padding: 10px 18px;
             background: var(--card);
@@ -1659,27 +1500,22 @@
             font-weight: 500;
             color: var(--text-secondary);
             cursor: pointer;
-            white-space: nowrap;
-            transition: all var(--transition);
         }
 
-        .filter-btn.active {
+        .filter.active {
             background: rgba(212, 168, 75, 0.1);
             border-color: var(--accent);
             color: var(--accent);
         }
 
-        .filter-btn:active {
-            transform: scale(0.96);
-        }
-
         .alumni-list {
+            padding: 0 20px;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .alumni-row {
+        .alumni-card {
             display: flex;
             align-items: center;
             gap: 14px;
@@ -1688,15 +1524,13 @@
             border-radius: var(--radius);
             padding: 16px;
             cursor: pointer;
-            transition: all var(--transition);
         }
 
-        .alumni-row:active {
+        .alumni-card:active {
             background: var(--card-hover);
-            transform: scale(0.99);
         }
 
-        .alumni-pic {
+        .alumni-avatar {
             width: 54px;
             height: 54px;
             border-radius: 50%;
@@ -1705,10 +1539,9 @@
             justify-content: center;
             font-weight: 600;
             font-size: 17px;
-            flex-shrink: 0;
         }
 
-        .alumni-details {
+        .alumni-info {
             flex: 1;
             min-width: 0;
         }
@@ -1736,25 +1569,15 @@
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            transition: all var(--transition);
         }
 
-        .connect-btn:active {
-            transform: scale(0.95);
-            background: var(--card-hover);
-        }
-
-        /* ===== PROFILE SCREEN ===== */
-        .profile-page {
-            padding: 20px;
-        }
-
+        /* ===== PROFILE PAGE ===== */
         .profile-hero {
             text-align: center;
-            padding: 24px 0 32px;
+            padding: 24px 20px 32px;
         }
 
-        .profile-pic {
+        .profile-avatar {
             width: 100px;
             height: 100px;
             background: linear-gradient(145deg, var(--unc), var(--unc-dark));
@@ -1766,7 +1589,6 @@
             font-weight: 700;
             margin: 0 auto 16px;
             border: 3px solid var(--accent);
-            box-shadow: 0 8px 32px rgba(75, 156, 211, 0.3);
         }
 
         .profile-name {
@@ -1775,34 +1597,35 @@
             margin-bottom: 4px;
         }
 
-        .profile-school {
+        .profile-degree {
             color: var(--text-secondary);
             font-size: 14px;
             margin-bottom: 20px;
         }
 
-        .profile-nums {
+        .profile-stats {
             display: flex;
             justify-content: center;
             gap: 40px;
         }
 
-        .profile-num {
+        .profile-stat {
             text-align: center;
         }
 
-        .profile-num-value {
+        .profile-stat-val {
             font-size: 24px;
             font-weight: 700;
             color: var(--accent);
         }
 
-        .profile-num-label {
+        .profile-stat-label {
             font-size: 12px;
             color: var(--text-muted);
         }
 
         .menu-list {
+            padding: 0 20px;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -1817,15 +1640,13 @@
             border-radius: var(--radius);
             padding: 18px;
             cursor: pointer;
-            transition: all var(--transition);
         }
 
         .menu-item:active {
             background: var(--card-hover);
-            transform: scale(0.99);
         }
 
-        .menu-icon-wrap {
+        .menu-icon {
             width: 48px;
             height: 48px;
             background: var(--bg);
@@ -1856,23 +1677,74 @@
             font-size: 20px;
         }
 
-        /* ===== MODALS ===== */
-        .modal-backdrop {
+        /* ===== NOTIFICATIONS PAGE ===== */
+        .notifications-page {
+            padding: 20px;
+        }
+
+        .notif-item {
+            display: flex;
+            gap: 14px;
+            padding: 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+        }
+
+        .notif-item.unread {
+            border-color: var(--accent);
+            background: rgba(212, 168, 75, 0.05);
+        }
+
+        .notif-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .notif-content {
+            flex: 1;
+        }
+
+        .notif-title {
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .notif-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .notif-time {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.75);
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
             z-index: 1000;
             display: flex;
             align-items: flex-end;
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.35s;
+            transition: all 0.3s;
         }
 
-        .modal-backdrop.open {
+        .modal-overlay.open {
             opacity: 1;
             visibility: visible;
         }
@@ -1885,10 +1757,10 @@
             max-height: 90vh;
             overflow-y: auto;
             transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s var(--ease);
         }
 
-        .modal-backdrop.open .modal-sheet {
+        .modal-overlay.open .modal-sheet {
             transform: translateY(0);
         }
 
@@ -1902,29 +1774,27 @@
 
         .modal-body {
             padding: 12px 28px 36px;
+            text-align: center;
         }
 
         .modal-emoji {
             font-size: 72px;
-            text-align: center;
             margin-bottom: 16px;
         }
 
         .modal-heading {
             font-size: 26px;
             font-weight: 700;
-            text-align: center;
             margin-bottom: 6px;
         }
 
         .modal-sub {
-            text-align: center;
             color: var(--text-muted);
             font-size: 14px;
             margin-bottom: 24px;
         }
 
-        .modal-points {
+        .modal-price {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1935,11 +1805,10 @@
             margin-bottom: 28px;
         }
 
-        .modal-text {
+        .modal-desc {
             color: var(--text-secondary);
             font-size: 15px;
             line-height: 1.6;
-            text-align: center;
             margin-bottom: 32px;
         }
 
@@ -1954,8 +1823,6 @@
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
-            transition: all var(--transition);
-            box-shadow: 0 8px 24px var(--accent-glow);
         }
 
         .modal-cta:active {
@@ -1963,14 +1830,13 @@
         }
 
         .modal-balance {
-            text-align: center;
             margin-top: 14px;
             font-size: 13px;
             color: var(--text-muted);
         }
 
         /* ===== TOAST ===== */
-        .toast-wrap {
+        .toast-container {
             position: fixed;
             bottom: calc(100px + var(--safe-bottom));
             left: 20px;
@@ -1992,7 +1858,7 @@
             box-shadow: var(--shadow-lg);
             transform: translateY(100px);
             opacity: 0;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s var(--spring);
             pointer-events: auto;
         }
 
@@ -2010,36 +1876,24 @@
             font-weight: 500;
         }
 
-        /* Desktop frame */
+        /* Desktop */
         @media (min-width: 520px) {
-            body {
-                background: #050810;
-            }
-            
+            body { background: #050810; }
             .app {
                 max-width: 480px;
                 margin: 0 auto;
                 background: var(--bg);
                 border-left: 1px solid var(--border);
                 border-right: 1px solid var(--border);
-                box-shadow: 0 0 100px rgba(0,0,0,0.5);
             }
-            
-            .header {
+            .header, .bottom-nav {
                 max-width: 480px;
                 left: 50%;
                 transform: translateX(-50%);
             }
-            
-            .bottom-nav {
-                max-width: 480px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            
             .modal-sheet {
                 border-radius: var(--radius-lg);
-                margin: auto auto 24px;
+                margin-bottom: 24px;
             }
         }
     </style>
@@ -2048,236 +1902,242 @@
     <!-- Splash -->
     <div class="splash" id="splash">
         <div class="splash-logo">V</div>
-        <div class="splash-brand">Veritas</div>
-        <div class="splash-tagline">Your degree, verified forever</div>
-        <div class="splash-progress">
-            <div class="splash-progress-bar"></div>
-        </div>
+        <div class="splash-text">Veritas</div>
+        <div class="splash-sub">Your degree, verified forever</div>
+        <div class="splash-bar"><div class="splash-bar-fill"></div></div>
     </div>
 
     <!-- Onboarding -->
     <div class="onboarding" id="onboarding">
-        <div class="onboard-container">
-            <div class="onboard-slides">
-                <div class="onboard-slide active" data-slide="0">
-                    <div class="onboard-visual">🎓</div>
-                    <h2 class="onboard-title">Your Degree, Verified</h2>
-                    <p class="onboard-desc">Transform your diploma into a verified digital credential that proves your achievement forever</p>
-                </div>
-                <div class="onboard-slide" data-slide="1">
-                    <div class="onboard-visual">💎</div>
-                    <h2 class="onboard-title">Earn Rewards</h2>
-                    <p class="onboard-desc">Collect points for your loyalty and engagement. Redeem them for exclusive perks from premium brands</p>
-                </div>
-                <div class="onboard-slide" data-slide="2">
-                    <div class="onboard-visual">🤝</div>
-                    <h2 class="onboard-title">Connect & Thrive</h2>
-                    <p class="onboard-desc">Join a verified network of fellow graduates. Find mentors, opportunities, and lifelong connections</p>
-                </div>
+        <div class="onboard-slides">
+            <div class="onboard-slide active">
+                <div class="onboard-icon">🎓</div>
+                <h2 class="onboard-title">Your Degree, Verified</h2>
+                <p class="onboard-desc">Transform your diploma into a verified digital credential that proves your achievement forever</p>
             </div>
-            <div class="onboard-footer">
-                <div class="onboard-dots">
-                    <div class="onboard-dot active"></div>
-                    <div class="onboard-dot"></div>
-                    <div class="onboard-dot"></div>
-                </div>
-                <button class="btn-primary" id="onboardNext">Continue</button>
-                <button class="btn-secondary" id="onboardSkip">Skip</button>
+            <div class="onboard-slide">
+                <div class="onboard-icon">💎</div>
+                <h2 class="onboard-title">Earn Rewards</h2>
+                <p class="onboard-desc">Collect points for your loyalty and engagement. Redeem them for exclusive perks from premium brands</p>
             </div>
+            <div class="onboard-slide">
+                <div class="onboard-icon">🤝</div>
+                <h2 class="onboard-title">Connect & Thrive</h2>
+                <p class="onboard-desc">Join a verified network of fellow graduates. Find mentors, opportunities, and lifelong connections</p>
+            </div>
+        </div>
+        <div class="onboard-footer">
+            <div class="onboard-dots">
+                <div class="onboard-dot active"></div>
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot"></div>
+            </div>
+            <button class="btn btn-primary" id="onboardNext">Continue</button>
+            <button class="btn btn-ghost" id="onboardSkip">Skip</button>
         </div>
     </div>
 
     <!-- App -->
     <div class="app" id="app">
         <!-- Header -->
-        <header class="header" id="header">
-            <div class="header-content">
+        <header class="header">
+            <div class="header-inner">
                 <div class="header-left">
                     <div class="header-logo">V</div>
-                    <span class="header-title">Veritas</span>
+                    <span class="header-brand">Veritas</span>
                 </div>
                 <div class="header-right">
-                    <div class="points-chip" onclick="switchTab('profile')">
-                        💎 <span class="value">12,450</span>
-                    </div>
-                    <div class="header-btn">
-                        🔔
-                        <div class="badge"></div>
-                    </div>
+                    <div class="points-badge">💎 <span class="num">12,450</span></div>
+                    <div class="icon-btn" onclick="showNotifications()">🔔<div class="dot"></div></div>
                 </div>
             </div>
         </header>
 
-        <div class="ptr-indicator" id="ptr">↻</div>
-
         <!-- Main -->
-        <main class="main" id="main">
+        <main class="main">
             <!-- Home -->
             <div class="screen active" id="screen-home">
-                <div class="greeting-section">
-                    <div class="greeting-row">
-                        <div class="greeting-text">
-                            <h1>Hey, Shane 👋</h1>
-                            <p>Your verified credential is working for you</p>
-                        </div>
-                        <div class="greeting-avatar" onclick="switchTab('profile')">SS</div>
+                <div class="greeting">
+                    <div>
+                        <h1>Hey, Shane 👋</h1>
+                        <p>Your verified credential is working for you</p>
                     </div>
+                    <div class="greeting-avatar" onclick="switchTab('profile')">SS</div>
                 </div>
 
-                <div class="credential-section">
-                    <div class="credential-card">
-                        <div class="credential-inner">
-                            <div class="credential-top">
-                                <div class="credential-school">
-                                    <div class="school-seal">UNC</div>
-                                    <div class="school-text">
-                                        <h3>UNC Chapel Hill</h3>
-                                        <p>Chapel Hill, NC</p>
-                                    </div>
+                <div class="credential-wrap">
+                    <div class="credential">
+                        <div class="credential-top">
+                            <div class="school-row">
+                                <div class="school-seal">UNC</div>
+                                <div class="school-info">
+                                    <h3>UNC Chapel Hill</h3>
+                                    <p>Chapel Hill, NC</p>
                                 </div>
-                                <div class="verified-seal">✓ Verified</div>
                             </div>
-                            <div class="credential-degree">
-                                <h2>Bachelor of Arts in Economics</h2>
-                            </div>
-                            <div class="credential-meta">
-                                <span class="meta-item">🎓 Class of 2020</span>
-                                <span class="meta-item">📅 6 years ago</span>
-                            </div>
-                            <div class="credential-bottom">
-                                <span class="credential-id">🔐 VRT-2020-78432</span>
-                                <button class="credential-share" onclick="toast('📤 Share link copied!')">📤 Share</button>
-                            </div>
+                            <div class="verified-pill">✓ Verified</div>
+                        </div>
+                        <h2>Bachelor of Arts in Economics</h2>
+                        <div class="credential-meta">
+                            <span class="meta-tag">🎓 Class of 2020</span>
+                            <span class="meta-tag">📅 6 years ago</span>
+                        </div>
+                        <div class="credential-foot">
+                            <span class="cred-id">🔐 VRT-2020-78432</span>
+                            <button class="share-btn" onclick="toast('📤 Share link copied!')">📤 Share</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="actions-section">
-                    <div class="actions-grid">
-                        <div class="action-item" onclick="switchTab('rewards')">
-                            <div class="action-icon">🎁</div>
-                            <span class="action-label">Rewards</span>
-                        </div>
-                        <div class="action-item" onclick="scrollTo('predictions')">
-                            <div class="action-icon">🏀</div>
-                            <span class="action-label">Predict</span>
-                        </div>
-                        <div class="action-item" onclick="switchTab('network')">
-                            <div class="action-icon">👥</div>
-                            <span class="action-label">Network</span>
-                        </div>
-                        <div class="action-item" onclick="scrollTo('events')">
-                            <div class="action-icon">📅</div>
-                            <span class="action-label">Events</span>
-                        </div>
+                <div class="actions">
+                    <div class="action-btn" onclick="switchTab('rewards')">
+                        <div class="action-icon">🎁</div>
+                        <span class="action-label">Rewards</span>
+                    </div>
+                    <div class="action-btn" onclick="scrollToEl('predictions')">
+                        <div class="action-icon">🏀</div>
+                        <span class="action-label">Predict</span>
+                    </div>
+                    <div class="action-btn" onclick="switchTab('network')">
+                        <div class="action-icon">👥</div>
+                        <span class="action-label">Network</span>
+                    </div>
+                    <div class="action-btn" onclick="scrollToEl('events')">
+                        <div class="action-icon">📅</div>
+                        <span class="action-label">Events</span>
                     </div>
                 </div>
 
-                <div class="stats-section">
-                    <div class="stats-row">
-                        <div class="stat-card">
-                            <div class="stat-value">94</div>
-                            <div class="stat-label">Engagement</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">12</div>
-                            <div class="stat-label">Wins</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">847</div>
-                            <div class="stat-label">Network</div>
-                        </div>
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-val">94</div>
+                        <div class="stat-label">Engagement</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-val">12</div>
+                        <div class="stat-label">Predictions</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-val">847</div>
+                        <div class="stat-label">Network</div>
                     </div>
                 </div>
 
-                <div class="points-section">
+                <div class="points-wrap">
                     <div class="points-card">
-                        <div class="points-header">
-                            <div class="points-info">
-                                <span class="points-label">Veritas Points</span>
-                                <span class="points-value">12,450</span>
-                                <span class="points-delta">↑ +850 this month</span>
+                        <div class="points-top">
+                            <div>
+                                <div class="points-label">Veritas Points</div>
+                                <div class="points-num">12,450</div>
+                                <div class="points-delta">↑ +850 this month</div>
                             </div>
-                            <div class="tier-pill">🏆 Gold</div>
+                            <div class="tier-badge">🏆 Gold</div>
                         </div>
-                        <div class="progress-area">
+                        <div class="progress-wrap">
                             <div class="progress-labels">
                                 <span>3,550 to Legacy</span>
                                 <span>16,000</span>
                             </div>
                             <div class="progress-track">
-                                <div class="progress-bar" style="width: 78%"></div>
+                                <div class="progress-fill" style="width:78%"></div>
                             </div>
                             <div class="tier-track">
-                                <div class="tier-marker"><span class="tier-marker-icon">🔵</span><span class="tier-marker-name">Blue</span></div>
-                                <div class="tier-marker"><span class="tier-marker-icon">🥈</span><span class="tier-marker-name">Silver</span></div>
-                                <div class="tier-marker current"><span class="tier-marker-icon">🏆</span><span class="tier-marker-name">Gold</span></div>
-                                <div class="tier-marker"><span class="tier-marker-icon">👑</span><span class="tier-marker-name">Legacy</span></div>
+                                <div class="tier-marker"><span class="icon">🔵</span><span class="name">Blue</span></div>
+                                <div class="tier-marker"><span class="icon">🥈</span><span class="name">Silver</span></div>
+                                <div class="tier-marker active"><span class="icon">🏆</span><span class="name">Gold</span></div>
+                                <div class="tier-marker"><span class="icon">👑</span><span class="name">Legacy</span></div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievements-section">
+                    <div class="section-head">
+                        <h3 class="section-title">🏅 Achievements</h3>
+                        <span class="section-link">View all</span>
+                    </div>
+                    <div class="achievements-scroll">
+                        <div class="achievement">
+                            <div class="achievement-icon">🎓</div>
+                            <div class="achievement-name">Verified</div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-icon">🔥</div>
+                            <div class="achievement-name">7-Day Streak</div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-icon">🏀</div>
+                            <div class="achievement-name">Predictor</div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-icon">🤝</div>
+                            <div class="achievement-name">Connector</div>
+                        </div>
+                        <div class="achievement locked">
+                            <div class="achievement-icon">👑</div>
+                            <div class="achievement-name">Legacy</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="ai-section">
                     <div class="ai-card">
-                        <div class="ai-inner">
-                            <div class="ai-top">
-                                <div class="ai-avatar">🤖</div>
-                                <div class="ai-meta">
-                                    <h3>Veritas AI</h3>
-                                    <div class="ai-status"><div class="ai-status-dot"></div>Online</div>
-                                </div>
+                        <div class="ai-head">
+                            <div class="ai-avatar">🤖</div>
+                            <div class="ai-info">
+                                <h3>Veritas AI</h3>
+                                <div class="ai-status"><div class="dot"></div>Online</div>
                             </div>
-                            <div class="ai-messages" id="aiMessages">
-                                <div class="ai-messages-inner" id="aiMsgsInner">
-                                    <div class="ai-msg bot">👋 Hey Shane! You're <strong>3,550 points</strong> from Legacy. Want me to show you the fastest way there?</div>
-                                </div>
+                        </div>
+                        <div class="ai-chat" id="aiChat">
+                            <div class="ai-messages" id="aiMsgs">
+                                <div class="ai-msg bot">👋 Hey Shane! You're <strong>3,550 points</strong> from Legacy. Want me to show you the fastest way there?</div>
                             </div>
-                            <div class="ai-input-area">
-                                <input type="text" class="ai-input" id="aiInput" placeholder="Ask me anything...">
-                                <button class="ai-send" onclick="sendAI()">➤</button>
-                            </div>
-                            <div class="ai-suggestions">
-                                <span class="ai-pill" onclick="askAI('How do I reach Legacy?')">🎯 Path to Legacy</span>
-                                <span class="ai-pill" onclick="askAI('Find tech alumni')">👥 Tech alumni</span>
-                                <span class="ai-pill" onclick="askAI('Best rewards')">🎁 Rewards</span>
-                            </div>
+                        </div>
+                        <div class="ai-input-row">
+                            <input type="text" class="ai-input" id="aiInput" placeholder="Ask me anything...">
+                            <button class="ai-send" onclick="sendAI()">➤</button>
+                        </div>
+                        <div class="ai-pills">
+                            <span class="ai-pill" onclick="askAI('How do I reach Legacy?')">🎯 Path to Legacy</span>
+                            <span class="ai-pill" onclick="askAI('Find tech alumni')">👥 Tech alumni</span>
+                            <span class="ai-pill" onclick="askAI('Best rewards')">🎁 Rewards</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="rewards-section">
-                    <div class="section-header">
+                    <div class="section-head" style="padding: 0 20px 14px;">
                         <h3 class="section-title">🎁 Rewards</h3>
-                        <span class="section-action" onclick="switchTab('rewards')">See all</span>
+                        <span class="section-link" onclick="switchTab('rewards')">See all</span>
                     </div>
                     <div class="rewards-scroll">
                         <div class="reward-card" onclick="openReward('marriott')">
-                            <div class="reward-icon-wrap">🏨</div>
+                            <div class="reward-emoji">🏨</div>
                             <div class="reward-name">Free Night</div>
                             <div class="reward-brand">Marriott</div>
                             <div class="reward-price">💎 5,000</div>
                         </div>
                         <div class="reward-card" onclick="openReward('linkedin')">
-                            <div class="reward-icon-wrap">💼</div>
+                            <div class="reward-emoji">💼</div>
                             <div class="reward-name">Premium 3mo</div>
                             <div class="reward-brand">LinkedIn</div>
                             <div class="reward-price">💎 3,500</div>
                         </div>
                         <div class="reward-card" onclick="openReward('nike')">
-                            <div class="reward-icon-wrap">👟</div>
+                            <div class="reward-emoji">👟</div>
                             <div class="reward-name">$50 Card</div>
                             <div class="reward-brand">Nike</div>
                             <div class="reward-price">💎 4,000</div>
                         </div>
                         <div class="reward-card" onclick="openReward('airbnb')">
-                            <div class="reward-icon-wrap">🏠</div>
+                            <div class="reward-emoji">🏠</div>
                             <div class="reward-name">$100 Credit</div>
                             <div class="reward-brand">Airbnb</div>
                             <div class="reward-price">💎 8,000</div>
                         </div>
                         <div class="reward-card" onclick="openReward('uber')">
-                            <div class="reward-icon-wrap">🚗</div>
+                            <div class="reward-emoji">🚗</div>
                             <div class="reward-name">$20 Credit</div>
                             <div class="reward-brand">Uber</div>
                             <div class="reward-price">💎 1,800</div>
@@ -2286,16 +2146,16 @@
                 </div>
 
                 <div class="predictions-section" id="predictions">
-                    <div class="section-header">
+                    <div class="section-head">
                         <h3 class="section-title">🏀 Predictions</h3>
                         <span style="font-size:12px;background:var(--success-bg);color:var(--success);padding:5px 12px;border-radius:50px;">+100 pts/win</span>
                     </div>
-                    <div class="prediction-card">
+                    <div class="prediction">
                         <div class="prediction-top">
                             <span class="prediction-league">ACC Basketball</span>
                             <span class="prediction-time">Sat • 2:00 PM</span>
                         </div>
-                        <div class="prediction-teams">
+                        <div class="matchup">
                             <div class="team">
                                 <div class="team-logo" style="background:var(--unc)">UNC</div>
                                 <span class="team-name">Tar Heels</span>
@@ -2308,18 +2168,18 @@
                                 <span class="team-record">19-4</span>
                             </div>
                         </div>
-                        <div class="prediction-picks">
-                            <button class="pick-btn selected" onclick="pickTeam(this)">UNC -3.5<span class="pick-sub">Your pick</span></button>
-                            <button class="pick-btn" onclick="pickTeam(this)">Duke +3.5<span class="pick-sub">52%</span></button>
+                        <div class="picks">
+                            <button class="pick selected" onclick="selectPick(this)">UNC -3.5<span class="pick-sub">Your pick</span></button>
+                            <button class="pick" onclick="selectPick(this)">Duke +3.5<span class="pick-sub">52%</span></button>
                         </div>
                         <div class="prediction-footer">🎯 Win: <strong>+100 pts</strong></div>
                     </div>
-                    <div class="prediction-card">
+                    <div class="prediction">
                         <div class="prediction-top">
                             <span class="prediction-league">ACC Basketball</span>
                             <span class="prediction-time">Sun • 4:00 PM</span>
                         </div>
-                        <div class="prediction-teams">
+                        <div class="matchup">
                             <div class="team">
                                 <div class="team-logo" style="background:var(--ncstate)">NCST</div>
                                 <span class="team-name">Wolfpack</span>
@@ -2332,20 +2192,20 @@
                                 <span class="team-record">14-9</span>
                             </div>
                         </div>
-                        <div class="prediction-picks">
-                            <button class="pick-btn" onclick="pickTeam(this)">NC State +2<span class="pick-sub">48%</span></button>
-                            <button class="pick-btn" onclick="pickTeam(this)">Clemson -2<span class="pick-sub">52%</span></button>
+                        <div class="picks">
+                            <button class="pick" onclick="selectPick(this)">NC State +2<span class="pick-sub">48%</span></button>
+                            <button class="pick" onclick="selectPick(this)">Clemson -2<span class="pick-sub">52%</span></button>
                         </div>
                         <div class="prediction-footer">🎯 Win: <strong>+100 pts</strong></div>
                     </div>
                 </div>
 
                 <div class="events-section" id="events">
-                    <div class="section-header">
-                        <h3 class="section-title">📅 Upcoming Events</h3>
-                        <span class="section-action">See all</span>
+                    <div class="section-head">
+                        <h3 class="section-title">📅 Events</h3>
+                        <span class="section-link">See all</span>
                     </div>
-                    <div class="event-card">
+                    <div class="event">
                         <div class="event-date">
                             <span class="event-month">Feb</span>
                             <span class="event-day">15</span>
@@ -2353,10 +2213,10 @@
                         <div class="event-info">
                             <div class="event-title">Triangle Alumni Mixer</div>
                             <div class="event-meta">Raleigh, NC • 6:00 PM</div>
-                            <span class="event-badge">+250 pts</span>
+                            <span class="event-reward">+250 pts</span>
                         </div>
                     </div>
-                    <div class="event-card">
+                    <div class="event">
                         <div class="event-date">
                             <span class="event-month">Feb</span>
                             <span class="event-day">22</span>
@@ -2364,10 +2224,10 @@
                         <div class="event-info">
                             <div class="event-title">Career Workshop</div>
                             <div class="event-meta">Virtual • 12:00 PM</div>
-                            <span class="event-badge">+150 pts</span>
+                            <span class="event-reward">+150 pts</span>
                         </div>
                     </div>
-                    <div class="event-card">
+                    <div class="event">
                         <div class="event-date">
                             <span class="event-month">Mar</span>
                             <span class="event-day">1</span>
@@ -2375,187 +2235,296 @@
                         <div class="event-info">
                             <div class="event-title">UNC vs Duke Watch Party</div>
                             <div class="event-meta">Durham, NC • 7:00 PM</div>
-                            <span class="event-badge">+200 pts</span>
+                            <span class="event-reward">+200 pts</span>
                         </div>
+                    </div>
+                </div>
+
+                <div class="activity-section">
+                    <div class="section-head">
+                        <h3 class="section-title">⚡ Activity</h3>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">💎</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Earned 100 points</div>
+                            <div class="activity-desc">Correct prediction: UNC vs Wake</div>
+                        </div>
+                        <div class="activity-time">2h ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">🎁</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Redeemed reward</div>
+                            <div class="activity-desc">LinkedIn Premium (3 months)</div>
+                        </div>
+                        <div class="activity-time">1d ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">🤝</div>
+                        <div class="activity-content">
+                            <div class="activity-title">New connection</div>
+                            <div class="activity-desc">Sarah Chen accepted your request</div>
+                        </div>
+                        <div class="activity-time">2d ago</div>
                     </div>
                 </div>
             </div>
 
             <!-- Rewards -->
             <div class="screen" id="screen-rewards">
-                <div class="rewards-page">
+                <div class="page-header">
                     <h1>Rewards</h1>
                     <p>Redeem your points for exclusive perks</p>
-                    <div class="category-scroll">
-                        <span class="category-chip active">All</span>
-                        <span class="category-chip">Travel</span>
-                        <span class="category-chip">Shopping</span>
-                        <span class="category-chip">Dining</span>
-                        <span class="category-chip">Experiences</span>
+                </div>
+                <div class="categories">
+                    <span class="cat-chip active">All</span>
+                    <span class="cat-chip">Travel</span>
+                    <span class="cat-chip">Shopping</span>
+                    <span class="cat-chip">Dining</span>
+                    <span class="cat-chip">Experiences</span>
+                </div>
+                <div class="rewards-grid">
+                    <div class="reward-tile" onclick="openReward('marriott')">
+                        <div class="reward-emoji">🏨</div>
+                        <div class="reward-name">Free Hotel Night</div>
+                        <div class="reward-brand">Marriott Bonvoy</div>
+                        <div class="reward-price">💎 5,000</div>
                     </div>
-                    <div class="rewards-grid">
-                        <div class="reward-tile" onclick="openReward('marriott')">
-                            <div class="reward-icon-wrap">🏨</div>
-                            <div class="reward-name">Free Hotel Night</div>
-                            <div class="reward-brand">Marriott Bonvoy</div>
-                            <div class="reward-price">💎 5,000</div>
-                        </div>
-                        <div class="reward-tile" onclick="openReward('linkedin')">
-                            <div class="reward-icon-wrap">💼</div>
-                            <div class="reward-name">Premium 3 Months</div>
-                            <div class="reward-brand">LinkedIn</div>
-                            <div class="reward-price">💎 3,500</div>
-                        </div>
-                        <div class="reward-tile" onclick="openReward('nike')">
-                            <div class="reward-icon-wrap">👟</div>
-                            <div class="reward-name">$50 Gift Card</div>
-                            <div class="reward-brand">Nike</div>
-                            <div class="reward-price">💎 4,000</div>
-                        </div>
-                        <div class="reward-tile" onclick="openReward('airbnb')">
-                            <div class="reward-icon-wrap">🏠</div>
-                            <div class="reward-name">$100 Credit</div>
-                            <div class="reward-brand">Airbnb</div>
-                            <div class="reward-price">💎 8,000</div>
-                        </div>
-                        <div class="reward-tile" onclick="openReward('uber')">
-                            <div class="reward-icon-wrap">🚗</div>
-                            <div class="reward-name">$20 Credit</div>
-                            <div class="reward-brand">Uber</div>
-                            <div class="reward-price">💎 1,800</div>
-                        </div>
-                        <div class="reward-tile" onclick="openReward('amex')">
-                            <div class="reward-icon-wrap">💳</div>
-                            <div class="reward-name">$25 Statement</div>
-                            <div class="reward-brand">Amex</div>
-                            <div class="reward-price">💎 2,000</div>
-                        </div>
+                    <div class="reward-tile" onclick="openReward('linkedin')">
+                        <div class="reward-emoji">💼</div>
+                        <div class="reward-name">Premium 3 Months</div>
+                        <div class="reward-brand">LinkedIn</div>
+                        <div class="reward-price">💎 3,500</div>
+                    </div>
+                    <div class="reward-tile" onclick="openReward('nike')">
+                        <div class="reward-emoji">👟</div>
+                        <div class="reward-name">$50 Gift Card</div>
+                        <div class="reward-brand">Nike</div>
+                        <div class="reward-price">💎 4,000</div>
+                    </div>
+                    <div class="reward-tile" onclick="openReward('airbnb')">
+                        <div class="reward-emoji">🏠</div>
+                        <div class="reward-name">$100 Credit</div>
+                        <div class="reward-brand">Airbnb</div>
+                        <div class="reward-price">💎 8,000</div>
+                    </div>
+                    <div class="reward-tile" onclick="openReward('uber')">
+                        <div class="reward-emoji">🚗</div>
+                        <div class="reward-name">$20 Credit</div>
+                        <div class="reward-brand">Uber</div>
+                        <div class="reward-price">💎 1,800</div>
+                    </div>
+                    <div class="reward-tile" onclick="openReward('amex')">
+                        <div class="reward-emoji">💳</div>
+                        <div class="reward-name">$25 Statement</div>
+                        <div class="reward-brand">Amex</div>
+                        <div class="reward-price">💎 2,000</div>
+                    </div>
+                    <div class="reward-tile" onclick="openReward('spotify')">
+                        <div class="reward-emoji">🎵</div>
+                        <div class="reward-name">3 Months Free</div>
+                        <div class="reward-brand">Spotify</div>
+                        <div class="reward-price">💎 2,500</div>
+                    </div>
+                    <div class="reward-tile" onclick="openReward('doordash')">
+                        <div class="reward-emoji">🍔</div>
+                        <div class="reward-name">$30 Credit</div>
+                        <div class="reward-brand">DoorDash</div>
+                        <div class="reward-price">💎 2,800</div>
                     </div>
                 </div>
             </div>
 
             <!-- Network -->
             <div class="screen" id="screen-network">
-                <div class="network-page">
+                <div class="page-header">
+                    <h1>Network</h1>
+                    <p>Connect with verified alumni</p>
+                </div>
+                <div class="search-wrap">
                     <div class="search-box">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" placeholder="Search alumni...">
+                        <span>🔍</span>
+                        <input type="text" placeholder="Search alumni..." id="searchInput" oninput="filterAlumni()">
                     </div>
-                    <div class="filter-scroll">
-                        <span class="filter-btn active">All</span>
-                        <span class="filter-btn">UNC</span>
-                        <span class="filter-btn">Duke</span>
-                        <span class="filter-btn">NC State</span>
-                        <span class="filter-btn">Tech</span>
-                        <span class="filter-btn">Finance</span>
+                </div>
+                <div class="filters">
+                    <span class="filter active" onclick="setFilter(this, 'all')">All</span>
+                    <span class="filter" onclick="setFilter(this, 'unc')">UNC</span>
+                    <span class="filter" onclick="setFilter(this, 'duke')">Duke</span>
+                    <span class="filter" onclick="setFilter(this, 'ncstate')">NC State</span>
+                    <span class="filter" onclick="setFilter(this, 'tech')">Tech</span>
+                </div>
+                <div class="alumni-list" id="alumniList">
+                    <div class="alumni-card" data-school="unc" data-industry="tech">
+                        <div class="alumni-avatar" style="background:var(--unc)">SC</div>
+                        <div class="alumni-info">
+                            <div class="alumni-name">Sarah Chen</div>
+                            <div class="alumni-bio">UNC '19 • PM at Google</div>
+                        </div>
+                        <button class="connect-btn" onclick="event.stopPropagation();toast('🤝 Request sent!')">Connect</button>
                     </div>
-                    <div class="alumni-list">
-                        <div class="alumni-row">
-                            <div class="alumni-pic" style="background:var(--unc)">SC</div>
-                            <div class="alumni-details">
-                                <div class="alumni-name">Sarah Chen</div>
-                                <div class="alumni-bio">UNC '19 • PM at Google</div>
-                            </div>
-                            <button class="connect-btn" onclick="toast('🤝 Request sent!')">Connect</button>
+                    <div class="alumni-card" data-school="duke" data-industry="tech">
+                        <div class="alumni-avatar" style="background:var(--duke)">JM</div>
+                        <div class="alumni-info">
+                            <div class="alumni-name">James Miller</div>
+                            <div class="alumni-bio">Duke '18 • Founder, TechStart</div>
                         </div>
-                        <div class="alumni-row">
-                            <div class="alumni-pic" style="background:var(--duke)">JM</div>
-                            <div class="alumni-details">
-                                <div class="alumni-name">James Miller</div>
-                                <div class="alumni-bio">Duke '18 • Founder, TechStart</div>
-                            </div>
-                            <button class="connect-btn" onclick="toast('🤝 Request sent!')">Connect</button>
+                        <button class="connect-btn" onclick="event.stopPropagation();toast('🤝 Request sent!')">Connect</button>
+                    </div>
+                    <div class="alumni-card" data-school="ncstate" data-industry="tech">
+                        <div class="alumni-avatar" style="background:var(--ncstate)">AP</div>
+                        <div class="alumni-info">
+                            <div class="alumni-name">Amanda Park</div>
+                            <div class="alumni-bio">NC State '20 • Engineer at Apple</div>
                         </div>
-                        <div class="alumni-row">
-                            <div class="alumni-pic" style="background:var(--ncstate)">AP</div>
-                            <div class="alumni-details">
-                                <div class="alumni-name">Amanda Park</div>
-                                <div class="alumni-bio">NC State '20 • Engineer at Apple</div>
-                            </div>
-                            <button class="connect-btn" onclick="toast('🤝 Request sent!')">Connect</button>
+                        <button class="connect-btn" onclick="event.stopPropagation();toast('🤝 Request sent!')">Connect</button>
+                    </div>
+                    <div class="alumni-card" data-school="unc" data-industry="finance">
+                        <div class="alumni-avatar" style="background:var(--unc)">MR</div>
+                        <div class="alumni-info">
+                            <div class="alumni-name">Michael Roberts</div>
+                            <div class="alumni-bio">UNC '17 • VP at Goldman</div>
                         </div>
-                        <div class="alumni-row">
-                            <div class="alumni-pic" style="background:var(--unc)">MR</div>
-                            <div class="alumni-details">
-                                <div class="alumni-name">Michael Roberts</div>
-                                <div class="alumni-bio">UNC '17 • VP at Goldman</div>
-                            </div>
-                            <button class="connect-btn" onclick="toast('🤝 Request sent!')">Connect</button>
+                        <button class="connect-btn" onclick="event.stopPropagation();toast('🤝 Request sent!')">Connect</button>
+                    </div>
+                    <div class="alumni-card" data-school="duke" data-industry="tech">
+                        <div class="alumni-avatar" style="background:var(--duke)">LW</div>
+                        <div class="alumni-info">
+                            <div class="alumni-name">Lisa Wang</div>
+                            <div class="alumni-bio">Duke '21 • Designer at Airbnb</div>
                         </div>
-                        <div class="alumni-row">
-                            <div class="alumni-pic" style="background:var(--duke)">LW</div>
-                            <div class="alumni-details">
-                                <div class="alumni-name">Lisa Wang</div>
-                                <div class="alumni-bio">Duke '21 • Designer at Airbnb</div>
-                            </div>
-                            <button class="connect-btn" onclick="toast('🤝 Request sent!')">Connect</button>
+                        <button class="connect-btn" onclick="event.stopPropagation();toast('🤝 Request sent!')">Connect</button>
+                    </div>
+                    <div class="alumni-card" data-school="unc" data-industry="consulting">
+                        <div class="alumni-avatar" style="background:var(--unc)">DK</div>
+                        <div class="alumni-info">
+                            <div class="alumni-name">David Kim</div>
+                            <div class="alumni-bio">UNC '16 • Partner at McKinsey</div>
                         </div>
+                        <button class="connect-btn" onclick="event.stopPropagation();toast('🤝 Request sent!')">Connect</button>
                     </div>
                 </div>
             </div>
 
             <!-- Profile -->
             <div class="screen" id="screen-profile">
-                <div class="profile-page">
-                    <div class="profile-hero">
-                        <div class="profile-pic">SS</div>
-                        <h1 class="profile-name">Shane Sarin</h1>
-                        <p class="profile-school">UNC '20 • Economics</p>
-                        <div class="profile-nums">
-                            <div class="profile-num">
-                                <div class="profile-num-value">12,450</div>
-                                <div class="profile-num-label">Points</div>
-                            </div>
-                            <div class="profile-num">
-                                <div class="profile-num-value">847</div>
-                                <div class="profile-num-label">Network</div>
-                            </div>
-                            <div class="profile-num">
-                                <div class="profile-num-value">Gold</div>
-                                <div class="profile-num-label">Tier</div>
-                            </div>
+                <div class="profile-hero">
+                    <div class="profile-avatar">SS</div>
+                    <h1 class="profile-name">Shane Sarin</h1>
+                    <p class="profile-degree">UNC '20 • Economics</p>
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-val">12,450</div>
+                            <div class="profile-stat-label">Points</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-val">847</div>
+                            <div class="profile-stat-label">Network</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-val">Gold</div>
+                            <div class="profile-stat-label">Tier</div>
                         </div>
                     </div>
-                    <div class="menu-list">
-                        <div class="menu-item">
-                            <div class="menu-icon-wrap">🎓</div>
-                            <div class="menu-content">
-                                <div class="menu-title">My Credentials</div>
-                                <div class="menu-desc">View and share your verified degree</div>
-                            </div>
-                            <span class="menu-arrow">›</span>
+                </div>
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <div class="menu-icon">🎓</div>
+                        <div class="menu-content">
+                            <div class="menu-title">My Credentials</div>
+                            <div class="menu-desc">View and share your verified degree</div>
                         </div>
-                        <div class="menu-item">
-                            <div class="menu-icon-wrap">💎</div>
-                            <div class="menu-content">
-                                <div class="menu-title">Points History</div>
-                                <div class="menu-desc">See how you earned your points</div>
-                            </div>
-                            <span class="menu-arrow">›</span>
+                        <span class="menu-arrow">›</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon">💎</div>
+                        <div class="menu-content">
+                            <div class="menu-title">Points History</div>
+                            <div class="menu-desc">See how you earned your points</div>
                         </div>
-                        <div class="menu-item">
-                            <div class="menu-icon-wrap">🎁</div>
-                            <div class="menu-content">
-                                <div class="menu-title">Redeemed Rewards</div>
-                                <div class="menu-desc">View your reward history</div>
-                            </div>
-                            <span class="menu-arrow">›</span>
+                        <span class="menu-arrow">›</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon">🎁</div>
+                        <div class="menu-content">
+                            <div class="menu-title">Redeemed Rewards</div>
+                            <div class="menu-desc">View your reward history</div>
                         </div>
-                        <div class="menu-item">
-                            <div class="menu-icon-wrap">🔔</div>
-                            <div class="menu-content">
-                                <div class="menu-title">Notifications</div>
-                                <div class="menu-desc">Manage your preferences</div>
-                            </div>
-                            <span class="menu-arrow">›</span>
+                        <span class="menu-arrow">›</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon">🏅</div>
+                        <div class="menu-content">
+                            <div class="menu-title">Achievements</div>
+                            <div class="menu-desc">View your badges and milestones</div>
                         </div>
-                        <div class="menu-item">
-                            <div class="menu-icon-wrap">⚙️</div>
-                            <div class="menu-content">
-                                <div class="menu-title">Settings</div>
-                                <div class="menu-desc">Account and privacy</div>
-                            </div>
-                            <span class="menu-arrow">›</span>
+                        <span class="menu-arrow">›</span>
+                    </div>
+                    <div class="menu-item" onclick="showNotifications()">
+                        <div class="menu-icon">🔔</div>
+                        <div class="menu-content">
+                            <div class="menu-title">Notifications</div>
+                            <div class="menu-desc">Manage your preferences</div>
+                        </div>
+                        <span class="menu-arrow">›</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon">⚙️</div>
+                        <div class="menu-content">
+                            <div class="menu-title">Settings</div>
+                            <div class="menu-desc">Account and privacy</div>
+                        </div>
+                        <span class="menu-arrow">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="screen" id="screen-notifications">
+                <div class="page-header">
+                    <h1>Notifications</h1>
+                    <p>Stay updated on your activity</p>
+                </div>
+                <div class="notifications-page">
+                    <div class="notif-item unread">
+                        <div class="notif-icon">🏀</div>
+                        <div class="notif-content">
+                            <div class="notif-title">Your prediction was correct!</div>
+                            <div class="notif-desc">UNC beat Wake Forest. +100 points added.</div>
+                            <div class="notif-time">2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="notif-item unread">
+                        <div class="notif-icon">🤝</div>
+                        <div class="notif-content">
+                            <div class="notif-title">Sarah Chen accepted your request</div>
+                            <div class="notif-desc">You're now connected. Start a conversation!</div>
+                            <div class="notif-time">5 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-icon">📅</div>
+                        <div class="notif-content">
+                            <div class="notif-title">Event reminder</div>
+                            <div class="notif-desc">Triangle Alumni Mixer is in 2 weeks</div>
+                            <div class="notif-time">1 day ago</div>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-icon">🎁</div>
+                        <div class="notif-content">
+                            <div class="notif-title">New reward available</div>
+                            <div class="notif-desc">Spotify Premium 3 months just added</div>
+                            <div class="notif-time">2 days ago</div>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-icon">⭐</div>
+                        <div class="notif-content">
+                            <div class="notif-title">Achievement unlocked!</div>
+                            <div class="notif-desc">You earned the "Predictor" badge</div>
+                            <div class="notif-time">3 days ago</div>
                         </div>
                     </div>
                 </div>
@@ -2564,20 +2533,20 @@
 
         <!-- Bottom Nav -->
         <nav class="bottom-nav">
-            <div class="nav-items">
-                <div class="nav-item active" data-tab="home" onclick="switchTab('home')">
+            <div class="nav-row">
+                <div class="nav-btn active" data-tab="home" onclick="switchTab('home')">
                     <span class="nav-icon">🏠</span>
                     <span class="nav-label">Home</span>
                 </div>
-                <div class="nav-item" data-tab="rewards" onclick="switchTab('rewards')">
+                <div class="nav-btn" data-tab="rewards" onclick="switchTab('rewards')">
                     <span class="nav-icon">🎁</span>
                     <span class="nav-label">Rewards</span>
                 </div>
-                <div class="nav-item" data-tab="network" onclick="switchTab('network')">
+                <div class="nav-btn" data-tab="network" onclick="switchTab('network')">
                     <span class="nav-icon">👥</span>
                     <span class="nav-label">Network</span>
                 </div>
-                <div class="nav-item" data-tab="profile" onclick="switchTab('profile')">
+                <div class="nav-btn" data-tab="profile" onclick="switchTab('profile')">
                     <span class="nav-icon">👤</span>
                     <span class="nav-label">Profile</span>
                 </div>
@@ -2586,7 +2555,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal-backdrop" id="modal" onclick="closeModal(event)">
+    <div class="modal-overlay" id="modal" onclick="closeModal(event)">
         <div class="modal-sheet" onclick="event.stopPropagation()">
             <div class="modal-handle"></div>
             <div class="modal-body" id="modalBody"></div>
@@ -2594,7 +2563,7 @@
     </div>
 
     <!-- Toast -->
-    <div class="toast-wrap">
+    <div class="toast-container">
         <div class="toast" id="toast">
             <span class="toast-icon" id="toastIcon">✓</span>
             <span class="toast-text" id="toastText"></span>
@@ -2603,14 +2572,15 @@
 
     <script>
         // State
-        let slideIdx = 0;
-        const onboarded = localStorage.getItem('veritas_done');
+        let slide = 0;
+        const done = localStorage.getItem('veritas_onboarded');
+        let currentFilter = 'all';
 
-        // Splash
+        // Init
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('splash').classList.add('hidden');
-                if (onboarded) {
+                if (done) {
                     document.getElementById('app').classList.add('active');
                 } else {
                     document.getElementById('onboarding').classList.add('active');
@@ -2620,54 +2590,56 @@
 
         // Onboarding
         document.getElementById('onboardNext').onclick = () => {
-            if (slideIdx < 2) {
-                setSlide(slideIdx + 1);
+            if (slide < 2) {
+                goSlide(slide + 1);
             } else {
                 finishOnboard();
             }
         };
         document.getElementById('onboardSkip').onclick = finishOnboard;
 
-        function setSlide(i) {
+        function goSlide(i) {
             const slides = document.querySelectorAll('.onboard-slide');
             const dots = document.querySelectorAll('.onboard-dot');
-            slides[slideIdx].classList.remove('active');
-            slides[slideIdx].classList.add('prev');
-            dots[slideIdx].classList.remove('active');
-            slideIdx = i;
+            slides[slide].classList.remove('active');
+            slides[slide].classList.add('prev');
+            dots[slide].classList.remove('active');
+            slide = i;
             setTimeout(() => {
                 slides.forEach(s => s.classList.remove('prev'));
-                slides[slideIdx].classList.add('active');
-                dots[slideIdx].classList.add('active');
+                slides[slide].classList.add('active');
+                dots[slide].classList.add('active');
             }, 50);
-            document.getElementById('onboardNext').textContent = slideIdx === 2 ? 'Get Started' : 'Continue';
+            document.getElementById('onboardNext').textContent = slide === 2 ? 'Get Started' : 'Continue';
         }
 
         function finishOnboard() {
-            localStorage.setItem('veritas_done', '1');
+            localStorage.setItem('veritas_onboarded', '1');
             document.getElementById('onboarding').classList.remove('active');
             document.getElementById('app').classList.add('active');
         }
 
         // Navigation
         function switchTab(tab) {
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.tab === tab));
+            document.querySelectorAll('.nav-btn').forEach(n => n.classList.toggle('active', n.dataset.tab === tab));
             document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === `screen-${tab}`));
-            document.getElementById('main').scrollTop = 0;
+            document.querySelector('.main').scrollTop = 0;
         }
 
-        function scrollTo(id) {
+        function showNotifications() {
+            document.querySelectorAll('.nav-btn').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen-notifications').classList.add('active');
+            document.querySelector('.main').scrollTop = 0;
+        }
+
+        function scrollToEl(id) {
             document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // Header scroll effect
-        document.getElementById('main').addEventListener('scroll', function() {
-            document.getElementById('header').classList.toggle('scrolled', this.scrollTop > 20);
-        });
-
         // Predictions
-        function pickTeam(btn) {
-            const picks = btn.parentElement.querySelectorAll('.pick-btn');
+        function selectPick(btn) {
+            const picks = btn.parentElement.querySelectorAll('.pick');
             picks.forEach(p => {
                 p.classList.remove('selected');
                 p.querySelector('.pick-sub').textContent = '50%';
@@ -2679,16 +2651,16 @@
 
         // AI
         const aiReplies = {
-            legacy: `Great question! Here's the fastest path to Legacy:<br><br>🗳️ <strong>10 predictions</strong> → +1,000 pts<br>🤝 <strong>Refer 2 alumni</strong> → +500 each<br>📅 <strong>Attend Mixer</strong> → +250 pts<br>💝 <strong>Monthly gift</strong> → +1,000 pts<br><br>That's 3,250 points! Want me to set reminders?`,
-            tech: `Found <strong>156 tech alumni</strong>:<br><br>• 23 at Google<br>• 18 at Meta<br>• 15 at Apple<br>• 12 at Triangle startups<br><br>Sarah Chen (UNC '19, Google PM) is open to connect!`,
-            rewards: `Based on your profile:<br><br>🥇 <strong>LinkedIn Premium</strong> - 3,500 pts<br>Great for job hunting!<br><br>🥈 <strong>Marriott Night</strong> - 5,000 pts<br>You travel often<br><br>🥉 <strong>Nike $50</strong> - 4,000 pts`
+            legacy: `Great question! Here's the fastest path:<br><br>🗳️ <strong>10 predictions</strong> → +1,000 pts<br>🤝 <strong>Refer 2 alumni</strong> → +500 each<br>📅 <strong>Attend Mixer</strong> → +250 pts<br>💝 <strong>Monthly gift</strong> → +1,000 pts<br><br>That's 3,250 points!`,
+            tech: `Found <strong>156 tech alumni</strong>:<br><br>• 23 at Google<br>• 18 at Meta<br>• 15 at Apple<br>• 12 at Triangle startups<br><br>Sarah Chen (UNC '19, PM at Google) is open to connect!`,
+            rewards: `Based on your profile:<br><br>🥇 <strong>LinkedIn Premium</strong> - 3,500 pts<br>🥈 <strong>Marriott Night</strong> - 5,000 pts<br>🥉 <strong>Nike $50</strong> - 4,000 pts`
         };
 
         function sendAI() {
             const input = document.getElementById('aiInput');
             const text = input.value.trim();
             if (!text) return;
-            addAIMsg(text, 'user');
+            addMsg(text, 'user');
             input.value = '';
             
             let reply = "I'll look into that for you! 🔍";
@@ -2697,7 +2669,7 @@
             else if (lower.includes('tech') || lower.includes('alumni')) reply = aiReplies.tech;
             else if (lower.includes('reward')) reply = aiReplies.rewards;
             
-            setTimeout(() => addAIMsg(reply, 'bot'), 600);
+            setTimeout(() => addMsg(reply, 'bot'), 600);
         }
 
         function askAI(q) {
@@ -2705,37 +2677,39 @@
             sendAI();
         }
 
-        function addAIMsg(html, type) {
-            const wrap = document.getElementById('aiMsgsInner');
+        function addMsg(html, type) {
+            const msgs = document.getElementById('aiMsgs');
             const div = document.createElement('div');
             div.className = `ai-msg ${type}`;
             div.innerHTML = html;
-            wrap.appendChild(div);
-            document.getElementById('aiMessages').scrollTop = 99999;
+            msgs.appendChild(div);
+            document.getElementById('aiChat').scrollTop = 99999;
         }
 
         document.getElementById('aiInput').addEventListener('keypress', e => {
             if (e.key === 'Enter') sendAI();
         });
 
-        // Rewards Modal
+        // Rewards
         const rewards = {
-            marriott: { icon: '🏨', name: 'Free Hotel Night', brand: 'Marriott Bonvoy', cost: 5000, desc: 'One complimentary night at any Marriott property worldwide. Valid 12 months.' },
-            linkedin: { icon: '💼', name: 'Premium 3 Months', brand: 'LinkedIn', cost: 3500, desc: 'Unlock InMail, profile views, and learning courses.' },
-            nike: { icon: '👟', name: '$50 Gift Card', brand: 'Nike', cost: 4000, desc: 'Valid at Nike.com and all retail stores. No expiration.' },
-            airbnb: { icon: '🏠', name: '$100 Credit', brand: 'Airbnb', cost: 8000, desc: 'Use for stays or experiences worldwide. Valid 12 months.' },
-            uber: { icon: '🚗', name: '$20 Credit', brand: 'Uber', cost: 1800, desc: 'Ride credit valid for 6 months.' },
-            amex: { icon: '💳', name: '$25 Statement', brand: 'American Express', cost: 2000, desc: 'Statement credit on your next bill.' }
+            marriott: { emoji: '🏨', name: 'Free Hotel Night', brand: 'Marriott Bonvoy', cost: 5000, desc: 'One complimentary night at any Marriott property worldwide. Valid 12 months.' },
+            linkedin: { emoji: '💼', name: 'Premium 3 Months', brand: 'LinkedIn', cost: 3500, desc: 'Unlock InMail, profile views, and learning courses.' },
+            nike: { emoji: '👟', name: '$50 Gift Card', brand: 'Nike', cost: 4000, desc: 'Valid at Nike.com and all retail stores.' },
+            airbnb: { emoji: '🏠', name: '$100 Credit', brand: 'Airbnb', cost: 8000, desc: 'Use for stays or experiences worldwide.' },
+            uber: { emoji: '🚗', name: '$20 Credit', brand: 'Uber', cost: 1800, desc: 'Ride credit valid for 6 months.' },
+            amex: { emoji: '💳', name: '$25 Statement', brand: 'American Express', cost: 2000, desc: 'Statement credit on your next bill.' },
+            spotify: { emoji: '🎵', name: '3 Months Free', brand: 'Spotify', cost: 2500, desc: 'Premium subscription for 3 months.' },
+            doordash: { emoji: '🍔', name: '$30 Credit', brand: 'DoorDash', cost: 2800, desc: 'Food delivery credit.' }
         };
 
         function openReward(id) {
             const r = rewards[id];
             document.getElementById('modalBody').innerHTML = `
-                <div class="modal-emoji">${r.icon}</div>
+                <div class="modal-emoji">${r.emoji}</div>
                 <h2 class="modal-heading">${r.name}</h2>
                 <p class="modal-sub">${r.brand}</p>
-                <div class="modal-points">💎 ${r.cost.toLocaleString()}</div>
-                <p class="modal-text">${r.desc}</p>
+                <div class="modal-price">💎 ${r.cost.toLocaleString()}</div>
+                <p class="modal-desc">${r.desc}</p>
                 <button class="modal-cta" onclick="redeemReward('${r.name}')">Redeem Now</button>
                 <p class="modal-balance">Balance: 12,450 → ${(12450 - r.cost).toLocaleString()} pts</p>
             `;
@@ -2743,9 +2717,7 @@
         }
 
         function closeModal(e) {
-            if (e.target.id === 'modal') {
-                document.getElementById('modal').classList.remove('open');
-            }
+            document.getElementById('modal').classList.remove('open');
         }
 
         function redeemReward(name) {
@@ -2753,25 +2725,52 @@
             toast(`🎉 ${name} redeemed!`);
         }
 
-        // Toast
-        function toast(msg) {
-            const t = document.getElementById('toast');
-            document.getElementById('toastText').textContent = msg;
-            document.getElementById('toastIcon').textContent = msg.includes('🎉') ? '🎉' : msg.includes('🤝') ? '🤝' : msg.includes('🏀') ? '🏀' : '✓';
-            t.classList.add('visible');
-            setTimeout(() => t.classList.remove('visible'), 3000);
+        // Alumni filter
+        function setFilter(el, filter) {
+            document.querySelectorAll('.filter').forEach(f => f.classList.remove('active'));
+            el.classList.add('active');
+            currentFilter = filter;
+            filterAlumni();
         }
 
-        // Category/Filter chips
-        document.querySelectorAll('.category-chip, .filter-btn').forEach(c => {
+        function filterAlumni() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.alumni-card');
+            cards.forEach(card => {
+                const name = card.querySelector('.alumni-name').textContent.toLowerCase();
+                const bio = card.querySelector('.alumni-bio').textContent.toLowerCase();
+                const school = card.dataset.school;
+                const industry = card.dataset.industry;
+                
+                let show = true;
+                if (search && !name.includes(search) && !bio.includes(search)) show = false;
+                if (currentFilter !== 'all') {
+                    if (currentFilter === 'tech' && industry !== 'tech') show = false;
+                    else if (currentFilter !== 'tech' && school !== currentFilter) show = false;
+                }
+                card.style.display = show ? 'flex' : 'none';
+            });
+        }
+
+        // Categories
+        document.querySelectorAll('.cat-chip').forEach(c => {
             c.addEventListener('click', function() {
-                this.parentElement.querySelectorAll('.category-chip, .filter-btn').forEach(x => x.classList.remove('active'));
+                document.querySelectorAll('.cat-chip').forEach(x => x.classList.remove('active'));
                 this.classList.add('active');
             });
         });
 
-        // Haptic feedback simulation
-        document.querySelectorAll('button, .action-item, .reward-card, .reward-tile, .alumni-row, .menu-item, .nav-item, .event-card, .credential-card').forEach(el => {
+        // Toast
+        function toast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toastText').textContent = msg;
+            document.getElementById('toastIcon').textContent = msg.charAt(0);
+            t.classList.add('visible');
+            setTimeout(() => t.classList.remove('visible'), 3000);
+        }
+
+        // Haptic
+        document.querySelectorAll('button, .action-btn, .reward-card, .reward-tile, .alumni-card, .menu-item, .nav-btn, .event, .credential, .achievement').forEach(el => {
             el.addEventListener('touchstart', () => {
                 if (navigator.vibrate) navigator.vibrate(10);
             });
