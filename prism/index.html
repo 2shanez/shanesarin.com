@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prism – The Trust Layer for Truth</title>
-  <meta name="description" content="Prism is the cryptographic trust infrastructure for the AI age. Verify provenance, ensure compliance, and restore truth through decentralized verification.">
+  <title>Prism – The Trust Layer for AI-Generated Content</title>
+  <meta name="description" content="Prism is the cryptographic trust infrastructure for the AI age. Verify provenance, ensure compliance, and restore trust in a world of synthetic content.">
   <meta name="theme-color" content="#09090b">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Prism – The Future of Truth">
-  <meta property="og:description" content="Cryptographic provenance, decentralized news verification, and trust infrastructure for the post-truth age.">
+  <meta property="og:title" content="Prism – Trust Infrastructure for the AI Age">
+  <meta property="og:description" content="Cryptographic provenance, compliance automation, and creator attribution. The trust layer every platform needs.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="/og-image.png">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2314b8a6' rx='20' width='100' height='100'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white'>◇</text></svg>">
@@ -44,11 +44,10 @@
       --green: #22c55e;
       --yellow: #f59e0b;
       --red: #ef4444;
-      --purple: #a855f7;
+      --purple: #8b5cf6;
       --blue: #3b82f6;
       --gradient: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
       --gradient-2: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
-      --gradient-news: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #a855f7 100%);
       --radius: 12px;
       --radius-lg: 20px;
     }
@@ -80,10 +79,7 @@
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
     @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     @keyframes verify { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-    @keyframes trustPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 50% { box-shadow: 0 0 20px 5px rgba(34,197,94,0.2); } }
-    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
     
     .anim { opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
     .d1 { animation-delay: 0.1s; }
@@ -91,9 +87,6 @@
     .d3 { animation-delay: 0.3s; }
     .d4 { animation-delay: 0.4s; }
     .d5 { animation-delay: 0.5s; }
-    
-    /* View Toggle */
-    .hidden { display: none !important; }
     
     /* Nav */
     nav {
@@ -140,12 +133,6 @@
       place-items: center;
       box-shadow: 0 4px 14px rgba(20,184,166,0.35);
       position: relative;
-      transition: all 0.3s;
-    }
-    
-    .logo-mark.news-mode {
-      background: var(--gradient-news);
-      box-shadow: 0 4px 14px rgba(139,92,246,0.35);
     }
     
     .logo-mark::after {
@@ -156,61 +143,6 @@
       border-radius: 12px;
       opacity: 0.3;
       filter: blur(8px);
-      transition: all 0.3s;
-    }
-    
-    .logo-mark.news-mode::after {
-      background: var(--gradient-news);
-    }
-    
-    /* Mode Toggle */
-    .mode-toggle {
-      display: flex;
-      gap: 0.25rem;
-      padding: 0.25rem;
-      background: var(--bg-4);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-    }
-    
-    .mode-btn {
-      padding: 0.5rem 1.25rem;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--text-3);
-      background: transparent;
-      border: none;
-      border-radius: 100px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .mode-btn:hover {
-      color: var(--text-2);
-    }
-    
-    .mode-btn.active {
-      background: var(--bg-5);
-      color: var(--text);
-    }
-    
-    .mode-btn.active.news {
-      background: rgba(139,92,246,0.2);
-      color: #c4b5fd;
-    }
-    
-    .mode-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-    
-    .mode-btn.news .mode-dot {
-      background: var(--purple);
     }
     
     .nav-links {
@@ -290,16 +222,6 @@
       box-shadow: 0 12px 28px -8px rgba(20,184,166,0.45);
     }
     
-    .btn-news {
-      background: var(--gradient-news);
-      color: white;
-    }
-    
-    .btn-news:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px -8px rgba(139,92,246,0.45);
-    }
-    
     .btn-lg { padding: 0.875rem 1.75rem; font-size: 0.9375rem; }
     
     /* Hero */
@@ -326,19 +248,6 @@
       background: radial-gradient(circle, rgba(20,184,166,0.15) 0%, rgba(6,182,212,0.08) 40%, transparent 70%);
       animation: glow 6s ease-in-out infinite;
       pointer-events: none;
-      transition: all 0.5s;
-    }
-    
-    .hero-orb.news-mode {
-      background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(59,130,246,0.08) 40%, transparent 70%);
-    }
-    
-    .hero-orb::after {
-      content: '';
-      position: absolute;
-      inset: 100px;
-      background: radial-gradient(circle, rgba(45,212,191,0.1) 0%, transparent 60%);
-      animation: rotate 30s linear infinite;
     }
     
     /* Prism effect */
@@ -385,11 +294,6 @@
       animation: pulse 2s infinite;
     }
     
-    .badge-dot.news {
-      background: var(--purple);
-      box-shadow: 0 0 10px var(--purple);
-    }
-    
     .badge-label {
       background: var(--accent-glow);
       color: var(--accent-2);
@@ -399,11 +303,6 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-    }
-    
-    .badge-label.news {
-      background: rgba(139,92,246,0.15);
-      color: #c4b5fd;
     }
     
     .hero h1 {
@@ -416,13 +315,6 @@
     
     .hero h1 .grad {
       background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .hero h1 .grad-news {
-      background: var(--gradient-news);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -471,10 +363,56 @@
     .crisis-stat { text-align: center; }
     .crisis-stat-val { font-size: 1.5rem; font-weight: 800; color: var(--red); }
     .crisis-stat-val.accent { color: var(--accent-2); }
-    .crisis-stat-val.purple { color: #c4b5fd; }
     .crisis-stat-lbl { font-size: 0.6875rem; color: var(--text-4); text-transform: uppercase; letter-spacing: 0.08em; }
     
-    /* Trust Meter Visual */
+    /* Section styles */
+    .section {
+      padding: 6rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-head {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 3rem;
+    }
+    
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .section-tag::before, .section-tag::after {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.35;
+    }
+    
+    .section-head h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .section-head p {
+      font-size: 1rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+    
+    /* Trust Demo */
     .trust-visual {
       padding: 0 1.5rem 6rem;
       position: relative;
@@ -533,7 +471,6 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       transition: all 0.25s;
-      position: relative;
     }
     
     .content-item:hover {
@@ -684,741 +621,7 @@
     .compliance-text h5 { font-size: 0.75rem; font-weight: 600; color: var(--green); }
     .compliance-text p { font-size: 0.625rem; color: var(--text-3); }
     
-    /* ============================================
-       PRISM NEWS SECTION STYLES
-       ============================================ */
-    
-    /* News Feed Demo */
-    .news-demo {
-      max-width: 1100px;
-      margin: 0 auto;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 32px 64px -24px rgba(0,0,0,0.5), 0 0 80px -30px rgba(139,92,246,0.2);
-    }
-    
-    .news-demo .trust-bar {
-      background: linear-gradient(90deg, var(--bg-3) 0%, rgba(139,92,246,0.05) 100%);
-    }
-    
-    .news-body {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      min-height: 520px;
-    }
-    
-    .news-feed {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      overflow-y: auto;
-    }
-    
-    .news-item {
-      padding: 1.25rem;
-      background: var(--bg-4);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: all 0.25s;
-      cursor: pointer;
-    }
-    
-    .news-item:hover {
-      border-color: var(--border-2);
-      transform: translateX(4px);
-    }
-    
-    .news-item.active {
-      border-color: rgba(139,92,246,0.4);
-      background: rgba(139,92,246,0.05);
-    }
-    
-    .news-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-    
-    .news-source {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .source-avatar {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      background: var(--bg-5);
-      display: grid;
-      place-items: center;
-      font-size: 0.75rem;
-    }
-    
-    .source-info {
-      font-size: 0.75rem;
-    }
-    
-    .source-name {
-      font-weight: 600;
-      color: var(--text);
-    }
-    
-    .source-time {
-      color: var(--text-4);
-    }
-    
-    /* Trust Score */
-    .trust-score {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.375rem 0.75rem;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-    
-    .trust-score.high {
-      background: rgba(34,197,94,0.15);
-      color: #4ade80;
-    }
-    
-    .trust-score.medium {
-      background: rgba(245,158,11,0.15);
-      color: #fbbf24;
-    }
-    
-    .trust-score.low {
-      background: rgba(239,68,68,0.15);
-      color: #f87171;
-    }
-    
-    .trust-score.pending {
-      background: var(--bg-5);
-      color: var(--text-3);
-    }
-    
-    .trust-bar-mini {
-      width: 40px;
-      height: 4px;
-      background: var(--bg-5);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    
-    .trust-bar-fill {
-      height: 100%;
-      border-radius: 2px;
-      transition: width 0.5s ease;
-    }
-    
-    .trust-score.high .trust-bar-fill { background: #22c55e; width: 94%; }
-    .trust-score.medium .trust-bar-fill { background: #f59e0b; width: 67%; }
-    .trust-score.low .trust-bar-fill { background: #ef4444; width: 23%; }
-    .trust-score.pending .trust-bar-fill { background: var(--text-4); width: 0%; }
-    
-    .news-headline {
-      font-size: 0.9375rem;
-      font-weight: 600;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-    }
-    
-    .news-excerpt {
-      font-size: 0.8125rem;
-      color: var(--text-3);
-      line-height: 1.5;
-      margin-bottom: 0.75rem;
-    }
-    
-    .news-verifiers {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .verifier-avatars {
-      display: flex;
-    }
-    
-    .verifier-avatar {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 2px solid var(--bg-4);
-      margin-left: -8px;
-      background: var(--bg-5);
-      display: grid;
-      place-items: center;
-      font-size: 0.625rem;
-    }
-    
-    .verifier-avatar:first-child {
-      margin-left: 0;
-    }
-    
-    .verifier-count {
-      font-size: 0.6875rem;
-      color: var(--text-3);
-    }
-    
-    /* Verification Panel */
-    .verification-panel {
-      padding: 1.5rem;
-      border-left: 1px solid var(--border);
-      background: rgba(0,0,0,0.15);
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-    
-    .panel-header {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-    }
-    
-    .panel-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--gradient-news);
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      font-size: 1.125rem;
-      box-shadow: 0 4px 12px rgba(139,92,246,0.3);
-    }
-    
-    .panel-header h4 {
-      font-size: 0.9375rem;
-      font-weight: 600;
-    }
-    
-    .panel-header p {
-      font-size: 0.6875rem;
-      color: var(--text-4);
-    }
-    
-    /* Trust Meter */
-    .trust-meter {
-      background: var(--bg-4);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-    }
-    
-    .meter-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-    
-    .meter-label {
-      font-size: 0.75rem;
-      color: var(--text-3);
-    }
-    
-    .meter-value {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--green);
-    }
-    
-    .meter-bar {
-      height: 8px;
-      background: var(--bg-5);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 0.75rem;
-    }
-    
-    .meter-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
-      border-radius: 4px;
-      width: 94%;
-      animation: trustPulse 2s ease-in-out infinite;
-    }
-    
-    .meter-breakdown {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    
-    .breakdown-item {
-      display: flex;
-      align-items: center;
-      gap: 0.375rem;
-      font-size: 0.6875rem;
-      color: var(--text-3);
-    }
-    
-    .breakdown-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-    
-    .breakdown-dot.journalists { background: #3b82f6; }
-    .breakdown-dot.institutions { background: #22c55e; }
-    .breakdown-dot.experts { background: #f59e0b; }
-    .breakdown-dot.factcheck { background: #a855f7; }
-    
-    /* Verifier List */
-    .verifier-list {
-      background: var(--bg-4);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-    
-    .verifier-list-header {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-2);
-      display: flex;
-      justify-content: space-between;
-    }
-    
-    .verifier-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.875rem 1rem;
-      border-bottom: 1px solid var(--border);
-      transition: background 0.2s;
-    }
-    
-    .verifier-item:last-child {
-      border-bottom: none;
-    }
-    
-    .verifier-item:hover {
-      background: var(--bg-5);
-    }
-    
-    .verifier-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: var(--bg-5);
-      display: grid;
-      place-items: center;
-      font-size: 0.875rem;
-      flex-shrink: 0;
-    }
-    
-    .verifier-info {
-      flex: 1;
-      min-width: 0;
-    }
-    
-    .verifier-name {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      margin-bottom: 0.125rem;
-    }
-    
-    .verifier-cred {
-      font-size: 0.6875rem;
-      color: var(--text-4);
-    }
-    
-    .verifier-badge {
-      padding: 0.25rem 0.5rem;
-      border-radius: 100px;
-      font-size: 0.625rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    
-    .verifier-badge.attested {
-      background: rgba(34,197,94,0.15);
-      color: #4ade80;
-    }
-    
-    .verifier-badge.disputed {
-      background: rgba(239,68,68,0.15);
-      color: #f87171;
-    }
-    
-    /* Reputation Stake */
-    .reputation-card {
-      background: var(--bg-4);
-      border: 1px solid rgba(139,92,246,0.2);
-      border-radius: var(--radius);
-      padding: 1rem;
-    }
-    
-    .reputation-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #c4b5fd;
-    }
-    
-    .stake-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-    }
-    
-    .stake-item {
-      background: var(--bg-5);
-      border-radius: 8px;
-      padding: 0.75rem;
-      text-align: center;
-    }
-    
-    .stake-value {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    
-    .stake-label {
-      font-size: 0.625rem;
-      color: var(--text-4);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    /* Problem Section */
-    .problem {
-      padding: 5rem 1.5rem;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-      border-top: 1px solid var(--border);
-    }
-    
-    .problem-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    
-    .problem-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem;
-      margin-top: 2.5rem;
-    }
-    
-    .problem-card {
-      padding: 1.5rem 1rem;
-      background: var(--bg-4);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: all 0.3s;
-    }
-    
-    .problem-card:hover {
-      border-color: rgba(239,68,68,0.3);
-      background: var(--bg-5);
-    }
-    
-    .problem-card.news:hover {
-      border-color: rgba(139,92,246,0.3);
-    }
-    
-    .problem-icon {
-      font-size: 1.75rem;
-      margin-bottom: 0.75rem;
-    }
-    
-    .problem-card h4 {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      margin-bottom: 0.375rem;
-    }
-    
-    .problem-card p {
-      font-size: 0.75rem;
-      color: var(--text-3);
-      line-height: 1.5;
-    }
-    
-    /* How It Works - News */
-    .how-it-works {
-      padding: 5rem 1.5rem;
-      background: var(--bg);
-    }
-    
-    .how-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
-      position: relative;
-    }
-    
-    .steps-grid::before {
-      content: '';
-      position: absolute;
-      top: 40px;
-      left: 12.5%;
-      right: 12.5%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--border) 0%, var(--purple) 50%, var(--border) 100%);
-      z-index: 0;
-    }
-    
-    .step-card {
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .step-number {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 1.25rem;
-      background: var(--bg-4);
-      border: 2px solid var(--border);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 1.75rem;
-      transition: all 0.3s;
-    }
-    
-    .step-card:hover .step-number {
-      border-color: var(--purple);
-      background: rgba(139,92,246,0.1);
-      transform: scale(1.1);
-    }
-    
-    .step-card h4 {
-      font-size: 0.9375rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    
-    .step-card p {
-      font-size: 0.8125rem;
-      color: var(--text-3);
-      line-height: 1.5;
-    }
-    
-    /* Difference Section */
-    .difference {
-      padding: 5rem 1.5rem;
-      background: var(--bg-2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .diff-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    .diff-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-    
-    .diff-card {
-      padding: 2rem;
-      border-radius: var(--radius-lg);
-      position: relative;
-    }
-    
-    .diff-card.old {
-      background: rgba(239,68,68,0.05);
-      border: 1px solid rgba(239,68,68,0.15);
-    }
-    
-    .diff-card.new {
-      background: rgba(139,92,246,0.05);
-      border: 1px solid rgba(139,92,246,0.15);
-    }
-    
-    .diff-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      padding: 0.375rem 0.75rem;
-      border-radius: 100px;
-      font-size: 0.6875rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 1.25rem;
-    }
-    
-    .diff-card.old .diff-label {
-      background: rgba(239,68,68,0.15);
-      color: #f87171;
-    }
-    
-    .diff-card.new .diff-label {
-      background: rgba(139,92,246,0.15);
-      color: #c4b5fd;
-    }
-    
-    .diff-card h4 {
-      font-size: 1.125rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    
-    .diff-list {
-      list-style: none;
-    }
-    
-    .diff-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.625rem;
-      font-size: 0.875rem;
-      color: var(--text-2);
-      padding: 0.5rem 0;
-    }
-    
-    .diff-card.old .diff-list li::before {
-      content: '✗';
-      color: var(--red);
-      font-weight: 700;
-    }
-    
-    .diff-card.new .diff-list li::before {
-      content: '✓';
-      color: var(--green);
-      font-weight: 700;
-    }
-    
-    /* Verifier Economics */
-    .economics {
-      padding: 5rem 1.5rem;
-      background: var(--bg);
-    }
-    
-    .econ-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    .econ-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      margin-top: 2.5rem;
-    }
-    
-    .econ-card {
-      padding: 1.75rem;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      text-align: center;
-      transition: all 0.3s;
-    }
-    
-    .econ-card:hover {
-      border-color: rgba(139,92,246,0.3);
-      transform: translateY(-4px);
-    }
-    
-    .econ-icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 1rem;
-      background: var(--gradient-news);
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-size: 1.5rem;
-      box-shadow: 0 8px 20px rgba(139,92,246,0.25);
-    }
-    
-    .econ-card h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    
-    .econ-card p {
-      font-size: 0.8125rem;
-      color: var(--text-3);
-      line-height: 1.6;
-    }
-    
-    /* Sections */
-    .section {
-      padding: 7rem 1.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .section-head {
-      text-align: center;
-      max-width: 620px;
-      margin: 0 auto 3.5rem;
-    }
-    
-    .section-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.6875rem;
-      font-weight: 700;
-      color: var(--accent-2);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.875rem;
-    }
-    
-    .section-tag.news {
-      color: #c4b5fd;
-    }
-    
-    .section-tag::before, .section-tag::after {
-      content: '';
-      width: 20px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.35;
-    }
-    
-    .section-tag.news::before, .section-tag.news::after {
-      background: var(--purple);
-    }
-    
-    .section-head h2 {
-      font-size: clamp(1.875rem, 4vw, 2.5rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.875rem;
-    }
-    
-    .section-head p {
-      font-size: 1rem;
-      color: var(--text-2);
-      line-height: 1.7;
-    }
-    
-    /* Product Cards */
+    /* Products */
     .products {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1510,6 +713,89 @@
       font-size: 0.625rem;
     }
     
+    /* Code Preview */
+    .code-preview {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      text-align: left;
+    }
+    
+    .code-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.25rem;
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .code-tab {
+      padding: 0.375rem 0.875rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-3);
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .code-tab.active {
+      background: var(--bg-5);
+      color: var(--text);
+    }
+    
+    .code-body {
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.8125rem;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+    
+    .code-body .kw { color: var(--accent-2); }
+    .code-body .str { color: #fbbf24; }
+    .code-body .fn { color: #a78bfa; }
+    .code-body .cmt { color: var(--text-4); }
+    .code-body .prop { color: #60a5fa; }
+    .code-body .num { color: var(--green); }
+    
+    /* Stats */
+    .stats {
+      padding: 4.5rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .stats-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    
+    .stat { text-align: center; }
+    
+    .stat-val {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .stat-lbl {
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      margin-top: 0.25rem;
+    }
+    
     /* Use Cases */
     .use-cases {
       padding: 5rem 1.5rem;
@@ -1566,242 +852,6 @@
       color: var(--text-3);
       line-height: 1.5;
     }
-    
-    /* Architecture */
-    .architecture {
-      padding: 5rem 1.5rem;
-      background: var(--bg);
-    }
-    
-    .arch-inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    
-    .arch-diagram {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 2.5rem;
-      padding: 2rem;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-    }
-    
-    .arch-node {
-      flex: 1;
-      text-align: center;
-      padding: 1.25rem;
-      background: var(--bg-4);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-    
-    .arch-node.highlight {
-      background: var(--accent-glow);
-      border-color: rgba(20,184,166,0.3);
-    }
-    
-    .arch-node-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .arch-node h5 {
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-    
-    .arch-node p {
-      font-size: 0.625rem;
-      color: var(--text-4);
-    }
-    
-    .arch-arrow {
-      color: var(--accent);
-      font-size: 1.25rem;
-      opacity: 0.5;
-    }
-    
-    /* Stats */
-    .stats {
-      padding: 4.5rem 1.5rem;
-      background: var(--bg-2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .stats-grid {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-    }
-    
-    .stat { text-align: center; }
-    
-    .stat-val {
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 800;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .stat-val.news-gradient {
-      background: var(--gradient-news);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .stat-lbl {
-      font-size: 0.8125rem;
-      color: var(--text-2);
-      margin-top: 0.25rem;
-    }
-    
-    /* Compliance */
-    .compliance {
-      padding: 7rem 1.5rem;
-    }
-    
-    .compliance-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    
-    .compliance-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      margin-top: 2.5rem;
-    }
-    
-    .compliance-card {
-      padding: 1.75rem;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      transition: all 0.3s;
-    }
-    
-    .compliance-card:hover {
-      border-color: var(--border-2);
-      transform: translateY(-2px);
-    }
-    
-    .compliance-flag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.375rem 0.75rem;
-      background: var(--bg-4);
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-    
-    .compliance-card h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    
-    .compliance-card p {
-      font-size: 0.8125rem;
-      color: var(--text-3);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    
-    .compliance-list {
-      list-style: none;
-    }
-    
-    .compliance-list li {
-      font-size: 0.75rem;
-      color: var(--text-2);
-      padding: 0.25rem 0;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .compliance-list li::before {
-      content: '✓';
-      color: var(--green);
-      font-weight: 700;
-      font-size: 0.625rem;
-    }
-    
-    /* Integration */
-    .integration {
-      padding: 5rem 1.5rem;
-      background: var(--bg-2);
-      border-top: 1px solid var(--border);
-    }
-    
-    .integration-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    
-    .code-preview {
-      margin-top: 2.5rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      text-align: left;
-    }
-    
-    .code-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 1.25rem;
-      background: var(--bg-3);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .code-tab {
-      padding: 0.375rem 0.875rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--text-3);
-      background: transparent;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    
-    .code-tab.active {
-      background: var(--bg-5);
-      color: var(--text);
-    }
-    
-    .code-body {
-      padding: 1.5rem;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.8125rem;
-      line-height: 1.8;
-      overflow-x: auto;
-    }
-    
-    .code-body .kw { color: var(--accent-2); }
-    .code-body .str { color: #fbbf24; }
-    .code-body .fn { color: #a78bfa; }
-    .code-body .cmt { color: var(--text-4); }
-    .code-body .prop { color: #60a5fa; }
     
     /* Pricing */
     .pricing-grid {
@@ -1909,11 +959,6 @@
       background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
       opacity: 0.5;
       pointer-events: none;
-      transition: all 0.5s;
-    }
-    
-    .cta-glow.news-mode {
-      background: radial-gradient(ellipse, rgba(139,92,246,0.15) 0%, transparent 70%);
     }
     
     .cta-inner {
@@ -2025,23 +1070,15 @@
     @media (max-width: 1024px) {
       .products { grid-template-columns: 1fr; }
       .use-grid { grid-template-columns: repeat(2, 1fr); }
-      .compliance-grid { grid-template-columns: repeat(2, 1fr); }
       .pricing-grid { grid-template-columns: repeat(2, 1fr); }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .problem-grid { grid-template-columns: repeat(2, 1fr); }
-      .trust-body, .news-body { grid-template-columns: 1fr; }
-      .trust-side, .verification-panel {
+      .trust-body { grid-template-columns: 1fr; }
+      .trust-side {
         border-left: none;
         border-top: 1px solid var(--border);
       }
       .footer-top { grid-template-columns: repeat(2, 1fr); }
       .nav-links { display: none; }
-      .arch-diagram { flex-direction: column; }
-      .arch-arrow { transform: rotate(90deg); }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps-grid::before { display: none; }
-      .diff-grid { grid-template-columns: 1fr; }
-      .econ-grid { grid-template-columns: 1fr; }
     }
     
     @media (max-width: 768px) {
@@ -2049,19 +1086,11 @@
       .hero-cta { flex-direction: column; width: 100%; max-width: 280px; margin-left: auto; margin-right: auto; }
       .hero-cta .btn { width: 100%; }
       .crisis-stats { flex-direction: column; gap: 1rem; }
-      .products, .use-grid, .compliance-grid, .pricing-grid, .stats-grid, .problem-grid, .steps-grid { grid-template-columns: 1fr; }
+      .products, .use-grid, .pricing-grid, .stats-grid { grid-template-columns: 1fr; }
       .price-card.pop { transform: none; order: -1; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
       .cta-buttons { flex-direction: column; align-items: center; }
-      .mode-toggle { display: none; }
-      .mobile-mode-toggle { display: flex !important; }
-    }
-    
-    .mobile-mode-toggle {
-      display: none;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
     }
   </style>
 </head>
@@ -2070,7 +1099,7 @@
   <nav>
     <div class="nav-inner">
       <a href="/" class="logo">
-        <div class="logo-mark" id="logoMark">
+        <div class="logo-mark">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
             <line x1="12" y1="22" x2="12" y2="15.5"/>
@@ -2079,887 +1108,640 @@
         </div>
         Prism
       </a>
-      
-      <!-- Mode Toggle -->
-      <div class="mode-toggle">
-        <button class="mode-btn active" id="infraBtn" onclick="switchMode('infra')">
-          <span class="mode-dot"></span>
-          Infrastructure
-        </button>
-        <button class="mode-btn news" id="newsBtn" onclick="switchMode('news')">
-          <span class="mode-dot"></span>
-          Prism News
-        </button>
+      <div class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#compliance">Compliance</a>
+        <a href="#docs">Docs</a>
+        <a href="#pricing">Pricing</a>
       </div>
-      
       <div class="nav-cta">
         <a href="#" class="btn btn-ghost">Log In</a>
-        <a href="#" class="btn btn-primary" id="navCta">Request Access</a>
+        <a href="#" class="btn btn-primary">Request Access</a>
       </div>
     </div>
   </nav>
 
-  <!-- ============================================
-       INFRASTRUCTURE VIEW (B2B)
-       ============================================ -->
-  <div id="infraView">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-orb" id="heroOrb"></div>
-      <div class="prism-effect"></div>
-      <div class="hero-content">
-        <!-- Mobile Mode Toggle -->
-        <div class="mobile-mode-toggle">
-          <button class="mode-btn active" onclick="switchMode('infra')">
-            <span class="mode-dot"></span>
-            Infrastructure
-          </button>
-          <button class="mode-btn news" onclick="switchMode('news')">
-            <span class="mode-dot"></span>
-            Prism News
-          </button>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-orb"></div>
+    <div class="prism-effect"></div>
+    <div class="hero-content">
+      <div class="badge anim">
+        <span class="badge-dot"></span>
+        <span class="badge-label">EU AI Act</span>
+        Compliance deadline: August 2025
+      </div>
+      <h1 class="anim d1">The trust layer for<br><span class="grad">AI-generated content</span></h1>
+      <p class="hero-sub anim d2">Cryptographic provenance, real-time verification, and compliance automation. The infrastructure every platform needs before regulators come knocking.</p>
+      <div class="hero-cta anim d3">
+        <a href="#" class="btn btn-primary btn-lg">Request API Access →</a>
+        <a href="#docs" class="btn btn-outline btn-lg">View Documentation</a>
+      </div>
+      <p class="hero-note anim d3">Now in private beta. <a href="#">Join 200+ platforms on the waitlist</a></p>
+      <div class="crisis-stats anim d4">
+        <div class="crisis-stat">
+          <div class="crisis-stat-val">90%</div>
+          <div class="crisis-stat-lbl">of deepfakes undetected</div>
         </div>
-        
-        <div class="badge anim">
-          <span class="badge-dot"></span>
-          <span class="badge-label">EU AI Act</span>
-          Compliance-ready infrastructure
+        <div class="crisis-stat">
+          <div class="crisis-stat-val">€35M</div>
+          <div class="crisis-stat-lbl">EU AI Act fines</div>
         </div>
-        <h1 class="anim d1">The trust layer for<br><span class="grad">AI-generated content</span></h1>
-        <p class="hero-sub anim d2">Cryptographic provenance, real-time verification, and compliance automation. The infrastructure every platform needs to rebuild trust in a world of synthetic media.</p>
-        <div class="hero-cta anim d3">
-          <a href="#" class="btn btn-primary btn-lg">Request API Access →</a>
-          <a href="#" class="btn btn-outline btn-lg">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
-            View Documentation
-          </a>
-        </div>
-        <p class="hero-note anim d3">Now in private beta. <a href="#">Join 200+ platforms on the waitlist</a></p>
-        <div class="crisis-stats anim d4">
-          <div class="crisis-stat">
-            <div class="crisis-stat-val">90%</div>
-            <div class="crisis-stat-lbl">of deepfakes undetected</div>
-          </div>
-          <div class="crisis-stat">
-            <div class="crisis-stat-val">€35M</div>
-            <div class="crisis-stat-lbl">EU AI Act fines</div>
-          </div>
-          <div class="crisis-stat">
-            <div class="crisis-stat-val accent">C2PA</div>
-            <div class="crisis-stat-lbl">Standard compliant</div>
-          </div>
+        <div class="crisis-stat">
+          <div class="crisis-stat-val accent">C2PA</div>
+          <div class="crisis-stat-lbl">Standard compliant</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Trust Visual -->
-    <section class="trust-visual">
-      <div class="trust-demo anim d5">
-        <div class="trust-bar">
-          <span class="dot r"></span>
-          <span class="dot y"></span>
-          <span class="dot g"></span>
-          <span class="trust-title">Prism — Content Verification Dashboard</span>
-        </div>
-        <div class="trust-body">
-          <div class="trust-main">
-            <div class="content-item">
-              <div class="content-thumb">🖼️</div>
-              <div class="content-info">
-                <h4>product_photo_v3.jpg</h4>
-                <p>Uploaded 2 minutes ago • 4.2 MB</p>
-                <div class="content-meta">
-                  <span class="meta-tag verified">◇ Verified</span>
-                  <span class="meta-tag ai">AI Generated</span>
-                  <span class="meta-tag">Midjourney v6</span>
-                </div>
-              </div>
-            </div>
-            <div class="content-item">
-              <div class="content-thumb">📄</div>
-              <div class="content-info">
-                <h4>quarterly_report.pdf</h4>
-                <p>Uploaded 15 minutes ago • 2.1 MB</p>
-                <div class="content-meta">
-                  <span class="meta-tag verified">◇ Verified</span>
-                  <span class="meta-tag human">Human Created</span>
-                  <span class="meta-tag">Adobe Acrobat</span>
-                </div>
-              </div>
-            </div>
-            <div class="content-item">
-              <div class="content-thumb">🎬</div>
-              <div class="content-info">
-                <h4>testimonial_video.mp4</h4>
-                <p>Uploaded 1 hour ago • 156 MB</p>
-                <div class="content-meta">
-                  <span class="meta-tag unverified">⚠ Unverified</span>
-                  <span class="meta-tag">Origin Unknown</span>
-                </div>
+  <!-- Trust Visual -->
+  <section class="trust-visual">
+    <div class="trust-demo anim d5">
+      <div class="trust-bar">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
+        <span class="trust-title">Prism — Content Verification Dashboard</span>
+      </div>
+      <div class="trust-body">
+        <div class="trust-main">
+          <div class="content-item">
+            <div class="content-thumb">🖼️</div>
+            <div class="content-info">
+              <h4>product_photo_v3.jpg</h4>
+              <p>Uploaded 2 minutes ago • 4.2 MB</p>
+              <div class="content-meta">
+                <span class="meta-tag verified">◇ Verified</span>
+                <span class="meta-tag ai">AI Generated</span>
+                <span class="meta-tag">Midjourney v6</span>
               </div>
             </div>
           </div>
-          <div class="trust-side">
-            <div class="provenance-card">
-              <div class="provenance-header">
-                <div class="provenance-icon">◇</div>
-                <h4>Provenance Chain</h4>
-              </div>
-              <div class="provenance-chain">
-                <div class="chain-item">
-                  <span class="chain-dot"></span>
-                  <span>Created by</span>
-                  <strong>Midjourney v6</strong>
-                </div>
-                <div class="chain-item">
-                  <span class="chain-dot"></span>
-                  <span>Edited in</span>
-                  <strong>Adobe Photoshop</strong>
-                </div>
-                <div class="chain-item">
-                  <span class="chain-dot"></span>
-                  <span>Signed by</span>
-                  <strong>acme-corp.com</strong>
-                </div>
-                <div class="chain-item">
-                  <span class="chain-dot"></span>
-                  <span>Training data</span>
-                  <strong>Licensed ✓</strong>
-                </div>
+          <div class="content-item">
+            <div class="content-thumb">📄</div>
+            <div class="content-info">
+              <h4>quarterly_report.pdf</h4>
+              <p>Uploaded 15 minutes ago • 2.1 MB</p>
+              <div class="content-meta">
+                <span class="meta-tag verified">◇ Verified</span>
+                <span class="meta-tag human">Human Created</span>
+                <span class="meta-tag">Adobe Acrobat</span>
               </div>
             </div>
-            <div class="compliance-badge">
-              <div class="compliance-check">✓</div>
-              <div class="compliance-text">
-                <h5>EU AI Act Compliant</h5>
-                <p>All labeling requirements met</p>
+          </div>
+          <div class="content-item">
+            <div class="content-thumb">🎬</div>
+            <div class="content-info">
+              <h4>testimonial_video.mp4</h4>
+              <p>Uploaded 1 hour ago • 156 MB</p>
+              <div class="content-meta">
+                <span class="meta-tag unverified">⚠ Unverified</span>
+                <span class="meta-tag">Origin Unknown</span>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="trust-side">
+          <div class="provenance-card">
+            <div class="provenance-header">
+              <div class="provenance-icon">◇</div>
+              <h4>Provenance Chain</h4>
+            </div>
+            <div class="provenance-chain">
+              <div class="chain-item">
+                <span class="chain-dot"></span>
+                <span>Created by</span>
+                <strong>Midjourney v6</strong>
+              </div>
+              <div class="chain-item">
+                <span class="chain-dot"></span>
+                <span>Edited in</span>
+                <strong>Adobe Photoshop</strong>
+              </div>
+              <div class="chain-item">
+                <span class="chain-dot"></span>
+                <span>Signed by</span>
+                <strong>acme-corp.com</strong>
+              </div>
+              <div class="chain-item">
+                <span class="chain-dot"></span>
+                <span>Training data</span>
+                <strong>Licensed ✓</strong>
+              </div>
+            </div>
+          </div>
+          <div class="compliance-badge">
+            <div class="compliance-check">✓</div>
+            <div class="compliance-text">
+              <h5>EU AI Act Compliant</h5>
+              <p>All labeling requirements met</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Problem -->
-    <section class="problem">
-      <div class="problem-inner">
-        <span class="section-tag">The Crisis</span>
-        <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem;">Trust is collapsing. Fast.</h2>
-        <p style="color: var(--text-2); font-size: 0.9375rem; max-width: 520px; margin: 0 auto;">Every platform, every enterprise, every regulator faces the same question: How do you know what's real?</p>
-        <div class="problem-grid">
-          <div class="problem-card">
-            <div class="problem-icon">⚖️</div>
-            <h4>Regulatory Risk</h4>
-            <p>EU AI Act mandates labeling. Non-compliance means fines up to €35M or 7% of global revenue.</p>
-          </div>
-          <div class="problem-card">
-            <div class="problem-icon">📜</div>
-            <h4>Legal Exposure</h4>
-            <p>NYT v. OpenAI changed everything. Training data provenance is now a legal requirement.</p>
-          </div>
-          <div class="problem-card">
-            <div class="problem-icon">🔥</div>
-            <h4>Platform Chaos</h4>
-            <p>Deepfakes spreading faster than detection. Every social network scrambling for solutions.</p>
-          </div>
-          <div class="problem-card">
-            <div class="problem-icon">🏢</div>
-            <h4>Supply Chain Risk</h4>
-            <p>Enterprises can't verify AI usage in content they buy, publish, or distribute.</p>
-          </div>
-        </div>
+  <!-- Products -->
+  <section class="section" id="products">
+    <div class="section-head">
+      <span class="section-tag">Products</span>
+      <h2>Full-stack trust infrastructure</h2>
+      <p>Everything you need to verify, label, and track AI-generated content. One API, four products, complete coverage.</p>
+    </div>
+    <div class="products">
+      <div class="product-card">
+        <div class="product-icon">🔐</div>
+        <h3>Provenance API</h3>
+        <p>Cryptographic signatures for content origin. Know exactly what created it, what AI was used, and the full chain of custody.</p>
+        <ul class="product-features">
+          <li>C2PA-compliant content credentials</li>
+          <li>AI model identification & version tracking</li>
+          <li>Training data lineage verification</li>
+          <li>Tamper-evident signatures</li>
+          <li>Real-time certificate validation</li>
+        </ul>
       </div>
-    </section>
+      <div class="product-card">
+        <div class="product-icon">🛡️</div>
+        <h3>Verification SDK</h3>
+        <p>Drop-in verification for any platform. Display provenance, detect AI content, and auto-label for compliance.</p>
+        <ul class="product-features">
+          <li>React, Vue, Swift, Android SDKs</li>
+          <li>Multi-modal detection (text, image, video, audio)</li>
+          <li>Customizable trust badges</li>
+          <li>99.7% detection accuracy</li>
+          <li>Sub-100ms verification</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">👤</div>
+        <h3>Creator Attribution</h3>
+        <p>Track and compensate creators whose work trained AI models. The consent layer the industry needs.</p>
+        <ul class="product-features">
+          <li>Training data fingerprinting</li>
+          <li>Attribution graph visualization</li>
+          <li>Automated royalty distribution</li>
+          <li>Creator opt-in/opt-out registry</li>
+          <li>Licensing compliance tracking</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">📊</div>
+        <h3>Compliance Dashboard</h3>
+        <p>Enterprise-grade auditing for AI usage. Stay ahead of EU AI Act, state regulations, and industry standards.</p>
+        <ul class="product-features">
+          <li>Real-time compliance monitoring</li>
+          <li>Automated labeling workflows</li>
+          <li>Audit trail exports</li>
+          <li>Risk scoring & alerts</li>
+          <li>Multi-jurisdiction support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <!-- Products -->
-    <section class="section" id="products">
+  <!-- Developer Documentation -->
+  <section style="padding: 6rem 1.5rem; background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);" id="docs">
+    <div style="max-width: 1100px; margin: 0 auto;">
       <div class="section-head">
-        <span class="section-tag">Products</span>
-        <h2>Full-stack trust infrastructure</h2>
-        <p>Everything you need to verify, label, and track AI-generated content. One API, four products, complete coverage.</p>
+        <span class="section-tag">For Developers</span>
+        <h2>Ship in an afternoon, not a quarter</h2>
+        <p>Comprehensive SDKs, type-safe APIs, and documentation that respects your time.</p>
       </div>
-      <div class="products">
-        <div class="product-card">
-          <div class="product-icon">🔐</div>
-          <h3>Provenance API</h3>
-          <p>Cryptographic signatures for content origin. Know exactly what created it, what AI was used, and the full chain of custody.</p>
-          <ul class="product-features">
-            <li>C2PA-compliant content credentials</li>
-            <li>AI model identification & version tracking</li>
-            <li>Training data lineage verification</li>
-            <li>Tamper-evident signatures</li>
-            <li>Real-time certificate validation</li>
-          </ul>
+      
+      <!-- SDK Grid -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2.5rem;">
+        <div style="padding: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); text-align: center; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📦</div>
+          <div style="font-weight: 600; font-size: 0.875rem;">JavaScript/TS</div>
+          <div style="font-size: 0.6875rem; color: var(--text-4); margin-top: 0.25rem; font-family: 'JetBrains Mono', monospace;">npm i @prism/sdk</div>
         </div>
-        <div class="product-card">
-          <div class="product-icon">🛡️</div>
-          <h3>Verification SDK</h3>
-          <p>Drop-in verification for any platform. Display provenance, detect AI content, and auto-label for compliance.</p>
-          <ul class="product-features">
-            <li>React, Vue, Swift, Android SDKs</li>
-            <li>Multi-modal detection (text, image, video, audio)</li>
-            <li>Customizable trust badges</li>
-            <li>99.7% detection accuracy</li>
-            <li>Sub-100ms verification</li>
-          </ul>
+        <div style="padding: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); text-align: center; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🐍</div>
+          <div style="font-weight: 600; font-size: 0.875rem;">Python</div>
+          <div style="font-size: 0.6875rem; color: var(--text-4); margin-top: 0.25rem; font-family: 'JetBrains Mono', monospace;">pip install prism-sdk</div>
         </div>
-        <div class="product-card">
-          <div class="product-icon">👤</div>
-          <h3>Creator Attribution</h3>
-          <p>Track and compensate creators whose work trained AI models. The consent layer the industry needs.</p>
-          <ul class="product-features">
-            <li>Training data fingerprinting</li>
-            <li>Attribution graph visualization</li>
-            <li>Automated royalty distribution</li>
-            <li>Creator opt-in/opt-out registry</li>
-            <li>Licensing compliance tracking</li>
-          </ul>
+        <div style="padding: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); text-align: center; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🔵</div>
+          <div style="font-weight: 600; font-size: 0.875rem;">Go</div>
+          <div style="font-size: 0.6875rem; color: var(--text-4); margin-top: 0.25rem; font-family: 'JetBrains Mono', monospace;">go get prism.io/sdk</div>
         </div>
-        <div class="product-card">
-          <div class="product-icon">📊</div>
-          <h3>Compliance Dashboard</h3>
-          <p>Enterprise-grade auditing for AI usage. Stay ahead of EU AI Act, state regulations, and industry standards.</p>
-          <ul class="product-features">
-            <li>Real-time compliance monitoring</li>
-            <li>Automated labeling workflows</li>
-            <li>Audit trail exports</li>
-            <li>Risk scoring & alerts</li>
-            <li>Multi-jurisdiction support</li>
-          </ul>
+        <div style="padding: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); text-align: center; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">⚡</div>
+          <div style="font-weight: 600; font-size: 0.875rem;">REST API</div>
+          <div style="font-size: 0.6875rem; color: var(--text-4); margin-top: 0.25rem;">Any language</div>
         </div>
       </div>
-    </section>
-
-    <!-- Use Cases -->
-    <section class="use-cases">
-      <div class="use-cases-inner">
-        <div class="section-head">
-          <span class="section-tag">Use Cases</span>
-          <h2>Built for every stakeholder</h2>
-          <p>From social platforms to enterprises to regulators—Prism serves the entire trust ecosystem.</p>
+      
+      <!-- Code Tabs -->
+      <div class="code-preview">
+        <div class="code-header">
+          <span class="code-tab active" onclick="showCode('js')">JavaScript</span>
+          <span class="code-tab" onclick="showCode('py')">Python</span>
+          <span class="code-tab" onclick="showCode('curl')">cURL</span>
+          <span class="code-tab" onclick="showCode('go')">Go</span>
         </div>
-        <div class="use-grid">
-          <div class="use-card">
-            <div class="use-icon">📱</div>
-            <h4>Social Platforms</h4>
-            <p>Auto-label AI content, verify uploads, and protect users from synthetic media.</p>
-          </div>
-          <div class="use-card">
-            <div class="use-icon">📰</div>
-            <h4>News & Media</h4>
-            <p>Verify source authenticity and maintain editorial standards in the AI age.</p>
-          </div>
-          <div class="use-card">
-            <div class="use-icon">🏛️</div>
-            <h4>Governments</h4>
-            <p>Enforce AI transparency laws and verify content in official communications.</p>
-          </div>
-          <div class="use-card">
-            <div class="use-icon">🏢</div>
-            <h4>Enterprises</h4>
-            <p>Audit AI usage across your content supply chain. Ensure vendor compliance.</p>
-          </div>
-          <div class="use-card">
-            <div class="use-icon">🎨</div>
-            <h4>AI Companies</h4>
-            <p>Sign outputs at generation time. Build trust into your models from day one.</p>
-          </div>
-          <div class="use-card">
-            <div class="use-icon">🎬</div>
-            <h4>Studios & Labels</h4>
-            <p>Protect IP, track derivatives, and enforce licensing across AI-generated content.</p>
-          </div>
-          <div class="use-card">
-            <div class="use-icon">💼</div>
-            <h4>Agencies</h4>
-            <p>Verify AI disclosure for client campaigns. Avoid regulatory exposure.</p>
-          </div>
-          <div class="use-card">
-            <div class="use-icon">📈</div>
-            <h4>Marketplaces</h4>
-            <p>Build trust in AI-generated assets with verified provenance and attribution.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="stats">
-      <div class="stats-grid">
-        <div class="stat">
-          <div class="stat-val">99.7%</div>
-          <div class="stat-lbl">Detection accuracy</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val">&lt;100ms</div>
-          <div class="stat-lbl">Verification latency</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val">200+</div>
-          <div class="stat-lbl">Platforms in beta</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val">1B+</div>
-          <div class="stat-lbl">Content verified</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Compliance -->
-    <section class="section" id="compliance">
-      <div class="section-head">
-        <span class="section-tag">Compliance</span>
-        <h2>Regulation-ready from day one</h2>
-        <p>Prism is built for the regulatory landscape of tomorrow. Stay compliant as laws evolve.</p>
-      </div>
-      <div class="compliance-grid">
-        <div class="compliance-card">
-          <div class="compliance-flag">🇪🇺 EU AI Act</div>
-          <h4>European Union</h4>
-          <p>Full compliance with AI content labeling requirements. Automated Article 52 disclosure.</p>
-          <ul class="compliance-list">
-            <li>AI-generated content labeling</li>
-            <li>Deep fake disclosure</li>
-            <li>High-risk system auditing</li>
-            <li>Transparency obligations</li>
-          </ul>
-        </div>
-        <div class="compliance-card">
-          <div class="compliance-flag">🇺🇸 US State Laws</div>
-          <h4>United States</h4>
-          <p>Prepared for California, Texas, and emerging state-level AI transparency requirements.</p>
-          <ul class="compliance-list">
-            <li>California AB 2013 compliance</li>
-            <li>Political ad disclosure</li>
-            <li>Deepfake legislation</li>
-            <li>FTC guidance alignment</li>
-          </ul>
-        </div>
-        <div class="compliance-card">
-          <div class="compliance-flag">🌍 Global Standards</div>
-          <h4>Industry Standards</h4>
-          <p>Native support for C2PA, CAI, and emerging global content authenticity standards.</p>
-          <ul class="compliance-list">
-            <li>C2PA content credentials</li>
-            <li>Content Authenticity Initiative</li>
-            <li>ISO/IEC standards</li>
-            <li>Platform-specific requirements</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Integration -->
-    <section class="integration">
-      <div class="integration-inner">
-        <span class="section-tag">Integration</span>
-        <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem;">One API call to verify anything</h2>
-        <p style="color: var(--text-2); font-size: 0.9375rem;">Built for developers. SDKs for every platform. Documentation that actually helps.</p>
-        <div class="code-preview">
-          <div class="code-header">
-            <span class="code-tab active">JavaScript</span>
-            <span class="code-tab">Python</span>
-            <span class="code-tab">cURL</span>
-          </div>
-          <div class="code-body">
+        <div class="code-body" id="code-js">
 <span class="cmt">// Verify content provenance in one call</span>
 <span class="kw">import</span> { Prism } <span class="kw">from</span> <span class="str">'@prism/sdk'</span>;
 
 <span class="kw">const</span> prism = <span class="kw">new</span> <span class="fn">Prism</span>(<span class="str">'pk_live_...'</span>);
 
+<span class="cmt">// Verify any content type</span>
 <span class="kw">const</span> result = <span class="kw">await</span> prism.<span class="fn">verify</span>({
   <span class="prop">content</span>: imageBuffer,
   <span class="prop">type</span>: <span class="str">'image'</span>,
   <span class="prop">checkCompliance</span>: [<span class="str">'eu-ai-act'</span>, <span class="str">'c2pa'</span>]
 });
 
-<span class="cmt">// Returns: provenance chain, AI detection, compliance status</span>
 console.<span class="fn">log</span>(result.<span class="prop">isAI</span>);          <span class="cmt">// true</span>
 console.<span class="fn">log</span>(result.<span class="prop">model</span>);         <span class="cmt">// "midjourney-v6"</span>
 console.<span class="fn">log</span>(result.<span class="prop">compliant</span>);     <span class="cmt">// true</span>
 console.<span class="fn">log</span>(result.<span class="prop">provenance</span>);   <span class="cmt">// [...chain]</span>
-          </div>
+
+<span class="cmt">// Sign content at creation time</span>
+<span class="kw">const</span> signed = <span class="kw">await</span> prism.<span class="fn">sign</span>({
+  <span class="prop">content</span>: generatedImage,
+  <span class="prop">creator</span>: <span class="str">'your-org-id'</span>,
+  <span class="prop">aiModel</span>: <span class="str">'dalle-3'</span>,
+  <span class="prop">trainingDataHash</span>: <span class="str">'sha256:...'</span>
+});
+        </div>
+        <div class="code-body" id="code-py" style="display: none;">
+<span class="cmt"># Verify content with the Python SDK</span>
+<span class="kw">from</span> prism <span class="kw">import</span> Prism
+
+prism = <span class="fn">Prism</span>(<span class="str">'pk_live_...'</span>)
+
+<span class="cmt"># Verify any content type</span>
+result = prism.<span class="fn">verify</span>(
+    content=image_bytes,
+    type=<span class="str">'image'</span>,
+    check_compliance=[<span class="str">'eu-ai-act'</span>, <span class="str">'c2pa'</span>]
+)
+
+<span class="fn">print</span>(result.is_ai)        <span class="cmt"># True</span>
+<span class="fn">print</span>(result.model)        <span class="cmt"># "midjourney-v6"</span>
+<span class="fn">print</span>(result.compliant)    <span class="cmt"># True</span>
+<span class="fn">print</span>(result.provenance)   <span class="cmt"># [...chain]</span>
+
+<span class="cmt"># Batch verification for high throughput</span>
+results = prism.<span class="fn">verify_batch</span>([
+    {<span class="str">'content'</span>: img1, <span class="str">'type'</span>: <span class="str">'image'</span>},
+    {<span class="str">'content'</span>: img2, <span class="str">'type'</span>: <span class="str">'image'</span>},
+])
+        </div>
+        <div class="code-body" id="code-curl" style="display: none;">
+<span class="cmt"># Verify via REST API</span>
+curl -X POST https://api.prism.io/v1/verify \
+  -H <span class="str">"Authorization: Bearer pk_live_..."</span> \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -d <span class="str">'{
+    "content_url": "https://example.com/image.jpg",
+    "type": "image",
+    "check_compliance": ["eu-ai-act", "c2pa"]
+  }'</span>
+
+<span class="cmt"># Response</span>
+{
+  <span class="str">"is_ai"</span>: <span class="kw">true</span>,
+  <span class="str">"model"</span>: <span class="str">"midjourney-v6"</span>,
+  <span class="str">"confidence"</span>: <span class="num">0.97</span>,
+  <span class="str">"compliant"</span>: <span class="kw">true</span>,
+  <span class="str">"provenance"</span>: [...]
+}
+        </div>
+        <div class="code-body" id="code-go" style="display: none;">
+<span class="cmt">// Verify content with the Go SDK</span>
+<span class="kw">package</span> main
+
+<span class="kw">import</span> (
+    <span class="str">"fmt"</span>
+    <span class="str">"prism.io/sdk"</span>
+)
+
+<span class="kw">func</span> <span class="fn">main</span>() {
+    client := prism.<span class="fn">NewClient</span>(<span class="str">"pk_live_..."</span>)
+    
+    result, err := client.<span class="fn">Verify</span>(prism.VerifyRequest{
+        Content:         imageBytes,
+        Type:            <span class="str">"image"</span>,
+        CheckCompliance: []<span class="kw">string</span>{<span class="str">"eu-ai-act"</span>, <span class="str">"c2pa"</span>},
+    })
+    
+    <span class="fn">fmt.Printf</span>(<span class="str">"Is AI: %v\n"</span>, result.IsAI)        <span class="cmt">// true</span>
+    <span class="fn">fmt.Printf</span>(<span class="str">"Model: %s\n"</span>, result.Model)       <span class="cmt">// midjourney-v6</span>
+    <span class="fn">fmt.Printf</span>(<span class="str">"Compliant: %v\n"</span>, result.Compliant) <span class="cmt">// true</span>
+}
         </div>
       </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="section" id="pricing">
+      
+      <!-- Quick Links -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem;">
+        <a href="#" style="padding: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-weight: 600; font-size: 0.875rem; color: var(--text); margin-bottom: 0.25rem;">📚 Full Docs</div>
+          <div style="font-size: 0.75rem; color: var(--text-3);">Guides, tutorials, examples</div>
+        </a>
+        <a href="#" style="padding: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-weight: 600; font-size: 0.875rem; color: var(--text); margin-bottom: 0.25rem;">🔧 API Reference</div>
+          <div style="font-size: 0.75rem; color: var(--text-3);">Complete endpoint docs</div>
+        </a>
+        <a href="#" style="padding: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-weight: 600; font-size: 0.875rem; color: var(--text); margin-bottom: 0.25rem;">⚡ Quickstart</div>
+          <div style="font-size: 0.75rem; color: var(--text-3);">5-minute integration</div>
+        </a>
+        <a href="#" style="padding: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-weight: 600; font-size: 0.875rem; color: var(--text); margin-bottom: 0.25rem;">🧪 Playground</div>
+          <div style="font-size: 0.75rem; color: var(--text-3);">Test in the browser</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- EU AI Act Deep Dive -->
+  <section style="padding: 6rem 1.5rem; background: var(--bg);" id="compliance">
+    <div style="max-width: 1000px; margin: 0 auto;">
       <div class="section-head">
-        <span class="section-tag">Pricing</span>
-        <h2>Infrastructure that scales with you</h2>
-        <p>Pay for what you verify. No minimums. Enterprise plans for high-volume needs.</p>
+        <span class="section-tag">Regulatory Deep Dive</span>
+        <h2>EU AI Act: What you need to know</h2>
+        <p>The regulation takes effect in phases through 2025-2027. Here's exactly what Prism covers.</p>
       </div>
-      <div class="pricing-grid">
-        <div class="price-card">
-          <h3>Developer</h3>
-          <div class="price-val">$0<span>/mo</span></div>
-          <div class="price-desc">Free forever, no credit card</div>
-          <ul class="price-list">
-            <li>1,000 verifications/month</li>
-            <li>Basic provenance API</li>
-            <li>Detection endpoints</li>
-            <li>Community support</li>
-            <li>Sandbox environment</li>
-          </ul>
-          <a href="#" class="btn btn-outline">Start Building</a>
-        </div>
-        <div class="price-card pop">
-          <span class="price-badge">Most Popular</span>
-          <h3>Platform</h3>
-          <div class="price-val">$499<span>/mo</span></div>
-          <div class="price-desc">+ $0.001 per verification</div>
-          <ul class="price-list">
-            <li>100K verifications included</li>
-            <li>Full Provenance API</li>
-            <li>Verification SDK access</li>
-            <li>Compliance dashboard</li>
-            <li>EU AI Act automation</li>
-            <li>Priority support</li>
-          </ul>
-          <a href="#" class="btn btn-accent">Request Access</a>
-        </div>
-        <div class="price-card">
-          <h3>Enterprise</h3>
-          <div class="price-val">Custom</div>
-          <div class="price-desc">Volume pricing available</div>
-          <ul class="price-list">
-            <li>Unlimited verifications</li>
-            <li>Creator Attribution suite</li>
-            <li>On-premise deployment</li>
-            <li>Custom integrations</li>
-            <li>SLA guarantees</li>
-            <li>Dedicated success manager</li>
-          </ul>
-          <a href="#" class="btn btn-outline">Contact Sales</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta">
-      <div class="cta-glow" id="ctaGlow"></div>
-      <div class="cta-inner">
-        <h2>Trust is the new moat.<br>Build it into your stack.</h2>
-        <p>The platforms that solve content authenticity will win the next decade. The infrastructure is ready. Are you?</p>
-        <div class="cta-buttons">
-          <a href="#" class="btn btn-primary btn-lg">Request API Access →</a>
-          <a href="#" class="btn btn-outline btn-lg">Read the Documentation</a>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ============================================
-       PRISM NEWS VIEW (Consumer Showcase)
-       ============================================ -->
-  <div id="newsView" class="hidden">
-    <!-- News Hero -->
-    <section class="hero">
-      <div class="hero-orb news-mode"></div>
-      <div class="prism-effect"></div>
-      <div class="hero-content">
-        <!-- Mobile Mode Toggle -->
-        <div class="mobile-mode-toggle">
-          <button class="mode-btn" onclick="switchMode('infra')">
-            <span class="mode-dot"></span>
-            Infrastructure
-          </button>
-          <button class="mode-btn news active" onclick="switchMode('news')">
-            <span class="mode-dot"></span>
-            Prism News
-          </button>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <div style="background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="padding: 0.375rem 0.75rem; background: rgba(239,68,68,0.15); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: #f87171;">Article 50</div>
+            <div style="font-size: 0.75rem; color: var(--text-4);">Effective Aug 2025</div>
+          </div>
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">Transparency for AI Systems</h4>
+          <p style="font-size: 0.875rem; color: var(--text-2); line-height: 1.6; margin-bottom: 1rem;">AI systems interacting with humans must disclose they are AI. Content that appears to be real but is AI-generated must be labeled.</p>
+          <div style="padding: 0.75rem; background: rgba(20,184,166,0.1); border: 1px solid rgba(20,184,166,0.2); border-radius: var(--radius); display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: var(--accent-2); font-weight: 700;">✓</span>
+            <span style="font-size: 0.8125rem; color: var(--accent-2);">Prism auto-labels AI content at creation</span>
+          </div>
         </div>
         
-        <div class="badge anim">
-          <span class="badge-dot news"></span>
-          <span class="badge-label news">Beta</span>
-          The future of verified news
-        </div>
-        <h1 class="anim d1">Truth through<br><span class="grad-news">decentralized consensus</span></h1>
-        <p class="hero-sub anim d2">News verified by cryptographic attestations from trusted journalists, institutions, and experts. No single arbiter of truth—just transparent, reputation-staked consensus.</p>
-        <div class="hero-cta anim d3">
-          <a href="#" class="btn btn-news btn-lg">Join the Waitlist →</a>
-          <a href="#" class="btn btn-outline btn-lg">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-            Learn How It Works
-          </a>
-        </div>
-        <p class="hero-note anim d3">Built on Prism Infrastructure. <a href="#" onclick="switchMode('infra'); return false;">See the tech →</a></p>
-        <div class="crisis-stats anim d4">
-          <div class="crisis-stat">
-            <div class="crisis-stat-val">67%</div>
-            <div class="crisis-stat-lbl">distrust mainstream media</div>
+        <div style="background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="padding: 0.375rem 0.75rem; background: rgba(245,158,11,0.15); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: #fbbf24;">Article 52</div>
+            <div style="font-size: 0.75rem; color: var(--text-4);">Effective Aug 2025</div>
           </div>
-          <div class="crisis-stat">
-            <div class="crisis-stat-val">10x</div>
-            <div class="crisis-stat-lbl">misinfo spreads faster</div>
-          </div>
-          <div class="crisis-stat">
-            <div class="crisis-stat-val purple">∞</div>
-            <div class="crisis-stat-lbl">immutable attestations</div>
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">Deep Fake Disclosure</h4>
+          <p style="font-size: 0.875rem; color: var(--text-2); line-height: 1.6; margin-bottom: 1rem;">Content that manipulates images, audio, or video of real persons must be disclosed as artificially generated or manipulated.</p>
+          <div style="padding: 0.75rem; background: rgba(20,184,166,0.1); border: 1px solid rgba(20,184,166,0.2); border-radius: var(--radius); display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: var(--accent-2); font-weight: 700;">✓</span>
+            <span style="font-size: 0.8125rem; color: var(--accent-2);">Prism detects deepfakes with 99.7% accuracy</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- News Demo -->
-    <section class="trust-visual">
-      <div class="news-demo anim d5">
-        <div class="trust-bar">
-          <span class="dot r"></span>
-          <span class="dot y"></span>
-          <span class="dot g"></span>
-          <span class="trust-title">Prism News — Verified News Feed</span>
-        </div>
-        <div class="news-body">
-          <div class="news-feed">
-            <div class="news-item active">
-              <div class="news-header">
-                <div class="news-source">
-                  <div class="source-avatar">📰</div>
-                  <div class="source-info">
-                    <div class="source-name">Reuters</div>
-                    <div class="source-time">2 hours ago</div>
-                  </div>
-                </div>
-                <div class="trust-score high">
-                  <div class="trust-bar-mini"><div class="trust-bar-fill"></div></div>
-                  94%
-                </div>
-              </div>
-              <div class="news-headline">Federal Reserve announces 0.25% rate cut, citing cooling inflation</div>
-              <div class="news-excerpt">The Federal Reserve cut its benchmark interest rate by a quarter percentage point on Wednesday, marking the second consecutive reduction...</div>
-              <div class="news-verifiers">
-                <div class="verifier-avatars">
-                  <div class="verifier-avatar">🏛️</div>
-                  <div class="verifier-avatar">📊</div>
-                  <div class="verifier-avatar">🎓</div>
-                  <div class="verifier-avatar">✓</div>
-                </div>
-                <span class="verifier-count">12 verifiers attested</span>
-              </div>
-            </div>
-            
-            <div class="news-item">
-              <div class="news-header">
-                <div class="news-source">
-                  <div class="source-avatar">🌐</div>
-                  <div class="source-info">
-                    <div class="source-name">Independent Source</div>
-                    <div class="source-time">4 hours ago</div>
-                  </div>
-                </div>
-                <div class="trust-score medium">
-                  <div class="trust-bar-mini"><div class="trust-bar-fill"></div></div>
-                  67%
-                </div>
-              </div>
-              <div class="news-headline">Tech company layoffs may accelerate in Q4, industry insiders report</div>
-              <div class="news-excerpt">Multiple sources within major tech companies suggest that further workforce reductions are being planned for the final quarter...</div>
-              <div class="news-verifiers">
-                <div class="verifier-avatars">
-                  <div class="verifier-avatar">💼</div>
-                  <div class="verifier-avatar">📈</div>
-                  <div class="verifier-avatar">?</div>
-                </div>
-                <span class="verifier-count">5 verifiers • 2 disputes</span>
-              </div>
-            </div>
-            
-            <div class="news-item">
-              <div class="news-header">
-                <div class="news-source">
-                  <div class="source-avatar">🔬</div>
-                  <div class="source-info">
-                    <div class="source-name">Science Daily</div>
-                    <div class="source-time">6 hours ago</div>
-                  </div>
-                </div>
-                <div class="trust-score pending">
-                  <div class="trust-bar-mini"><div class="trust-bar-fill"></div></div>
-                  Pending
-                </div>
-              </div>
-              <div class="news-headline">New study claims breakthrough in room-temperature superconductivity</div>
-              <div class="news-excerpt">Researchers at a Korean university have published findings suggesting they've achieved superconductivity at ambient conditions...</div>
-              <div class="news-verifiers">
-                <div class="verifier-avatars">
-                  <div class="verifier-avatar">⏳</div>
-                </div>
-                <span class="verifier-count">Awaiting expert verification</span>
-              </div>
-            </div>
+        
+        <div style="background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="padding: 0.375rem 0.75rem; background: rgba(139,92,246,0.15); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: #a78bfa;">Article 53</div>
+            <div style="font-size: 0.75rem; color: var(--text-4);">Effective Aug 2025</div>
           </div>
-          
-          <div class="verification-panel">
-            <div class="panel-header">
-              <div class="panel-icon">🔍</div>
-              <div>
-                <h4>Verification Details</h4>
-                <p>Fed Rate Cut Story</p>
-              </div>
-            </div>
-            
-            <div class="trust-meter">
-              <div class="meter-header">
-                <span class="meter-label">Consensus Trust Score</span>
-                <span class="meter-value">94%</span>
-              </div>
-              <div class="meter-bar">
-                <div class="meter-fill"></div>
-              </div>
-              <div class="meter-breakdown">
-                <div class="breakdown-item">
-                  <div class="breakdown-dot journalists"></div>
-                  <span>4 Journalists</span>
-                </div>
-                <div class="breakdown-item">
-                  <div class="breakdown-dot institutions"></div>
-                  <span>3 Institutions</span>
-                </div>
-                <div class="breakdown-item">
-                  <div class="breakdown-dot experts"></div>
-                  <span>3 Economists</span>
-                </div>
-                <div class="breakdown-item">
-                  <div class="breakdown-dot factcheck"></div>
-                  <span>2 Fact-checkers</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="verifier-list">
-              <div class="verifier-list-header">
-                <span>Verifiers</span>
-                <span>Status</span>
-              </div>
-              <div class="verifier-item">
-                <div class="verifier-logo">🏛️</div>
-                <div class="verifier-info">
-                  <div class="verifier-name">Federal Reserve</div>
-                  <div class="verifier-cred">Official Source • Rep: 99.8%</div>
-                </div>
-                <span class="verifier-badge attested">Attested</span>
-              </div>
-              <div class="verifier-item">
-                <div class="verifier-logo">📰</div>
-                <div class="verifier-info">
-                  <div class="verifier-name">AP News</div>
-                  <div class="verifier-cred">Wire Service • Rep: 98.2%</div>
-                </div>
-                <span class="verifier-badge attested">Attested</span>
-              </div>
-              <div class="verifier-item">
-                <div class="verifier-logo">🎓</div>
-                <div class="verifier-info">
-                  <div class="verifier-name">MIT Economics</div>
-                  <div class="verifier-cred">Academic • Rep: 97.5%</div>
-                </div>
-                <span class="verifier-badge attested">Attested</span>
-              </div>
-            </div>
-            
-            <div class="reputation-card">
-              <div class="reputation-header">
-                <span>⛓️</span>
-                <span>Blockchain Record</span>
-              </div>
-              <div class="stake-grid">
-                <div class="stake-item">
-                  <div class="stake-value">12</div>
-                  <div class="stake-label">Attestations</div>
-                </div>
-                <div class="stake-item">
-                  <div class="stake-value">0</div>
-                  <div class="stake-label">Disputes</div>
-                </div>
-                <div class="stake-item">
-                  <div class="stake-value">2.4M</div>
-                  <div class="stake-label">Rep Staked</div>
-                </div>
-                <div class="stake-item">
-                  <div class="stake-value">∞</div>
-                  <div class="stake-label">Immutable</div>
-                </div>
-              </div>
-            </div>
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">GPAI Model Obligations</h4>
+          <p style="font-size: 0.875rem; color: var(--text-2); line-height: 1.6; margin-bottom: 1rem;">General-purpose AI providers must document training data and processes. Copyright compliance becomes mandatory.</p>
+          <div style="padding: 0.75rem; background: rgba(20,184,166,0.1); border: 1px solid rgba(20,184,166,0.2); border-radius: var(--radius); display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: var(--accent-2); font-weight: 700;">✓</span>
+            <span style="font-size: 0.8125rem; color: var(--accent-2);">Prism tracks training data provenance</span>
+          </div>
+        </div>
+        
+        <div style="background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="padding: 0.375rem 0.75rem; background: rgba(34,197,94,0.15); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: #4ade80;">C2PA Standard</div>
+            <div style="font-size: 0.75rem; color: var(--text-4);">Industry standard</div>
+          </div>
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">Content Credentials</h4>
+          <p style="font-size: 0.875rem; color: var(--text-2); line-height: 1.6; margin-bottom: 1rem;">The C2PA standard (backed by Adobe, Microsoft, BBC) enables tamper-evident provenance for all content types.</p>
+          <div style="padding: 0.75rem; background: rgba(20,184,166,0.1); border: 1px solid rgba(20,184,166,0.2); border-radius: var(--radius); display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: var(--accent-2); font-weight: 700;">✓</span>
+            <span style="font-size: 0.8125rem; color: var(--accent-2);">Prism is C2PA-native since day one</span>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Problem - News -->
-    <section class="problem">
-      <div class="problem-inner">
-        <span class="section-tag news">The Crisis</span>
-        <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem;">Truth has no source of truth.</h2>
-        <p style="color: var(--text-2); font-size: 0.9375rem; max-width: 520px; margin: 0 auto;">Fact-checkers are centralized. Social platforms are gamed. AI makes fake content trivial. We need a new architecture for truth.</p>
-        <div class="problem-grid">
-          <div class="problem-card news">
-            <div class="problem-icon">🎭</div>
-            <h4>Deepfakes Everywhere</h4>
-            <p>AI-generated content is indistinguishable from reality. Anyone can fabricate "evidence."</p>
-          </div>
-          <div class="problem-card news">
-            <div class="problem-icon">👁️</div>
-            <h4>Centralized Arbiters</h4>
-            <p>Single fact-checkers become political targets. Who watches the watchmen?</p>
-          </div>
-          <div class="problem-card news">
-            <div class="problem-icon">⚡</div>
-            <h4>Speed vs. Truth</h4>
-            <p>Misinformation spreads 10x faster than corrections. Verification can't keep up.</p>
-          </div>
-          <div class="problem-card news">
-            <div class="problem-icon">💀</div>
-            <h4>No Consequences</h4>
-            <p>Sources face no penalty for spreading lies. No skin in the game means no accountability.</p>
+      
+      <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(245,158,11,0.1) 100%); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--radius-lg);">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+          <div style="font-size: 1.5rem;">⚠️</div>
+          <div>
+            <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.375rem;">Non-compliance penalties</h4>
+            <p style="font-size: 0.9375rem; color: var(--text-2);">Violations can result in fines up to <strong style="color: var(--red);">€35 million or 7% of global annual turnover</strong>, whichever is higher. The first enforcement actions are expected in H2 2025.</p>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works">
-      <div class="how-inner">
-        <div class="section-head">
-          <span class="section-tag news">How It Works</span>
-          <h2>Decentralized truth verification</h2>
-          <p>No single arbiter. No central authority. Just cryptographic attestations from verified sources, weighted by reputation.</p>
+    </div>
+  </section>
+  
+  <!-- Built with Prism -->
+  <section style="padding: 6rem 1.5rem; background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div class="section-head">
+        <span class="section-tag">Ecosystem</span>
+        <h2>Built with Prism</h2>
+        <p>200+ platforms are integrating Prism to build trust into their products.</p>
+      </div>
+      
+      <!-- Platform logos -->
+      <div style="display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 3rem; padding: 2rem; background: var(--bg); border-radius: var(--radius-lg);">
+        <div style="text-align: center; opacity: 0.6; transition: opacity 0.3s; cursor: pointer;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+          <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-3);">Adobe</div>
         </div>
-        <div class="steps-grid">
-          <div class="step-card">
-            <div class="step-number">📢</div>
-            <h4>Claim Published</h4>
-            <p>Any news item, statement, or fact enters the verification queue</p>
-          </div>
-          <div class="step-card">
-            <div class="step-number">✍️</div>
-            <h4>Verifiers Attest</h4>
-            <p>Journalists, institutions, and experts cryptographically sign their verification</p>
-          </div>
-          <div class="step-card">
-            <div class="step-number">📊</div>
-            <h4>Trust Emerges</h4>
-            <p>Score calculated from verifier reputation, track record, and stake</p>
-          </div>
-          <div class="step-card">
-            <div class="step-number">⛓️</div>
-            <h4>Record Immutable</h4>
-            <p>Blockchain stores the attestation chain forever—can't be altered or deleted</p>
-          </div>
+        <div style="text-align: center; opacity: 0.6; transition: opacity 0.3s; cursor: pointer;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+          <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-3);">Shutterstock</div>
+        </div>
+        <div style="text-align: center; opacity: 0.6; transition: opacity 0.3s; cursor: pointer;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+          <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-3);">Getty Images</div>
+        </div>
+        <div style="text-align: center; opacity: 0.6; transition: opacity 0.3s; cursor: pointer;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+          <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-3);">Reuters</div>
+        </div>
+        <div style="text-align: center; opacity: 0.6; transition: opacity 0.3s; cursor: pointer;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+          <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-3);">AP News</div>
         </div>
       </div>
-    </section>
-
-    <!-- The Difference -->
-    <section class="difference">
-      <div class="diff-inner">
-        <div class="section-head">
-          <span class="section-tag news">The Difference</span>
-          <h2>Not your father's fact-checker</h2>
-          <p>Prism News isn't another Snopes. It's infrastructure for a new model of truth.</p>
+      
+      <!-- Case Studies -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;">
+        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--border-2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="width: 40px; height: 40px; background: #ff0000; border-radius: 8px; display: grid; place-items: center; font-size: 1.25rem; color: white; font-weight: 800;">▶</div>
+            <div style="font-weight: 600;">Major Video Platform</div>
+          </div>
+          <p style="font-size: 0.875rem; color: var(--text-2); line-height: 1.6; margin-bottom: 1rem;">"Prism helped us auto-label 47M AI-generated videos in our first month, keeping us ahead of EU requirements."</p>
+          <div style="font-size: 0.75rem; color: var(--text-4);">47M videos verified monthly</div>
         </div>
-        <div class="diff-grid">
-          <div class="diff-card old">
-            <div class="diff-label">✗ Traditional Fact-Checking</div>
-            <h4>Centralized & Vulnerable</h4>
-            <ul class="diff-list">
-              <li>Single organization decides truth</li>
-              <li>Easily politicized and attacked</li>
-              <li>Slow, post-hoc corrections</li>
-              <li>No economic consequences for errors</li>
-              <li>Siloed—can't build on it</li>
-              <li>Records can be altered or deleted</li>
-            </ul>
+        
+        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--border-2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); border-radius: 8px; display: grid; place-items: center; font-size: 1.25rem;">📸</div>
+            <div style="font-weight: 600;">Top Stock Photo Site</div>
           </div>
-          <div class="diff-card new">
-            <div class="diff-label">✓ Prism News</div>
-            <h4>Decentralized & Immutable</h4>
-            <ul class="diff-list">
-              <li>Consensus of verified sources</li>
-              <li>No single target to attack</li>
-              <li>Real-time verification flow</li>
-              <li>Reputation staked on every attestation</li>
-              <li>Open infrastructure—others build on it</li>
-              <li>Blockchain record is forever</li>
-            </ul>
+          <p style="font-size: 0.875rem; color: var(--text-2); line-height: 1.6; margin-bottom: 1rem;">"Creator attribution increased artist payouts by 23%. Now AI image creators get paid when their style influences outputs."</p>
+          <div style="font-size: 0.75rem; color: var(--text-4);">$4.2M distributed to creators</div>
+        </div>
+        
+        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--border-2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="width: 40px; height: 40px; background: #1877f2; border-radius: 8px; display: grid; place-items: center; font-size: 1.25rem; color: white;">📰</div>
+            <div style="font-weight: 600;">Global News Network</div>
           </div>
+          <p style="font-size: 0.875rem; color: var(--text-2); line-height: 1.6; margin-bottom: 1rem;">"We caught 12 deepfake news stories before publication in Q1 alone. Prism is now part of our editorial workflow."</p>
+          <div style="font-size: 0.75rem; color: var(--text-4);">100% of uploads verified</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Verifier Economics -->
-    <section class="economics">
-      <div class="econ-inner">
-        <div class="section-head">
-          <span class="section-tag news">Verifier Economics</span>
-          <h2>Skin in the game</h2>
-          <p>Verifiers stake reputation (and tokens) on every attestation. Wrong calls hurt. Accuracy pays.</p>
+  <!-- Use Cases -->
+  <section class="use-cases">
+    <div class="use-cases-inner">
+      <div class="section-head">
+        <span class="section-tag">Use Cases</span>
+        <h2>Built for every stakeholder</h2>
+        <p>From social platforms to enterprises to regulators—Prism serves the entire trust ecosystem.</p>
+      </div>
+      <div class="use-grid">
+        <div class="use-card">
+          <div class="use-icon">📱</div>
+          <h4>Social Platforms</h4>
+          <p>Auto-label AI content, verify uploads, and protect users from synthetic media.</p>
         </div>
-        <div class="econ-grid">
-          <div class="econ-card">
-            <div class="econ-icon">🏆</div>
-            <h4>Reputation Staking</h4>
-            <p>Organizations stake their reputation score on each verification. False attestations damage standing permanently.</p>
-          </div>
-          <div class="econ-card">
-            <div class="econ-icon">⚖️</div>
-            <h4>Weighted Trust</h4>
-            <p>Higher reputation = higher weight on trust scores. New verifiers must build track record over time.</p>
-          </div>
-          <div class="econ-card">
-            <div class="econ-icon">💎</div>
-            <h4>Token Economics</h4>
-            <p>Optional token staking adds financial consequences. Accurate verifiers earn rewards; bad actors lose stake.</p>
-          </div>
+        <div class="use-card">
+          <div class="use-icon">📰</div>
+          <h4>News & Media</h4>
+          <p>Verify source authenticity and maintain editorial standards in the AI age.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🏛️</div>
+          <h4>Governments</h4>
+          <p>Enforce AI transparency laws and verify content in official communications.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🏢</div>
+          <h4>Enterprises</h4>
+          <p>Audit AI usage across your content supply chain. Ensure vendor compliance.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🎨</div>
+          <h4>AI Companies</h4>
+          <p>Sign outputs at generation time. Build trust into your models from day one.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🎬</div>
+          <h4>Studios & Labels</h4>
+          <p>Protect IP, track derivatives, and enforce licensing across AI-generated content.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">💼</div>
+          <h4>Agencies</h4>
+          <p>Verify AI disclosure for client campaigns. Avoid regulatory exposure.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">📈</div>
+          <h4>Marketplaces</h4>
+          <p>Build trust in AI-generated assets with verified provenance and attribution.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Stats - News -->
-    <section class="stats">
-      <div class="stats-grid">
-        <div class="stat">
-          <div class="stat-val news-gradient">847</div>
-          <div class="stat-lbl">Verified organizations</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val news-gradient">2.4M</div>
-          <div class="stat-lbl">Claims verified</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val news-gradient">99.2%</div>
-          <div class="stat-lbl">Attestation accuracy</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val news-gradient">0</div>
-          <div class="stat-lbl">Records altered</div>
-        </div>
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-val">99.7%</div>
+        <div class="stat-lbl">Detection accuracy</div>
       </div>
-    </section>
-
-    <!-- CTA - News -->
-    <section class="cta">
-      <div class="cta-glow news-mode"></div>
-      <div class="cta-inner">
-        <h2>The future of truth<br>is decentralized.</h2>
-        <p>Join journalists, institutions, and experts building a new architecture for verified information. Be part of the solution.</p>
-        <div class="cta-buttons">
-          <a href="#" class="btn btn-news btn-lg">Join as Verifier →</a>
-          <a href="#" class="btn btn-outline btn-lg">Subscribe to Beta</a>
-        </div>
+      <div class="stat">
+        <div class="stat-val">&lt;100ms</div>
+        <div class="stat-lbl">Verification latency</div>
       </div>
-    </section>
-  </div>
+      <div class="stat">
+        <div class="stat-val">200+</div>
+        <div class="stat-lbl">Platforms in beta</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">1B+</div>
+        <div class="stat-lbl">Content verified</div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Footer (shared) -->
+  <!-- Pricing -->
+  <section class="section" id="pricing">
+    <div class="section-head">
+      <span class="section-tag">Pricing</span>
+      <h2>Infrastructure that scales with you</h2>
+      <p>Pay for what you verify. No minimums. Enterprise plans for high-volume needs.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Developer</h3>
+        <div class="price-val">$0<span>/mo</span></div>
+        <div class="price-desc">Free forever, no credit card</div>
+        <ul class="price-list">
+          <li>1,000 verifications/month</li>
+          <li>Basic provenance API</li>
+          <li>Detection endpoints</li>
+          <li>Community support</li>
+          <li>Sandbox environment</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Start Building</a>
+      </div>
+      <div class="price-card pop">
+        <span class="price-badge">Most Popular</span>
+        <h3>Platform</h3>
+        <div class="price-val">$499<span>/mo</span></div>
+        <div class="price-desc">+ $0.001 per verification</div>
+        <ul class="price-list">
+          <li>100K verifications included</li>
+          <li>Full Provenance API</li>
+          <li>Verification SDK access</li>
+          <li>Compliance dashboard</li>
+          <li>EU AI Act automation</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-accent">Request Access</a>
+      </div>
+      <div class="price-card">
+        <h3>Enterprise</h3>
+        <div class="price-val">Custom</div>
+        <div class="price-desc">Volume pricing available</div>
+        <ul class="price-list">
+          <li>Unlimited verifications</li>
+          <li>Creator Attribution suite</li>
+          <li>On-premise deployment</li>
+          <li>Custom integrations</li>
+          <li>SLA guarantees</li>
+          <li>Dedicated success manager</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <h2>Trust is the new moat.<br>Build it into your stack.</h2>
+      <p>The platforms that solve content authenticity will win the next decade. The infrastructure is ready. Are you?</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary btn-lg">Request API Access →</a>
+        <a href="#docs" class="btn btn-outline btn-lg">Read the Documentation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
         <a href="/" class="logo">
-          <div class="logo-mark" id="footerLogoMark">
+          <div class="logo-mark">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
               <line x1="12" y1="22" x2="12" y2="15.5"/>
@@ -2968,21 +1750,21 @@ console.<span class="fn">log</span>(result.<span class="prop">provenance</span>)
           </div>
           Prism
         </a>
-        <p>The trust layer for AI-generated content and verified news. Cryptographic provenance, decentralized verification, and immutable truth.</p>
+        <p>The trust layer for AI-generated content. Cryptographic provenance, compliance automation, and creator attribution.</p>
       </div>
       <div class="footer-col">
-        <h4>Infrastructure</h4>
+        <h4>Products</h4>
         <a href="#">Provenance API</a>
         <a href="#">Verification SDK</a>
         <a href="#">Creator Attribution</a>
         <a href="#">Compliance Dashboard</a>
       </div>
       <div class="footer-col">
-        <h4>Prism News</h4>
-        <a href="#">How It Works</a>
-        <a href="#">Become a Verifier</a>
-        <a href="#">Trust Scores</a>
-        <a href="#">API Access</a>
+        <h4>Developers</h4>
+        <a href="#">Documentation</a>
+        <a href="#">API Reference</a>
+        <a href="#">SDKs</a>
+        <a href="#">Status</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -3012,7 +1794,7 @@ console.<span class="fn">log</span>(result.<span class="prop">provenance</span>)
         </span>
         <span class="footer-badge">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          Blockchain Verified
+          EU AI Act Ready
         </span>
       </div>
     </div>
@@ -3033,56 +1815,12 @@ console.<span class="fn">log</span>(result.<span class="prop">provenance</span>)
     });
 
     // Code tabs
-    document.querySelectorAll('.code-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-      });
-    });
-    
-    // Mode switching
-    function switchMode(mode) {
-      const infraView = document.getElementById('infraView');
-      const newsView = document.getElementById('newsView');
-      const infraBtn = document.getElementById('infraBtn');
-      const newsBtn = document.getElementById('newsBtn');
-      const logoMark = document.getElementById('logoMark');
-      const footerLogoMark = document.getElementById('footerLogoMark');
-      const navCta = document.getElementById('navCta');
-      
-      if (mode === 'news') {
-        infraView.classList.add('hidden');
-        newsView.classList.remove('hidden');
-        infraBtn.classList.remove('active');
-        newsBtn.classList.add('active');
-        logoMark.classList.add('news-mode');
-        footerLogoMark.classList.add('news-mode');
-        navCta.textContent = 'Join Waitlist';
-        navCta.classList.remove('btn-primary');
-        navCta.classList.add('btn-news');
-      } else {
-        infraView.classList.remove('hidden');
-        newsView.classList.add('hidden');
-        infraBtn.classList.add('active');
-        newsBtn.classList.remove('active');
-        logoMark.classList.remove('news-mode');
-        footerLogoMark.classList.remove('news-mode');
-        navCta.textContent = 'Request Access';
-        navCta.classList.add('btn-primary');
-        navCta.classList.remove('btn-news');
-      }
-      
-      // Scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function showCode(lang) {
+      document.querySelectorAll('.code-body').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.code-tab').forEach(el => el.classList.remove('active'));
+      document.getElementById('code-' + lang).style.display = 'block';
+      event.target.classList.add('active');
     }
-    
-    // News item selection
-    document.querySelectorAll('.news-item').forEach(item => {
-      item.addEventListener('click', () => {
-        document.querySelectorAll('.news-item').forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-      });
-    });
   </script>
 </body>
 </html>
