@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarbonOS – The Operating System for Climate Compliance</title>
+  <meta name="description" content="CarbonOS makes carbon accounting as easy as payments. Track, report, and reduce emissions. Comply with EU CSRD, SEC rules, and CA SB 253 without spreadsheets or consultants.">
+  <meta name="theme-color" content="#09090b">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="CarbonOS – Climate Compliance Made Simple">
+  <meta property="og:description" content="The Stripe for carbon accounting. Track emissions, generate reports, stay compliant. All through one API.">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2322c55e' rx='20' width='100' height='100'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white'>⬡</text></svg>">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg: #09090b;
+      --bg-2: #0c0c0e;
+      --bg-3: #111113;
+      --bg-4: #18181b;
+      --bg-5: #1f1f23;
+      --border: rgba(255,255,255,0.06);
+      --border-2: rgba(255,255,255,0.1);
+      --border-3: rgba(255,255,255,0.15);
+      --text: #fafafa;
+      --text-2: #a1a1aa;
+      --text-3: #71717a;
+      --text-4: #52525b;
+      --green: #22c55e;
+      --green-2: #4ade80;
+      --green-3: #86efac;
+      --green-glow: rgba(34,197,94,0.15);
+      --emerald: #10b981;
+      --teal: #14b8a6;
+      --lime: #84cc16;
+      --yellow: #eab308;
+      --red: #ef4444;
+      --orange: #f97316;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+      --gradient: linear-gradient(135deg, #059669 0%, #22c55e 50%, #84cc16 100%);
+      --gradient-alt: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes countUp { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+    @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
+    
+    .anim { opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.3s; }
+    .d4 { animation-delay: 0.4s; }
+    .d5 { animation-delay: 0.5s; }
+    .d6 { animation-delay: 0.6s; }
+    
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(9,9,11,0.95) 0%, rgba(9,9,11,0) 100%);
+      backdrop-filter: blur(12px);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+    
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover { color: var(--text); }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 0 30px var(--green-glow);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px var(--green-glow);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-4);
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--bg-5);
+      border-color: var(--border-3);
+    }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150%;
+      height: 100%;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, var(--green-glow) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border-2);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+    }
+    
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+    
+    .hero h1 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-2);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    /* Deadline Ticker */
+    .deadline-section {
+      padding: 4rem 2rem;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    }
+    
+    .deadline-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .deadline-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .deadline-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .deadline-header h2::before {
+      content: '⚠';
+    }
+    
+    .deadline-header p {
+      color: var(--text-2);
+      font-size: 1.1rem;
+    }
+    
+    .deadlines {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .deadline-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .deadline-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+    
+    .deadline-card.urgent::before { background: var(--red); }
+    .deadline-card.warning::before { background: var(--yellow); }
+    .deadline-card.soon::before { background: var(--orange); }
+    
+    .deadline-flag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    
+    .deadline-card.urgent .deadline-flag { background: rgba(239,68,68,0.15); color: var(--red); }
+    .deadline-card.warning .deadline-flag { background: rgba(234,179,8,0.15); color: var(--yellow); }
+    .deadline-card.soon .deadline-flag { background: rgba(249,115,22,0.15); color: var(--orange); }
+    
+    .deadline-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .deadline-card .reg {
+      font-size: 0.9rem;
+      color: var(--text-3);
+      margin-bottom: 1rem;
+    }
+    
+    .deadline-card .impact {
+      font-size: 0.9rem;
+      color: var(--text-2);
+    }
+    
+    .deadline-card .impact strong {
+      color: var(--text);
+    }
+    
+    /* Pain Section */
+    .pain-section {
+      padding: 6rem 2rem;
+      background: var(--bg-2);
+    }
+    
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .section-header p {
+      font-size: 1.1rem;
+      color: var(--text-2);
+    }
+    
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .pain-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+    
+    .pain-card .icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .pain-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    
+    .pain-card p {
+      color: var(--text-3);
+      font-size: 0.95rem;
+    }
+    
+    /* Solution Section */
+    .solution-section {
+      padding: 6rem 2rem;
+      background: var(--bg);
+    }
+    
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .solution-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .solution-card:hover {
+      border-color: var(--green);
+      box-shadow: 0 0 40px var(--green-glow);
+      transform: translateY(-4px);
+    }
+    
+    .solution-card .icon {
+      width: 56px;
+      height: 56px;
+      background: var(--gradient);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 24px var(--green-glow);
+    }
+    
+    .solution-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
+    .solution-card p {
+      color: var(--text-2);
+      font-size: 0.95rem;
+    }
+    
+    /* Dashboard Mockup */
+    .dashboard-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    }
+    
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .dashboard-frame {
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+    }
+    
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-4);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .window-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .window-dot.red { background: #ff5f56; }
+    .window-dot.yellow { background: #ffbd2e; }
+    .window-dot.green { background: #27ca40; }
+    
+    .dashboard-content {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .dashboard-content { grid-template-columns: 1fr; }
+    }
+    
+    .dash-card {
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    
+    .dash-card h4 {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    
+    .emissions-total {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .emissions-total .number {
+      font-size: 3rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--green);
+    }
+    
+    .emissions-total .unit {
+      font-size: 1rem;
+      color: var(--text-3);
+    }
+    
+    .emissions-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      background: rgba(34,197,94,0.15);
+      color: var(--green);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    /* Scope breakdown bars */
+    .scope-breakdown {
+      margin-top: 1.5rem;
+    }
+    
+    .scope-item {
+      margin-bottom: 1rem;
+    }
+    
+    .scope-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .scope-label span:first-child { color: var(--text-2); }
+    .scope-label span:last-child { color: var(--text); font-family: 'JetBrains Mono', monospace; }
+    
+    .scope-bar {
+      height: 8px;
+      background: var(--bg-5);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    
+    .scope-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      transition: width 1s ease-out;
+    }
+    
+    .scope-1 .scope-bar-fill { background: var(--green); width: 15%; }
+    .scope-2 .scope-bar-fill { background: var(--teal); width: 25%; }
+    .scope-3 .scope-bar-fill { background: var(--emerald); width: 60%; }
+    
+    /* Compliance status */
+    .compliance-list {
+      list-style: none;
+    }
+    
+    .compliance-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .compliance-item:last-child { border-bottom: none; }
+    
+    .compliance-item .name {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .compliance-item .flag {
+      font-size: 1.25rem;
+    }
+    
+    .compliance-status {
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .status-ready { background: rgba(34,197,94,0.15); color: var(--green); }
+    .status-progress { background: rgba(234,179,8,0.15); color: var(--yellow); }
+    .status-pending { background: rgba(113,113,122,0.15); color: var(--text-3); }
+    
+    /* API Section */
+    .api-section {
+      padding: 6rem 2rem;
+      background: var(--bg-2);
+    }
+    
+    .api-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .code-block {
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: var(--bg-4);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .code-header span {
+      font-size: 0.85rem;
+      color: var(--text-3);
+    }
+    
+    .code-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .code-tab {
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-3);
+      border: none;
+      transition: all 0.2s;
+    }
+    
+    .code-tab.active {
+      background: var(--bg-5);
+      color: var(--green);
+    }
+    
+    pre {
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    
+    .code-comment { color: var(--text-4); }
+    .code-keyword { color: var(--purple); }
+    .code-string { color: var(--green-2); }
+    .code-number { color: var(--orange); }
+    .code-property { color: var(--blue); }
+    
+    /* Pricing */
+    .pricing-section {
+      padding: 6rem 2rem;
+      background: var(--bg);
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .pricing-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      position: relative;
+    }
+    
+    .pricing-card.featured {
+      border-color: var(--green);
+      box-shadow: 0 0 60px var(--green-glow);
+    }
+    
+    .pricing-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    
+    .pricing-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .pricing-card .price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .pricing-card .price .amount {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    
+    .pricing-card .price .period {
+      color: var(--text-3);
+      font-size: 0.9rem;
+    }
+    
+    .pricing-card ul {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-card li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      color: var(--text-2);
+      font-size: 0.95rem;
+    }
+    
+    .pricing-card li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 600;
+    }
+    
+    .pricing-card .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    /* CTA */
+    .cta-section {
+      padding: 8rem 2rem;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      text-align: center;
+      position: relative;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150%;
+      height: 60%;
+      background: radial-gradient(ellipse 60% 60% at 50% 100%, var(--green-glow) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .cta-section h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .cta-section p {
+      font-size: 1.1rem;
+      color: var(--text-2);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    
+    footer p {
+      color: var(--text-3);
+      font-size: 0.9rem;
+    }
+    
+    footer a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    
+    /* Responsive */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.25rem; }
+      .hero p { font-size: 1rem; }
+      .section-header h2 { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="anim">
+    <a href="#" class="logo">
+      <div class="logo-icon">⬡</div>
+      CarbonOS
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#api">API</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" class="btn btn-primary">Get Started</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge anim d1">
+      <span class="dot"></span>
+      Now compliant with CSRD, SEC & SB 253
+    </div>
+    <h1 class="anim d2">
+      Carbon accounting<br>as easy as <span>payments</span>
+    </h1>
+    <p class="anim d3">
+      CarbonOS is the operating system for climate compliance. Track emissions, generate reports, and stay compliant—all through one elegant API.
+    </p>
+    <div class="hero-cta anim d4">
+      <a href="#" class="btn btn-primary">Start Free Trial</a>
+      <a href="#api" class="btn btn-secondary">View API Docs →</a>
+    </div>
+  </section>
+
+  <section class="deadline-section">
+    <div class="deadline-container">
+      <div class="deadline-header anim">
+        <h2>The Clock is Ticking</h2>
+        <p>Compliance deadlines are approaching. Non-compliance means fines, lawsuits, and lost business.</p>
+      </div>
+      <div class="deadlines">
+        <div class="deadline-card urgent anim d1">
+          <span class="deadline-flag">Effective Now</span>
+          <h3>EU CSRD</h3>
+          <p class="reg">Corporate Sustainability Reporting Directive</p>
+          <p class="impact"><strong>50,000+ companies</strong> must report sustainability data. Penalties up to <strong>€10M or 5% of revenue</strong>.</p>
+        </div>
+        <div class="deadline-card warning anim d2">
+          <span class="deadline-flag">2026</span>
+          <h3>SEC Climate Rules</h3>
+          <p class="reg">Climate-Related Disclosures</p>
+          <p class="impact">All US public companies must disclose climate risks and <strong>Scope 1 & 2 emissions</strong>.</p>
+        </div>
+        <div class="deadline-card soon anim d3">
+          <span class="deadline-flag">2027</span>
+          <h3>California SB 253</h3>
+          <p class="reg">Climate Corporate Data Accountability</p>
+          <p class="impact">Companies with <strong>$1B+ revenue</strong> in CA must report <strong>Scope 1, 2 & 3 emissions</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pain-section">
+    <div class="section-header anim">
+      <h2>The Current Reality</h2>
+      <p>Carbon accounting today is broken. Companies are drowning in spreadsheets, burning money on consultants, and still missing deadlines.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card anim d1">
+        <div class="icon">📊</div>
+        <h3>Spreadsheet Hell</h3>
+        <p>Data scattered across 47 Excel files. Manual calculations. Formula errors. Version chaos. "Which emissions_final_v3_FINAL.xlsx is the right one?"</p>
+      </div>
+      <div class="pain-card anim d2">
+        <div class="icon">💸</div>
+        <h3>$300k Consultants</h3>
+        <p>Big 4 firms charge a fortune for carbon audits. Small changes? Another engagement. Questions? Bill by the hour. Rinse, repeat, pay.</p>
+      </div>
+      <div class="pain-card anim d3">
+        <div class="icon">🔗</div>
+        <h3>Supply Chain Blindness</h3>
+        <p>90% of emissions are Scope 3 (supply chain). But good luck getting data from 500+ suppliers manually. Estimates and prayers.</p>
+      </div>
+      <div class="pain-card anim d4">
+        <div class="icon">⏰</div>
+        <h3>Compliance Whiplash</h3>
+        <p>CSRD, SEC, SB 253, CDP, GRI, TCFD... Different frameworks, different formats, different deadlines. Same data, repackaged endlessly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section" id="features">
+    <div class="section-header anim">
+      <h2>The <span style="color: var(--green)">CarbonOS</span> Way</h2>
+      <p>We built the infrastructure so you can focus on reducing emissions, not counting them.</p>
+    </div>
+    <div class="solution-grid">
+      <div class="solution-card anim d1">
+        <div class="icon">🔌</div>
+        <h3>Connect Once</h3>
+        <p>One integration to your ERP, accounting system, and supply chain. We pull the data, calculate emissions, and keep it fresh.</p>
+      </div>
+      <div class="solution-card anim d2">
+        <div class="icon">📡</div>
+        <h3>Real-Time Tracking</h3>
+        <p>No more annual audits. See your carbon footprint live. Track reductions as they happen. Celebrate wins immediately.</p>
+      </div>
+      <div class="solution-card anim d3">
+        <div class="icon">🌐</div>
+        <h3>Supplier Network</h3>
+        <p>Our API connects to 50,000+ suppliers already on CarbonOS. Get verified Scope 3 data automatically—no more chasing spreadsheets.</p>
+      </div>
+      <div class="solution-card anim d4">
+        <div class="icon">📋</div>
+        <h3>Multi-Framework Reports</h3>
+        <p>One dataset, infinite outputs. CSRD, SEC, CDP, GRI, TCFD—click a button, get a compliant report. Format converted automatically.</p>
+      </div>
+      <div class="solution-card anim d5">
+        <div class="icon">🎯</div>
+        <h3>Reduction Pathways</h3>
+        <p>AI-powered recommendations to actually cut emissions. Prioritized by impact, cost, and timeline. Track progress toward net zero.</p>
+      </div>
+      <div class="solution-card anim d6">
+        <div class="icon">✅</div>
+        <h3>Audit-Ready</h3>
+        <p>Every calculation documented, every source cited, every change logged. When auditors come, you're ready. Always.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section" id="dashboard">
+    <div class="section-header anim">
+      <h2>See Your Impact</h2>
+      <p>A dashboard that actually helps you understand and reduce emissions.</p>
+    </div>
+    <div class="dashboard-container">
+      <div class="dashboard-frame anim d2">
+        <div class="dashboard-header">
+          <span class="window-dot red"></span>
+          <span class="window-dot yellow"></span>
+          <span class="window-dot green"></span>
+        </div>
+        <div class="dashboard-content">
+          <div class="dash-card">
+            <h4>Total Emissions (YTD)</h4>
+            <div class="emissions-total">
+              <span class="number">24,847</span>
+              <span class="unit">tCO₂e</span>
+            </div>
+            <span class="emissions-change">↓ 12.3% vs last year</span>
+            <div class="scope-breakdown">
+              <div class="scope-item scope-1">
+                <div class="scope-label">
+                  <span>Scope 1 (Direct)</span>
+                  <span>3,726 tCO₂e</span>
+                </div>
+                <div class="scope-bar"><div class="scope-bar-fill"></div></div>
+              </div>
+              <div class="scope-item scope-2">
+                <div class="scope-label">
+                  <span>Scope 2 (Energy)</span>
+                  <span>6,212 tCO₂e</span>
+                </div>
+                <div class="scope-bar"><div class="scope-bar-fill"></div></div>
+              </div>
+              <div class="scope-item scope-3">
+                <div class="scope-label">
+                  <span>Scope 3 (Supply Chain)</span>
+                  <span>14,909 tCO₂e</span>
+                </div>
+                <div class="scope-bar"><div class="scope-bar-fill"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="dash-card">
+            <h4>Compliance Status</h4>
+            <ul class="compliance-list">
+              <li class="compliance-item">
+                <div class="name">
+                  <span class="flag">🇪🇺</span>
+                  <span>EU CSRD</span>
+                </div>
+                <span class="compliance-status status-ready">Ready</span>
+              </li>
+              <li class="compliance-item">
+                <div class="name">
+                  <span class="flag">🇺🇸</span>
+                  <span>SEC Climate</span>
+                </div>
+                <span class="compliance-status status-ready">Ready</span>
+              </li>
+              <li class="compliance-item">
+                <div class="name">
+                  <span class="flag">🌴</span>
+                  <span>CA SB 253</span>
+                </div>
+                <span class="compliance-status status-progress">In Progress</span>
+              </li>
+              <li class="compliance-item">
+                <div class="name">
+                  <span class="flag">🌍</span>
+                  <span>CDP Questionnaire</span>
+                </div>
+                <span class="compliance-status status-ready">Ready</span>
+              </li>
+              <li class="compliance-item">
+                <div class="name">
+                  <span class="flag">📊</span>
+                  <span>GRI Standards</span>
+                </div>
+                <span class="compliance-status status-pending">Pending</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="api-section" id="api">
+    <div class="section-header anim">
+      <h2>Developer-First API</h2>
+      <p>Stripe made payments easy. We're doing the same for carbon. Beautiful docs, intuitive SDKs, and type-safe everything.</p>
+    </div>
+    <div class="api-container">
+      <div class="code-block anim d2">
+        <div class="code-header">
+          <span>Track emissions with 3 lines of code</span>
+          <div class="code-tabs">
+            <button class="code-tab active">JavaScript</button>
+            <button class="code-tab">Python</button>
+            <button class="code-tab">cURL</button>
+          </div>
+        </div>
+        <pre><code><span class="code-comment">// Calculate emissions for a purchase</span>
+<span class="code-keyword">const</span> emission = <span class="code-keyword">await</span> carbonos.emissions.<span class="code-property">create</span>({
+  <span class="code-property">type</span>: <span class="code-string">'purchase'</span>,
+  <span class="code-property">supplier_id</span>: <span class="code-string">'sup_abc123'</span>,
+  <span class="code-property">amount</span>: <span class="code-number">50000</span>,
+  <span class="code-property">category</span>: <span class="code-string">'raw_materials'</span>
+});
+
+<span class="code-comment">// Returns calculated emissions with full audit trail</span>
+{
+  <span class="code-property">id</span>: <span class="code-string">'em_xyz789'</span>,
+  <span class="code-property">co2e_kg</span>: <span class="code-number">2847.5</span>,
+  <span class="code-property">scope</span>: <span class="code-number">3</span>,
+  <span class="code-property">methodology</span>: <span class="code-string">'spend_based_v2'</span>,
+  <span class="code-property">confidence</span>: <span class="code-number">0.92</span>,
+  <span class="code-property">source</span>: <span class="code-string">'supplier_verified'</span>
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing-section" id="pricing">
+    <div class="section-header anim">
+      <h2>Simple, Transparent Pricing</h2>
+      <p>No surprises. No per-calculation fees. Just predictable pricing that scales with you.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card anim d1">
+        <h3>Starter</h3>
+        <div class="price">
+          <span class="amount">$0</span>
+          <span class="period">/month</span>
+        </div>
+        <ul>
+          <li>Up to 100 emission records/mo</li>
+          <li>Scope 1 & 2 tracking</li>
+          <li>Basic dashboard</li>
+          <li>Community support</li>
+          <li>Single framework export</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Start Free</a>
+      </div>
+      <div class="pricing-card featured anim d2">
+        <h3>Business</h3>
+        <div class="price">
+          <span class="amount">$499</span>
+          <span class="period">/month</span>
+        </div>
+        <ul>
+          <li>Unlimited emission records</li>
+          <li>Full Scope 1, 2 & 3 tracking</li>
+          <li>Supplier network access</li>
+          <li>All framework exports</li>
+          <li>API access</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start Trial</a>
+      </div>
+      <div class="pricing-card anim d3">
+        <h3>Enterprise</h3>
+        <div class="price">
+          <span class="amount">Custom</span>
+        </div>
+        <ul>
+          <li>Everything in Business</li>
+          <li>Dedicated account manager</li>
+          <li>Custom integrations</li>
+          <li>On-premise deployment</li>
+          <li>SLA guarantees</li>
+          <li>Audit support</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2 class="anim">Sustainability shouldn't be painful.</h2>
+    <p class="anim d1">Join 2,000+ companies already using CarbonOS to track, report, and reduce their carbon footprint.</p>
+    <div class="anim d2">
+      <a href="#" class="btn btn-primary" style="font-size: 1rem; padding: 1rem 2rem;">Start Your Free Trial →</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by <a href="https://2667.io" target="_blank">2667.io</a> · Making climate compliance inevitable.</p>
+  </footer>
+
+  <script>
+    // Animate on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
