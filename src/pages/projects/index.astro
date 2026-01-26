@@ -2,29 +2,150 @@
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import ArrowCard from "@components/ArrowCard.astro";
+import PortfolioCard from "@components/PortfolioCard.astro";
 import { PROJECTS } from "@consts";
 
 const projects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Get unique categories for filter
+const categories = [...new Set(projects.map(p => {
+  const categoryMap: Record<string, string> = {
+    'clawdbot-setup': 'AI Tools',
+    'veritas': 'Social',
+    'civitas': 'GovTech',
+    'prism': 'Infrastructure',
+    'haven': 'Web3',
+    'medgraph': 'Healthcare',
+    'carbonos': 'Climate',
+    'sentinel': 'Security',
+    'casebrief': 'Legal',
+    'muse': 'Creator',
+    'aegis': 'AI Agents',
+  };
+  return categoryMap[p.slug] || 'Other';
+}))];
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
   <Container>
-    <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white">
-        Projects
+    <div class="space-y-8">
+      <!-- Header -->
+      <div class="animate">
+        <h1 class="text-3xl font-bold text-black dark:text-white mb-2">Projects</h1>
+        <p class="text-black/60 dark:text-white/60">A collection of ideas, prototypes, and experiments.</p>
       </div>
-      <ul class="animate flex flex-col gap-4">
+      
+      <!-- Category Filter Pills -->
+      <div class="animate flex flex-wrap gap-2" id="category-filter">
+        <button 
+          data-category="all" 
+          class="filter-btn active px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 bg-black dark:bg-white text-white dark:text-black"
+        >
+          All
+        </button>
+        {categories.map(category => (
+          <button 
+            data-category={category}
+            class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 bg-black/5 dark:bg-white/10 text-black/70 dark:text-white/70 hover:bg-black/10 dark:hover:bg-white/20"
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+      
+      <!-- Projects Grid -->
+      <div class="animate grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
         {
-          projects.map((project) => (
-            <li>
-              <ArrowCard entry={project}/>
-            </li>
-          ))
+          projects.map((project) => {
+            const categoryMap: Record<string, string> = {
+              'clawdbot-setup': 'AI Tools',
+              'veritas': 'Social',
+              'civitas': 'GovTech',
+              'prism': 'Infrastructure',
+              'haven': 'Web3',
+              'medgraph': 'Healthcare',
+              'carbonos': 'Climate',
+              'sentinel': 'Security',
+              'casebrief': 'Legal',
+              'muse': 'Creator',
+              'aegis': 'AI Agents',
+            };
+            const category = categoryMap[project.slug] || 'Other';
+            return (
+              <div class="project-card" data-category={category}>
+                <PortfolioCard entry={project} />
+              </div>
+            );
+          })
         }
-      </ul>
+      </div>
+      
+      <!-- Stats Footer -->
+      <div class="animate pt-8 border-t border-black/10 dark:border-white/10">
+        <div class="flex flex-wrap gap-8 justify-center text-center">
+          <div>
+            <div class="text-2xl font-bold text-black dark:text-white">{projects.length}</div>
+            <div class="text-sm text-black/50 dark:text-white/50">Projects</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-black dark:text-white">{categories.length}</div>
+            <div class="text-sm text-black/50 dark:text-white/50">Categories</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-black dark:text-white">2026</div>
+            <div class="text-sm text-black/50 dark:text-white/50">Latest</div>
+          </div>
+        </div>
+      </div>
     </div>
   </Container>
 </PageLayout>
+
+<script>
+  function initFilter() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+        
+        // Update active button
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'bg-black', 'dark:bg-white', 'text-white', 'dark:text-black');
+          b.classList.add('bg-black/5', 'dark:bg-white/10', 'text-black/70', 'dark:text-white/70');
+        });
+        btn.classList.add('active', 'bg-black', 'dark:bg-white', 'text-white', 'dark:text-black');
+        btn.classList.remove('bg-black/5', 'dark:bg-white/10', 'text-black/70', 'dark:text-white/70');
+        
+        // Filter cards
+        projectCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          if (category === 'all' || cardCategory === category) {
+            (card as HTMLElement).style.display = 'block';
+            card.classList.add('animate-fade-in');
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+  
+  // Run on initial load and after Astro page transitions
+  document.addEventListener('DOMContentLoaded', initFilter);
+  document.addEventListener('astro:after-swap', initFilter);
+</script>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+</style>
