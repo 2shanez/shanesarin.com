@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prism – The Trust Layer for AI-Generated Content</title>
+  <meta name="description" content="Prism is the cryptographic trust infrastructure for the AI age. Verify provenance, ensure compliance, and restore trust in a world of synthetic content.">
+  <meta name="theme-color" content="#09090b">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Prism – Trust Infrastructure for the AI Age">
+  <meta property="og:description" content="Cryptographic provenance, compliance automation, and creator attribution. The trust layer every platform needs.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og-image.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2314b8a6' rx='20' width='100' height='100'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white'>◇</text></svg>">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg: #09090b;
+      --bg-2: #0c0c0e;
+      --bg-3: #111113;
+      --bg-4: #18181b;
+      --bg-5: #1f1f23;
+      --border: rgba(255,255,255,0.06);
+      --border-2: rgba(255,255,255,0.1);
+      --border-3: rgba(255,255,255,0.15);
+      --text: #fafafa;
+      --text-2: #a1a1aa;
+      --text-3: #71717a;
+      --text-4: #52525b;
+      --accent: #14b8a6;
+      --accent-2: #2dd4bf;
+      --accent-3: #5eead4;
+      --accent-glow: rgba(20,184,166,0.15);
+      --green: #22c55e;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --gradient: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
+      --gradient-2: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes verify { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    
+    .anim { opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.3s; }
+    .d4 { animation-delay: 0.4s; }
+    .d5 { animation-delay: 0.5s; }
+    
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      transition: all 0.3s;
+    }
+    
+    nav.scrolled {
+      padding: 0.75rem 1.5rem;
+      background: rgba(9,9,11,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+    
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 14px rgba(20,184,166,0.35);
+      position: relative;
+    }
+    
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: var(--gradient);
+      border-radius: 12px;
+      opacity: 0.3;
+      filter: blur(8px);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      padding: 0.25rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+    
+    .nav-links a {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--bg-5);
+    }
+    
+    .nav-cta { display: flex; gap: 0.75rem; }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-ghost { background: transparent; color: var(--text-2); }
+    .btn-ghost:hover { color: var(--text); }
+    
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+    
+    .btn-primary:hover {
+      background: #e4e4e7;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    
+    .btn-outline:hover {
+      background: var(--bg-4);
+      border-color: var(--border-3);
+    }
+    
+    .btn-accent {
+      background: var(--gradient);
+      color: white;
+    }
+    
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -8px rgba(20,184,166,0.45);
+    }
+    
+    .btn-lg { padding: 0.875rem 1.75rem; font-size: 0.9375rem; }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Animated gradient orb */
+    .hero-orb {
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(20,184,166,0.15) 0%, rgba(6,182,212,0.08) 40%, transparent 70%);
+      animation: glow 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    .hero-orb::after {
+      content: '';
+      position: absolute;
+      inset: 100px;
+      background: radial-gradient(circle, rgba(45,212,191,0.1) 0%, transparent 60%);
+      animation: rotate 30s linear infinite;
+    }
+    
+    /* Prism effect */
+    .prism-effect {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: conic-gradient(from 0deg, rgba(239,68,68,0.1), rgba(245,158,11,0.1), rgba(34,197,94,0.1), rgba(6,182,212,0.1), rgba(139,92,246,0.1), rgba(239,68,68,0.1));
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.4;
+      animation: rotate 20s linear infinite;
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.375rem 1rem 0.375rem 0.5rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      margin-bottom: 1.75rem;
+    }
+    
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 2s infinite;
+    }
+    
+    .badge-label {
+      background: var(--accent-glow);
+      color: var(--accent-2);
+      padding: 0.125rem 0.5rem;
+      border-radius: 100px;
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero h1 .grad {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-sub {
+      font-size: clamp(1.0625rem, 2vw, 1.1875rem);
+      color: var(--text-2);
+      max-width: 560px;
+      margin: 0 auto 2.25rem;
+      line-height: 1.7;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    
+    .hero-note {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      margin-bottom: 3rem;
+    }
+    
+    .hero-note a {
+      color: var(--accent-2);
+      text-decoration: none;
+    }
+    
+    .hero-note a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Crisis Stats */
+    .crisis-stats {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .crisis-stat { text-align: center; }
+    .crisis-stat-val { font-size: 1.5rem; font-weight: 800; color: var(--red); }
+    .crisis-stat-val.accent { color: var(--accent-2); }
+    .crisis-stat-lbl { font-size: 0.6875rem; color: var(--text-4); text-transform: uppercase; letter-spacing: 0.08em; }
+    
+    /* Trust Meter Visual */
+    .trust-visual {
+      padding: 0 1.5rem 6rem;
+      position: relative;
+    }
+    
+    .trust-demo {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 32px 64px -24px rgba(0,0,0,0.5), 0 0 80px -30px rgba(20,184,166,0.2);
+    }
+    
+    .trust-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.875rem 1.25rem;
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--bg-5); }
+    .dot.r { background: #ff5f57; }
+    .dot.y { background: #febc2e; }
+    .dot.g { background: #28c840; }
+    
+    .trust-title {
+      flex: 1;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      font-weight: 500;
+    }
+    
+    .trust-body {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      min-height: 380px;
+    }
+    
+    .trust-main {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .content-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.25s;
+      position: relative;
+    }
+    
+    .content-item:hover {
+      border-color: var(--border-2);
+      transform: translateX(4px);
+    }
+    
+    .content-thumb {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--bg-5) 0%, var(--bg-3) 100%);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    
+    .content-info { flex: 1; min-width: 0; }
+    .content-info h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .content-info p { font-size: 0.8125rem; color: var(--text-3); margin-bottom: 0.5rem; }
+    
+    .content-meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.25rem 0.625rem;
+      background: var(--bg-5);
+      border-radius: 100px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--text-3);
+    }
+    
+    .meta-tag.verified {
+      background: rgba(20,184,166,0.15);
+      color: var(--accent-2);
+    }
+    
+    .meta-tag.ai {
+      background: rgba(139,92,246,0.15);
+      color: #a78bfa;
+    }
+    
+    .meta-tag.human {
+      background: rgba(34,197,94,0.15);
+      color: #4ade80;
+    }
+    
+    .meta-tag.unverified {
+      background: rgba(239,68,68,0.15);
+      color: #f87171;
+    }
+    
+    .trust-side {
+      padding: 1.5rem;
+      border-left: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+    }
+    
+    .provenance-card {
+      background: var(--bg-4);
+      border: 1px solid rgba(20,184,166,0.2);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    .provenance-header {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      margin-bottom: 1rem;
+    }
+    
+    .provenance-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(20,184,166,0.3);
+    }
+    
+    .provenance-header h4 {
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+    
+    .provenance-chain {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .chain-item {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.625rem;
+      background: var(--bg-5);
+      border-radius: 8px;
+      font-size: 0.75rem;
+    }
+    
+    .chain-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+    
+    .chain-item span { color: var(--text-3); }
+    .chain-item strong { color: var(--text); font-weight: 500; }
+    
+    .compliance-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.875rem 1rem;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: var(--radius);
+    }
+    
+    .compliance-check {
+      width: 24px;
+      height: 24px;
+      background: var(--green);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.75rem;
+      animation: verify 2s ease-in-out infinite;
+    }
+    
+    .compliance-text h5 { font-size: 0.75rem; font-weight: 600; color: var(--green); }
+    .compliance-text p { font-size: 0.625rem; color: var(--text-3); }
+    
+    /* Problem Section */
+    .problem {
+      padding: 5rem 1.5rem;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      border-top: 1px solid var(--border);
+    }
+    
+    .problem-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    
+    .problem-card {
+      padding: 1.5rem 1rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.3s;
+    }
+    
+    .problem-card:hover {
+      border-color: rgba(239,68,68,0.3);
+      background: var(--bg-5);
+    }
+    
+    .problem-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .problem-card h4 {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 0.375rem;
+    }
+    
+    .problem-card p {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+    
+    /* Sections */
+    .section {
+      padding: 7rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-head {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 3.5rem;
+    }
+    
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .section-tag::before, .section-tag::after {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.35;
+    }
+    
+    .section-head h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .section-head p {
+      font-size: 1rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+    
+    /* Product Cards */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    
+    .product-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .product-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--accent-glow) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .product-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -16px rgba(0,0,0,0.4);
+    }
+    
+    .product-card:hover::before { opacity: 1; }
+    
+    .product-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+    
+    .product-card:hover .product-icon {
+      background: var(--accent-glow);
+      border-color: rgba(20,184,166,0.2);
+    }
+    
+    .product-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .product-card > p {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .product-features {
+      list-style: none;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .product-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      padding: 0.375rem 0;
+    }
+    
+    .product-features li::before {
+      content: '◇';
+      color: var(--accent);
+      font-size: 0.625rem;
+    }
+    
+    /* Use Cases */
+    .use-cases {
+      padding: 5rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .use-cases-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .use-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    
+    .use-card {
+      padding: 1.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.3s;
+      text-align: center;
+    }
+    
+    .use-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-2px);
+    }
+    
+    .use-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-glow);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      margin: 0 auto 1rem;
+    }
+    
+    .use-card h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.375rem;
+    }
+    
+    .use-card p {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+    
+    /* Architecture */
+    .architecture {
+      padding: 5rem 1.5rem;
+      background: var(--bg);
+    }
+    
+    .arch-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .arch-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      padding: 2rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+    
+    .arch-node {
+      flex: 1;
+      text-align: center;
+      padding: 1.25rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    
+    .arch-node.highlight {
+      background: var(--accent-glow);
+      border-color: rgba(20,184,166,0.3);
+    }
+    
+    .arch-node-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .arch-node h5 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .arch-node p {
+      font-size: 0.625rem;
+      color: var(--text-4);
+    }
+    
+    .arch-arrow {
+      color: var(--accent);
+      font-size: 1.25rem;
+      opacity: 0.5;
+    }
+    
+    /* Stats */
+    .stats {
+      padding: 4.5rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .stats-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    
+    .stat { text-align: center; }
+    
+    .stat-val {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .stat-lbl {
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      margin-top: 0.25rem;
+    }
+    
+    /* Compliance */
+    .compliance {
+      padding: 7rem 1.5rem;
+    }
+    
+    .compliance-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .compliance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    
+    .compliance-card {
+      padding: 1.75rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      transition: all 0.3s;
+    }
+    
+    .compliance-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-2px);
+    }
+    
+    .compliance-flag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 0.75rem;
+      background: var(--bg-4);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .compliance-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .compliance-card p {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    
+    .compliance-list {
+      list-style: none;
+    }
+    
+    .compliance-list li {
+      font-size: 0.75rem;
+      color: var(--text-2);
+      padding: 0.25rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .compliance-list li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.625rem;
+    }
+    
+    /* Integration */
+    .integration {
+      padding: 5rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .integration-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .code-preview {
+      margin-top: 2.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      text-align: left;
+    }
+    
+    .code-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.25rem;
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .code-tab {
+      padding: 0.375rem 0.875rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-3);
+      background: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .code-tab.active {
+      background: var(--bg-5);
+      color: var(--text);
+    }
+    
+    .code-body {
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.8125rem;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+    
+    .code-body .kw { color: var(--accent-2); }
+    .code-body .str { color: #fbbf24; }
+    .code-body .fn { color: #a78bfa; }
+    .code-body .cmt { color: var(--text-4); }
+    .code-body .prop { color: #60a5fa; }
+    
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+    
+    .price-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .price-card:hover { border-color: var(--border-2); }
+    
+    .price-card.pop {
+      border-color: var(--accent);
+      background: linear-gradient(180deg, var(--accent-glow) 0%, var(--bg-2) 100%);
+      box-shadow: 0 0 60px -20px rgba(20,184,166,0.3);
+      transform: scale(1.02);
+    }
+    
+    .price-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient);
+      color: white;
+      font-size: 0.625rem;
+      font-weight: 700;
+      padding: 0.3125rem 0.875rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .price-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .price-val {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    
+    .price-val span {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-4);
+    }
+    
+    .price-desc {
+      font-size: 0.75rem;
+      color: var(--text-4);
+      margin-bottom: 1.5rem;
+    }
+    
+    .price-list {
+      list-style: none;
+      margin-bottom: 1.75rem;
+    }
+    
+    .price-list li {
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      padding: 0.4375rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+    
+    .price-list li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+    
+    .price-card .btn { width: 100%; }
+    
+    /* CTA */
+    .cta {
+      padding: 9rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    
+    .cta h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .cta p {
+      font-size: 1rem;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 3.5rem 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer-top {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, 1fr);
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+    }
+    
+    .footer-brand p {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      margin-top: 0.875rem;
+      max-width: 260px;
+      line-height: 1.6;
+    }
+    
+    .footer-col h4 {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-col a {
+      display: block;
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      text-decoration: none;
+      padding: 0.3125rem 0;
+      transition: color 0.2s;
+    }
+    
+    .footer-col a:hover { color: var(--text-2); }
+    
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    .footer-badges {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .footer-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: var(--text-3);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .products { grid-template-columns: 1fr; }
+      .use-grid { grid-template-columns: repeat(2, 1fr); }
+      .compliance-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .problem-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-body { grid-template-columns: 1fr; }
+      .trust-side {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+      .footer-top { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .arch-diagram { flex-direction: column; }
+      .arch-arrow { transform: rotate(90deg); }
+    }
+    
+    @media (max-width: 768px) {
+      .hero { padding: 6rem 1rem 3rem; }
+      .hero-cta { flex-direction: column; width: 100%; max-width: 280px; margin-left: auto; margin-right: auto; }
+      .hero-cta .btn { width: 100%; }
+      .crisis-stats { flex-direction: column; gap: 1rem; }
+      .products, .use-grid, .compliance-grid, .pricing-grid, .stats-grid, .problem-grid { grid-template-columns: 1fr; }
+      .price-card.pop { transform: none; order: -1; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+            <line x1="12" y1="22" x2="12" y2="15.5"/>
+            <polyline points="22 8.5 12 15.5 2 8.5"/>
+          </svg>
+        </div>
+        Prism
+      </a>
+      <div class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#compliance">Compliance</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#docs">Docs</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">Log In</a>
+        <a href="#" class="btn btn-primary">Request Access</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-orb"></div>
+    <div class="prism-effect"></div>
+    <div class="hero-content">
+      <div class="badge anim">
+        <span class="badge-dot"></span>
+        <span class="badge-label">EU AI Act</span>
+        Compliance-ready infrastructure
+      </div>
+      <h1 class="anim d1">The trust layer for<br><span class="grad">AI-generated content</span></h1>
+      <p class="hero-sub anim d2">Cryptographic provenance, real-time verification, and compliance automation. The infrastructure every platform needs to rebuild trust in a world of synthetic media.</p>
+      <div class="hero-cta anim d3">
+        <a href="#" class="btn btn-primary btn-lg">Request API Access →</a>
+        <a href="#" class="btn btn-outline btn-lg">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+          View Documentation
+        </a>
+      </div>
+      <p class="hero-note anim d3">Now in private beta. <a href="#">Join 200+ platforms on the waitlist</a></p>
+      <div class="crisis-stats anim d4">
+        <div class="crisis-stat">
+          <div class="crisis-stat-val">90%</div>
+          <div class="crisis-stat-lbl">of deepfakes undetected</div>
+        </div>
+        <div class="crisis-stat">
+          <div class="crisis-stat-val">€35M</div>
+          <div class="crisis-stat-lbl">EU AI Act fines</div>
+        </div>
+        <div class="crisis-stat">
+          <div class="crisis-stat-val accent">C2PA</div>
+          <div class="crisis-stat-lbl">Standard compliant</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Visual -->
+  <section class="trust-visual">
+    <div class="trust-demo anim d5">
+      <div class="trust-bar">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
+        <span class="trust-title">Prism — Content Verification Dashboard</span>
+      </div>
+      <div class="trust-body">
+        <div class="trust-main">
+          <div class="content-item">
+            <div class="content-thumb">🖼️</div>
+            <div class="content-info">
+              <h4>product_photo_v3.jpg</h4>
+              <p>Uploaded 2 minutes ago • 4.2 MB</p>
+              <div class="content-meta">
+                <span class="meta-tag verified">◇ Verified</span>
+                <span class="meta-tag ai">AI Generated</span>
+                <span class="meta-tag">Midjourney v6</span>
+              </div>
+            </div>
+          </div>
+          <div class="content-item">
+            <div class="content-thumb">📄</div>
+            <div class="content-info">
+              <h4>quarterly_report.pdf</h4>
+              <p>Uploaded 15 minutes ago • 2.1 MB</p>
+              <div class="content-meta">
+                <span class="meta-tag verified">◇ Verified</span>
+                <span class="meta-tag human">Human Created</span>
+                <span class="meta-tag">Adobe Acrobat</span>
+              </div>
+            </div>
+          </div>
+          <div class="content-item">
+            <div class="content-thumb">🎬</div>
+            <div class="content-info">
+              <h4>testimonial_video.mp4</h4>
+              <p>Uploaded 1 hour ago • 156 MB</p>
+              <div class="content-meta">
+                <span class="meta-tag unverified">⚠ Unverified</span>
+                <span class="meta-tag">Origin Unknown</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="trust-side">
+          <div class="provenance-card">
+            <div class="provenance-header">
+              <div class="provenance-icon">◇</div>
+              <h4>Provenance Chain</h4>
+            </div>
+            <div class="provenance-chain">
+              <div class="chain-item">
+                <span class="chain-dot"></span>
+                <span>Created by</span>
+                <strong>Midjourney v6</strong>
+              </div>
+              <div class="chain-item">
+                <span class="chain-dot"></span>
+                <span>Edited in</span>
+                <strong>Adobe Photoshop</strong>
+              </div>
+              <div class="chain-item">
+                <span class="chain-dot"></span>
+                <span>Signed by</span>
+                <strong>acme-corp.com</strong>
+              </div>
+              <div class="chain-item">
+                <span class="chain-dot"></span>
+                <span>Training data</span>
+                <strong>Licensed ✓</strong>
+              </div>
+            </div>
+          </div>
+          <div class="compliance-badge">
+            <div class="compliance-check">✓</div>
+            <div class="compliance-text">
+              <h5>EU AI Act Compliant</h5>
+              <p>All labeling requirements met</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="problem">
+    <div class="problem-inner">
+      <span class="section-tag">The Crisis</span>
+      <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem;">Trust is collapsing. Fast.</h2>
+      <p style="color: var(--text-2); font-size: 0.9375rem; max-width: 520px; margin: 0 auto;">Every platform, every enterprise, every regulator faces the same question: How do you know what's real?</p>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon">⚖️</div>
+          <h4>Regulatory Risk</h4>
+          <p>EU AI Act mandates labeling. Non-compliance means fines up to €35M or 7% of global revenue.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">📜</div>
+          <h4>Legal Exposure</h4>
+          <p>NYT v. OpenAI changed everything. Training data provenance is now a legal requirement.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">🔥</div>
+          <h4>Platform Chaos</h4>
+          <p>Deepfakes spreading faster than detection. Every social network scrambling for solutions.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">🏢</div>
+          <h4>Supply Chain Risk</h4>
+          <p>Enterprises can't verify AI usage in content they buy, publish, or distribute.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="section" id="products">
+    <div class="section-head">
+      <span class="section-tag">Products</span>
+      <h2>Full-stack trust infrastructure</h2>
+      <p>Everything you need to verify, label, and track AI-generated content. One API, four products, complete coverage.</p>
+    </div>
+    <div class="products">
+      <div class="product-card">
+        <div class="product-icon">🔐</div>
+        <h3>Provenance API</h3>
+        <p>Cryptographic signatures for content origin. Know exactly what created it, what AI was used, and the full chain of custody.</p>
+        <ul class="product-features">
+          <li>C2PA-compliant content credentials</li>
+          <li>AI model identification & version tracking</li>
+          <li>Training data lineage verification</li>
+          <li>Tamper-evident signatures</li>
+          <li>Real-time certificate validation</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🛡️</div>
+        <h3>Verification SDK</h3>
+        <p>Drop-in verification for any platform. Display provenance, detect AI content, and auto-label for compliance.</p>
+        <ul class="product-features">
+          <li>React, Vue, Swift, Android SDKs</li>
+          <li>Multi-modal detection (text, image, video, audio)</li>
+          <li>Customizable trust badges</li>
+          <li>99.7% detection accuracy</li>
+          <li>Sub-100ms verification</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">👤</div>
+        <h3>Creator Attribution</h3>
+        <p>Track and compensate creators whose work trained AI models. The consent layer the industry needs.</p>
+        <ul class="product-features">
+          <li>Training data fingerprinting</li>
+          <li>Attribution graph visualization</li>
+          <li>Automated royalty distribution</li>
+          <li>Creator opt-in/opt-out registry</li>
+          <li>Licensing compliance tracking</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">📊</div>
+        <h3>Compliance Dashboard</h3>
+        <p>Enterprise-grade auditing for AI usage. Stay ahead of EU AI Act, state regulations, and industry standards.</p>
+        <ul class="product-features">
+          <li>Real-time compliance monitoring</li>
+          <li>Automated labeling workflows</li>
+          <li>Audit trail exports</li>
+          <li>Risk scoring & alerts</li>
+          <li>Multi-jurisdiction support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="use-cases">
+    <div class="use-cases-inner">
+      <div class="section-head">
+        <span class="section-tag">Use Cases</span>
+        <h2>Built for every stakeholder</h2>
+        <p>From social platforms to enterprises to regulators—Prism serves the entire trust ecosystem.</p>
+      </div>
+      <div class="use-grid">
+        <div class="use-card">
+          <div class="use-icon">📱</div>
+          <h4>Social Platforms</h4>
+          <p>Auto-label AI content, verify uploads, and protect users from synthetic media.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">📰</div>
+          <h4>News & Media</h4>
+          <p>Verify source authenticity and maintain editorial standards in the AI age.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🏛️</div>
+          <h4>Governments</h4>
+          <p>Enforce AI transparency laws and verify content in official communications.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🏢</div>
+          <h4>Enterprises</h4>
+          <p>Audit AI usage across your content supply chain. Ensure vendor compliance.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🎨</div>
+          <h4>AI Companies</h4>
+          <p>Sign outputs at generation time. Build trust into your models from day one.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🎬</div>
+          <h4>Studios & Labels</h4>
+          <p>Protect IP, track derivatives, and enforce licensing across AI-generated content.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">💼</div>
+          <h4>Agencies</h4>
+          <p>Verify AI disclosure for client campaigns. Avoid regulatory exposure.</p>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">📈</div>
+          <h4>Marketplaces</h4>
+          <p>Build trust in AI-generated assets with verified provenance and attribution.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-val">99.7%</div>
+        <div class="stat-lbl">Detection accuracy</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">&lt;100ms</div>
+        <div class="stat-lbl">Verification latency</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">200+</div>
+        <div class="stat-lbl">Platforms in beta</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">1B+</div>
+        <div class="stat-lbl">Content verified</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section class="section" id="compliance">
+    <div class="section-head">
+      <span class="section-tag">Compliance</span>
+      <h2>Regulation-ready from day one</h2>
+      <p>Prism is built for the regulatory landscape of tomorrow. Stay compliant as laws evolve.</p>
+    </div>
+    <div class="compliance-grid">
+      <div class="compliance-card">
+        <div class="compliance-flag">🇪🇺 EU AI Act</div>
+        <h4>European Union</h4>
+        <p>Full compliance with AI content labeling requirements. Automated Article 52 disclosure.</p>
+        <ul class="compliance-list">
+          <li>AI-generated content labeling</li>
+          <li>Deep fake disclosure</li>
+          <li>High-risk system auditing</li>
+          <li>Transparency obligations</li>
+        </ul>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-flag">🇺🇸 US State Laws</div>
+        <h4>United States</h4>
+        <p>Prepared for California, Texas, and emerging state-level AI transparency requirements.</p>
+        <ul class="compliance-list">
+          <li>California AB 2013 compliance</li>
+          <li>Political ad disclosure</li>
+          <li>Deepfake legislation</li>
+          <li>FTC guidance alignment</li>
+        </ul>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-flag">🌍 Global Standards</div>
+        <h4>Industry Standards</h4>
+        <p>Native support for C2PA, CAI, and emerging global content authenticity standards.</p>
+        <ul class="compliance-list">
+          <li>C2PA content credentials</li>
+          <li>Content Authenticity Initiative</li>
+          <li>ISO/IEC standards</li>
+          <li>Platform-specific requirements</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration -->
+  <section class="integration">
+    <div class="integration-inner">
+      <span class="section-tag">Integration</span>
+      <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem;">One API call to verify anything</h2>
+      <p style="color: var(--text-2); font-size: 0.9375rem;">Built for developers. SDKs for every platform. Documentation that actually helps.</p>
+      <div class="code-preview">
+        <div class="code-header">
+          <span class="code-tab active">JavaScript</span>
+          <span class="code-tab">Python</span>
+          <span class="code-tab">cURL</span>
+        </div>
+        <div class="code-body">
+<span class="cmt">// Verify content provenance in one call</span>
+<span class="kw">import</span> { Prism } <span class="kw">from</span> <span class="str">'@prism/sdk'</span>;
+
+<span class="kw">const</span> prism = <span class="kw">new</span> <span class="fn">Prism</span>(<span class="str">'pk_live_...'</span>);
+
+<span class="kw">const</span> result = <span class="kw">await</span> prism.<span class="fn">verify</span>({
+  <span class="prop">content</span>: imageBuffer,
+  <span class="prop">type</span>: <span class="str">'image'</span>,
+  <span class="prop">checkCompliance</span>: [<span class="str">'eu-ai-act'</span>, <span class="str">'c2pa'</span>]
+});
+
+<span class="cmt">// Returns: provenance chain, AI detection, compliance status</span>
+console.<span class="fn">log</span>(result.<span class="prop">isAI</span>);          <span class="cmt">// true</span>
+console.<span class="fn">log</span>(result.<span class="prop">model</span>);         <span class="cmt">// "midjourney-v6"</span>
+console.<span class="fn">log</span>(result.<span class="prop">compliant</span>);     <span class="cmt">// true</span>
+console.<span class="fn">log</span>(result.<span class="prop">provenance</span>);   <span class="cmt">// [...chain]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section" id="pricing">
+    <div class="section-head">
+      <span class="section-tag">Pricing</span>
+      <h2>Infrastructure that scales with you</h2>
+      <p>Pay for what you verify. No minimums. Enterprise plans for high-volume needs.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Developer</h3>
+        <div class="price-val">$0<span>/mo</span></div>
+        <div class="price-desc">Free forever, no credit card</div>
+        <ul class="price-list">
+          <li>1,000 verifications/month</li>
+          <li>Basic provenance API</li>
+          <li>Detection endpoints</li>
+          <li>Community support</li>
+          <li>Sandbox environment</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Start Building</a>
+      </div>
+      <div class="price-card pop">
+        <span class="price-badge">Most Popular</span>
+        <h3>Platform</h3>
+        <div class="price-val">$499<span>/mo</span></div>
+        <div class="price-desc">+ $0.001 per verification</div>
+        <ul class="price-list">
+          <li>100K verifications included</li>
+          <li>Full Provenance API</li>
+          <li>Verification SDK access</li>
+          <li>Compliance dashboard</li>
+          <li>EU AI Act automation</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-accent">Request Access</a>
+      </div>
+      <div class="price-card">
+        <h3>Enterprise</h3>
+        <div class="price-val">Custom</div>
+        <div class="price-desc">Volume pricing available</div>
+        <ul class="price-list">
+          <li>Unlimited verifications</li>
+          <li>Creator Attribution suite</li>
+          <li>On-premise deployment</li>
+          <li>Custom integrations</li>
+          <li>SLA guarantees</li>
+          <li>Dedicated success manager</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <h2>Trust is the new moat.<br>Build it into your stack.</h2>
+      <p>The platforms that solve content authenticity will win the next decade. The infrastructure is ready. Are you?</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary btn-lg">Request API Access →</a>
+        <a href="#" class="btn btn-outline btn-lg">Read the Documentation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <div class="logo-mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+              <line x1="12" y1="22" x2="12" y2="15.5"/>
+              <polyline points="22 8.5 12 15.5 2 8.5"/>
+            </svg>
+          </div>
+          Prism
+        </a>
+        <p>The trust layer for AI-generated content. Cryptographic provenance, compliance automation, and creator attribution.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a href="#">Provenance API</a>
+        <a href="#">Verification SDK</a>
+        <a href="#">Creator Attribution</a>
+        <a href="#">Compliance Dashboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developers</h4>
+        <a href="#">Documentation</a>
+        <a href="#">API Reference</a>
+        <a href="#">SDKs</a>
+        <a href="#">Status</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Press Kit</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Security</a>
+        <a href="#">DPA</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Prism Technologies Inc. All rights reserved.</div>
+      <div class="footer-badges">
+        <span class="footer-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          SOC 2 Type II
+        </span>
+        <span class="footer-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          C2PA Certified
+        </span>
+        <span class="footer-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          EU AI Act Ready
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Code tabs
+    document.querySelectorAll('.code-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
