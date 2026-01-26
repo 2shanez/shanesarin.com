@@ -1,7 +1,7 @@
 ---
 title: "Clawdbot - Personal AI Assistant"
 description: "Self-hosted AI assistant connected to GitHub, web search, and more."
-date: "Jan 25 2026"
+date: "Jan 27 2026"
 demoURL: "https://github.com/clawdbot/clawdbot"
 repoURL: "https://github.com/2shanez/2shanez.github.io"
 ---
