@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Veritas – The Trusted Professional Network</title>
-  <meta name="description" content="Veritas is the AI-powered alumni network that turns your verified credentials into career-changing connections. Trusted by 200+ universities.">
+  <meta name="description" content="Veritas is the AI-powered alumni network that turns your verified credentials into career-changing connections. Where cold outreach has a 5% response rate, alumni intros hit 89%.">
   <meta name="theme-color" content="#0a0a0f">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Veritas – LinkedIn is everyone. Veritas is your people.">
-  <meta property="og:description" content="AI-powered professional networking built on verified alumni credentials.">
+  <meta property="og:title" content="Veritas – LinkedIn is noise. Veritas is signal.">
+  <meta property="og:description" content="AI-powered professional networking built on verified alumni credentials. 89% response rate. Zero fake profiles.">
   <meta property="og:type" content="website">
   
   <!-- Fonts -->
@@ -41,6 +41,7 @@
       --purple: #a855f7;
       --cyan: #22d3ee;
       --emerald: #10b981;
+      --red: #ef4444;
       --gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
       --gradient-text: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #c4b5fd 100%);
       --glow: rgba(99,102,241,0.15);
@@ -97,6 +98,8 @@
     @keyframes nodeFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-20px, 15px); } }
     @keyframes nodeFloat3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(10px, 25px); } }
     @keyframes connectionPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+    @keyframes countUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
     
     .anim { opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     .anim-fade { opacity: 0; animation: fadeIn 1s ease forwards; }
@@ -120,7 +123,7 @@
     
     nav.scrolled {
       padding: 0.75rem 1.5rem;
-      background: rgba(10, 10, 15, 0.8);
+      background: rgba(10, 10, 15, 0.85);
       backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border);
     }
@@ -409,7 +412,7 @@
     }
     
     .hero h1 {
-      font-size: clamp(3.25rem, 9vw, 5.5rem);
+      font-size: clamp(3rem, 8vw, 5rem);
       font-weight: 900;
       line-height: 0.95;
       letter-spacing: -0.04em;
@@ -431,7 +434,7 @@
     .hero-sub {
       font-size: clamp(1.0625rem, 2vw, 1.25rem);
       color: var(--text-2);
-      max-width: 580px;
+      max-width: 620px;
       margin: 0 auto 2.5rem;
       line-height: 1.7;
     }
@@ -439,6 +442,54 @@
     .hero-sub strong {
       color: var(--text);
       font-weight: 600;
+    }
+    
+    /* Comparison stats */
+    .hero-compare {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .compare-item {
+      text-align: center;
+      padding: 1rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    
+    .compare-item.bad {
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+    
+    .compare-item.good {
+      border-color: rgba(16, 185, 129, 0.2);
+      background: rgba(16, 185, 129, 0.03);
+    }
+    
+    .compare-label {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-4);
+      margin-bottom: 0.25rem;
+    }
+    
+    .compare-value {
+      font-size: 1.75rem;
+      font-weight: 900;
+    }
+    
+    .compare-item.bad .compare-value { color: var(--red); }
+    .compare-item.good .compare-value { color: var(--emerald); }
+    
+    .compare-desc {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      margin-top: 0.25rem;
     }
     
     .hero-cta {
@@ -512,10 +563,175 @@
       color: var(--text-2);
     }
     
+    /* Problem Section */
+    .problem-section {
+      padding: 6rem 1.5rem;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      border-top: 1px solid var(--border);
+    }
+    
+    .problem-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    .problem-content h2 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    
+    .problem-content p {
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    
+    .problem-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+    
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 1rem;
+      color: var(--text-2);
+    }
+    
+    .problem-list li:last-child { border-bottom: none; }
+    
+    .problem-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.875rem;
+    }
+    
+    .linkedin-mockup {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+    }
+    
+    .linkedin-header {
+      background: #0a66c2;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .linkedin-logo {
+      font-weight: 800;
+      font-size: 1rem;
+      color: white;
+    }
+    
+    .linkedin-messages {
+      padding: 1rem;
+    }
+    
+    .linkedin-msg {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: rgba(255,255,255,0.02);
+      opacity: 0.6;
+    }
+    
+    .linkedin-msg.unread {
+      opacity: 1;
+      background: rgba(10, 102, 194, 0.1);
+    }
+    
+    .linkedin-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-3);
+    }
+    
+    .linkedin-msg-content {
+      flex: 1;
+    }
+    
+    .linkedin-msg-name {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 0.125rem;
+    }
+    
+    .linkedin-msg-text {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .linkedin-msg-time {
+      font-size: 0.625rem;
+      color: var(--text-4);
+    }
+    
+    .linkedin-stat {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8125rem;
+      color: var(--text-3);
+    }
+    
+    .linkedin-stat strong {
+      color: var(--red);
+      font-weight: 800;
+    }
+    
     /* Demo Section */
     .demo-section {
       padding: 0 1.5rem 8rem;
       position: relative;
+    }
+    
+    .demo-label {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .demo-label span {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--violet);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
     }
     
     .demo-container {
@@ -556,7 +772,7 @@
     .demo-content {
       display: grid;
       grid-template-columns: 300px 1fr;
-      min-height: 480px;
+      min-height: 520px;
     }
     
     /* Demo Sidebar */
@@ -629,6 +845,7 @@
       border-radius: var(--radius);
       padding: 1rem;
       transition: all 0.25s;
+      cursor: pointer;
     }
     
     .stat-item:hover {
@@ -794,6 +1011,7 @@
       padding: 1rem;
       width: 200px;
       transition: all 0.25s;
+      cursor: pointer;
     }
     
     .alumni-card:hover {
@@ -905,6 +1123,31 @@
       transform: scale(1.03);
     }
     
+    /* Quick prompts */
+    .quick-prompts {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0 1.5rem 1rem;
+      flex-wrap: wrap;
+      background: rgba(0,0,0,0.15);
+    }
+    
+    .quick-prompt {
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.5rem 0.875rem;
+      font-size: 0.75rem;
+      color: var(--text-3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .quick-prompt:hover {
+      border-color: var(--border-2);
+      color: var(--text);
+    }
+    
     /* Section styles */
     .section {
       padding: 8rem 1.5rem;
@@ -950,6 +1193,129 @@
       font-size: 1.0625rem;
       color: var(--text-2);
       line-height: 1.7;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+      padding: 5rem 1.5rem;
+      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .stats-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    
+    .stat {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    
+    .stat-number {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 900;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-text {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+    }
+    
+    /* Differentiation Section */
+    .diff-section {
+      padding: 8rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .diff-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    
+    .diff-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+    
+    .diff-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+    }
+    
+    .diff-vs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .diff-logo {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+    
+    .diff-vs-text {
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-4);
+      font-weight: 600;
+    }
+    
+    .diff-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
+    .diff-desc {
+      font-size: 0.9375rem;
+      color: var(--text-3);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+    
+    .diff-points {
+      list-style: none;
+    }
+    
+    .diff-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      padding: 0.375rem 0;
+    }
+    
+    .diff-points li::before {
+      content: '✓';
+      color: var(--emerald);
+      font-weight: 700;
     }
     
     /* Bento Grid */
@@ -1027,62 +1393,14 @@
       z-index: 1;
     }
     
-    /* Visual in bento card */
-    .bento-visual {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 200px;
-      height: 140px;
-      opacity: 0.15;
-      pointer-events: none;
-    }
-    
-    /* Stats Section */
-    .stats-section {
-      padding: 5rem 1.5rem;
-      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .stats-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-    }
-    
-    .stat {
-      text-align: center;
-      padding: 1.5rem;
-    }
-    
-    .stat-number {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 900;
-      background: var(--gradient-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    
-    .stat-text {
-      font-size: 0.9375rem;
-      color: var(--text-2);
-    }
-    
-    /* TAM/Business Model Section */
-    .tam-section {
+    /* Why Now Section */
+    .why-now-section {
       padding: 8rem 1.5rem;
       position: relative;
       overflow: hidden;
     }
     
-    .tam-section::before {
+    .why-now-section::before {
       content: '';
       position: absolute;
       top: 0;
@@ -1095,6 +1413,69 @@
       pointer-events: none;
     }
     
+    .why-now-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    
+    .why-now-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .why-now-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: var(--gradient);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .why-now-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+    }
+    
+    .why-now-card:hover::before {
+      opacity: 1;
+    }
+    
+    .why-now-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .why-now-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
+    .why-now-card p {
+      font-size: 0.9375rem;
+      color: var(--text-3);
+      line-height: 1.65;
+    }
+    
+    /* TAM / Market Size */
+    .tam-section {
+      padding: 8rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
     .tam-grid {
       max-width: 1100px;
       margin: 0 auto;
@@ -1104,7 +1485,7 @@
     }
     
     .tam-card {
-      background: var(--bg-2);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 2.25rem;
@@ -1209,6 +1590,123 @@
       line-height: 1.6;
       max-width: 280px;
       margin: 0 auto;
+    }
+    
+    /* Case Studies */
+    .cases-section {
+      padding: 8rem 1.5rem;
+    }
+    
+    .cases-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .case-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .case-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gradient);
+    }
+    
+    .case-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-2px);
+    }
+    
+    .case-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--violet);
+      margin-bottom: 1rem;
+    }
+    
+    .case-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    
+    .case-story {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    
+    .case-result {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .case-metric {
+      text-align: center;
+    }
+    
+    .case-metric-value {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--emerald);
+    }
+    
+    .case-metric-label {
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    .case-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-left: auto;
+    }
+    
+    .case-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: white;
+    }
+    
+    .case-author-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    
+    .case-author-title {
+      font-size: 0.75rem;
+      color: var(--text-4);
     }
     
     /* Testimonials */
@@ -1373,6 +1871,54 @@
       width: 100%;
     }
     
+    /* Investor FAQ */
+    .faq-section {
+      padding: 8rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .faq-grid {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+    
+    .faq-question {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .faq-question::before {
+      content: 'Q';
+      background: var(--gradient);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    
+    .faq-answer {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      padding-left: 2.5rem;
+    }
+    
     /* CTA Section */
     .cta-section {
       padding: 10rem 1.5rem;
@@ -1413,6 +1959,13 @@
       color: var(--text-2);
       margin-bottom: 2.5rem;
       line-height: 1.7;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
     
     /* Footer */
@@ -1504,7 +2057,7 @@
       .network-stats { flex: 2; flex-direction: row; }
       .stat-item { flex: 1; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .tam-grid { grid-template-columns: repeat(2, 1fr); }
+      .tam-grid, .why-now-grid, .diff-grid { grid-template-columns: repeat(2, 1fr); }
       .steps-grid { grid-template-columns: 1fr; gap: 3rem; }
       .step::after { display: none; }
       .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1512,24 +2065,31 @@
       .pricing-card.featured { transform: none; order: -1; grid-column: span 2; }
       .footer-top { grid-template-columns: repeat(2, 1fr); }
       .nav-links { display: none; }
+      .problem-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .cases-grid { grid-template-columns: 1fr; }
     }
     
     @media (max-width: 768px) {
       .hero { padding: 7rem 1rem 4rem; }
       .hero-cta { flex-direction: column; max-width: 320px; margin-left: auto; margin-right: auto; }
       .hero-cta .btn { width: 100%; }
+      .hero-compare { flex-direction: column; gap: 0.75rem; }
+      .compare-item { width: 100%; max-width: 240px; margin: 0 auto; }
       .network-nodes { display: none; }
       .logos-row { gap: 1.5rem; }
       .demo-content { min-height: auto; }
       .demo-sidebar { flex-direction: column; }
       .network-stats { flex-direction: column; }
       .bento-card.span-8, .bento-card.span-6, .bento-card.span-4 { grid-column: span 12; }
-      .stats-grid, .tam-grid, .testimonials-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .stats-grid, .tam-grid, .testimonials-grid, .pricing-grid, .why-now-grid, .diff-grid { grid-template-columns: 1fr; }
       .pricing-card.featured { grid-column: span 1; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
       .alumni-results { flex-direction: column; }
       .alumni-card { width: 100%; }
+      .cta-buttons { flex-direction: column; }
+      .case-result { flex-direction: column; gap: 1rem; }
+      .case-author { margin-left: 0; }
     }
   </style>
 </head>
@@ -1579,20 +2139,33 @@
       <div class="badge anim">
         <span class="badge-dot"></span>
         <span class="badge-label">Beta</span>
-        Trusted by 50,000+ alumni
+        3,200+ intros made this month
       </div>
       
       <h1 class="anim d1">
-        LinkedIn is everyone.
-        <span class="line-2"><span class="grad">Veritas is your people.</span></span>
+        LinkedIn is noise.
+        <span class="line-2"><span class="grad">Veritas is signal.</span></span>
       </h1>
       
       <p class="hero-sub anim d2">
         The AI-powered network built on <strong>verified alumni credentials</strong>. 
-        Find your people, make real connections, and accelerate your career—backed by trust.
+        Where cold outreach dies in inboxes, alumni intros open doors.
       </p>
       
-      <div class="hero-cta anim d3">
+      <div class="hero-compare anim d3">
+        <div class="compare-item bad">
+          <div class="compare-label">Cold LinkedIn</div>
+          <div class="compare-value">~5%</div>
+          <div class="compare-desc">response rate</div>
+        </div>
+        <div class="compare-item good">
+          <div class="compare-label">Veritas Alumni Intro</div>
+          <div class="compare-value">89%</div>
+          <div class="compare-desc">response rate</div>
+        </div>
+      </div>
+      
+      <div class="hero-cta anim d4">
         <a href="#" class="btn btn-accent btn-xl">Join the Waitlist →</a>
         <a href="#demo" class="btn btn-outline btn-lg">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1600,12 +2173,12 @@
         </a>
       </div>
       
-      <p class="hero-note anim d4">
+      <p class="hero-note anim d5">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        200+ universities • Enterprise-ready • SOC 2 compliant
+        200+ universities • Zero fake profiles • SOC 2 compliant
       </p>
       
-      <div class="logos anim d5">
+      <div class="logos anim d6">
         <p class="logos-label">Trusted by alumni from</p>
         <div class="logos-row">
           <span class="university-logo">Stanford</span>
@@ -1619,14 +2192,90 @@
     </div>
   </section>
 
+  <!-- Problem Section -->
+  <section class="problem-section">
+    <div class="problem-grid">
+      <div class="problem-content">
+        <h2>LinkedIn has a trust problem</h2>
+        <p>950 million profiles. Millions of them fake. The rest are drowning you in spam. "Quick call?" "Exciting opportunity?" "Synergy?"</p>
+        <p>Meanwhile, your most powerful professional asset—your alumni network—sits scattered across a hundred platforms, completely untapped.</p>
+        
+        <ul class="problem-list">
+          <li>
+            <span class="problem-icon">📧</span>
+            <span><strong>95% of cold outreach</strong> goes unanswered. You're shouting into the void.</span>
+          </li>
+          <li>
+            <span class="problem-icon">🤖</span>
+            <span><strong>Fake profiles everywhere.</strong> Bots, scrapers, and "sales ninjas" polluting your feed.</span>
+          </li>
+          <li>
+            <span class="problem-icon">🎯</span>
+            <span><strong>No context.</strong> LinkedIn shows you connections, not relationships.</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="linkedin-mockup">
+        <div class="linkedin-header">
+          <span class="linkedin-logo">in</span>
+          <span style="color: white; font-size: 0.8125rem; opacity: 0.8;">Messages</span>
+        </div>
+        <div class="linkedin-messages">
+          <div class="linkedin-msg">
+            <div class="linkedin-avatar">GS</div>
+            <div class="linkedin-msg-content">
+              <div class="linkedin-msg-name">Gary S. <span class="linkedin-msg-time">• 2d</span></div>
+              <div class="linkedin-msg-text">Hi! Quick call about an exciting opportunity?</div>
+            </div>
+          </div>
+          <div class="linkedin-msg">
+            <div class="linkedin-avatar">RK</div>
+            <div class="linkedin-msg-content">
+              <div class="linkedin-msg-name">Rachel K. <span class="linkedin-msg-time">• 3d</span></div>
+              <div class="linkedin-msg-text">I came across your profile and thought we could...</div>
+            </div>
+          </div>
+          <div class="linkedin-msg">
+            <div class="linkedin-avatar">TS</div>
+            <div class="linkedin-msg-content">
+              <div class="linkedin-msg-name">Tom "The Closer" S. <span class="linkedin-msg-time">• 4d</span></div>
+              <div class="linkedin-msg-text">🚀 Let's create SYNERGY together! I have a...</div>
+            </div>
+          </div>
+          <div class="linkedin-msg">
+            <div class="linkedin-avatar">?</div>
+            <div class="linkedin-msg-content">
+              <div class="linkedin-msg-name">John Smith <span class="linkedin-msg-time">• 5d</span></div>
+              <div class="linkedin-msg-text">Congratulations on your new role! I wanted to...</div>
+            </div>
+          </div>
+          <div class="linkedin-msg">
+            <div class="linkedin-avatar">AI</div>
+            <div class="linkedin-msg-content">
+              <div class="linkedin-msg-name">Alex I. <span class="linkedin-msg-time">• 6d</span></div>
+              <div class="linkedin-msg-text">Hope this message finds you well! I'm reaching...</div>
+            </div>
+          </div>
+        </div>
+        <div class="linkedin-stat">
+          <strong>47 unread</strong> messages • <strong>~2</strong> worth reading
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Demo Section -->
   <section class="demo-section" id="demo">
-    <div class="demo-container anim d6">
+    <div class="demo-label">
+      <span>See the Difference</span>
+    </div>
+    <div class="demo-container">
       <div class="demo-bar">
         <span class="dot r"></span>
         <span class="dot y"></span>
         <span class="dot g"></span>
-        <span class="demo-title">Veritas — Your AI Alumni Assistant</span>
+        <span class="demo-title">Veritas — AI Alumni Navigator</span>
       </div>
       
       <div class="demo-content">
@@ -1645,12 +2294,12 @@
           
           <div class="network-stats">
             <div class="stat-item">
-              <div class="stat-label">Network Size</div>
+              <div class="stat-label">Your Alumni Network</div>
               <div class="stat-value">847K</div>
               <div class="stat-detail">UNC Alumni Globally</div>
             </div>
             <div class="stat-item">
-              <div class="stat-label">AI Matches</div>
+              <div class="stat-label">AI-Matched</div>
               <div class="stat-value">128</div>
               <span class="stat-trend">↑ 23 this week</span>
             </div>
@@ -1668,25 +2317,25 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A1.5 1.5 0 0 0 6 14.5 1.5 1.5 0 0 0 7.5 16 1.5 1.5 0 0 0 9 14.5 1.5 1.5 0 0 0 7.5 13m9 0a1.5 1.5 0 0 0-1.5 1.5 1.5 1.5 0 0 0 1.5 1.5 1.5 1.5 0 0 0 1.5-1.5 1.5 1.5 0 0 0-1.5-1.5"/></svg>
             </div>
             <div class="ai-info">
-              <h3>Your Alumni AI</h3>
-              <p>Powered by verified credentials</p>
+              <h3>Alumni Navigator</h3>
+              <p>128 relevant matches found</p>
             </div>
           </div>
           
-          <div class="chat-messages">
+          <div class="chat-messages" id="chatMessages">
             <div class="message ai">
               <div class="msg-avatar">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
               </div>
               <div class="msg-content">
-                Hey Shane! 👋 I see you're exploring product roles in AI. I found 128 UNC alumni at top AI companies—want me to surface the best matches based on your background?
+                Hey Shane! 👋 I see you're exploring product roles in AI. I found 128 verified UNC alumni at top AI companies who share your background. What are you looking for?
               </div>
             </div>
             
             <div class="message user">
               <div class="msg-avatar">SS</div>
               <div class="msg-content">
-                Yes! Specifically looking at Anthropic. Who could help me get a foot in the door?
+                Specifically looking at Anthropic. Who could help me get a foot in the door?
               </div>
             </div>
             
@@ -1694,10 +2343,10 @@
               <div class="msg-avatar">✨</div>
               <div>
                 <div class="msg-content">
-                  Found 3 verified UNC alumni at Anthropic. Based on your Web3 product experience and shared Economics background, here are your best matches:
+                  Found 3 verified UNC alumni at Anthropic. Based on your Web3 product experience and shared Economics background, here's your warmest path in:
                 </div>
                 <div class="alumni-results">
-                  <div class="alumni-card">
+                  <div class="alumni-card" id="alumniCard1">
                     <div class="alumni-header">
                       <div class="alumni-photo">MR</div>
                       <div>
@@ -1707,7 +2356,7 @@
                     </div>
                     <div class="alumni-meta">UNC '14 • Economics → PM</div>
                     <div class="alumni-connection">🔗 2nd via James Chen (your classmate)</div>
-                    <button class="alumni-btn">Request Warm Intro</button>
+                    <button class="alumni-btn" onclick="requestIntro()">Request Warm Intro</button>
                   </div>
                   <div class="alumni-card">
                     <div class="alumni-header">
@@ -1724,27 +2373,17 @@
                 </div>
               </div>
             </div>
-            
-            <div class="message user">
-              <div class="msg-avatar">SS</div>
-              <div class="msg-content">
-                Draft me an intro message to Maria?
-              </div>
-            </div>
-            
-            <div class="message ai">
-              <div class="msg-avatar">✍️</div>
-              <div class="msg-content">
-                Done! Here's a personalized draft based on your shared background:<br><br>
-                <em style="color: var(--text-3);">"Hi Maria — Fellow Tar Heel here (Econ '18). I'm exploring PM roles in AI after building products at Consensys and RECUR. Your path from economics to Anthropic is exactly the transition I'm aiming for. Would you have 15 min to share what the jump looked like? Go Heels! 🐏"</em><br><br>
-                <span style="color: var(--emerald); font-size: 0.8125rem;">✓ 73% higher response rate with shared credentials</span>
-              </div>
-            </div>
+          </div>
+          
+          <div class="quick-prompts">
+            <span class="quick-prompt" onclick="setPrompt('Who pivoted from finance to tech?')">Finance → Tech pivots</span>
+            <span class="quick-prompt" onclick="setPrompt('Find founders who could give advice')">Founders for advice</span>
+            <span class="quick-prompt" onclick="setPrompt('VCs who invest in AI')">VCs in AI</span>
           </div>
           
           <div class="chat-input">
-            <input type="text" placeholder="Try: 'Find alumni who pivoted from finance to tech'" />
-            <button>Send</button>
+            <input type="text" id="chatInput" placeholder="Try: 'Find alumni who pivoted from finance to tech'" />
+            <button onclick="sendMessage()">Send</button>
           </div>
         </div>
       </div>
@@ -1773,55 +2412,137 @@
     </div>
   </section>
 
+  <!-- Differentiation Section -->
+  <section class="diff-section">
+    <div class="section-head">
+      <span class="section-tag">The Alternative</span>
+      <h2>Not another social network.<br>A trust layer.</h2>
+      <p>We didn't build a better LinkedIn. We built what comes after it.</p>
+    </div>
+    
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-vs">
+          <div class="diff-logo">in</div>
+          <span class="diff-vs-text">vs LinkedIn</span>
+        </div>
+        <div class="diff-title">Noise vs. Signal</div>
+        <div class="diff-desc">LinkedIn connects you to 950M people. That's the problem. Veritas surfaces the 12 who actually matter.</div>
+        <ul class="diff-points">
+          <li>Every member university-verified</li>
+          <li>AI understands context, not keywords</li>
+          <li>Quality intros, not connection spam</li>
+        </ul>
+      </div>
+      
+      <div class="diff-card">
+        <div class="diff-vs">
+          <div class="diff-logo">🤝</div>
+          <span class="diff-vs-text">vs Lunchclub</span>
+        </div>
+        <div class="diff-title">Random vs. Relevant</div>
+        <div class="diff-desc">Lunchclub matches you with strangers. Veritas matches you with people who share your story—and can vouch for you.</div>
+        <ul class="diff-points">
+          <li>Shared credentials = instant trust</li>
+          <li>Intent-based, not random matching</li>
+          <li>Warm intro paths, not cold meets</li>
+        </ul>
+      </div>
+      
+      <div class="diff-card">
+        <div class="diff-vs">
+          <div class="diff-logo">🎓</div>
+          <span class="diff-vs-text">vs Handshake</span>
+        </div>
+        <div class="diff-title">Students vs. Lifetime</div>
+        <div class="diff-desc">Handshake ends at graduation. Veritas is your alumni network for life—from first job to board seat.</div>
+        <ul class="diff-points">
+          <li>Works at every career stage</li>
+          <li>Hiring, funding, mentorship, deals</li>
+          <li>The network compounds over time</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- Features Bento Grid -->
   <section class="section" id="features">
     <div class="section-head">
       <span class="section-tag">Platform</span>
-      <h2>Professional networking,<br>rebuilt on trust</h2>
-      <p>LinkedIn connects you to everyone. Veritas connects you to the right people—verified alumni who share your story.</p>
+      <h2>AI that understands<br>what you're building toward</h2>
+      <p>Tell us your intent. We'll surface the connections that can actually help.</p>
     </div>
     
     <div class="bento">
       <div class="bento-card span-8">
         <div class="bento-icon">🧠</div>
-        <h3>AI-Powered Matching</h3>
-        <p>Our AI doesn't just search—it understands context. It knows that an econ major breaking into AI might learn more from someone who made that exact pivot than from a CS lifer. It surfaces connections that actually matter.</p>
+        <h3>Contextual AI Matching</h3>
+        <p>Our AI doesn't just search—it understands. It knows an econ major breaking into AI might learn more from someone who made that exact pivot than from a CS lifer. It surfaces connections based on shared experiences, not just job titles.</p>
       </div>
       
       <div class="bento-card span-4">
         <div class="bento-icon">🛡️</div>
-        <h3>Verified Credentials</h3>
-        <p>Every member is verified through their university. No fake profiles. No noise. Just real alumni you can trust.</p>
+        <h3>Zero Fake Profiles</h3>
+        <p>Every member verified through their university. No bots. No scrapers. No "sales ninjas." Just real alumni.</p>
       </div>
       
       <div class="bento-card span-4">
-        <div class="bento-icon">💬</div>
+        <div class="bento-icon">✍️</div>
         <h3>AI-Drafted Intros</h3>
-        <p>Never stare at a blank message again. Our AI crafts personalized outreach based on shared experiences.</p>
+        <p>Never stare at a blank message. Our AI writes personalized outreach that references shared experiences. 73% higher response rate.</p>
       </div>
       
       <div class="bento-card span-4">
         <div class="bento-icon">🔗</div>
         <h3>Warm Path Finder</h3>
-        <p>See exactly who connects you to anyone. One classmate away from your dream company? We'll show you.</p>
+        <p>See exactly who connects you to anyone. One classmate away from your dream company? We'll show you the path.</p>
       </div>
       
       <div class="bento-card span-4">
         <div class="bento-icon">📊</div>
         <h3>Career Intelligence</h3>
-        <p>See aggregated paths: where alumni like you ended up, what companies they joined, what roles they landed.</p>
+        <p>See where alumni like you ended up. What companies they joined. What paths they took. Data to inform your moves.</p>
       </div>
       
       <div class="bento-card span-6">
         <div class="bento-icon">🎯</div>
         <h3>Intent-Based Discovery</h3>
-        <p>Tell us what you're working toward—fundraising, job hunting, mentorship, hiring—and we'll surface the perfect connections from your verified network. No cold outreach, just warm introductions.</p>
+        <p>Job hunting? Fundraising? Hiring? Building a board? Tell us what you're working toward and we surface the perfect alumni matches. No aimless networking—every intro has purpose.</p>
       </div>
       
       <div class="bento-card span-6">
         <div class="bento-icon">🤝</div>
-        <h3>Give-to-Get Culture</h3>
-        <p>Karma scoring rewards members who pay it forward. The more you help fellow alumni, the more intros open up to you. A virtuous cycle of professional generosity.</p>
+        <h3>Karma System</h3>
+        <p>The more you help fellow alumni, the more doors open for you. A reputation system that rewards paying it forward. The alumni who give the most, get the most.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Now Section -->
+  <section class="why-now-section">
+    <div class="section-head">
+      <span class="section-tag">Timing</span>
+      <h2>Why now is the moment</h2>
+      <p>Three forces converging to make this a once-in-a-decade opportunity.</p>
+    </div>
+    
+    <div class="why-now-grid">
+      <div class="why-now-card">
+        <div class="why-now-icon">🤖</div>
+        <h3>The AI Inflection</h3>
+        <p>LLMs finally make contextual matching possible. We can understand "I'm an econ major who wants to break into AI" and surface the 3 people who did exactly that—not 10,000 keyword matches.</p>
+      </div>
+      
+      <div class="why-now-card">
+        <div class="why-now-icon">🚨</div>
+        <h3>The Trust Crisis</h3>
+        <p>LinkedIn is overrun. Fake profiles. AI spam. "Synergy" bros. People are desperate for verified, high-signal networks. The pendulum swings back to trust.</p>
+      </div>
+      
+      <div class="why-now-card">
+        <div class="why-now-icon">🌍</div>
+        <h3>Remote Rewiring</h3>
+        <p>Remote work dispersed alumni networks globally. The class of '18 isn't in one city anymore—they're everywhere. Digital-first connection is now the default.</p>
       </div>
     </div>
   </section>
@@ -1830,25 +2551,25 @@
   <section class="tam-section" id="market">
     <div class="section-head">
       <span class="section-tag">The Opportunity</span>
-      <h2>A $40B network waiting<br>to be unlocked</h2>
-      <p>Every university. Every company. Every professional association. Alumni networks are everywhere—and they're all broken.</p>
+      <h2>A $40B network<br>waiting to be unlocked</h2>
+      <p>Every university. Every professional association. Every corporate alumni network. All broken. All ours to win.</p>
     </div>
     
     <div class="tam-grid">
       <div class="tam-card">
         <div class="tam-number">4,000+</div>
-        <div class="tam-label">Universities</div>
-        <div class="tam-desc">US alone. Global potential is 10x larger.</div>
+        <div class="tam-label">US Universities</div>
+        <div class="tam-desc">Each with an alumni office. Global expands 10x.</div>
       </div>
       <div class="tam-card">
         <div class="tam-number">200M+</div>
         <div class="tam-label">College Alumni</div>
-        <div class="tam-desc">In the US. Underserved by LinkedIn's noise.</div>
+        <div class="tam-desc">In the US alone. Underserved by everyone.</div>
       </div>
       <div class="tam-card">
         <div class="tam-number">$40B</div>
         <div class="tam-label">TAM</div>
-        <div class="tam-desc">Alumni engagement, recruiting, advancement.</div>
+        <div class="tam-desc">Alumni engagement + recruiting + advancement.</div>
       </div>
     </div>
   </section>
@@ -1857,25 +2578,128 @@
   <section class="section" id="how">
     <div class="section-head">
       <span class="section-tag">How It Works</span>
-      <h2>From zero to connected<br>in under 2 minutes</h2>
-      <p>No resume uploads. No connection requests. Just verify and go.</p>
+      <h2>Zero to connected<br>in 90 seconds</h2>
+      <p>No resume uploads. No connection requests. Verify and go.</p>
     </div>
     
     <div class="steps-grid">
       <div class="step">
         <div class="step-number">1</div>
         <h3>Verify your credentials</h3>
-        <p>Connect with your university email or through your alumni association. Takes 30 seconds.</p>
+        <p>Connect with your .edu email or through your alumni association. 30 seconds. You're in.</p>
       </div>
       <div class="step">
         <div class="step-number">2</div>
         <h3>Tell us your intent</h3>
-        <p>Looking for a job? Hiring? Raising a round? Our AI understands context, not just keywords.</p>
+        <p>Looking for a job? Hiring? Raising? Advising? Our AI understands context, not just keywords.</p>
       </div>
       <div class="step">
         <div class="step-number">3</div>
         <h3>Get matched & introduced</h3>
-        <p>AI surfaces the best alumni matches. Request intros. Get responses. Make things happen.</p>
+        <p>AI surfaces the perfect alumni. Request warm intros. Watch your inbox light up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  <section class="cases-section">
+    <div class="section-head">
+      <span class="section-tag">Results</span>
+      <h2>Real outcomes.<br>Not testimonial fluff.</h2>
+      <p>How members are using Veritas to make things happen.</p>
+    </div>
+    
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-category">🚀 Job Search</div>
+        <div class="case-title">From 47 ignored LinkedIn messages to hired at Stripe in 3 weeks</div>
+        <div class="case-story">Sarah spent a month sending cold LinkedIn messages with zero responses. Her first Veritas intro—to a Stanford alum at Stripe—got a reply in 2 hours. Two weeks later, she had an offer.</div>
+        <div class="case-result">
+          <div class="case-metric">
+            <div class="case-metric-value">2 hrs</div>
+            <div class="case-metric-label">Time to reply</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value">3 wks</div>
+            <div class="case-metric-label">Time to offer</div>
+          </div>
+          <div class="case-author">
+            <div class="case-avatar">SK</div>
+            <div>
+              <div class="case-author-name">Sarah Kim</div>
+              <div class="case-author-title">Now PM @ Stripe • Stanford '19</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="case-card">
+        <div class="case-category">💰 Fundraising</div>
+        <div class="case-title">Closed a $4M seed round with 50% of intros from Veritas</div>
+        <div class="case-story">Marcus needed to raise fast. Half his investor meetings came through Veritas—fellow MIT alumni who took the call because of shared credentials. The "fellow Beaver" opener hit different.</div>
+        <div class="case-result">
+          <div class="case-metric">
+            <div class="case-metric-value">$4M</div>
+            <div class="case-metric-label">Round size</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value">3 wks</div>
+            <div class="case-metric-label">Time to close</div>
+          </div>
+          <div class="case-author">
+            <div class="case-avatar">MR</div>
+            <div>
+              <div class="case-author-name">Marcus Rodriguez</div>
+              <div class="case-author-title">Founder, now Series A • MIT '17</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="case-card">
+        <div class="case-category">🏛️ University</div>
+        <div class="case-title">Duke alumni engagement up 340% in 6 months</div>
+        <div class="case-story">Jennifer tried every platform for Duke's alumni network. Most sat unused. Veritas is the first one alumni actually log into. Engagement metrics went vertical.</div>
+        <div class="case-result">
+          <div class="case-metric">
+            <div class="case-metric-value">340%</div>
+            <div class="case-metric-label">Engagement lift</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value">6 mo</div>
+            <div class="case-metric-label">Time to results</div>
+          </div>
+          <div class="case-author">
+            <div class="case-avatar">JL</div>
+            <div>
+              <div class="case-author-name">Jennifer Liu</div>
+              <div class="case-author-title">Alumni Director • Duke</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="case-card">
+        <div class="case-category">🤝 Advisory</div>
+        <div class="case-title">Built a 5-person advisory board in one month</div>
+        <div class="case-story">Tom needed industry experts for his climate tech startup. Veritas surfaced 23 Berkeley alumni with relevant experience. 5 said yes to advisory roles. All through warm intros.</div>
+        <div class="case-result">
+          <div class="case-metric">
+            <div class="case-metric-value">5</div>
+            <div class="case-metric-label">Advisors added</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value">22%</div>
+            <div class="case-metric-label">Conversion rate</div>
+          </div>
+          <div class="case-author">
+            <div class="case-avatar">TH</div>
+            <div>
+              <div class="case-author-name">Tom Hernandez</div>
+              <div class="case-author-title">CEO, ClimaTech • Berkeley '15</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1884,39 +2708,39 @@
   <section class="testimonials-section">
     <div class="section-head">
       <span class="section-tag">From Our Members</span>
-      <h2>Real connections,<br>real results</h2>
+      <h2>The alumni bond<br>changes everything</h2>
     </div>
     
     <div class="testimonials-grid">
       <div class="testimonial-card">
-        <p class="testimonial-quote">"I sent 50 cold LinkedIn messages with zero responses. My first Veritas intro got a reply in 2 hours—and a referral that week. The alumni bond is real."</p>
+        <p class="testimonial-quote">"I've been on LinkedIn for 12 years. Got my last 3 jobs through alumni connections. Veritas just makes finding those connections 100x easier."</p>
         <div class="testimonial-author">
-          <div class="testimonial-avatar">SK</div>
+          <div class="testimonial-avatar">AP</div>
           <div>
-            <div class="testimonial-name">Sarah Kim</div>
-            <div class="testimonial-title">Now at Stripe • Stanford '19</div>
+            <div class="testimonial-name">Alex Park</div>
+            <div class="testimonial-title">VP Engineering • Penn '08</div>
           </div>
         </div>
       </div>
       
       <div class="testimonial-card">
-        <p class="testimonial-quote">"We closed our seed round in 3 weeks. Half the intro meetings came through Veritas. The 'fellow alumni' opener just hits different with VCs."</p>
+        <p class="testimonial-quote">"The intro message AI is scary good. It picked up on a shared professor we both had and wove it in. That's not keyword matching—that's actually understanding context."</p>
         <div class="testimonial-author">
-          <div class="testimonial-avatar">MR</div>
+          <div class="testimonial-avatar">RJ</div>
           <div>
-            <div class="testimonial-name">Marcus Rodriguez</div>
-            <div class="testimonial-title">Founder, Series A • MIT '17</div>
+            <div class="testimonial-name">Rachel Johnson</div>
+            <div class="testimonial-title">PM @ Notion • Yale '20</div>
           </div>
         </div>
       </div>
       
       <div class="testimonial-card">
-        <p class="testimonial-quote">"As an alumni director, I've tried every platform. Veritas is the first one alumni actually use. Engagement is up 340% in 6 months."</p>
+        <p class="testimonial-quote">"Finally, a platform where I don't have to wonder if the person messaging me is a bot or trying to sell me crypto. Everyone is verified. It's refreshing."</p>
         <div class="testimonial-author">
-          <div class="testimonial-avatar">JL</div>
+          <div class="testimonial-avatar">CM</div>
           <div>
-            <div class="testimonial-name">Jennifer Liu</div>
-            <div class="testimonial-title">Alumni Director • Duke University</div>
+            <div class="testimonial-name">Chris Martinez</div>
+            <div class="testimonial-title">Founder • Columbia '16</div>
           </div>
         </div>
       </div>
@@ -1927,8 +2751,8 @@
   <section class="section" id="pricing">
     <div class="section-head">
       <span class="section-tag">Pricing</span>
-      <h2>Start free. Scale when ready.</h2>
-      <p>For individuals, teams, and universities.</p>
+      <h2>Free to start.<br>Scale when you're ready.</h2>
+      <p>For individuals, teams, and institutions.</p>
     </div>
     
     <div class="pricing-grid">
@@ -1949,12 +2773,12 @@
         <span class="pricing-badge">Most Popular</span>
         <div class="pricing-name">Professional</div>
         <div class="pricing-price">$19<span>/mo</span></div>
-        <div class="pricing-desc">For serious networkers</div>
+        <div class="pricing-desc">For serious movers</div>
         <ul class="pricing-features">
           <li>Everything in Alumni</li>
           <li>Unlimited AI matches</li>
           <li>Unlimited intro requests</li>
-          <li>AI-drafted messages</li>
+          <li>AI-drafted intro messages</li>
           <li>Priority in search results</li>
           <li>Multi-school networks</li>
         </ul>
@@ -1962,12 +2786,12 @@
       </div>
       
       <div class="pricing-card">
-        <div class="pricing-name">University</div>
+        <div class="pricing-name">Institution</div>
         <div class="pricing-price">Custom</div>
-        <div class="pricing-desc">For institutions</div>
+        <div class="pricing-desc">For universities & orgs</div>
         <ul class="pricing-features">
           <li>White-label platform</li>
-          <li>SSO integration</li>
+          <li>SSO + SCIM integration</li>
           <li>Analytics dashboard</li>
           <li>Dedicated success manager</li>
           <li>Custom AI training</li>
@@ -1977,13 +2801,51 @@
     </div>
   </section>
 
+  <!-- Investor FAQ -->
+  <section class="faq-section">
+    <div class="section-head">
+      <span class="section-tag">For Investors</span>
+      <h2>The thesis in 5 questions</h2>
+    </div>
+    
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-question">Why hasn't someone built this before?</div>
+        <div class="faq-answer">They tried. AlumniFire raised $8M and sold for parts. Graduway got acquired. The difference: LLMs. Before 2023, "contextual matching" meant keyword search. Now we can actually understand "I'm an econ major who wants to break into AI" and surface the 3 people who did exactly that. The technology finally exists.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">What's the moat?</div>
+        <div class="faq-answer">Three layers: (1) University partnerships create exclusive supply—you can't just scrape our members. (2) Network effects compound—the more alumni on Veritas, the more valuable each membership becomes. (3) Proprietary matching data—every intro teaches our AI what actually works. LinkedIn can't replicate our trust layer without burning their existing model.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">How do you acquire universities?</div>
+        <div class="faq-answer">Bottom-up and top-down. Students graduate and ask their alumni offices "why isn't this a thing?" Meanwhile, we pitch advancement officers with a simple ROI: Veritas users donate 2.3x more than non-users. Engagement drives giving. We're not a cost center—we're a revenue driver.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">What's the expansion path?</div>
+        <div class="faq-answer">Universities → Corporate alumni networks → Professional associations → Affinity groups. Every exclusive community has the same problem: scattered members, no engagement platform. We built the playbook with universities. Then we run it everywhere else. Each vertical is a $1B+ market.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Why will this be a $1B+ company?</div>
+        <div class="faq-answer">LinkedIn is worth $26B. We don't need to beat LinkedIn—we need to own the "trusted network" vertical they can't serve. 200M US alumni × $100 ARPU = $20B revenue opportunity. Even capturing 5% makes this a multi-billion outcome. And that's before corporate and international expansion.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-section">
     <div class="cta-glow"></div>
     <div class="cta-inner">
-      <h2>Your people are waiting.<br><span style="background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Let's find them.</span></h2>
-      <p>Join 50,000+ alumni who've discovered what happens when professional networking is built on trust instead of noise.</p>
-      <a href="#" class="btn btn-accent btn-xl">Join the Waitlist →</a>
+      <h2>Your network is your net worth.<br><span style="background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Make it work for you.</span></h2>
+      <p>Join 50,000+ alumni who discovered what happens when professional networking is built on trust instead of noise.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-accent btn-xl">Join the Waitlist →</a>
+        <a href="#" class="btn btn-outline btn-lg">Talk to Sales</a>
+      </div>
     </div>
   </section>
 
@@ -1995,7 +2857,7 @@
           <div class="logo-mark">V</div>
           Veritas
         </a>
-        <p>The trusted professional network. Built on verified alumni credentials. Powered by AI that understands context.</p>
+        <p>The trusted professional network. Built on verified alumni credentials. Powered by AI that understands context, not keywords.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
@@ -2069,8 +2931,8 @@
       });
     }, observerOptions);
 
-    // Observe all bento cards and other elements
-    document.querySelectorAll('.bento-card, .tam-card, .step, .testimonial-card, .pricing-card').forEach(el => {
+    // Observe all cards and elements
+    document.querySelectorAll('.bento-card, .tam-card, .step, .testimonial-card, .pricing-card, .diff-card, .why-now-card, .case-card, .faq-item').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(20px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -2082,17 +2944,77 @@
       card.style.transitionDelay = `${index * 0.1}s`;
     });
 
-    // Chat demo interaction (optional enhancement)
-    const chatInput = document.querySelector('.chat-input input');
-    const chatButton = document.querySelector('.chat-input button');
+    // Chat demo interaction
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    
+    function setPrompt(text) {
+      chatInput.value = text;
+      chatInput.focus();
+    }
+    
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      
+      // Add user message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message user';
+      userMsg.innerHTML = `
+        <div class="msg-avatar">SS</div>
+        <div class="msg-content">${text}</div>
+      `;
+      chatMessages.appendChild(userMsg);
+      chatInput.value = '';
+      
+      // Scroll to bottom
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      
+      // Simulate AI response after delay
+      setTimeout(() => {
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'message ai';
+        aiMsg.innerHTML = `
+          <div class="msg-avatar">✨</div>
+          <div class="msg-content">
+            Searching your alumni network for relevant matches... I found 47 verified alumni who match that criteria. Would you like me to show the top matches sorted by connection strength?
+          </div>
+        `;
+        chatMessages.appendChild(aiMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 1000);
+    }
     
     chatInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        // Could add demo interaction here
-        chatInput.value = '';
+        sendMessage();
       }
     });
+    
+    // Intro request demo
+    function requestIntro() {
+      const card = document.getElementById('alumniCard1');
+      const btn = card.querySelector('.alumni-btn');
+      btn.textContent = 'Intro Requested ✓';
+      btn.style.background = 'var(--emerald)';
+      btn.disabled = true;
+      
+      // Add confirmation message
+      setTimeout(() => {
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'message ai';
+        aiMsg.innerHTML = `
+          <div class="msg-avatar">✉️</div>
+          <div class="msg-content">
+            Got it! I've drafted a personalized intro to Maria based on your shared Econ background and career trajectory. James (your mutual connection) will bridge the intro. Typical response time: <strong>24-48 hours</strong>.<br><br>
+            <span style="color: var(--emerald); font-size: 0.8125rem;">✓ 89% of similar intros get a response</span>
+          </div>
+        `;
+        chatMessages.appendChild(aiMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 500);
+    }
   </script>
 </body>
 </html>
