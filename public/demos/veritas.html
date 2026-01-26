@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veritas – The Trusted Professional Network</title>
+  <meta name="description" content="Veritas is the AI-powered alumni network that turns your verified credentials into career-changing connections. Trusted by 200+ universities.">
+  <meta name="theme-color" content="#0a0a0f">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Veritas – LinkedIn is everyone. Veritas is your people.">
+  <meta property="og:description" content="AI-powered professional networking built on verified alumni credentials.">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%234f46e5'/><stop offset='100%25' stop-color='%237c3aed'/></linearGradient></defs><rect fill='url(%23g)' rx='20' width='100' height='100'/><text x='50' y='68' font-size='55' font-weight='bold' text-anchor='middle' fill='white'>V</text></svg>">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg: #0a0a0f;
+      --bg-2: #0d0d14;
+      --bg-3: #12121a;
+      --bg-4: #18182a;
+      --bg-5: #1e1e30;
+      --border: rgba(255,255,255,0.05);
+      --border-2: rgba(255,255,255,0.08);
+      --border-3: rgba(255,255,255,0.12);
+      --text: #fafafa;
+      --text-2: #a1a1aa;
+      --text-3: #71717a;
+      --text-4: #52525b;
+      --indigo: #6366f1;
+      --violet: #8b5cf6;
+      --purple: #a855f7;
+      --cyan: #22d3ee;
+      --emerald: #10b981;
+      --gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+      --gradient-text: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #c4b5fd 100%);
+      --glow: rgba(99,102,241,0.15);
+      --glow-violet: rgba(139,92,246,0.12);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    /* Grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    
+    /* Grid background */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+    }
+    
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
+    @keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes glow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.05); } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+    @keyframes nodeFloat1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(15px, -20px); } }
+    @keyframes nodeFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-20px, 15px); } }
+    @keyframes nodeFloat3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(10px, 25px); } }
+    @keyframes connectionPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+    
+    .anim { opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .anim-fade { opacity: 0; animation: fadeIn 1s ease forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.3s; }
+    .d4 { animation-delay: 0.4s; }
+    .d5 { animation-delay: 0.5s; }
+    .d6 { animation-delay: 0.6s; }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    nav.scrolled {
+      padding: 0.75rem 1.5rem;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.375rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--gradient);
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 1.125rem;
+      color: white;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+      position: relative;
+    }
+    
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: var(--gradient);
+      border-radius: 13px;
+      z-index: -1;
+      opacity: 0.4;
+      filter: blur(8px);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 0.375rem;
+      padding: 0.25rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+    
+    .nav-links a {
+      padding: 0.5rem 1.125rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      border-radius: 100px;
+      transition: all 0.25s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .nav-cta { display: flex; gap: 0.75rem; align-items: center; }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .btn-ghost { 
+      background: transparent; 
+      color: var(--text-2); 
+    }
+    .btn-ghost:hover { color: var(--text); }
+    
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+    
+    .btn-primary:hover {
+      background: #e4e4e7;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(255,255,255,0.3);
+    }
+    
+    .btn-accent {
+      background: var(--gradient);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-accent::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+    }
+    
+    .btn-accent:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px -10px rgba(99, 102, 241, 0.5);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.03);
+      border-color: var(--border-3);
+    }
+    
+    .btn-lg { padding: 1rem 2rem; font-size: 0.9375rem; }
+    .btn-xl { padding: 1.125rem 2.5rem; font-size: 1rem; border-radius: 14px; }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 1.5rem 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Animated network orb */
+    .hero-orb {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      pointer-events: none;
+    }
+    
+    .hero-orb .glow-1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, rgba(139,92,246,0.1) 35%, transparent 65%);
+      animation: glow 8s ease-in-out infinite;
+    }
+    
+    .hero-orb .glow-2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(168,85,247,0.1) 0%, transparent 50%);
+      animation: orbit 40s linear infinite;
+    }
+    
+    .hero-orb .ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(99,102,241,0.15);
+    }
+    
+    .hero-orb .ring-1 { width: 300px; height: 300px; animation: orbit 60s linear infinite; }
+    .hero-orb .ring-2 { width: 450px; height: 450px; animation: orbit 80s linear infinite reverse; }
+    .hero-orb .ring-3 { width: 600px; height: 600px; animation: orbit 100s linear infinite; }
+    
+    /* Network nodes */
+    .network-nodes {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+    }
+    
+    .node {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background: var(--bg-4);
+      border: 1px solid var(--border-2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    
+    .node-1 { top: 10%; left: 20%; animation: nodeFloat1 6s ease-in-out infinite; }
+    .node-2 { top: 5%; right: 25%; animation: nodeFloat2 7s ease-in-out infinite 0.5s; }
+    .node-3 { top: 35%; left: 5%; animation: nodeFloat3 5s ease-in-out infinite 1s; }
+    .node-4 { top: 30%; right: 8%; animation: nodeFloat1 8s ease-in-out infinite 1.5s; }
+    .node-5 { bottom: 25%; left: 15%; animation: nodeFloat2 6s ease-in-out infinite 2s; }
+    .node-6 { bottom: 20%; right: 20%; animation: nodeFloat3 7s ease-in-out infinite 0.8s; }
+    
+    .node-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent);
+      transform-origin: left center;
+      animation: connectionPulse 3s ease-in-out infinite;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+    
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1.25rem 0.5rem 0.625rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+    
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--emerald);
+      animation: pulse 2s infinite;
+    }
+    
+    .badge-label {
+      background: var(--gradient);
+      color: white;
+      padding: 0.1875rem 0.625rem;
+      border-radius: 100px;
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .hero h1 {
+      font-size: clamp(3.25rem, 9vw, 5.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.75rem;
+    }
+    
+    .hero h1 .grad {
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero h1 .line-2 {
+      display: block;
+      font-size: 0.85em;
+    }
+    
+    .hero-sub {
+      font-size: clamp(1.0625rem, 2vw, 1.25rem);
+      color: var(--text-2);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    
+    .hero-sub strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    
+    .hero-note {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    
+    .hero-note svg {
+      width: 14px;
+      height: 14px;
+      color: var(--emerald);
+    }
+    
+    /* Logos */
+    .logos {
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .logos-label {
+      font-size: 0.6875rem;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      margin-bottom: 1.75rem;
+    }
+    
+    .logos-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      opacity: 0.5;
+    }
+    
+    .logos-row img {
+      height: 28px;
+      filter: grayscale(100%) brightness(200%);
+      opacity: 0.6;
+      transition: all 0.3s;
+    }
+    
+    .logos-row img:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+    
+    .university-logo {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text-3);
+      transition: color 0.3s;
+    }
+    
+    .university-logo:hover {
+      color: var(--text-2);
+    }
+    
+    /* Demo Section */
+    .demo-section {
+      padding: 0 1.5rem 8rem;
+      position: relative;
+    }
+    
+    .demo-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 
+        0 50px 100px -30px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(255,255,255,0.03),
+        0 0 100px -20px rgba(99,102,241,0.15);
+    }
+    
+    .demo-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 1rem 1.5rem;
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--bg-5); }
+    .dot.r { background: #ff5f57; }
+    .dot.y { background: #febc2e; }
+    .dot.g { background: #28c840; }
+    
+    .demo-title {
+      flex: 1;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      font-weight: 500;
+    }
+    
+    .demo-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: 480px;
+    }
+    
+    /* Demo Sidebar */
+    .demo-sidebar {
+      padding: 1.5rem;
+      border-right: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .demo-profile {
+      text-align: center;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .demo-avatar {
+      width: 64px;
+      height: 64px;
+      background: var(--gradient);
+      border-radius: 50%;
+      margin: 0 auto 0.875rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      box-shadow: 0 8px 24px rgba(99,102,241,0.3);
+    }
+    
+    .demo-name {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .demo-school {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+    }
+    
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--emerald);
+      padding: 0.125rem 0.5rem;
+      border-radius: 100px;
+      font-size: 0.625rem;
+      font-weight: 600;
+    }
+    
+    .network-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+    
+    .stat-item {
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      transition: all 0.25s;
+    }
+    
+    .stat-item:hover {
+      border-color: var(--border-2);
+      transform: translateX(4px);
+    }
+    
+    .stat-label {
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-4);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .stat-value {
+      font-size: 1.375rem;
+      font-weight: 800;
+    }
+    
+    .stat-detail {
+      font-size: 0.6875rem;
+      color: var(--text-3);
+      margin-top: 0.125rem;
+    }
+    
+    .stat-trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.625rem;
+      padding: 0.125rem 0.375rem;
+      border-radius: 4px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--emerald);
+      margin-top: 0.375rem;
+    }
+    
+    /* Demo Chat */
+    .demo-chat {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+    }
+    
+    .ai-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .ai-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 12px;
+      height: 12px;
+      background: var(--emerald);
+      border-radius: 50%;
+      border: 2px solid var(--bg-3);
+    }
+    
+    .ai-avatar svg {
+      width: 20px;
+      height: 20px;
+      color: white;
+    }
+    
+    .ai-info h3 {
+      font-size: 0.9375rem;
+      font-weight: 700;
+    }
+    
+    .ai-info p {
+      font-size: 0.6875rem;
+      color: var(--text-3);
+    }
+    
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    
+    .message {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 90%;
+    }
+    
+    .message.ai { align-self: flex-start; }
+    .message.user { align-self: flex-end; flex-direction: row-reverse; }
+    
+    .msg-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.8125rem;
+      font-weight: 700;
+    }
+    
+    .message.ai .msg-avatar {
+      background: var(--gradient);
+      color: white;
+    }
+    
+    .message.user .msg-avatar {
+      background: var(--bg-5);
+      color: var(--text-2);
+    }
+    
+    .msg-content {
+      padding: 0.875rem 1.125rem;
+      border-radius: 16px;
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+    
+    .message.ai .msg-content {
+      background: var(--bg-4);
+      border-bottom-left-radius: 4px;
+    }
+    
+    .message.user .msg-content {
+      background: var(--indigo);
+      border-bottom-right-radius: 4px;
+    }
+    
+    /* Alumni cards in chat */
+    .alumni-results {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.875rem;
+      flex-wrap: wrap;
+    }
+    
+    .alumni-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      padding: 1rem;
+      width: 200px;
+      transition: all 0.25s;
+    }
+    
+    .alumni-card:hover {
+      border-color: var(--indigo);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    
+    .alumni-header {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      margin-bottom: 0.625rem;
+    }
+    
+    .alumni-photo {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-2);
+    }
+    
+    .alumni-name {
+      font-weight: 700;
+      font-size: 0.8125rem;
+    }
+    
+    .alumni-role {
+      font-size: 0.6875rem;
+      color: var(--text-3);
+    }
+    
+    .alumni-meta {
+      font-size: 0.6875rem;
+      color: var(--text-4);
+      margin-bottom: 0.75rem;
+    }
+    
+    .alumni-connection {
+      font-size: 0.6875rem;
+      color: var(--indigo);
+      font-weight: 600;
+    }
+    
+    .alumni-btn {
+      margin-top: 0.75rem;
+      width: 100%;
+      padding: 0.5rem;
+      background: var(--gradient);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .alumni-btn:hover {
+      transform: scale(1.02);
+    }
+    
+    .chat-input {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+      background: rgba(0,0,0,0.15);
+    }
+    
+    .chat-input input {
+      flex: 1;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.875rem 1.125rem;
+      color: var(--text);
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    
+    .chat-input input::placeholder { color: var(--text-4); }
+    
+    .chat-input input:focus {
+      outline: none;
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+    }
+    
+    .chat-input button {
+      background: var(--gradient);
+      border: none;
+      border-radius: 12px;
+      padding: 0 1.5rem;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    
+    .chat-input button:hover {
+      transform: scale(1.03);
+    }
+    
+    /* Section styles */
+    .section {
+      padding: 8rem 1.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    
+    .section-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 4rem;
+    }
+    
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--violet);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    
+    .section-tag::before, .section-tag::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--violet);
+      opacity: 0.4;
+    }
+    
+    .section-head h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    
+    .section-head p {
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+    
+    /* Bento Grid */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+    
+    .bento-card {
+      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--glow) 0%, transparent 40%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    
+    .bento-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -16px rgba(0,0,0,0.4);
+    }
+    
+    .bento-card:hover::before { opacity: 1; }
+    
+    .bento-card.span-8 { grid-column: span 8; }
+    .bento-card.span-6 { grid-column: span 6; }
+    .bento-card.span-4 { grid-column: span 4; }
+    .bento-card.span-12 { grid-column: span 12; }
+    
+    .bento-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.15);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+    
+    .bento-card:hover .bento-icon {
+      background: rgba(99,102,241,0.15);
+      transform: scale(1.05);
+    }
+    
+    .bento-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.625rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .bento-card p {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Visual in bento card */
+    .bento-visual {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 140px;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+      padding: 5rem 1.5rem;
+      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .stats-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    
+    .stat {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    
+    .stat-number {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 900;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-text {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+    }
+    
+    /* TAM/Business Model Section */
+    .tam-section {
+      padding: 8rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tam-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      background: radial-gradient(ellipse, var(--glow-violet) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .tam-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    
+    .tam-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+    }
+    
+    .tam-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: var(--gradient);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .tam-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+    }
+    
+    .tam-card:hover::before {
+      opacity: 1;
+    }
+    
+    .tam-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .tam-label {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .tam-desc {
+      font-size: 0.875rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+    
+    /* How it works */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    
+    .step::after {
+      content: '';
+      position: absolute;
+      top: 40px;
+      right: -50%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--indigo), transparent);
+      opacity: 0.3;
+    }
+    
+    .step:last-child::after { display: none; }
+    
+    .step-number {
+      width: 64px;
+      height: 64px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: white;
+      box-shadow: 0 12px 32px -8px rgba(99,102,241,0.5);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .step h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.625rem;
+    }
+    
+    .step p {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+    
+    /* Testimonials */
+    .testimonials-section {
+      padding: 8rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .testimonials-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    
+    .testimonial-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+    
+    .testimonial-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-2px);
+    }
+    
+    .testimonial-quote {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-2);
+      margin-bottom: 1.5rem;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+    
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: white;
+    }
+    
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 0.9375rem;
+    }
+    
+    .testimonial-title {
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    /* Pricing */
+    .pricing-section {
+      padding: 8rem 1.5rem;
+    }
+    
+    .pricing-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+    
+    .pricing-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .pricing-card:hover {
+      border-color: var(--border-2);
+    }
+    
+    .pricing-card.featured {
+      background: linear-gradient(180deg, rgba(99,102,241,0.08) 0%, var(--bg-2) 100%);
+      border-color: var(--indigo);
+      transform: scale(1.03);
+      box-shadow: 0 0 80px -20px rgba(99,102,241,0.25);
+    }
+    
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient);
+      color: white;
+      font-size: 0.625rem;
+      font-weight: 700;
+      padding: 0.375rem 1rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .pricing-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .pricing-price {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+    
+    .pricing-price span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-4);
+    }
+    
+    .pricing-desc {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-features li {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--emerald);
+      font-weight: 700;
+      font-size: 0.8125rem;
+    }
+    
+    .pricing-card .btn {
+      width: 100%;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 10rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, var(--glow) 0%, var(--glow-violet) 40%, transparent 70%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .cta-inner h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    
+    .cta-inner p {
+      font-size: 1.125rem;
+      color: var(--text-2);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 4rem 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer-top {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.75fr repeat(4, 1fr);
+      gap: 3rem;
+      padding-bottom: 3rem;
+    }
+    
+    .footer-brand p {
+      font-size: 0.875rem;
+      color: var(--text-4);
+      margin-top: 1rem;
+      max-width: 280px;
+      line-height: 1.65;
+    }
+    
+    .footer-col h4 {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.25rem;
+    }
+    
+    .footer-col a {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--text-3);
+      text-decoration: none;
+      padding: 0.375rem 0;
+      transition: color 0.2s;
+    }
+    
+    .footer-col a:hover {
+      color: var(--text);
+    }
+    
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-copy {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+    }
+    
+    .footer-socials {
+      display: flex;
+      gap: 1.25rem;
+    }
+    
+    .footer-socials a {
+      color: var(--text-4);
+      transition: color 0.2s;
+    }
+    
+    .footer-socials a:hover {
+      color: var(--text-2);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .bento-card.span-8, .bento-card.span-6 { grid-column: span 6; }
+      .bento-card.span-4 { grid-column: span 6; }
+      .demo-content { grid-template-columns: 1fr; }
+      .demo-sidebar { 
+        border-right: none; 
+        border-bottom: 1px solid var(--border);
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .demo-profile { flex: 1; min-width: 200px; border-bottom: none; padding-bottom: 0; }
+      .network-stats { flex: 2; flex-direction: row; }
+      .stat-item { flex: 1; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .tam-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .step::after { display: none; }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-card.featured { transform: none; order: -1; grid-column: span 2; }
+      .footer-top { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+    
+    @media (max-width: 768px) {
+      .hero { padding: 7rem 1rem 4rem; }
+      .hero-cta { flex-direction: column; max-width: 320px; margin-left: auto; margin-right: auto; }
+      .hero-cta .btn { width: 100%; }
+      .network-nodes { display: none; }
+      .logos-row { gap: 1.5rem; }
+      .demo-content { min-height: auto; }
+      .demo-sidebar { flex-direction: column; }
+      .network-stats { flex-direction: column; }
+      .bento-card.span-8, .bento-card.span-6, .bento-card.span-4 { grid-column: span 12; }
+      .stats-grid, .tam-grid, .testimonials-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card.featured { grid-column: span 1; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .alumni-results { flex-direction: column; }
+      .alumni-card { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">V</div>
+        Veritas
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#universities">Universities</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">Log In</a>
+        <a href="#" class="btn btn-primary">Get Early Access</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-orb">
+      <div class="glow-1"></div>
+      <div class="glow-2"></div>
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+    </div>
+    
+    <div class="network-nodes">
+      <div class="node node-1">🎓</div>
+      <div class="node node-2">👩‍💼</div>
+      <div class="node node-3">🚀</div>
+      <div class="node node-4">💼</div>
+      <div class="node node-5">🧑‍💻</div>
+      <div class="node node-6">🌍</div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="badge anim">
+        <span class="badge-dot"></span>
+        <span class="badge-label">Beta</span>
+        Trusted by 50,000+ alumni
+      </div>
+      
+      <h1 class="anim d1">
+        LinkedIn is everyone.
+        <span class="line-2"><span class="grad">Veritas is your people.</span></span>
+      </h1>
+      
+      <p class="hero-sub anim d2">
+        The AI-powered network built on <strong>verified alumni credentials</strong>. 
+        Find your people, make real connections, and accelerate your career—backed by trust.
+      </p>
+      
+      <div class="hero-cta anim d3">
+        <a href="#" class="btn btn-accent btn-xl">Join the Waitlist →</a>
+        <a href="#demo" class="btn btn-outline btn-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          See It In Action
+        </a>
+      </div>
+      
+      <p class="hero-note anim d4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        200+ universities • Enterprise-ready • SOC 2 compliant
+      </p>
+      
+      <div class="logos anim d5">
+        <p class="logos-label">Trusted by alumni from</p>
+        <div class="logos-row">
+          <span class="university-logo">Stanford</span>
+          <span class="university-logo">MIT</span>
+          <span class="university-logo">Harvard</span>
+          <span class="university-logo">Yale</span>
+          <span class="university-logo">Berkeley</span>
+          <span class="university-logo">UNC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Section -->
+  <section class="demo-section" id="demo">
+    <div class="demo-container anim d6">
+      <div class="demo-bar">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
+        <span class="demo-title">Veritas — Your AI Alumni Assistant</span>
+      </div>
+      
+      <div class="demo-content">
+        <div class="demo-sidebar">
+          <div class="demo-profile">
+            <div class="demo-avatar">SS</div>
+            <div class="demo-name">Shane Sarin</div>
+            <div class="demo-school">
+              <span class="verified-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                Verified
+              </span>
+              UNC Chapel Hill '18
+            </div>
+          </div>
+          
+          <div class="network-stats">
+            <div class="stat-item">
+              <div class="stat-label">Network Size</div>
+              <div class="stat-value">847K</div>
+              <div class="stat-detail">UNC Alumni Globally</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">AI Matches</div>
+              <div class="stat-value">128</div>
+              <span class="stat-trend">↑ 23 this week</span>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Intros Made</div>
+              <div class="stat-value">12</div>
+              <div class="stat-detail">89% response rate</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="demo-chat">
+          <div class="chat-header">
+            <div class="ai-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A1.5 1.5 0 0 0 6 14.5 1.5 1.5 0 0 0 7.5 16 1.5 1.5 0 0 0 9 14.5 1.5 1.5 0 0 0 7.5 13m9 0a1.5 1.5 0 0 0-1.5 1.5 1.5 1.5 0 0 0 1.5 1.5 1.5 1.5 0 0 0 1.5-1.5 1.5 1.5 0 0 0-1.5-1.5"/></svg>
+            </div>
+            <div class="ai-info">
+              <h3>Your Alumni AI</h3>
+              <p>Powered by verified credentials</p>
+            </div>
+          </div>
+          
+          <div class="chat-messages">
+            <div class="message ai">
+              <div class="msg-avatar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              </div>
+              <div class="msg-content">
+                Hey Shane! 👋 I see you're exploring product roles in AI. I found 128 UNC alumni at top AI companies—want me to surface the best matches based on your background?
+              </div>
+            </div>
+            
+            <div class="message user">
+              <div class="msg-avatar">SS</div>
+              <div class="msg-content">
+                Yes! Specifically looking at Anthropic. Who could help me get a foot in the door?
+              </div>
+            </div>
+            
+            <div class="message ai">
+              <div class="msg-avatar">✨</div>
+              <div>
+                <div class="msg-content">
+                  Found 3 verified UNC alumni at Anthropic. Based on your Web3 product experience and shared Economics background, here are your best matches:
+                </div>
+                <div class="alumni-results">
+                  <div class="alumni-card">
+                    <div class="alumni-header">
+                      <div class="alumni-photo">MR</div>
+                      <div>
+                        <div class="alumni-name">Maria Rodriguez</div>
+                        <div class="alumni-role">Senior PM @ Anthropic</div>
+                      </div>
+                    </div>
+                    <div class="alumni-meta">UNC '14 • Economics → PM</div>
+                    <div class="alumni-connection">🔗 2nd via James Chen (your classmate)</div>
+                    <button class="alumni-btn">Request Warm Intro</button>
+                  </div>
+                  <div class="alumni-card">
+                    <div class="alumni-header">
+                      <div class="alumni-photo">DK</div>
+                      <div>
+                        <div class="alumni-name">David Kim</div>
+                        <div class="alumni-role">Product Lead @ Anthropic</div>
+                      </div>
+                    </div>
+                    <div class="alumni-meta">UNC '12 • CS + Econ</div>
+                    <div class="alumni-connection">🔗 3rd connection</div>
+                    <button class="alumni-btn">Request Intro</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="message user">
+              <div class="msg-avatar">SS</div>
+              <div class="msg-content">
+                Draft me an intro message to Maria?
+              </div>
+            </div>
+            
+            <div class="message ai">
+              <div class="msg-avatar">✍️</div>
+              <div class="msg-content">
+                Done! Here's a personalized draft based on your shared background:<br><br>
+                <em style="color: var(--text-3);">"Hi Maria — Fellow Tar Heel here (Econ '18). I'm exploring PM roles in AI after building products at Consensys and RECUR. Your path from economics to Anthropic is exactly the transition I'm aiming for. Would you have 15 min to share what the jump looked like? Go Heels! 🐏"</em><br><br>
+                <span style="color: var(--emerald); font-size: 0.8125rem;">✓ 73% higher response rate with shared credentials</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="chat-input">
+            <input type="text" placeholder="Try: 'Find alumni who pivoted from finance to tech'" />
+            <button>Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-number">89%</div>
+        <div class="stat-text">Response rate on alumni intros</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">3.2x</div>
+        <div class="stat-text">More likely to get hired via alumni</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">50K+</div>
+        <div class="stat-text">Verified alumni on platform</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">&lt;48h</div>
+        <div class="stat-text">Average intro response time</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Bento Grid -->
+  <section class="section" id="features">
+    <div class="section-head">
+      <span class="section-tag">Platform</span>
+      <h2>Professional networking,<br>rebuilt on trust</h2>
+      <p>LinkedIn connects you to everyone. Veritas connects you to the right people—verified alumni who share your story.</p>
+    </div>
+    
+    <div class="bento">
+      <div class="bento-card span-8">
+        <div class="bento-icon">🧠</div>
+        <h3>AI-Powered Matching</h3>
+        <p>Our AI doesn't just search—it understands context. It knows that an econ major breaking into AI might learn more from someone who made that exact pivot than from a CS lifer. It surfaces connections that actually matter.</p>
+      </div>
+      
+      <div class="bento-card span-4">
+        <div class="bento-icon">🛡️</div>
+        <h3>Verified Credentials</h3>
+        <p>Every member is verified through their university. No fake profiles. No noise. Just real alumni you can trust.</p>
+      </div>
+      
+      <div class="bento-card span-4">
+        <div class="bento-icon">💬</div>
+        <h3>AI-Drafted Intros</h3>
+        <p>Never stare at a blank message again. Our AI crafts personalized outreach based on shared experiences.</p>
+      </div>
+      
+      <div class="bento-card span-4">
+        <div class="bento-icon">🔗</div>
+        <h3>Warm Path Finder</h3>
+        <p>See exactly who connects you to anyone. One classmate away from your dream company? We'll show you.</p>
+      </div>
+      
+      <div class="bento-card span-4">
+        <div class="bento-icon">📊</div>
+        <h3>Career Intelligence</h3>
+        <p>See aggregated paths: where alumni like you ended up, what companies they joined, what roles they landed.</p>
+      </div>
+      
+      <div class="bento-card span-6">
+        <div class="bento-icon">🎯</div>
+        <h3>Intent-Based Discovery</h3>
+        <p>Tell us what you're working toward—fundraising, job hunting, mentorship, hiring—and we'll surface the perfect connections from your verified network. No cold outreach, just warm introductions.</p>
+      </div>
+      
+      <div class="bento-card span-6">
+        <div class="bento-icon">🤝</div>
+        <h3>Give-to-Get Culture</h3>
+        <p>Karma scoring rewards members who pay it forward. The more you help fellow alumni, the more intros open up to you. A virtuous cycle of professional generosity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAM / Market Size -->
+  <section class="tam-section" id="market">
+    <div class="section-head">
+      <span class="section-tag">The Opportunity</span>
+      <h2>A $40B network waiting<br>to be unlocked</h2>
+      <p>Every university. Every company. Every professional association. Alumni networks are everywhere—and they're all broken.</p>
+    </div>
+    
+    <div class="tam-grid">
+      <div class="tam-card">
+        <div class="tam-number">4,000+</div>
+        <div class="tam-label">Universities</div>
+        <div class="tam-desc">US alone. Global potential is 10x larger.</div>
+      </div>
+      <div class="tam-card">
+        <div class="tam-number">200M+</div>
+        <div class="tam-label">College Alumni</div>
+        <div class="tam-desc">In the US. Underserved by LinkedIn's noise.</div>
+      </div>
+      <div class="tam-card">
+        <div class="tam-number">$40B</div>
+        <div class="tam-label">TAM</div>
+        <div class="tam-desc">Alumni engagement, recruiting, advancement.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it Works -->
+  <section class="section" id="how">
+    <div class="section-head">
+      <span class="section-tag">How It Works</span>
+      <h2>From zero to connected<br>in under 2 minutes</h2>
+      <p>No resume uploads. No connection requests. Just verify and go.</p>
+    </div>
+    
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Verify your credentials</h3>
+        <p>Connect with your university email or through your alumni association. Takes 30 seconds.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Tell us your intent</h3>
+        <p>Looking for a job? Hiring? Raising a round? Our AI understands context, not just keywords.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Get matched & introduced</h3>
+        <p>AI surfaces the best alumni matches. Request intros. Get responses. Make things happen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section">
+    <div class="section-head">
+      <span class="section-tag">From Our Members</span>
+      <h2>Real connections,<br>real results</h2>
+    </div>
+    
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I sent 50 cold LinkedIn messages with zero responses. My first Veritas intro got a reply in 2 hours—and a referral that week. The alumni bond is real."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SK</div>
+          <div>
+            <div class="testimonial-name">Sarah Kim</div>
+            <div class="testimonial-title">Now at Stripe • Stanford '19</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"We closed our seed round in 3 weeks. Half the intro meetings came through Veritas. The 'fellow alumni' opener just hits different with VCs."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MR</div>
+          <div>
+            <div class="testimonial-name">Marcus Rodriguez</div>
+            <div class="testimonial-title">Founder, Series A • MIT '17</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"As an alumni director, I've tried every platform. Veritas is the first one alumni actually use. Engagement is up 340% in 6 months."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JL</div>
+          <div>
+            <div class="testimonial-name">Jennifer Liu</div>
+            <div class="testimonial-title">Alumni Director • Duke University</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section" id="pricing">
+    <div class="section-head">
+      <span class="section-tag">Pricing</span>
+      <h2>Start free. Scale when ready.</h2>
+      <p>For individuals, teams, and universities.</p>
+    </div>
+    
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Alumni</div>
+        <div class="pricing-price">$0<span>/mo</span></div>
+        <div class="pricing-desc">Free forever</div>
+        <ul class="pricing-features">
+          <li>Verified alumni profile</li>
+          <li>5 AI matches per month</li>
+          <li>1 intro request per week</li>
+          <li>Career path insights</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Join Free</a>
+      </div>
+      
+      <div class="pricing-card featured">
+        <span class="pricing-badge">Most Popular</span>
+        <div class="pricing-name">Professional</div>
+        <div class="pricing-price">$19<span>/mo</span></div>
+        <div class="pricing-desc">For serious networkers</div>
+        <ul class="pricing-features">
+          <li>Everything in Alumni</li>
+          <li>Unlimited AI matches</li>
+          <li>Unlimited intro requests</li>
+          <li>AI-drafted messages</li>
+          <li>Priority in search results</li>
+          <li>Multi-school networks</li>
+        </ul>
+        <a href="#" class="btn btn-accent">Start Free Trial</a>
+      </div>
+      
+      <div class="pricing-card">
+        <div class="pricing-name">University</div>
+        <div class="pricing-price">Custom</div>
+        <div class="pricing-desc">For institutions</div>
+        <ul class="pricing-features">
+          <li>White-label platform</li>
+          <li>SSO integration</li>
+          <li>Analytics dashboard</li>
+          <li>Dedicated success manager</li>
+          <li>Custom AI training</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <h2>Your people are waiting.<br><span style="background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Let's find them.</span></h2>
+      <p>Join 50,000+ alumni who've discovered what happens when professional networking is built on trust instead of noise.</p>
+      <a href="#" class="btn btn-accent btn-xl">Join the Waitlist →</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <div class="logo-mark">V</div>
+          Veritas
+        </a>
+        <p>The trusted professional network. Built on verified alumni credentials. Powered by AI that understands context.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">For Universities</a>
+        <a href="#">For Enterprise</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Press Kit</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Help Center</a>
+        <a href="#">API Docs</a>
+        <a href="#">Community</a>
+        <a href="#">Status</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+        <a href="#">GDPR</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Veritas Inc. All rights reserved.</div>
+      <div class="footer-socials">
+        <a href="#" aria-label="X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', scrollY > 40);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all bento cards and other elements
+    document.querySelectorAll('.bento-card, .tam-card, .step, .testimonial-card, .pricing-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Stagger animation for grid items
+    document.querySelectorAll('.bento-card').forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.1}s`;
+    });
+
+    // Chat demo interaction (optional enhancement)
+    const chatInput = document.querySelector('.chat-input input');
+    const chatButton = document.querySelector('.chat-input button');
+    
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        // Could add demo interaction here
+        chatInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
