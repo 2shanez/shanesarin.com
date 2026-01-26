@@ -430,6 +430,15 @@
             margin-bottom: 4px;
         }
 
+        .greeting-title {
+            animation: greetingIn 0.6s ease-out;
+        }
+
+        @keyframes greetingIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .greeting p {
             color: var(--text-secondary);
             font-size: 14px;
@@ -461,6 +470,20 @@
             border: 1px solid rgba(75, 156, 211, 0.2);
             position: relative;
             overflow: hidden;
+            animation: cardIn 0.5s ease-out 0.1s both;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .points-card {
+            animation: cardIn 0.5s ease-out 0.2s both;
+        }
+
+        .ai-card {
+            animation: cardIn 0.5s ease-out 0.3s both;
         }
 
         .credential::before {
@@ -604,6 +627,19 @@
         .action-btn:active {
             transform: scale(0.94);
             background: var(--card-hover);
+        }
+
+        .actions {
+            animation: fadeIn 0.5s ease-out 0.15s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .stats-row {
+            animation: fadeIn 0.5s ease-out 0.2s both;
         }
 
         .action-icon {
