@@ -116,11 +116,21 @@ const { title, description, image = "/profile.jpg" } = Astro.props;
 
   function animate() {
     const animateElements = document.querySelectorAll(".animate");
-
-    animateElements.forEach((element, index) => {
-      setTimeout(() => {
-        element.classList.add("show");
-      }, index * 150);
+    
+    // Wait for next frame to ensure CSS is fully applied
+    requestAnimationFrame(() => {
+      // Enable transitions
+      document.documentElement.classList.add("ready");
+      
+      // Small delay to ensure transitions are active before animating
+      requestAnimationFrame(() => {
+        animateElements.forEach((element, index) => {
+          // Stagger with minimal JS delay
+          setTimeout(() => {
+            element.classList.add("show");
+          }, index * 60);
+        });
+      });
     });
   }
 
@@ -179,6 +189,9 @@ const { title, description, image = "/profile.jpg" } = Astro.props;
   }
 
   document.addEventListener("DOMContentLoaded", () => init());
-  document.addEventListener("astro:after-swap", () => init());
+  document.addEventListener("astro:after-swap", () => {
+    document.documentElement.classList.remove("ready");
+    init();
+  });
   preloadTheme();
 </script>
