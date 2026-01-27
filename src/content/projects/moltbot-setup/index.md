@@ -1,7 +1,7 @@
 ---
 title: "🤖 Moltbot - Personal AI Assistant"
 description: "Self-hosted AI assistant connected to GitHub, web search, and more."
-date: "Jan 2026"
+date: "Jan 28 2026"
 demoURL: "https://github.com/clawdbot/clawdbot"
 repoURL: "https://github.com/2shanez/2shanez.github.io"
 ---
