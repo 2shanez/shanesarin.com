@@ -41,11 +41,21 @@
 
   function animate() {
     const animateElements = document.querySelectorAll(".animate");
-
-    animateElements.forEach((element, index) => {
-      setTimeout(() => {
-        element.classList.add("show");
-      }, index * 150);
+    
+    // Wait for next frame to ensure CSS is fully applied
+    requestAnimationFrame(() => {
+      // Enable transitions
+      document.documentElement.classList.add("ready");
+      
+      // Small delay to ensure transitions are active before animating
+      requestAnimationFrame(() => {
+        animateElements.forEach((element, index) => {
+          // Stagger with minimal JS delay
+          setTimeout(() => {
+            element.classList.add("show");
+          }, index * 60);
+        });
+      });
     });
   }
 
@@ -104,9 +114,12 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => init());
-  document.addEventListener("astro:after-swap", () => init());
+  document.addEventListener("astro:after-swap", () => {
+    document.documentElement.classList.remove("ready");
+    init();
+  });
   preloadTheme();
-</script><link rel="stylesheet" href="/_astro/_slug_.Cnqin7Dg.css">
+</script><link rel="stylesheet" href="/_astro/_slug_.B5cL2BXF.css">
 <style>.line-clamp-2[data-astro-cid-3vbfny23]{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}a[data-astro-cid-3vbfny23]:hover span[data-astro-cid-3vbfny23].text-5xl{transform:scale(1.15)}
 </style></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 justify-between"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white" style="transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1), text-decoration-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);">  <div class="font-semibold"> Shane </div>  </a> <nav class="flex gap-1"> <a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white underline underline-offset-2" style="transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1), text-decoration-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);"> 
 Work
