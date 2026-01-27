@@ -9,23 +9,25 @@ const projects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
+// Category mapping
+const categoryMap: Record<string, string> = {
+  'clawdbot-setup': 'AI Tools',
+  'veritas': 'Social',
+  'civitas': 'GovTech',
+  'prism': 'Infrastructure',
+  'haven': 'Web3',
+  'medgraph': 'Healthcare',
+  'carbonos': 'Climate',
+  'sentinel': 'Security',
+  'casebrief': 'Legal',
+  'muse': 'Creator',
+  'aegis': 'AI Agents',
+};
+
+const getCategory = (slug: string) => categoryMap[slug] || 'Other';
+
 // Get unique categories for filter
-const categories = [...new Set(projects.map(p => {
-  const categoryMap: Record<string, string> = {
-    'clawdbot-setup': 'AI Tools',
-    'veritas': 'Social',
-    'civitas': 'GovTech',
-    'prism': 'Infrastructure',
-    'haven': 'Web3',
-    'medgraph': 'Healthcare',
-    'carbonos': 'Climate',
-    'sentinel': 'Security',
-    'casebrief': 'Legal',
-    'muse': 'Creator',
-    'aegis': 'AI Agents',
-  };
-  return categoryMap[p.slug] || 'Other';
-}))];
+const categories = [...new Set(projects.map(p => getCategory(p.slug)))];
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
@@ -57,29 +59,11 @@ const categories = [...new Set(projects.map(p => {
       
       <!-- Projects Grid -->
       <div class="animate grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
-        {
-          projects.map((project) => {
-            const categoryMap: Record<string, string> = {
-              'clawdbot-setup': 'AI Tools',
-              'veritas': 'Social',
-              'civitas': 'GovTech',
-              'prism': 'Infrastructure',
-              'haven': 'Web3',
-              'medgraph': 'Healthcare',
-              'carbonos': 'Climate',
-              'sentinel': 'Security',
-              'casebrief': 'Legal',
-              'muse': 'Creator',
-              'aegis': 'AI Agents',
-            };
-            const category = categoryMap[project.slug] || 'Other';
-            return (
-              <div class="project-card" data-category={category}>
-                <PortfolioCard entry={project} />
-              </div>
-            );
-          })
-        }
+        {projects.map((project) => (
+          <div class="project-card" data-category={getCategory(project.slug)}>
+            <PortfolioCard entry={project} />
+          </div>
+        ))}
       </div>
       
       <!-- Stats Footer -->
