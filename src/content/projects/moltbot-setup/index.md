@@ -1,5 +1,5 @@
 ---
-title: "🤖 Moltbot - Personal AI Assistant"
+title: "Moltbot - Personal AI Assistant"
 description: "Self-hosted AI assistant connected to GitHub, web search, and more."
 date: "Jan 28 2026"
 demoURL: "https://github.com/clawdbot/clawdbot"
