@@ -1,7 +1,7 @@
 ---
 title: "CarbonOS - Climate Compliance Infrastructure"
 description: "The operating system for corporate climate compliance. Track, report, and reduce emissions. Comply with EU CSRD, SEC rules, and CA SB 253 without spreadsheets or consultants."
-date: "Jan 26 2026"
+date: "Jan 2026"
 demoURL: "https://2667.io/demos/carbonos.html"
 ---
 

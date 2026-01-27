@@ -1,7 +1,7 @@
 ---
 title: "Sentinel"
 description: "AI-Native Defense & Security Platform"
-date: 2025-01-26
+date: "Jan 2026"
 status: "concept"
 tags: ["ai", "defense", "security", "government", "enterprise", "cyber"]
 demo: "/demos/sentinel.html"

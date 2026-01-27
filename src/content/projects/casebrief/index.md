@@ -1,7 +1,7 @@
 ---
 title: "CaseBrief - AI Legal Workflow Platform"
 description: "The AI associate that never sleeps. Automate legal research, contract analysis, discovery, and brief drafting. 10x lawyer productivity while maintaining the accuracy clients demand."
-date: "Jan 26 2025"
+date: "Jan 2026"
 demoURL: "https://2667.io/demos/casebrief.html"
 ---
 

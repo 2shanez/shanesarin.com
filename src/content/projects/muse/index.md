@@ -1,7 +1,7 @@
 ---
 title: "Muse"
 description: "The AI Studio for Creators"
-date: 2025-01-26
+date: "Jan 2026"
 status: "concept"
 tags: ["ai", "creator-economy", "content", "monetization", "web3"]
 demo: "/demos/muse.html"

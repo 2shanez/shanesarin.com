@@ -1,7 +1,7 @@
 ---
 title: "Prism"
 description: "The Trust Layer for the AI Age"
-date: 2025-01-15
+date: "Jan 2026"
 status: "concept"
 tags: ["ai", "trust", "verification", "news", "infrastructure", "blockchain"]
 demo: "/demos/prism.html"

@@ -1,7 +1,7 @@
 ---
 title: "Aegis"
 description: "The Operating System for Your AI Life"
-date: 2025-01-26
+date: "Jan 2026"
 status: "concept"
 tags: ["ai", "agents", "automation", "security", "personal-computing", "infrastructure"]
 demo: "/demos/aegis.html"

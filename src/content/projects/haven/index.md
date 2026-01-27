@@ -1,7 +1,7 @@
 ---
 title: "Haven"
 description: "Protection That Works Automatically"
-date: 2025-01-26
+date: "Jan 2026"
 status: "concept"
 tags: ["chainlink", "insurance", "parametric", "oracles", "defi", "consumer"]
 demo: "/demos/haven.html"

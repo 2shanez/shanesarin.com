@@ -1,7 +1,7 @@
 ---
 title: "MedGraph - AI Infrastructure for Healthcare Operations"
 description: "The Palantir of hospital operations. AI that connects fragmented healthcare systems and optimizes clinical workflows."
-date: "Jan 26 2026"
+date: "Jan 2026"
 demoURL: "https://2667.io/demos/medgraph.html"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Veritas - AI-Powered Alumni Network"
 description: "The trusted professional network where credentials are verified and connections are warm. LinkedIn is everyone. Veritas is your people."
-date: "Jan 26 2026"
+date: "Jan 2026"
 demoURL: "https://2667.io/demos/veritas.html"
 ---
 

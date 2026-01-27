@@ -1,7 +1,7 @@
 ---
 title: "Civitas - AI Infrastructure for Citizen Services"
 description: "The Palantir of citizen services. Proactive government that finds benefits for you, not the other way around."
-date: "Jan 26 2026"
+date: "Jan 2026"
 demoURL: "https://2667.io/demos/civitas.html"
 ---
 
