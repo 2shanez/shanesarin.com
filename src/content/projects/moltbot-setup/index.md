@@ -1,16 +1,16 @@
 ---
-title: "Clawdbot - Personal AI Assistant"
+title: "Moltbot - Personal AI Assistant"
 description: "Self-hosted AI assistant connected to GitHub, web search, and more."
 date: "Jan 27 2026"
 demoURL: "https://github.com/clawdbot/clawdbot"
 repoURL: "https://github.com/2shanez/2shanez.github.io"
 ---
 
-My personal AI assistant setup using [Clawdbot](https://clawdbot.com) — an open-source, self-hosted AI agent that connects to your tools and messaging platforms.
+My personal AI assistant setup using [Moltbot](https://clawdbot.com) — an open-source, self-hosted AI agent that connects to your tools and messaging platforms.
 
-## 🤖 What is Clawdbot?
+## 🤖 What is Moltbot?
 
-Clawdbot is an AI assistant that runs on your own server and can:
+Moltbot is an AI assistant that runs on your own server and can:
 - Connect to messaging apps (Telegram, Discord, WhatsApp, iMessage, etc.)
 - Execute commands and write code
 - Control browsers for automation
@@ -43,31 +43,19 @@ My assistant analyzed my site's performance and submitted a PR that:
 - Improved page load times
 
 ### Research Assistant
-Using Exa MCP integration:
-```bash
-mcporter call exa.web_search_exa query="latest AI developments"
-mcporter call exa.get_code_context_exa query="React hooks examples"
-mcporter call exa.company_research_exa query="Anthropic products"
-```
-
-## 📚 Resources
-
-- [Clawdbot GitHub](https://github.com/clawdbot/clawdbot)
-- [Clawdbot Docs](https://docs.clawd.bot)
-- [Clawdbot Discord](https://discord.gg/clawd)
-- [ClawdHub (Skills)](https://clawdhub.com)
+Using Exa MCP integration for AI-powered search and research capabilities.
 
 ## 💡 Tips for Getting Started
 
 1. **Start simple** — Get Telegram working first before adding more channels
-2. **Use skills** — Don't reinvent the wheel; check ClawdHub for pre-built integrations
+2. **Use skills** — Don't reinvent the wheel; check for pre-built integrations
 3. **Set up GitHub early** — `gh auth login` unlocks a ton of useful automation
 4. **Reminders are powerful** — Use cron jobs for daily standups, check-ins, etc.
 
 ## 🔮 What's Next
 
 - [ ] Connect Mac node for iMessage and desktop control
-- [ ] Set up email integration (Gmail via gog)
+- [ ] Set up email integration
 - [ ] Explore voice features
 - [ ] Build custom skills for personal workflows
 
