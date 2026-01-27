@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="/favicon.png"><meta name="generator" content="Astro v5.16.8"><!-- Font preloads --><link rel="preload" href="/_astro/inter-latin-400-normal.C38fXH4l.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/inter-latin-600-normal.LgqL8muc.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-400-normal.DnxXpLNu.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-600-normal.B-3RcLOQ.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://2667.io/projects/sentinel/"><!-- Primary Meta Tags --><title>Sentinel | Shane</title><meta name="title" content="Sentinel | Shane"><meta name="description" content="AI-Native Defense &#38; Security Platform"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://2667.io/projects/sentinel/"><meta property="og:title" content="Sentinel | Shane"><meta property="og:description" content="AI-Native Defense &#38; Security Platform"><meta property="og:image" content="https://2667.io/profile.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://2667.io/projects/sentinel/"><meta property="twitter:title" content="Sentinel | Shane"><meta property="twitter:description" content="AI-Native Defense &#38; Security Platform"><meta property="twitter:image" content="https://2667.io/profile.jpg"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="Shane" href="https://2667.io/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme === "system" || !localStorage.theme) {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+    window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.C3Mazj8N.css"></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 justify-between"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> Shane </div>  </a> <nav class="flex gap-1"> <a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+Work
+ </a> <span>/</span> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+Projects
+ </a> <span>/</span> <a href="/collection" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+2667
+ </a> </nav> </div>  </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/projects" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
+Back to projects
+ </div> </a> </div> <div class="space-y-1 my-10"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2025-01-26T00:00:00.000Z"> Jan 26, 2025 </time> </div>
+&bull;
+<div class="font-base text-sm"> 4 min read </div> </div> <div class="animate text-2xl font-semibold text-black dark:text-white"> Sentinel </div>  </div> <article class="animate"> <h1 id="sentinel--the-anduril-of-cyber-defense">Sentinel – The Anduril of Cyber Defense</h1>
+<p><strong>Sentinel</strong> is the AI platform for threat detection, analysis, and autonomous response. Built for government and enterprise. The future of national security.</p>
+<h2 id="the-thesis">The Thesis</h2>
+<p>Adversaries are using AI. Defense needs to as well.</p>
+<p>Nation-states and sophisticated threat actors have weaponized artificial intelligence. Traditional security can’t keep pace. Sentinel is the answer.</p>
+<h2 id="the-gap-in-the-market">The Gap in the Market</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Company</th><th>Focus</th><th>Gap</th></tr></thead><tbody><tr><td><strong>Anduril</strong></td><td>Hardware defense (drones, sensors, Lattice)</td><td>Not cyber-focused</td></tr><tr><td><strong>Palantir</strong></td><td>Data analytics, intelligence</td><td>Analysis-heavy, not operational</td></tr><tr><td><strong>Shield AI</strong></td><td>Autonomous aircraft</td><td>Hardware, not software security</td></tr><tr><td><strong>CrowdStrike</strong></td><td>Endpoint protection</td><td>Point solution, not platform</td></tr></tbody></table>
+<p><strong>The gap</strong>: No AI-native platform that combines threat detection, analysis, AND autonomous response in one unified system. That’s Sentinel.</p>
+<h2 id="core-capabilities">Core Capabilities</h2>
+<h3 id="-threat-detection">🔍 Threat Detection</h3>
+<p>Multi-modal AI that sees threats across network, endpoint, cloud, and identity—simultaneously.</p>
+<ul>
+<li>Behavioral anomaly detection</li>
+<li>Graph-based attack path analysis</li>
+<li>Zero-day pattern recognition</li>
+<li>Cross-environment correlation</li>
+</ul>
+<h3 id="-ai-analysis">🧠 AI Analysis</h3>
+<p>Large language models trained on threat intelligence to explain, contextualize, and prioritize.</p>
+<ul>
+<li>Natural language threat briefings</li>
+<li>Automated indicator enrichment</li>
+<li>TTP mapping to MITRE ATT&#x26;CK</li>
+<li>Predictive risk scoring</li>
+</ul>
+<h3 id="-autonomous-response">⚡ Autonomous Response</h3>
+<p>Pre-approved playbooks execute in milliseconds. Human-in-the-loop for high-impact decisions.</p>
+<ul>
+<li>Automated containment</li>
+<li>Dynamic micro-segmentation</li>
+<li>Identity-aware access control</li>
+<li>Configurable autonomy levels</li>
+</ul>
+<h3 id="-threat-intelligence">🌐 Threat Intelligence</h3>
+<p>Continuous ingestion of global threat feeds, dark web monitoring, and adversary tracking.</p>
+<ul>
+<li>200+ intelligence feeds</li>
+<li>APT campaign tracking</li>
+<li>Geopolitical context overlay</li>
+<li>Custom indicator creation</li>
+</ul>
+<h2 id="the-problem-we-solve">The Problem We Solve</h2>
+<p><strong>AI-Powered Attacks Are Here:</strong></p>
+<ul>
+<li>Automated vulnerability discovery at machine speed</li>
+<li>Polymorphic malware that evolves past signatures</li>
+<li>Deepfake-enabled social engineering at scale</li>
+<li>AI-generated zero-days faster than patches deploy</li>
+<li>Autonomous attack chains with no human in the loop</li>
+</ul>
+<p><strong>Legacy Defense Can’t Keep Up:</strong></p>
+<ul>
+<li>Rule-based systems can’t adapt to novel threats</li>
+<li>Alert fatigue: 10,000+ daily alerts, 5% investigated</li>
+<li>Median dwell time: 197 days undetected</li>
+<li>Talent shortage: 3.4M unfilled security positions</li>
+<li>Fragmented tools with no unified threat picture</li>
+</ul>
+<h2 id="deployment-options">Deployment Options</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model</th><th>Description</th><th>Best For</th></tr></thead><tbody><tr><td><strong>On-Premises</strong></td><td>Full deployment in your data center. Air-gapped capable.</td><td>Classified environments</td></tr><tr><td><strong>Government Cloud</strong></td><td>AWS GovCloud, Azure Government, Google Cloud for Government</td><td>Federal agencies</td></tr><tr><td><strong>Hybrid</strong></td><td>Sensors on-prem, analytics in cloud</td><td>Enterprise with compliance needs</td></tr></tbody></table>
+<h2 id="compliance--certifications">Compliance &#x26; Certifications</h2>
+<ul>
+<li>🛡️ <strong>FedRAMP High</strong> Authorized</li>
+<li>🔐 <strong>IL5 / IL6</strong> Certified</li>
+<li>🏛️ <strong>StateRAMP</strong> Authorized</li>
+<li>📋 <strong>SOC 2 Type II</strong> Certified</li>
+<li>🌐 <strong>ISO 27001</strong> Certified</li>
+<li>💳 <strong>PCI DSS</strong> Level 1</li>
+<li>🏥 <strong>HIPAA</strong> Compliant</li>
+<li>🇪🇺 <strong>GDPR</strong> Compliant</li>
+</ul>
+<h2 id="target-customers">Target Customers</h2>
+<ol>
+<li><strong>Federal Government</strong> - DoD, Intelligence Community, Civilian Agencies</li>
+<li><strong>State &#x26; Local</strong> - Governors’ offices, critical agencies</li>
+<li><strong>Defense Industrial Base</strong> - Defense contractors, suppliers</li>
+<li><strong>Critical Infrastructure</strong> - Energy, water, transportation, healthcare</li>
+<li><strong>Fortune 500 Enterprise</strong> - Financial services, tech, manufacturing</li>
+</ol>
+<h2 id="government-procurement-landscape">Government Procurement Landscape</h2>
+<p>Sentinel is designed to navigate federal acquisition:</p>
+<ul>
+<li><strong>SBIR/STTR</strong> eligible for R&#x26;D funding</li>
+<li><strong>GSA Schedule</strong> ready for faster procurement</li>
+<li><strong>OTA (Other Transaction Authority)</strong> compatible for rapid deployment</li>
+<li><strong>CAGE Code</strong> registered and active</li>
+</ul>
+<h2 id="the-positioning">The Positioning</h2>
+<blockquote>
+<p>“The Anduril of cyber defense”</p>
+<p>AI that sees threats before they materialize. Defense-grade security for the age of AI warfare.</p>
+</blockquote>
+<h2 id="why-now">Why Now?</h2>
+<ol>
+<li><strong>AI threat explosion</strong>: Nation-states have weaponized AI for offensive operations</li>
+<li><strong>Regulation tailwinds</strong>: CISA, Executive Orders requiring modern security posture</li>
+<li><strong>Talent crisis</strong>: Can’t hire enough analysts; must augment with AI</li>
+<li><strong>Budget availability</strong>: Cyber budgets at all-time highs post-SolarWinds, Colonial Pipeline</li>
+<li><strong>AI maturity</strong>: LLMs finally capable of meaningful security analysis</li>
+</ol>
+<h2 id="the-vision">The Vision</h2>
+<p>Every organization—from government agencies to critical infrastructure to enterprises—needs AI-native defense. Sentinel becomes the standard platform for autonomous cyber operations.</p>
+<p>The future of national security runs on Sentinel.</p>
+<hr>
+<p><em><a href="/demos/sentinel.html">View the demo →</a></em></p> </article>  </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+Back to top
+</div> </button> </div> </div> <div class="flex justify-end items-center"> <div class="flex flex-wrap gap-1 items-center"> <button id="light-theme-button" aria-label="Light theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div>  </div> </footer> </body></html>

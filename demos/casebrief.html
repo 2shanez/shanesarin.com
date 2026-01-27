@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaseBrief – The AI Associate That Never Sleeps</title>
+  <meta name="description" content="CaseBrief is the AI-powered legal workflow platform that 10x lawyer productivity. Automate research, drafting, discovery, and contract analysis.">
+  <meta name="theme-color" content="#0a0f1a">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="CaseBrief – AI Legal Workflow Platform">
+  <meta property="og:description" content="The AI associate that never sleeps. 10x your legal team's productivity with automated research, drafting, and discovery.">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Crimson+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%231e3a5f'/><stop offset='100%25' stop-color='%23c9a227'/></linearGradient></defs><rect fill='url(%23g)' rx='18' width='100' height='100'/><text x='50' y='65' font-size='50' font-weight='bold' text-anchor='middle' fill='white'>⚖</text></svg>">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg: #0a0f1a;
+      --bg-2: #0d1320;
+      --bg-3: #111827;
+      --bg-4: #1a2332;
+      --bg-5: #243044;
+      --border: rgba(201, 162, 39, 0.08);
+      --border-2: rgba(201, 162, 39, 0.12);
+      --border-3: rgba(201, 162, 39, 0.18);
+      --text: #f5f5f5;
+      --text-2: #94a3b8;
+      --text-3: #64748b;
+      --text-4: #475569;
+      --navy: #1e3a5f;
+      --navy-light: #2d4a6f;
+      --gold: #c9a227;
+      --gold-light: #dbb94d;
+      --gold-dark: #9a7b1a;
+      --emerald: #10b981;
+      --red: #ef4444;
+      --gradient: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 50%, #1e3a5f 100%);
+      --gradient-gold: linear-gradient(135deg, #c9a227 0%, #dbb94d 50%, #c9a227 100%);
+      --gradient-text: linear-gradient(135deg, #c9a227 0%, #dbb94d 50%, #f5d678 100%);
+      --glow: rgba(201, 162, 39, 0.1);
+      --glow-navy: rgba(30, 58, 95, 0.2);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    /* Subtle pattern overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    
+    /* Legal document lines background */
+    .lines-bg {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(201, 162, 39, 0.015) 39px, rgba(201, 162, 39, 0.015) 40px);
+      pointer-events: none;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 60%);
+    }
+    
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+    @keyframes glow { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
+    @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+    @keyframes highlight { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    
+    .anim { opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .anim-fade { opacity: 0; animation: fadeIn 1s ease forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.3s; }
+    .d4 { animation-delay: 0.4s; }
+    .d5 { animation-delay: 0.5s; }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    nav.scrolled {
+      padding: 0.75rem 1.5rem;
+      background: rgba(10, 15, 26, 0.9);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.375rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      background: var(--gradient);
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 20px rgba(30, 58, 95, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+      position: relative;
+      border: 1px solid rgba(201, 162, 39, 0.2);
+    }
+    
+    .logo-text {
+      font-family: 'Crimson Pro', serif;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 0.375rem;
+      padding: 0.25rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+    
+    .nav-links a {
+      padding: 0.5rem 1.125rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      border-radius: 100px;
+      transition: all 0.25s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .nav-cta { display: flex; gap: 0.75rem; align-items: center; }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .btn-ghost { background: transparent; color: var(--text-2); }
+    .btn-ghost:hover { color: var(--text); }
+    
+    .btn-primary {
+      background: var(--gradient-gold);
+      color: var(--bg);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(201, 162, 39, 0.5);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    
+    .btn-outline:hover {
+      background: rgba(201, 162, 39, 0.05);
+      border-color: var(--gold);
+    }
+    
+    .btn-lg { padding: 1rem 2rem; font-size: 0.9375rem; }
+    .btn-xl { padding: 1.125rem 2.5rem; font-size: 1rem; border-radius: 14px; }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 1.5rem 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Scales of justice background */
+    .hero-scales {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 25rem;
+      opacity: 0.02;
+      pointer-events: none;
+      color: var(--gold);
+    }
+    
+    /* Glowing orb */
+    .hero-orb {
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      pointer-events: none;
+    }
+    
+    .hero-orb .glow-1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(30, 58, 95, 0.3) 0%, rgba(201, 162, 39, 0.1) 35%, transparent 65%);
+      animation: glow 8s ease-in-out infinite;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+    
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1.25rem 0.5rem 0.625rem;
+      background: rgba(201, 162, 39, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+    
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--emerald);
+      animation: pulse 2s infinite;
+    }
+    
+    .badge-label {
+      background: var(--gradient-gold);
+      color: var(--bg);
+      padding: 0.1875rem 0.625rem;
+      border-radius: 100px;
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.75rem, 7vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.75rem;
+    }
+    
+    .hero h1 .serif {
+      font-family: 'Crimson Pro', serif;
+      font-weight: 600;
+      font-style: italic;
+    }
+    
+    .hero h1 .gold {
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-sub {
+      font-size: clamp(1.0625rem, 2vw, 1.25rem);
+      color: var(--text-2);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    
+    .hero-sub strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+    
+    /* Time savings stat */
+    .hero-stat {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 3rem;
+      font-weight: 900;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    
+    .stat-label {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      margin-top: 0.25rem;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    .trust-badge svg {
+      width: 16px;
+      height: 16px;
+      color: var(--emerald);
+    }
+    
+    /* Logos */
+    .logos {
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .logos-label {
+      font-size: 0.6875rem;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      margin-bottom: 1.75rem;
+    }
+    
+    .logos-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      opacity: 0.6;
+    }
+    
+    .firm-logo {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-3);
+      letter-spacing: 0.02em;
+    }
+    
+    /* Problem Section */
+    .problem-section {
+      padding: 8rem 1.5rem;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      border-top: 1px solid var(--border);
+    }
+    
+    .problem-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    .problem-content h2 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    
+    .problem-content p {
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    
+    .problem-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+    
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 1rem;
+      color: var(--text-2);
+    }
+    
+    .problem-list li:last-child { border-bottom: none; }
+    
+    .problem-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.875rem;
+    }
+    
+    /* Traditional legal workflow mockup */
+    .workflow-mockup {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+    }
+    
+    .workflow-header {
+      background: var(--bg-4);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .workflow-header span {
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    .workflow-content {
+      padding: 1.5rem;
+    }
+    
+    .workflow-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.875rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: rgba(255,255,255,0.02);
+    }
+    
+    .workflow-item.highlight {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    
+    .workflow-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-5);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    
+    .workflow-text {
+      flex: 1;
+    }
+    
+    .workflow-text strong {
+      font-size: 0.875rem;
+      display: block;
+      margin-bottom: 0.125rem;
+    }
+    
+    .workflow-text span {
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    .workflow-time {
+      font-size: 0.75rem;
+      color: var(--red);
+      font-weight: 600;
+    }
+    
+    .workflow-stat {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8125rem;
+      color: var(--text-3);
+    }
+    
+    .workflow-stat strong {
+      color: var(--red);
+      font-weight: 800;
+    }
+    
+    /* Demo Section */
+    .demo-section {
+      padding: 0 1.5rem 8rem;
+      position: relative;
+    }
+    
+    .demo-label {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .demo-label span {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    
+    .demo-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 
+        0 50px 100px -30px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(201, 162, 39, 0.05),
+        0 0 100px -20px rgba(201, 162, 39, 0.1);
+    }
+    
+    .demo-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 1rem 1.5rem;
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--bg-5); }
+    .dot.r { background: #ff5f57; }
+    .dot.y { background: #febc2e; }
+    .dot.g { background: #28c840; }
+    
+    .demo-title {
+      flex: 1;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      font-weight: 500;
+    }
+    
+    .demo-content {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: 560px;
+    }
+    
+    /* Demo Sidebar */
+    .demo-sidebar {
+      padding: 1.5rem;
+      border-right: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .demo-workflow {
+      padding: 1.25rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    
+    .demo-workflow-title {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-4);
+      margin-bottom: 0.75rem;
+    }
+    
+    .workflow-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .workflow-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--bg-5);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .workflow-option:hover,
+    .workflow-option.active {
+      border-color: var(--gold);
+      background: rgba(201, 162, 39, 0.05);
+    }
+    
+    .workflow-option.active {
+      box-shadow: 0 0 0 1px var(--gold);
+    }
+    
+    .workflow-option-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-3);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+    }
+    
+    .workflow-option-text {
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+    
+    /* Case Stats */
+    .case-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+    
+    .case-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.625rem;
+      background: var(--bg-4);
+      border-radius: 8px;
+      font-size: 0.75rem;
+    }
+    
+    .case-stat-label { color: var(--text-4); }
+    .case-stat-value { font-weight: 700; color: var(--gold); }
+    
+    /* Demo Main Area */
+    .demo-main {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .demo-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+    }
+    
+    .ai-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-gold);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 1.125rem;
+    }
+    
+    .ai-icon::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 12px;
+      height: 12px;
+      background: var(--emerald);
+      border-radius: 50%;
+      border: 2px solid var(--bg-3);
+    }
+    
+    .ai-info h3 {
+      font-size: 0.9375rem;
+      font-weight: 700;
+    }
+    
+    .ai-info p {
+      font-size: 0.6875rem;
+      color: var(--text-3);
+    }
+    
+    /* Chat/Analysis Area */
+    .analysis-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .analysis-card {
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    
+    .analysis-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+    }
+    
+    .analysis-header-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--gradient-gold);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8125rem;
+    }
+    
+    .analysis-header h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    
+    .analysis-body {
+      padding: 1rem;
+    }
+    
+    /* Contract clause visualization */
+    .contract-preview {
+      background: var(--bg-3);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.9375rem;
+      line-height: 1.8;
+      color: var(--text-2);
+      position: relative;
+    }
+    
+    .contract-preview .highlight-text {
+      background: rgba(201, 162, 39, 0.2);
+      border-bottom: 2px solid var(--gold);
+      padding: 0 0.25rem;
+    }
+    
+    .contract-preview .risk-text {
+      background: rgba(239, 68, 68, 0.2);
+      border-bottom: 2px solid var(--red);
+      padding: 0 0.25rem;
+    }
+    
+    /* AI Analysis Results */
+    .ai-results {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .ai-result-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.875rem;
+      background: var(--bg-3);
+      border-radius: 10px;
+      border-left: 3px solid var(--gold);
+    }
+    
+    .ai-result-item.risk {
+      border-left-color: var(--red);
+      background: rgba(239, 68, 68, 0.05);
+    }
+    
+    .ai-result-item.safe {
+      border-left-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.05);
+    }
+    
+    .ai-result-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+    
+    .ai-result-item.risk .ai-result-icon {
+      background: rgba(239, 68, 68, 0.2);
+    }
+    
+    .ai-result-item.safe .ai-result-icon {
+      background: rgba(16, 185, 129, 0.2);
+    }
+    
+    .ai-result-content h5 {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .ai-result-content p {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+    
+    /* Search Input */
+    .search-input {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+      background: rgba(0,0,0,0.15);
+    }
+    
+    .search-input input {
+      flex: 1;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.875rem 1.125rem;
+      color: var(--text);
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    
+    .search-input input::placeholder { color: var(--text-4); }
+    
+    .search-input input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
+    }
+    
+    .search-input button {
+      background: var(--gradient-gold);
+      border: none;
+      border-radius: 12px;
+      padding: 0 1.5rem;
+      color: var(--bg);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    
+    .search-input button:hover {
+      transform: scale(1.02);
+    }
+    
+    /* Section styles */
+    .section {
+      padding: 8rem 1.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    
+    .section-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 4rem;
+    }
+    
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    
+    .section-tag::before, .section-tag::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+    }
+    
+    .section-head h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    
+    .section-head p {
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+    
+    /* Features Bento */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+    
+    .bento-card {
+      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--glow) 0%, transparent 40%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    
+    .bento-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -16px rgba(0,0,0,0.4);
+    }
+    
+    .bento-card:hover::before { opacity: 1; }
+    
+    .bento-card.span-8 { grid-column: span 8; }
+    .bento-card.span-6 { grid-column: span 6; }
+    .bento-card.span-4 { grid-column: span 4; }
+    .bento-card.span-12 { grid-column: span 12; }
+    
+    .bento-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(201, 162, 39, 0.1);
+      border: 1px solid rgba(201, 162, 39, 0.15);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .bento-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.625rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .bento-card p {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+      padding: 5rem 1.5rem;
+      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .stats-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    
+    .stat {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    
+    .stat-number {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 900;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-text {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+    }
+    
+    /* Competitive Section */
+    .compete-section {
+      padding: 8rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .compete-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    
+    .compete-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+    
+    .compete-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+    }
+    
+    .compete-vs {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .compete-logo {
+      width: 44px;
+      height: 44px;
+      background: var(--bg-4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+    }
+    
+    .compete-vs-text {
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-4);
+      font-weight: 600;
+    }
+    
+    .compete-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
+    .compete-desc {
+      font-size: 0.9375rem;
+      color: var(--text-3);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+    
+    .compete-points {
+      list-style: none;
+    }
+    
+    .compete-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      padding: 0.375rem 0;
+    }
+    
+    .compete-points li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+    }
+    
+    /* Security Section */
+    .security-section {
+      padding: 8rem 1.5rem;
+    }
+    
+    .security-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .security-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
+    .security-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    
+    .security-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 1rem;
+      border: 2px solid rgba(201, 162, 39, 0.2);
+    }
+    
+    .security-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .security-card p {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+    
+    /* Pricing */
+    .pricing-section {
+      padding: 8rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .pricing-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+    
+    .pricing-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .pricing-card:hover {
+      border-color: var(--border-2);
+    }
+    
+    .pricing-card.featured {
+      background: linear-gradient(180deg, rgba(201, 162, 39, 0.05) 0%, var(--bg) 100%);
+      border-color: var(--gold);
+      transform: scale(1.03);
+      box-shadow: 0 0 80px -20px rgba(201, 162, 39, 0.2);
+    }
+    
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient-gold);
+      color: var(--bg);
+      font-size: 0.625rem;
+      font-weight: 700;
+      padding: 0.375rem 1rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .pricing-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .pricing-price {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+    
+    .pricing-price span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-4);
+    }
+    
+    .pricing-desc {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-features li {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.8125rem;
+    }
+    
+    .pricing-card .btn {
+      width: 100%;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 10rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, var(--glow) 0%, var(--glow-navy) 40%, transparent 70%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .cta-inner h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    
+    .cta-inner p {
+      font-size: 1.125rem;
+      color: var(--text-2);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 4rem 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .footer-text {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .footer-links a {
+      font-size: 0.875rem;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .demo-content { grid-template-columns: 1fr; }
+      .demo-sidebar { display: none; }
+      .bento-card.span-8, .bento-card.span-6, .bento-card.span-4 { grid-column: span 6; }
+      .compete-grid { grid-template-columns: 1fr; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .security-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .bento-card.span-8, .bento-card.span-6, .bento-card.span-4, .bento-card.span-12 { grid-column: span 12; }
+      .hero-stat { flex-direction: column; gap: 1.5rem; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .security-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="lines-bg"></div>
+  
+  <!-- Navigation -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-mark">⚖</div>
+        <span class="logo-text">CaseBrief</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#demo">Demo</a>
+        <a href="#security">Security</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">Sign In</a>
+        <a href="#demo" class="btn btn-primary">Request Demo</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-orb">
+      <div class="glow-1"></div>
+    </div>
+    <div class="hero-scales">⚖</div>
+    
+    <div class="hero-content">
+      <div class="badge anim">
+        <span class="badge-label">Now in Beta</span>
+        <span class="badge-dot"></span>
+        <span>AI-powered legal workflows</span>
+      </div>
+      
+      <h1 class="anim d1">
+        The <span class="serif gold">AI Associate</span><br>
+        That Never Sleeps
+      </h1>
+      
+      <p class="hero-sub anim d2">
+        Your associates spend 60% of their time on work AI can do in minutes. Research that takes 8 hours? Done in 4 minutes. Contract review? 12 seconds per page with 99.4% accuracy. <strong>$150K/year per associate, back in your pocket.</strong>
+      </p>
+      
+      <div class="hero-stat anim d3">
+        <div class="stat-item">
+          <div class="stat-value">87%</div>
+          <div class="stat-label">Time Saved on Research</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">3.2x</div>
+          <div class="stat-label">More Billable Hours</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">99.4%</div>
+          <div class="stat-label">Citation Accuracy</div>
+        </div>
+      </div>
+      
+      <div class="hero-cta anim d4">
+        <a href="#demo" class="btn btn-primary btn-xl">Request Demo</a>
+        <a href="#features" class="btn btn-outline btn-xl">See How It Works</a>
+      </div>
+      
+      <div class="hero-trust anim d5">
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          SOC 2 Type II Certified
+        </div>
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Attorney-Client Privilege Protected
+        </div>
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          256-bit AES Encryption
+        </div>
+      </div>
+      
+      <div class="logos">
+        <p class="logos-label">Trusted by leading law firms</p>
+        <div class="logos-row">
+          <span class="firm-logo">Morrison & Associates</span>
+          <span class="firm-logo">Chen Legal Group</span>
+          <span class="firm-logo">Whitfield Partners</span>
+          <span class="firm-logo">Baker Sterling LLP</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Problem Section -->
+  <section class="problem-section">
+    <div class="problem-grid">
+      <div class="problem-content">
+        <h2>Legal Work Shouldn't Mean<br>Endless Manual Tasks</h2>
+        <p>
+          Your associates spend 60% of their time on research, document review, and drafting templates. 
+          That's talent wasted on tasks AI can do in minutes.
+        </p>
+        <ul class="problem-list">
+          <li>
+            <span class="problem-icon">⏱</span>
+            <span><strong>8+ hours</strong> average for comprehensive case research</span>
+          </li>
+          <li>
+            <span class="problem-icon">📄</span>
+            <span><strong>Thousands of pages</strong> reviewed manually in discovery</span>
+          </li>
+          <li>
+            <span class="problem-icon">💸</span>
+            <span><strong>$150K+/year</strong> per associate on repeatable tasks</span>
+          </li>
+          <li>
+            <span class="problem-icon">⚠️</span>
+            <span><strong>Missed precedents</strong> because nobody can read everything</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="workflow-mockup">
+        <div class="workflow-header">
+          <span>📁</span>
+          <span>Traditional Legal Workflow</span>
+        </div>
+        <div class="workflow-content">
+          <div class="workflow-item highlight">
+            <div class="workflow-icon">🔍</div>
+            <div class="workflow-text">
+              <strong>Legal Research</strong>
+              <span>Westlaw + LexisNexis search</span>
+            </div>
+            <span class="workflow-time">4-8 hrs</span>
+          </div>
+          <div class="workflow-item highlight">
+            <div class="workflow-icon">📖</div>
+            <div class="workflow-text">
+              <strong>Document Review</strong>
+              <span>Contract & discovery analysis</span>
+            </div>
+            <span class="workflow-time">6-12 hrs</span>
+          </div>
+          <div class="workflow-item highlight">
+            <div class="workflow-icon">✍️</div>
+            <div class="workflow-text">
+              <strong>Brief Drafting</strong>
+              <span>Initial draft & citations</span>
+            </div>
+            <span class="workflow-time">8-16 hrs</span>
+          </div>
+          <div class="workflow-item">
+            <div class="workflow-icon">👁</div>
+            <div class="workflow-text">
+              <strong>Partner Review</strong>
+              <span>Corrections & revisions</span>
+            </div>
+            <span class="workflow-time">2-4 hrs</span>
+          </div>
+        </div>
+        <div class="workflow-stat">
+          <strong>18-40 hours</strong> of associate time per matter
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Demo Section -->
+  <section class="demo-section" id="demo">
+    <div class="demo-label">
+      <span>Interactive Demo</span>
+    </div>
+    
+    <div class="demo-container">
+      <div class="demo-bar">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
+        <span class="demo-title">CaseBrief — Contract Analysis</span>
+      </div>
+      
+      <div class="demo-content">
+        <div class="demo-sidebar">
+          <div class="demo-workflow">
+            <div class="demo-workflow-title">AI Workflows</div>
+            <div class="workflow-options">
+              <div class="workflow-option active">
+                <div class="workflow-option-icon">📄</div>
+                <span class="workflow-option-text">Contract Review</span>
+              </div>
+              <div class="workflow-option">
+                <div class="workflow-option-icon">🔍</div>
+                <span class="workflow-option-text">Legal Research</span>
+              </div>
+              <div class="workflow-option">
+                <div class="workflow-option-icon">📋</div>
+                <span class="workflow-option-text">Discovery</span>
+              </div>
+              <div class="workflow-option">
+                <div class="workflow-option-icon">✍️</div>
+                <span class="workflow-option-text">Brief Drafting</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="case-stats">
+            <div class="case-stat">
+              <span class="case-stat-label">Documents Analyzed</span>
+              <span class="case-stat-value">1,247</span>
+            </div>
+            <div class="case-stat">
+              <span class="case-stat-label">Time Saved Today</span>
+              <span class="case-stat-value">14.2 hrs</span>
+            </div>
+            <div class="case-stat">
+              <span class="case-stat-label">Issues Flagged</span>
+              <span class="case-stat-value">23</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="demo-main">
+          <div class="demo-header">
+            <div class="ai-icon">⚖</div>
+            <div class="ai-info">
+              <h3>CaseBrief AI</h3>
+              <p>Contract analysis complete • 12 clauses reviewed</p>
+            </div>
+          </div>
+          
+          <div class="analysis-area">
+            <div class="analysis-card">
+              <div class="analysis-header">
+                <div class="analysis-header-icon">📄</div>
+                <h4>SaaS Services Agreement — TechCorp Inc.</h4>
+              </div>
+              <div class="analysis-body">
+                <div class="contract-preview">
+                  <strong>Section 8.3 — Limitation of Liability</strong><br><br>
+                  IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY <span class="highlight-text">INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES</span>, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (I) YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE; (II) <span class="risk-text">ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON THE SERVICE</span>...
+                </div>
+              </div>
+            </div>
+            
+            <div class="ai-results">
+              <div class="ai-result-item risk">
+                <div class="ai-result-icon">⚠️</div>
+                <div class="ai-result-content">
+                  <h5>Third-Party Liability Gap</h5>
+                  <p>Section 8.3(ii) excludes liability for third-party conduct, which may leave your client exposed if vendor uses subcontractors. Consider adding carve-out for vendor's agents.</p>
+                </div>
+              </div>
+              
+              <div class="ai-result-item risk">
+                <div class="ai-result-icon">⚠️</div>
+                <div class="ai-result-content">
+                  <h5>Missing Cap on Direct Damages</h5>
+                  <p>No ceiling specified for direct damages. Industry standard is 12 months of fees. Recommend adding explicit cap language.</p>
+                </div>
+              </div>
+              
+              <div class="ai-result-item safe">
+                <div class="ai-result-icon">✓</div>
+                <div class="ai-result-content">
+                  <h5>Standard Consequential Damages Waiver</h5>
+                  <p>Mutual waiver of consequential damages is market-standard and protects both parties equally.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="search-input">
+            <input type="text" placeholder="Ask about this contract or request changes...">
+            <button>Analyze</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="section-head">
+      <div class="section-tag">Capabilities</div>
+      <h2>AI-Powered Legal Workflows</h2>
+      <p>Four core capabilities that transform how your firm operates. Each powered by AI trained on millions of legal documents.</p>
+    </div>
+    
+    <div class="bento">
+      <div class="bento-card span-8">
+        <div class="bento-icon">🔍</div>
+        <h3>Legal Research at Scale</h3>
+        <p>Search across every federal and state case, statute, and regulation. CaseBrief finds relevant precedents, analyzes holdings, and cites sources — in seconds, not hours. Includes automatic Shepardizing and adverse authority detection.</p>
+      </div>
+      
+      <div class="bento-card span-4">
+        <div class="bento-icon">📄</div>
+        <h3>Contract Analysis</h3>
+        <p>Upload any contract and get instant issue-spotting, risk scoring, and clause-by-clause analysis against your firm's playbook.</p>
+      </div>
+      
+      <div class="bento-card span-4">
+        <div class="bento-icon">📋</div>
+        <h3>Discovery Automation</h3>
+        <p>Review thousands of documents in minutes. AI-powered privilege detection, relevance scoring, and automatic categorization.</p>
+      </div>
+      
+      <div class="bento-card span-8">
+        <div class="bento-icon">✍️</div>
+        <h3>Brief & Motion Drafting</h3>
+        <p>Generate first drafts of briefs, motions, and memoranda with proper citations and formatting. Train on your firm's winning arguments and adapt to judge-specific preferences. Includes automatic Bluebook citation formatting.</p>
+      </div>
+      
+      <div class="bento-card span-6">
+        <div class="bento-icon">📊</div>
+        <h3>Matter Analytics</h3>
+        <p>Track time savings, identify bottlenecks, and measure AI accuracy across your practice. Full audit trails for every AI-assisted document.</p>
+      </div>
+      
+      <div class="bento-card span-6">
+        <div class="bento-icon">🔗</div>
+        <h3>Seamless Integrations</h3>
+        <p>Connect with iManage, NetDocuments, Clio, and your existing practice management tools. Export to Word with track changes preserved.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-number">87%</div>
+        <div class="stat-text">Research time reduced</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">2.4M</div>
+        <div class="stat-text">Documents analyzed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">99.4%</div>
+        <div class="stat-text">Citation accuracy</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">$2.1M</div>
+        <div class="stat-text">Avg. firm savings/year</div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Competitive Section -->
+  <section class="compete-section">
+    <div class="section-head">
+      <div class="section-tag">Why CaseBrief</div>
+      <h2>Built Different for Legal</h2>
+      <p>We're not a general AI tool with legal prompts bolted on. CaseBrief is purpose-built for the way law firms actually work.</p>
+    </div>
+    
+    <div class="compete-grid">
+      <div class="compete-card">
+        <div class="compete-vs">
+          <div class="compete-logo">🤖</div>
+          <span class="compete-vs-text">vs Generic AI (ChatGPT)</span>
+        </div>
+        <h3 class="compete-title">Accuracy That Passes Muster</h3>
+        <p class="compete-desc">Generic AI hallucinates citations. CaseBrief only cites real cases, auto-validates every reference.</p>
+        <ul class="compete-points">
+          <li>Zero hallucinated citations</li>
+          <li>Real-time Shepardizing</li>
+          <li>Full audit trail</li>
+        </ul>
+      </div>
+      
+      <div class="compete-card">
+        <div class="compete-vs">
+          <div class="compete-logo">📚</div>
+          <span class="compete-vs-text">vs Westlaw / Lexis AI</span>
+        </div>
+        <h3 class="compete-title">Beyond Search</h3>
+        <p class="compete-desc">Legacy tools search. CaseBrief analyzes, drafts, and integrates into your actual workflow.</p>
+        <ul class="compete-points">
+          <li>End-to-end workflow automation</li>
+          <li>Draft generation, not just search</li>
+          <li>60% lower cost</li>
+        </ul>
+      </div>
+      
+      <div class="compete-card">
+        <div class="compete-vs">
+          <div class="compete-logo">🏢</div>
+          <span class="compete-vs-text">vs Enterprise Legal AI</span>
+        </div>
+        <h3 class="compete-title">No 6-Month Implementation</h3>
+        <p class="compete-desc">Enterprise tools take months to deploy. CaseBrief is live in days with your existing systems.</p>
+        <ul class="compete-points">
+          <li>Week 1 deployment</li>
+          <li>No training required</li>
+          <li>Pay-per-use pricing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Security Section -->
+  <section class="security-section" id="security">
+    <div class="section-head">
+      <div class="section-tag">Security & Compliance</div>
+      <h2>Enterprise-Grade Protection</h2>
+      <p>Your clients' data deserves the highest standard of protection. CaseBrief is built to meet the security requirements of the most demanding firms.</p>
+    </div>
+    
+    <div class="security-grid">
+      <div class="security-card">
+        <div class="security-icon">🔒</div>
+        <h3>SOC 2 Type II</h3>
+        <p>Annual third-party audits verify our security controls</p>
+      </div>
+      
+      <div class="security-card">
+        <div class="security-icon">🛡️</div>
+        <h3>Privilege Protection</h3>
+        <p>Attorney-client data never used for model training</p>
+      </div>
+      
+      <div class="security-card">
+        <div class="security-icon">🔐</div>
+        <h3>256-bit Encryption</h3>
+        <p>AES encryption at rest and TLS 1.3 in transit</p>
+      </div>
+      
+      <div class="security-card">
+        <div class="security-icon">🏛️</div>
+        <h3>Bar Compliant</h3>
+        <p>Designed to meet ABA ethics opinion requirements</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Pricing Section -->
+  <section class="pricing-section" id="pricing">
+    <div class="section-head">
+      <div class="section-tag">Pricing</div>
+      <h2>Plans for Every Firm</h2>
+      <p>From solo practitioners to AmLaw 100. Start with a pilot, scale when ready.</p>
+    </div>
+    
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3 class="pricing-name">Solo</h3>
+        <div class="pricing-price">$299<span>/mo</span></div>
+        <p class="pricing-desc">For solo practitioners</p>
+        <ul class="pricing-features">
+          <li>1 user seat</li>
+          <li>500 research queries/mo</li>
+          <li>50 contract analyses/mo</li>
+          <li>Brief drafting assistance</li>
+          <li>Email support</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Start Free Trial</a>
+      </div>
+      
+      <div class="pricing-card featured">
+        <span class="pricing-badge">Most Popular</span>
+        <h3 class="pricing-name">Team</h3>
+        <div class="pricing-price">$799<span>/mo</span></div>
+        <p class="pricing-desc">Per attorney, billed annually</p>
+        <ul class="pricing-features">
+          <li>5-25 user seats</li>
+          <li>Unlimited research</li>
+          <li>Unlimited contract analysis</li>
+          <li>Discovery automation</li>
+          <li>Custom playbooks</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Request Demo</a>
+      </div>
+      
+      <div class="pricing-card">
+        <h3 class="pricing-name">Enterprise</h3>
+        <div class="pricing-price">Custom</div>
+        <p class="pricing-desc">For large firms</p>
+        <ul class="pricing-features">
+          <li>Unlimited seats</li>
+          <li>Private cloud deployment</li>
+          <li>Custom model training</li>
+          <li>SSO & SCIM</li>
+          <li>Dedicated success manager</li>
+          <li>SLA guarantee</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <h2>The Future of Legal Work<br>Starts Now</h2>
+      <p>Join 200+ law firms already using CaseBrief to deliver better results faster. Schedule a demo to see the AI associate in action.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary btn-xl">Request Demo</a>
+        <a href="#" class="btn btn-outline btn-xl">Talk to Sales</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-mark" style="width:32px;height:32px;font-size:1rem;">⚖</div>
+        <span class="footer-text">© 2025 CaseBrief. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    
+    // Workflow option selection
+    document.querySelectorAll('.workflow-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.workflow-option').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

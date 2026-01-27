@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedGraph – The AI Operational Layer for Healthcare</title>
+  <meta name="description" content="MedGraph connects fragmented hospital systems into a unified intelligence layer. The operational AI that actually integrates—scheduling, staffing, supply chain, and billing in one platform.">
+  <meta name="theme-color" content="#0a0f14">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="MedGraph – The AI Operational Layer for Healthcare">
+  <meta property="og:description" content="The unified intelligence layer hospitals need. Connect fragmented systems, optimize operations, and make every workflow intelligent.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og-image.png">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MedGraph – Healthcare Operations, Unified">
+  <meta name="twitter:description" content="The operational AI layer that connects everything in healthcare">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230d9488' rx='18' width='100' height='100'/><path d='M50 20 L50 80 M30 40 L70 40 M30 60 L70 60' stroke='white' stroke-width='8' stroke-linecap='round'/></svg>">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg: #0a0f14;
+      --bg-2: #0d1318;
+      --bg-3: #111a21;
+      --bg-4: #162028;
+      --bg-5: #1c2a35;
+      --border: rgba(255,255,255,0.06);
+      --border-2: rgba(255,255,255,0.1);
+      --border-3: rgba(255,255,255,0.15);
+      --text: #f0fdf4;
+      --text-2: #94a3b8;
+      --text-3: #64748b;
+      --text-4: #475569;
+      --accent: #0d9488;
+      --accent-2: #2dd4bf;
+      --accent-3: #5eead4;
+      --accent-dark: #0f766e;
+      --accent-glow: rgba(13,148,136,0.15);
+      --green: #22c55e;
+      --green-glow: rgba(34,197,94,0.12);
+      --red: #ef4444;
+      --orange: #f97316;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --gold: #f59e0b;
+      --gradient: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
+      --gradient-warm: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+      --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes glow { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes flowLine { 0% { stroke-dashoffset: 1000; } 100% { stroke-dashoffset: 0; } }
+    @keyframes dataFlow { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    
+    .anim { opacity: 0; animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.3s; }
+    .d4 { animation-delay: 0.4s; }
+    .d5 { animation-delay: 0.5s; }
+    .d6 { animation-delay: 0.6s; }
+    
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      transition: all 0.3s;
+    }
+    
+    nav.scrolled {
+      padding: 0.75rem 1.5rem;
+      background: rgba(10,15,20,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 14px rgba(13,148,136,0.35);
+      position: relative;
+    }
+    
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: var(--gradient);
+      border-radius: 13px;
+      opacity: 0.25;
+      filter: blur(8px);
+    }
+    
+    .logo-mark svg {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      padding: 0.25rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+    
+    .nav-links a {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--bg-4);
+    }
+    
+    .nav-cta { display: flex; gap: 0.75rem; }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-ghost { background: transparent; color: var(--text-2); }
+    .btn-ghost:hover { color: var(--text); }
+    
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+    
+    .btn-primary:hover {
+      background: #d4f4e8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    
+    .btn-outline:hover {
+      background: var(--bg-3);
+      border-color: var(--border-3);
+    }
+    
+    .btn-accent {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 4px 16px rgba(13,148,136,0.3);
+    }
+    
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -8px rgba(13,148,136,0.5);
+    }
+    
+    .btn-lg { padding: 0.9rem 2rem; font-size: 0.9375rem; }
+    .btn-sm { padding: 0.5rem 1rem; font-size: 0.8125rem; }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(13,148,136,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 90%, rgba(34,197,94,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(139,92,246,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(13,148,136,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(13,148,136,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.4rem 1rem 0.4rem 0.5rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      margin-bottom: 1.75rem;
+    }
+    
+    .badge-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(13,148,136,0.25);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
+    }
+    
+    .badge-label {
+      background: rgba(13,148,136,0.15);
+      color: var(--accent-2);
+      padding: 0.125rem 0.5rem;
+      border-radius: 100px;
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.75rem, 7vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero h1 .grad {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-sub {
+      font-size: clamp(1.0625rem, 2vw, 1.25rem);
+      color: var(--text-2);
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    
+    /* Integration logos */
+    .integrations-strip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .integrations-label {
+      font-size: 0.75rem;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+    
+    .integrations-logos {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .int-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-3);
+      transition: all 0.2s;
+    }
+    
+    .int-logo:hover {
+      border-color: var(--border-2);
+      color: var(--text-2);
+    }
+    
+    .int-logo span {
+      font-size: 1.25rem;
+    }
+    
+    /* Problem section */
+    .problem {
+      padding: 6rem 1.5rem;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .problem-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .section-head {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+    
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .section-tag::before, .section-tag::after {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.35;
+    }
+    
+    .section-tag.red { color: var(--red); }
+    .section-tag.red::before, .section-tag.red::after { background: var(--red); }
+    
+    .section-head h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    
+    .section-head p {
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+    
+    /* Pain grid */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    
+    .pain-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pain-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), #f97316);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .pain-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+    }
+    
+    .pain-card:hover::before {
+      opacity: 1;
+    }
+    
+    .pain-stat {
+      font-size: 2.25rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--red) 0%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .pain-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .pain-card h3 {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      margin-bottom: 0.375rem;
+    }
+    
+    .pain-card p {
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+    
+    /* Failed solutions callout */
+    .failed-callout {
+      margin-top: 3rem;
+      padding: 2rem 2.5rem;
+      background: linear-gradient(135deg, rgba(239,68,68,0.06) 0%, rgba(249,115,22,0.04) 100%);
+      border: 1px solid rgba(239,68,68,0.15);
+      border-radius: var(--radius-lg);
+    }
+    
+    .failed-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    
+    .failed-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+    }
+    
+    .failed-head h4 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    
+    .failed-head span {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+    }
+    
+    .failed-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    
+    .failed-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.625rem;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+    }
+    
+    .failed-point::before {
+      content: '✗';
+      color: var(--red);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    /* Solution section */
+    .solution {
+      padding: 7rem 1.5rem;
+      background: var(--bg);
+    }
+    
+    .solution-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Architecture diagram */
+    .architecture {
+      margin-top: 3rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .arch-layers {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    
+    .arch-layer {
+      display: flex;
+      gap: 1rem;
+      align-items: stretch;
+    }
+    
+    .arch-label {
+      width: 120px;
+      padding: 0.75rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    
+    .arch-label span {
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-4);
+      font-weight: 600;
+    }
+    
+    .arch-label strong {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    
+    .arch-items {
+      flex: 1;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .arch-item {
+      flex: 1;
+      min-width: 140px;
+      padding: 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.2s;
+    }
+    
+    .arch-item:hover {
+      border-color: var(--border-2);
+      transform: translateY(-2px);
+    }
+    
+    .arch-item.source { border-left: 3px solid var(--orange); }
+    .arch-item.layer { border-left: 3px solid var(--accent); background: rgba(13,148,136,0.05); }
+    .arch-item.output { border-left: 3px solid var(--green); }
+    
+    .arch-item-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-4);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+    
+    .arch-item h5 {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .arch-item p {
+      font-size: 0.625rem;
+      color: var(--text-4);
+    }
+    
+    /* Data flow animation */
+    .arch-flow {
+      position: absolute;
+      left: 130px;
+      right: 20px;
+      height: 2px;
+      background: var(--bg-4);
+      overflow: hidden;
+    }
+    
+    .arch-flow.f1 { top: 50%; transform: translateY(-50%); }
+    
+    .arch-flow::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 100%;
+      background: var(--gradient);
+      animation: dataFlow 3s linear infinite;
+    }
+    
+    /* MedGraph layer highlight */
+    .medgraph-layer {
+      background: linear-gradient(180deg, rgba(13,148,136,0.08) 0%, rgba(13,148,136,0.02) 100%);
+      border: 1px solid rgba(13,148,136,0.2);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin: 0.5rem 0;
+    }
+    
+    .medgraph-layer .arch-label {
+      background: var(--gradient);
+      border-color: transparent;
+    }
+    
+    .medgraph-layer .arch-label span,
+    .medgraph-layer .arch-label strong {
+      color: white;
+    }
+    
+    /* Features bento */
+    .features {
+      padding: 7rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .features-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 3.5rem;
+    }
+    
+    .bento-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--accent-glow) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .bento-card:hover {
+      border-color: rgba(13,148,136,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 44px -16px rgba(0,0,0,0.4);
+    }
+    
+    .bento-card:hover::before { opacity: 1; }
+    
+    .bento-card.lg { grid-column: span 2; }
+    .bento-card.featured { 
+      grid-column: span 3;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .bento-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+    
+    .bento-card:hover .bento-icon {
+      background: var(--accent-glow);
+      border-color: rgba(13,148,136,0.25);
+    }
+    
+    .bento-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .bento-card p {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .bento-features {
+      list-style: none;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .bento-features li {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      padding: 0.4rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .bento-features li::before {
+      content: '◆';
+      color: var(--accent);
+      font-size: 0.5rem;
+    }
+    
+    /* Demo preview */
+    .demo-preview {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    
+    .demo-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.75rem 1rem;
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--bg-5); }
+    .dot.r { background: #ff5f57; }
+    .dot.y { background: #febc2e; }
+    .dot.g { background: #28c840; }
+    
+    .demo-body {
+      padding: 1rem;
+      min-height: 200px;
+    }
+    
+    .metric-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .metric-card {
+      flex: 1;
+      padding: 0.875rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    
+    .metric-card h5 {
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-4);
+      margin-bottom: 0.375rem;
+    }
+    
+    .metric-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+    
+    .metric-val.up { color: var(--green); }
+    .metric-val.down { color: var(--red); }
+    .metric-val.neutral { color: var(--accent-2); }
+    
+    .metric-change {
+      font-size: 0.625rem;
+      color: var(--green);
+      margin-top: 0.25rem;
+    }
+    
+    /* Workflow section */
+    .workflows {
+      padding: 7rem 1.5rem;
+      background: var(--bg);
+    }
+    
+    .workflows-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .workflow-tabs {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    
+    .workflow-tab {
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .workflow-tab:hover {
+      border-color: var(--border-2);
+      color: var(--text-2);
+    }
+    
+    .workflow-tab.active {
+      background: var(--accent-glow);
+      border-color: rgba(13,148,136,0.3);
+      color: var(--accent-2);
+    }
+    
+    .workflow-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 3rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+    
+    .workflow-content h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    
+    .workflow-content p {
+      font-size: 1rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    
+    .workflow-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    
+    .wstat {
+      padding: 1.25rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    
+    .wstat-val {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 0.25rem;
+    }
+    
+    .wstat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-3);
+    }
+    
+    .workflow-visual {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    
+    .visual-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .visual-header h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--green);
+    }
+    
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    .visual-body {
+      padding: 1.25rem;
+    }
+    
+    .schedule-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .schedule-time {
+      width: 50px;
+      font-size: 0.6875rem;
+      color: var(--text-4);
+      font-weight: 500;
+      padding-top: 0.25rem;
+    }
+    
+    .schedule-blocks {
+      flex: 1;
+      display: flex;
+      gap: 4px;
+    }
+    
+    .schedule-block {
+      height: 28px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding: 0 0.5rem;
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: white;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    
+    .schedule-block.surgery { background: var(--accent); flex: 3; }
+    .schedule-block.consult { background: var(--blue); flex: 1; }
+    .schedule-block.break { background: var(--bg-5); color: var(--text-3); flex: 0.5; }
+    .schedule-block.optimized { background: var(--green); flex: 2; }
+    
+    /* Stats */
+    .stats {
+      padding: 5rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .stats-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    
+    .stat { text-align: center; }
+    
+    .stat-val {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .stat-lbl {
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      margin-top: 0.25rem;
+      line-height: 1.4;
+    }
+    
+    /* Use cases */
+    .use-cases {
+      padding: 7rem 1.5rem;
+      background: var(--bg);
+    }
+    
+    .use-cases-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3.5rem;
+    }
+    
+    .case-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      transition: all 0.3s;
+    }
+    
+    .case-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+    }
+    
+    .case-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    
+    .case-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .case-card p {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+    
+    .case-metric {
+      display: flex;
+      align-items: baseline;
+      gap: 0.375rem;
+    }
+    
+    .case-metric-val {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--green);
+    }
+    
+    .case-metric-lbl {
+      font-size: 0.75rem;
+      color: var(--text-3);
+    }
+    
+    /* Comparison */
+    .comparison {
+      padding: 6rem 1.5rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .comparison-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .comparison-table {
+      margin-top: 3rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    
+    .comp-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 0;
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .comp-header > div {
+      padding: 1.25rem 1.5rem;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    
+    .comp-header > div:first-child {
+      text-align: left;
+    }
+    
+    .comp-header > div:last-child {
+      border-right: none;
+      background: rgba(13,148,136,0.1);
+      color: var(--accent-2);
+    }
+    
+    .comp-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .comp-row:last-child {
+      border-bottom: none;
+    }
+    
+    .comp-row > div {
+      padding: 1rem 1.5rem;
+      font-size: 0.8125rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid var(--border);
+    }
+    
+    .comp-row > div:first-child {
+      justify-content: flex-start;
+      color: var(--text-2);
+    }
+    
+    .comp-row > div:last-child {
+      border-right: none;
+      background: rgba(13,148,136,0.03);
+    }
+    
+    .comp-check {
+      color: var(--green);
+      font-weight: 700;
+    }
+    
+    .comp-x {
+      color: var(--red);
+      font-weight: 700;
+    }
+    
+    .comp-partial {
+      color: var(--orange);
+      font-size: 0.6875rem;
+    }
+    
+    /* Security */
+    .security {
+      padding: 5rem 1.5rem;
+      background: var(--bg);
+    }
+    
+    .security-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    
+    .security-badge {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
+    .security-badge:hover {
+      border-color: var(--border-2);
+    }
+    
+    .security-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      margin: 0 auto 0.875rem;
+    }
+    
+    .security-badge h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    
+    .security-badge p {
+      font-size: 0.6875rem;
+      color: var(--text-4);
+    }
+    
+    /* CTA */
+    .cta {
+      padding: 8rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(13,148,136,0.12) 0%, rgba(34,197,94,0.06) 50%, transparent 70%);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    
+    .cta h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.875rem;
+    }
+    
+    .cta p {
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 3.5rem 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-2);
+    }
+    
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+    }
+    
+    .footer-brand p {
+      font-size: 0.8125rem;
+      color: var(--text-4);
+      margin-top: 0.875rem;
+      max-width: 280px;
+      line-height: 1.6;
+    }
+    
+    .footer-col h4 {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-col a {
+      display: block;
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      text-decoration: none;
+      padding: 0.3125rem 0;
+      transition: color 0.2s;
+    }
+    
+    .footer-col a:hover { color: var(--text-2); }
+    
+    .footer-bottom {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    .footer-badges {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .footer-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: var(--text-3);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .pain-grid { grid-template-columns: repeat(2, 1fr); }
+      .failed-points { grid-template-columns: 1fr; }
+      .bento { grid-template-columns: repeat(2, 1fr); }
+      .bento-card.lg, .bento-card.featured { grid-column: span 2; }
+      .bento-card.featured { grid-template-columns: 1fr; }
+      .workflow-card { grid-template-columns: 1fr; }
+      .cases-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .security-grid { grid-template-columns: repeat(2, 1fr); }
+      .comp-header, .comp-row { grid-template-columns: 1.5fr repeat(3, 1fr); }
+      .footer-top { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .arch-layer { flex-direction: column; }
+      .arch-label { width: 100%; }
+    }
+    
+    @media (max-width: 768px) {
+      .hero { padding: 6rem 1rem 3rem; }
+      .hero-cta { flex-direction: column; width: 100%; max-width: 280px; margin-left: auto; margin-right: auto; }
+      .hero-cta .btn { width: 100%; }
+      .pain-grid, .bento, .cases-grid, .stats-grid, .security-grid { grid-template-columns: 1fr; }
+      .bento-card.lg, .bento-card.featured { grid-column: span 1; }
+      .workflow-tabs { gap: 0.375rem; }
+      .workflow-tab { padding: 0.5rem 0.875rem; font-size: 0.75rem; }
+      .workflow-stats { grid-template-columns: 1fr; }
+      .comparison-table { overflow-x: auto; }
+      .comp-header, .comp-row { min-width: 600px; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .integrations-logos { gap: 0.75rem; }
+      .int-logo { padding: 0.5rem 0.75rem; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 4v16M6 10h12M6 14h12"/>
+          </svg>
+        </div>
+        MedGraph
+      </a>
+      <div class="nav-links">
+        <a href="#platform">Platform</a>
+        <a href="#workflows">Workflows</a>
+        <a href="#security">Security</a>
+        <a href="#docs">Docs</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">Log In</a>
+        <a href="#" class="btn btn-primary">Request Demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="badge anim">
+        <span class="badge-icon">🏥</span>
+        <span class="badge-label">Healthcare AI</span>
+        The operational layer hospitals need
+      </div>
+      <h1 class="anim d1">Stop firefighting.<br><span class="grad">Start predicting.</span></h1>
+      <p class="hero-sub anim d2">US hospitals waste <strong>$935 billion annually</strong> on administrative chaos. Epic doesn't talk to Kronos. Kronos doesn't talk to SAP. MedGraph is the AI layer that connects everything—predicting tomorrow's staffing crisis today, catching the supply stockout before surgery, blocking the denial before it's billed.</p>
+      <div class="hero-cta anim d3">
+        <a href="#" class="btn btn-accent btn-lg">Request Demo →</a>
+        <a href="#" class="btn btn-outline btn-lg">View Case Studies</a>
+      </div>
+      
+      <div class="integrations-strip anim d4">
+        <span class="integrations-label">Integrates with your existing systems</span>
+        <div class="integrations-logos">
+          <div class="int-logo"><span>📊</span> Epic</div>
+          <div class="int-logo"><span>🏥</span> Cerner</div>
+          <div class="int-logo"><span>📋</span> Meditech</div>
+          <div class="int-logo"><span>💊</span> Allscripts</div>
+          <div class="int-logo"><span>📦</span> SAP</div>
+          <div class="int-logo"><span>🔌</span> +40 more</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="problem">
+    <div class="problem-inner">
+      <div class="section-head">
+        <span class="section-tag red">The Reality</span>
+        <h2>Hospital operations are drowning in complexity</h2>
+        <p>EHRs don't talk to each other. Clinical workflows are manual. AI is siloed. The result? Billions in waste and burned-out staff.</p>
+      </div>
+      
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-stat">$935B</div>
+          <div class="pain-label">Wasted Annually</div>
+          <h3>Administrative Burden</h3>
+          <p>25% of US healthcare spending goes to admin—scheduling, billing, compliance paperwork.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-stat">18%</div>
+          <div class="pain-label">Nurse Turnover</div>
+          <h3>Staffing Crisis</h3>
+          <p>Manual scheduling, last-minute call-outs, and understaffing drive burnout and costs $52K per nurse.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-stat">23%</div>
+          <div class="pain-label">OR Utilization Lost</div>
+          <h3>Scheduling Chaos</h3>
+          <p>Operating rooms sit empty while patients wait weeks. Manual scheduling can't optimize complex constraints.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-stat">$7.4M</div>
+          <div class="pain-label">Supply Waste per Hospital</div>
+          <h3>Supply Chain Blindness</h3>
+          <p>Expired inventory, stockouts, manual reordering. No visibility across departments.</p>
+        </div>
+      </div>
+      
+      <div class="failed-callout">
+        <div class="failed-head">
+          <div class="failed-icon">💀</div>
+          <div>
+            <h4>Why existing solutions fail</h4>
+            <span>Olive AI raised $900M, valued at $4B, then collapsed. Here's the pattern:</span>
+          </div>
+        </div>
+        <div class="failed-points">
+          <div class="failed-point">Point solutions don't talk to each other—creating more silos</div>
+          <div class="failed-point">RPA bots break when EHR vendors update their interfaces</div>
+          <div class="failed-point">Epic/Cerner optimize their ecosystem, not your workflows</div>
+          <div class="failed-point">"AI" products are rule engines with fancy dashboards</div>
+          <div class="failed-point">Consultants leave, knowledge walks out the door</div>
+          <div class="failed-point">Implementations take 18+ months, ROI never materializes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution -->
+  <section class="solution" id="platform">
+    <div class="solution-inner">
+      <div class="section-head">
+        <span class="section-tag">The Solution</span>
+        <h2>One layer to connect everything</h2>
+        <p>MedGraph sits between your systems and your workflows. We normalize the data, model the relationships, and make every operation intelligent.</p>
+      </div>
+      
+      <div class="architecture">
+        <div class="arch-layers">
+          <!-- Source layer -->
+          <div class="arch-layer">
+            <div class="arch-label">
+              <span>Layer 1</span>
+              <strong>Data Sources</strong>
+            </div>
+            <div class="arch-items">
+              <div class="arch-item source">
+                <div class="arch-item-icon">📊</div>
+                <div>
+                  <h5>Epic/Cerner</h5>
+                  <p>EHR data</p>
+                </div>
+              </div>
+              <div class="arch-item source">
+                <div class="arch-item-icon">⏰</div>
+                <div>
+                  <h5>Kronos/UKG</h5>
+                  <p>Staff scheduling</p>
+                </div>
+              </div>
+              <div class="arch-item source">
+                <div class="arch-item-icon">📦</div>
+                <div>
+                  <h5>SAP/Oracle</h5>
+                  <p>Supply chain</p>
+                </div>
+              </div>
+              <div class="arch-item source">
+                <div class="arch-item-icon">💰</div>
+                <div>
+                  <h5>Billing Systems</h5>
+                  <p>Revenue cycle</p>
+                </div>
+              </div>
+              <div class="arch-item source">
+                <div class="arch-item-icon">📍</div>
+                <div>
+                  <h5>RTLS/IoT</h5>
+                  <p>Asset tracking</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- MedGraph layer -->
+          <div class="arch-layer medgraph-layer">
+            <div class="arch-label">
+              <span>Layer 2</span>
+              <strong>MedGraph</strong>
+            </div>
+            <div class="arch-items">
+              <div class="arch-item layer">
+                <div class="arch-item-icon">🔗</div>
+                <div>
+                  <h5>Knowledge Graph</h5>
+                  <p>Entity relationships</p>
+                </div>
+              </div>
+              <div class="arch-item layer">
+                <div class="arch-item-icon">🧠</div>
+                <div>
+                  <h5>AI Models</h5>
+                  <p>Prediction + optimization</p>
+                </div>
+              </div>
+              <div class="arch-item layer">
+                <div class="arch-item-icon">⚡</div>
+                <div>
+                  <h5>Event Engine</h5>
+                  <p>Real-time triggers</p>
+                </div>
+              </div>
+              <div class="arch-item layer">
+                <div class="arch-item-icon">🔄</div>
+                <div>
+                  <h5>Workflow Automation</h5>
+                  <p>Cross-system actions</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Output layer -->
+          <div class="arch-layer">
+            <div class="arch-label">
+              <span>Layer 3</span>
+              <strong>Outputs</strong>
+            </div>
+            <div class="arch-items">
+              <div class="arch-item output">
+                <div class="arch-item-icon">📅</div>
+                <div>
+                  <h5>Smart Scheduling</h5>
+                  <p>OR, beds, staff</p>
+                </div>
+              </div>
+              <div class="arch-item output">
+                <div class="arch-item-icon">👥</div>
+                <div>
+                  <h5>Staffing Optimization</h5>
+                  <p>Predictive allocation</p>
+                </div>
+              </div>
+              <div class="arch-item output">
+                <div class="arch-item-icon">📊</div>
+                <div>
+                  <h5>Supply Intelligence</h5>
+                  <p>Auto-replenishment</p>
+                </div>
+              </div>
+              <div class="arch-item output">
+                <div class="arch-item-icon">💵</div>
+                <div>
+                  <h5>Revenue Optimization</h5>
+                  <p>Denial prevention</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="features-inner">
+      <div class="section-head">
+        <span class="section-tag">Capabilities</span>
+        <h2>Intelligence that actually works</h2>
+        <p>Not another dashboard. MedGraph takes action—predicting problems before they happen and automating the solutions.</p>
+      </div>
+      
+      <div class="bento">
+        <div class="bento-card featured">
+          <div>
+            <div class="bento-icon">🔮</div>
+            <h3>Predictive Operations</h3>
+            <p>Know what's coming before it arrives. MedGraph predicts patient volume, staffing needs, supply consumption, and equipment failures—giving you hours or days of lead time to respond.</p>
+            <ul class="bento-features">
+              <li>72-hour patient census forecasting (94% accuracy)</li>
+              <li>Nurse call-out prediction based on patterns</li>
+              <li>Equipment failure warnings before downtime</li>
+              <li>Supply stockout alerts 14 days in advance</li>
+            </ul>
+          </div>
+          <div class="demo-preview">
+            <div class="demo-bar">
+              <span class="dot r"></span>
+              <span class="dot y"></span>
+              <span class="dot g"></span>
+            </div>
+            <div class="demo-body">
+              <div class="metric-row">
+                <div class="metric-card">
+                  <h5>Tomorrow's Census</h5>
+                  <div class="metric-val up">342</div>
+                  <div class="metric-change">↑ 12 from today</div>
+                </div>
+                <div class="metric-card">
+                  <h5>ICU Beds Available</h5>
+                  <div class="metric-val down">3</div>
+                  <div class="metric-change">⚠️ Consider early discharges</div>
+                </div>
+              </div>
+              <div class="metric-row">
+                <div class="metric-card">
+                  <h5>Staffing Gap (7AM)</h5>
+                  <div class="metric-val neutral">-4 RNs</div>
+                  <div class="metric-change">Auto-texting float pool</div>
+                </div>
+                <div class="metric-card">
+                  <h5>OR Utilization</h5>
+                  <div class="metric-val up">87%</div>
+                  <div class="metric-change">↑ 8% vs last week</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bento-card">
+          <div class="bento-icon">📅</div>
+          <h3>Smart Scheduling</h3>
+          <p>AI that understands constraints. Surgeon preferences, equipment availability, staff skills, patient acuity—all optimized in real-time.</p>
+          <ul class="bento-features">
+            <li>Multi-resource optimization</li>
+            <li>Automatic conflict resolution</li>
+            <li>Same-day fill rate 94%</li>
+          </ul>
+        </div>
+        
+        <div class="bento-card">
+          <div class="bento-icon">👥</div>
+          <h3>Staffing Intelligence</h3>
+          <p>Match the right skills to the right patients. Predict call-outs, auto-fill from float pool, and balance workloads fairly.</p>
+          <ul class="bento-features">
+            <li>Acuity-based assignments</li>
+            <li>Float pool automation</li>
+            <li>Overtime reduction by 32%</li>
+          </ul>
+        </div>
+        
+        <div class="bento-card">
+          <div class="bento-icon">📦</div>
+          <h3>Supply Chain Clarity</h3>
+          <p>See every item, predict every need. Auto-replenishment based on surgical schedules, not just par levels.</p>
+          <ul class="bento-features">
+            <li>Procedure-linked ordering</li>
+            <li>Expiration prevention</li>
+            <li>Vendor cost optimization</li>
+          </ul>
+        </div>
+        
+        <div class="bento-card lg">
+          <div class="bento-icon">💵</div>
+          <h3>Revenue Protection</h3>
+          <p>Catch denials before they happen. MedGraph analyzes documentation patterns, identifies missing charges, and flags compliance risks in real-time—not after the claim is rejected.</p>
+          <ul class="bento-features">
+            <li>Pre-submission denial prediction (89% accuracy)</li>
+            <li>Missing charge detection</li>
+            <li>Prior auth automation</li>
+            <li>Payer rule monitoring</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflows -->
+  <section class="workflows" id="workflows">
+    <div class="workflows-inner">
+      <div class="section-head">
+        <span class="section-tag">Workflows</span>
+        <h2>Start with one workflow, expand to all</h2>
+        <p>We don't ask you to rip and replace. Pick your biggest pain point, prove value in 90 days, then expand.</p>
+      </div>
+      
+      <div class="workflow-tabs">
+        <button class="workflow-tab active">OR Scheduling</button>
+        <button class="workflow-tab">Nurse Staffing</button>
+        <button class="workflow-tab">Bed Management</button>
+        <button class="workflow-tab">Supply Chain</button>
+        <button class="workflow-tab">Revenue Cycle</button>
+      </div>
+      
+      <div class="workflow-card">
+        <div class="workflow-content">
+          <h3>OR Scheduling Optimization</h3>
+          <p>Operating rooms are your most expensive real estate. Yet most hospitals run at 60-70% utilization with long wait times. MedGraph optimizes the entire surgical workflow—from block allocation to room turnover.</p>
+          
+          <div class="workflow-stats">
+            <div class="wstat">
+              <div class="wstat-val">+23%</div>
+              <div class="wstat-lbl">OR Utilization</div>
+            </div>
+            <div class="wstat">
+              <div class="wstat-val">-42%</div>
+              <div class="wstat-lbl">Same-day Cancellations</div>
+            </div>
+            <div class="wstat">
+              <div class="wstat-val">-18min</div>
+              <div class="wstat-lbl">Avg Turnover Time</div>
+            </div>
+            <div class="wstat">
+              <div class="wstat-val">$4.2M</div>
+              <div class="wstat-lbl">Annual Revenue Captured</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="workflow-visual">
+          <div class="visual-header">
+            <h4>OR 3 Schedule — Today</h4>
+            <div class="live-badge">
+              <span class="live-dot"></span>
+              Optimizing
+            </div>
+          </div>
+          <div class="visual-body">
+            <div class="schedule-row">
+              <div class="schedule-time">7:00 AM</div>
+              <div class="schedule-blocks">
+                <div class="schedule-block surgery">Knee Replacement — Dr. Chen</div>
+              </div>
+            </div>
+            <div class="schedule-row">
+              <div class="schedule-time">10:30 AM</div>
+              <div class="schedule-blocks">
+                <div class="schedule-block break">Turn</div>
+                <div class="schedule-block consult">Block</div>
+              </div>
+            </div>
+            <div class="schedule-row">
+              <div class="schedule-time">11:15 AM</div>
+              <div class="schedule-blocks">
+                <div class="schedule-block optimized">AI Filled: Hip Scope — Dr. Park</div>
+              </div>
+            </div>
+            <div class="schedule-row">
+              <div class="schedule-time">1:00 PM</div>
+              <div class="schedule-blocks">
+                <div class="schedule-block surgery">Spinal Fusion — Dr. Williams</div>
+              </div>
+            </div>
+            <div class="schedule-row">
+              <div class="schedule-time">4:30 PM</div>
+              <div class="schedule-blocks">
+                <div class="schedule-block break">Turn</div>
+                <div class="schedule-block optimized">AI Filled: Rotator Cuff</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-val">47</div>
+        <div class="stat-lbl">Hospital Systems</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">$312M</div>
+        <div class="stat-lbl">Annual Savings Generated</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">94%</div>
+        <div class="stat-lbl">Prediction Accuracy</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">90 days</div>
+        <div class="stat-lbl">Time to Value</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="use-cases">
+    <div class="use-cases-inner">
+      <div class="section-head">
+        <span class="section-tag">Use Cases</span>
+        <h2>Built for every care setting</h2>
+        <p>From 50-bed community hospitals to 2,000-bed academic medical centers. MedGraph scales with your complexity.</p>
+      </div>
+      
+      <div class="cases-grid">
+        <div class="case-card">
+          <div class="case-icon">🏥</div>
+          <h3>Academic Medical Centers</h3>
+          <p>Complex multi-campus operations with teaching requirements, research protocols, and high-acuity cases. MedGraph handles the constraints others can't.</p>
+          <div class="case-metric">
+            <span class="case-metric-val">$8.2M</span>
+            <span class="case-metric-lbl">avg annual savings</span>
+          </div>
+        </div>
+        
+        <div class="case-card">
+          <div class="case-icon">🩺</div>
+          <h3>Community Hospitals</h3>
+          <p>Lean teams wearing multiple hats. MedGraph automates the operational work so staff can focus on patients, not spreadsheets.</p>
+          <div class="case-metric">
+            <span class="case-metric-val">-34%</span>
+            <span class="case-metric-lbl">admin time reduction</span>
+          </div>
+        </div>
+        
+        <div class="case-card">
+          <div class="case-icon">🔬</div>
+          <h3>Ambulatory Surgery Centers</h3>
+          <p>Throughput is everything. Optimize case scheduling, turnover times, and staff allocation to maximize revenue per OR hour.</p>
+          <div class="case-metric">
+            <span class="case-metric-val">+31%</span>
+            <span class="case-metric-lbl">case volume increase</span>
+          </div>
+        </div>
+        
+        <div class="case-card">
+          <div class="case-icon">🚑</div>
+          <h3>Health Systems</h3>
+          <p>Multi-facility coordination, shared resources, transfer optimization. See across your entire network, not just one site.</p>
+          <div class="case-metric">
+            <span class="case-metric-val">42%</span>
+            <span class="case-metric-lbl">transfer time reduction</span>
+          </div>
+        </div>
+        
+        <div class="case-card">
+          <div class="case-icon">🧒</div>
+          <h3>Children's Hospitals</h3>
+          <p>Unique scheduling constraints, family-centered care, specialized equipment. MedGraph adapts to pediatric workflows.</p>
+          <div class="case-metric">
+            <span class="case-metric-val">28%</span>
+            <span class="case-metric-lbl">wait time reduction</span>
+          </div>
+        </div>
+        
+        <div class="case-card">
+          <div class="case-icon">🏔️</div>
+          <h3>Rural & Critical Access</h3>
+          <p>Limited staff, unpredictable volume, supply chain challenges. AI that makes small teams punch above their weight.</p>
+          <div class="case-metric">
+            <span class="case-metric-val">-52%</span>
+            <span class="case-metric-lbl">stockout incidents</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="comparison">
+    <div class="comparison-inner">
+      <div class="section-head">
+        <span class="section-tag">Why MedGraph</span>
+        <h2>Not another point solution</h2>
+        <p>We built what Olive promised but couldn't deliver—a unified operational layer that actually integrates.</p>
+      </div>
+      
+      <div class="comparison-table">
+        <div class="comp-header">
+          <div>Capability</div>
+          <div>Epic/Cerner</div>
+          <div>Point Solutions</div>
+          <div>MedGraph</div>
+        </div>
+        <div class="comp-row">
+          <div>Cross-system integration</div>
+          <div><span class="comp-partial">Own ecosystem only</span></div>
+          <div><span class="comp-x">✗</span></div>
+          <div><span class="comp-check">✓</span></div>
+        </div>
+        <div class="comp-row">
+          <div>Real-time optimization</div>
+          <div><span class="comp-x">✗</span></div>
+          <div><span class="comp-partial">Single workflow</span></div>
+          <div><span class="comp-check">✓</span></div>
+        </div>
+        <div class="comp-row">
+          <div>Predictive analytics</div>
+          <div><span class="comp-partial">Limited</span></div>
+          <div><span class="comp-partial">Siloed</span></div>
+          <div><span class="comp-check">✓</span></div>
+        </div>
+        <div class="comp-row">
+          <div>Automated actions</div>
+          <div><span class="comp-x">✗</span></div>
+          <div><span class="comp-partial">Rules-based</span></div>
+          <div><span class="comp-check">✓</span></div>
+        </div>
+        <div class="comp-row">
+          <div>90-day implementation</div>
+          <div><span class="comp-x">✗</span></div>
+          <div><span class="comp-x">✗</span></div>
+          <div><span class="comp-check">✓</span></div>
+        </div>
+        <div class="comp-row">
+          <div>Works with existing EHR</div>
+          <div><span class="comp-partial">Replaces it</span></div>
+          <div><span class="comp-check">✓</span></div>
+          <div><span class="comp-check">✓</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security -->
+  <section class="security" id="security">
+    <div class="security-inner">
+      <div class="section-head">
+        <span class="section-tag">Security & Compliance</span>
+        <h2>Healthcare-grade from day one</h2>
+        <p>We were built for HIPAA, not retrofitted. Your data never leaves your environment.</p>
+      </div>
+      
+      <div class="security-grid">
+        <div class="security-badge">
+          <div class="security-icon">🔒</div>
+          <h4>HIPAA Compliant</h4>
+          <p>BAA included</p>
+        </div>
+        <div class="security-badge">
+          <div class="security-icon">🏛️</div>
+          <h4>SOC 2 Type II</h4>
+          <p>Audited annually</p>
+        </div>
+        <div class="security-badge">
+          <div class="security-icon">🛡️</div>
+          <h4>HITRUST Certified</h4>
+          <p>CSF v9.6</p>
+        </div>
+        <div class="security-badge">
+          <div class="security-icon">🏠</div>
+          <h4>On-Premise Option</h4>
+          <p>Your infrastructure</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <h2>Ready to stop firefighting?</h2>
+      <p>Join the 47 hospital systems already running smarter. We'll show you ROI on your biggest pain point in 90 days—or walk away.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-accent btn-lg">Request Demo →</a>
+        <a href="#" class="btn btn-outline btn-lg">Download Case Study</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="logo">
+            <div class="logo-mark">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+                <path d="M12 4v16M6 10h12M6 14h12"/>
+              </svg>
+            </div>
+            MedGraph
+          </a>
+          <p>The operational AI layer hospitals need. Connecting fragmented systems into unified intelligence.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="#">Scheduling</a>
+          <a href="#">Staffing</a>
+          <a href="#">Supply Chain</a>
+          <a href="#">Revenue Cycle</a>
+          <a href="#">Integrations</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">Documentation</a>
+          <a href="#">Case Studies</a>
+          <a href="#">Blog</a>
+          <a href="#">Webinars</a>
+          <a href="#">ROI Calculator</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Careers</a>
+          <a href="#">Contact</a>
+          <a href="#">Press</a>
+          <a href="#">Security</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 MedGraph. All rights reserved.</span>
+        <div class="footer-badges">
+          <span class="footer-badge">🔒 HIPAA Compliant</span>
+          <span class="footer-badge">🛡️ SOC 2 Type II</span>
+          <span class="footer-badge">✓ HITRUST Certified</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    
+    // Workflow tabs
+    const tabs = document.querySelectorAll('.workflow-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+    
+    // Intersection Observer for animations
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.anim').forEach(el => {
+      el.style.animationPlayState = 'paused';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

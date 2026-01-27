@@ -1,0 +1,356 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="/favicon.png"><meta name="generator" content="Astro v5.16.8"><!-- Font preloads --><link rel="preload" href="/_astro/inter-latin-400-normal.C38fXH4l.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/inter-latin-600-normal.LgqL8muc.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-400-normal.DnxXpLNu.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-600-normal.B-3RcLOQ.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://2667.io/projects/aegis/"><!-- Primary Meta Tags --><title>Aegis | Shane</title><meta name="title" content="Aegis | Shane"><meta name="description" content="The Operating System for Your AI Life"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://2667.io/projects/aegis/"><meta property="og:title" content="Aegis | Shane"><meta property="og:description" content="The Operating System for Your AI Life"><meta property="og:image" content="https://2667.io/profile.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://2667.io/projects/aegis/"><meta property="twitter:title" content="Aegis | Shane"><meta property="twitter:description" content="The Operating System for Your AI Life"><meta property="twitter:image" content="https://2667.io/profile.jpg"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="Shane" href="https://2667.io/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme === "system" || !localStorage.theme) {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+    window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.C3Mazj8N.css"></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 justify-between"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> Shane </div>  </a> <nav class="flex gap-1"> <a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+Work
+ </a> <span>/</span> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+Projects
+ </a> <span>/</span> <a href="/collection" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+2667
+ </a> </nav> </div>  </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/projects" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
+Back to projects
+ </div> </a> </div> <div class="space-y-1 my-10"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2025-01-26T00:00:00.000Z"> Jan 26, 2025 </time> </div>
+&bull;
+<div class="font-base text-sm"> 5 min read </div> </div> <div class="animate text-2xl font-semibold text-black dark:text-white"> Aegis </div>  </div> <article class="animate"> <h1 id="aegis--the-operating-system-for-your-ai-life">Aegis – The Operating System for Your AI Life</h1>
+<p><strong>Aegis</strong> is the infrastructure that lets AI agents securely act in the real world. Your agents, your control, your data.</p>
+<h2 id="the-thesis">The Thesis</h2>
+<p>Everyone will have AI agents acting on their behalf—managing calendar, email, finances, health, and home. But who builds the infrastructure for personal AI?</p>
+<p>The agents exist (Claude, GPT, AutoGPT). The infrastructure doesn’t.</p>
+<p>Without proper permissions, identity, and security—agents are either useless or dangerous.</p>
+<h2 id="the-problem">The Problem</h2>
+<h3 id="without-aegis">Without Aegis:</h3>
+<ul>
+<li>Share passwords with AI to access services</li>
+<li>No granular permissions—all or nothing access</li>
+<li>Can’t verify what actions agents actually took</li>
+<li>No way to revoke or limit agent access</li>
+<li>Every integration is a custom hack</li>
+</ul>
+<h3 id="with-aegis">With Aegis:</h3>
+<ul>
+<li>Secure OAuth-style agent authorization</li>
+<li>Fine-grained, revocable permissions</li>
+<li>Complete audit trail of all agent actions</li>
+<li>Time-limited, scoped access tokens</li>
+<li>Universal integration protocol</li>
+</ul>
+<h2 id="agent-capabilities">Agent Capabilities</h2>
+<p>Aegis enables a new category of AI-powered automation:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Capability</th><th>What It Does</th><th>Permission Example</th></tr></thead><tbody><tr><td><strong>Calendar</strong></td><td>Smart scheduling, rescheduling, buffer management</td><td>Read events, create (work hours only)</td></tr><tr><td><strong>Email</strong></td><td>Triage, draft replies, schedule sends</td><td>Read, draft replies (no send without approval)</td></tr><tr><td><strong>Finance</strong></td><td>Bill payments, expense tracking, subscriptions</td><td>Read balance only, no transactions</td></tr><tr><td><strong>Smart Home</strong></td><td>Cross-device coordination, energy optimization</td><td>Control lights, thermostat (not locks)</td></tr><tr><td><strong>Shopping</strong></td><td>Price tracking, reorders, delivery coordination</td><td>Order essentials, require approval >$50</td></tr><tr><td><strong>Health</strong></td><td>Appointment scheduling, medication reminders</td><td>Read-only, never share externally</td></tr></tbody></table>
+<h2 id="security-model-trust-but-verify">Security Model: Trust, But Verify</h2>
+<p>The principle of least privilege for AI:</p>
+<h3 id="zero-knowledge-architecture">Zero-Knowledge Architecture</h3>
+<p>Your credentials never touch our servers. Agents authenticate directly with services using secure, scoped tokens.</p>
+<h3 id="complete-audit-trail">Complete Audit Trail</h3>
+<p>Every action your agent takes is logged with cryptographic proof. Review, verify, and export anytime.</p>
+<h3 id="time-bounded-permissions">Time-Bounded Permissions</h3>
+<p>Set expiration dates on any permission. Access automatically revokes—no cleanup required.</p>
+<h3 id="instant-kill-switch">Instant Kill Switch</h3>
+<p>One click to pause all agent activity. Emergency stop that actually works, every time.</p>
+<h2 id="integration-ecosystem">Integration Ecosystem</h2>
+<p>200+ integrations out of the box:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Category</th><th>Services</th></tr></thead><tbody><tr><td><strong>Productivity</strong></td><td>Google Workspace, Microsoft 365, Notion, Slack, Todoist</td></tr><tr><td><strong>Finance</strong></td><td>Plaid-connected banks, Mint, Robinhood, Stripe</td></tr><tr><td><strong>Smart Home</strong></td><td>HomeKit, Google Home, Ring, Nest, Philips Hue</td></tr><tr><td><strong>Health</strong></td><td>Apple Health, Fitbit, MyFitnessPal, Oura</td></tr><tr><td><strong>Commerce</strong></td><td>Amazon, Instacart, DoorDash, Uber</td></tr></tbody></table>
+<h2 id="the-market">The Market</h2>
+<h3 id="personal-ai-infrastructure">Personal AI Infrastructure</h3>
+<ul>
+<li><strong>TAM</strong>: Every human with an AI assistant</li>
+<li><strong>SAM</strong>: 500M+ people using AI tools today</li>
+<li><strong>SOM</strong>: Power users who want AI to actually DO things</li>
+</ul>
+<h3 id="the-gap">The Gap</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What Exists</th><th>What’s Missing</th></tr></thead><tbody><tr><td>AI that can think</td><td>AI that can act</td></tr><tr><td>Chat interfaces</td><td>Agent infrastructure</td></tr><tr><td>Single-app bots</td><td>Cross-service coordination</td></tr><tr><td>Human-in-the-loop</td><td>Secure autonomous operation</td></tr></tbody></table>
+<h2 id="business-model">Business Model</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tier</th><th>Price</th><th>For</th></tr></thead><tbody><tr><td><strong>Personal</strong></td><td>$0/mo</td><td>Trying out AI agents</td></tr><tr><td><strong>Pro</strong></td><td>$29/mo</td><td>Power users</td></tr><tr><td><strong>Team</strong></td><td>$99/mo</td><td>Households &#x26; small teams</td></tr><tr><td><strong>Enterprise</strong></td><td>Custom</td><td>Organizations</td></tr></tbody></table>
+<h3 id="revenue-streams">Revenue Streams</h3>
+<ul>
+<li>Consumer subscriptions</li>
+<li>API fees for agent developers</li>
+<li>Enterprise licensing</li>
+<li>Integration marketplace fees</li>
+</ul>
+<h2 id="why-now">Why Now?</h2>
+<ol>
+<li><strong>AI capability explosion</strong>: LLMs can now understand and execute complex tasks</li>
+<li><strong>Agent frameworks maturing</strong>: AutoGPT, LangChain, CrewAI proving the concept</li>
+<li><strong>API proliferation</strong>: More services expose APIs than ever before</li>
+<li><strong>Trust gap</strong>: Users want AI help but don’t trust current approaches</li>
+<li><strong>Regulation incoming</strong>: EU AI Act and others will require audit trails</li>
+</ol>
+<h2 id="competitive-landscape">Competitive Landscape</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Player</th><th>Focus</th><th>Gap</th></tr></thead><tbody><tr><td><strong>Zapier/Make</strong></td><td>Workflow automation</td><td>No AI reasoning, rigid flows</td></tr><tr><td><strong>IFTTT</strong></td><td>Simple triggers</td><td>No agent autonomy</td></tr><tr><td><strong>AutoGPT</strong></td><td>AI agents</td><td>No security, no permissions</td></tr><tr><td><strong>Personal AI assistants</strong></td><td>Chat</td><td>Can’t actually act</td></tr></tbody></table>
+<p><strong>Aegis = Agent infrastructure + Security + Permissions</strong></p>
+<h2 id="the-vision">The Vision</h2>
+<blockquote>
+<p>“The inevitable future of personal computing is AI agents that act on your behalf. We’re building the infrastructure that makes this safe, secure, and actually useful.”</p>
+</blockquote>
+<p>Imagine:</p>
+<ul>
+<li>Your calendar agent knows not to book meetings during your daughter’s school events</li>
+<li>Your finance agent pays bills but requires approval for anything unusual</li>
+<li>Your health agent coordinates appointments but never shares data externally</li>
+<li>All of them work together, respecting boundaries you set once</li>
+</ul>
+<p><strong>This is the operating system for your AI life.</strong></p>
+<hr>
+<p><em><a href="/demos/aegis.html">View the demo →</a></em></p> </article>  </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+Back to top
+</div> </button> </div> </div> <div class="flex justify-end items-center"> <div class="flex flex-wrap gap-1 items-center"> <button id="light-theme-button" aria-label="Light theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div>  </div> </footer> </body></html>

@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarbonOS – Carbon Accounting Infrastructure</title>
+  <meta name="description" content="The API for carbon accounting. Calculate emissions, generate compliance reports, reduce your footprint. Used by 2,400+ companies.">
+  <meta name="theme-color" content="#09090b">
+  
+  <meta property="og:title" content="CarbonOS – The Stripe for Carbon">
+  <meta property="og:description" content="Carbon accounting infrastructure for the net-zero economy.">
+  <meta property="og:type" content="website">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2310b981' rx='16' width='100' height='100'/><text x='50' y='65' font-size='45' text-anchor='middle' fill='white' font-weight='bold'>C</text></svg>">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg: #09090b;
+      --bg-2: #0c0c0e;
+      --bg-3: #111113;
+      --bg-4: #18181b;
+      --bg-5: #1f1f23;
+      --border: rgba(255,255,255,0.06);
+      --border-2: rgba(255,255,255,0.1);
+      --border-3: rgba(255,255,255,0.15);
+      --text: #fafafa;
+      --text-2: #a1a1aa;
+      --text-3: #71717a;
+      --text-4: #52525b;
+      --green: #10b981;
+      --green-2: #34d399;
+      --green-3: #6ee7b7;
+      --green-glow: rgba(16,185,129,0.12);
+      --emerald: #059669;
+      --teal: #14b8a6;
+      --lime: #84cc16;
+      --yellow: #eab308;
+      --red: #ef4444;
+      --orange: #f97316;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+      --gradient: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+      --radius: 12px;
+      --radius-lg: 16px;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+    
+    .anim { opacity: 0; animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.15s; }
+    .d3 { animation-delay: 0.2s; }
+    .d4 { animation-delay: 0.25s; }
+    .d5 { animation-delay: 0.3s; }
+    .d6 { animation-delay: 0.35s; }
+    
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(9,9,11,0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+    
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--text-3);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover { color: var(--text); }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+    }
+    
+    .btn-primary {
+      background: var(--green);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--green-2);
+      transform: translateY(-1px);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-4);
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--bg-5);
+      border-color: var(--border-3);
+    }
+    
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-2);
+      padding: 0.5rem 0.75rem;
+    }
+    
+    .btn-ghost:hover { color: var(--text); }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -20%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, var(--green-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.75rem, 7vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+    
+    .hero h1 .highlight {
+      color: var(--green);
+    }
+    
+    .hero-sub {
+      font-size: 1.25rem;
+      color: var(--text-2);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+    
+    .hero-cta .btn-primary {
+      padding: 0.875rem 1.75rem;
+      font-size: 0.95rem;
+    }
+    
+    .hero-proof {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    
+    .proof-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    
+    .proof-item .value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text);
+    }
+    
+    .proof-item .label {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Logos */
+    .logos-section {
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-2);
+    }
+    
+    .logos-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .logos-label {
+      font-size: 0.75rem;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+    
+    .logos-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      opacity: 0.5;
+    }
+    
+    .logo-item {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: -0.02em;
+    }
+    
+    /* Problem Section */
+    .problem-section {
+      padding: 8rem 2rem;
+      background: var(--bg);
+    }
+    
+    .section-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    
+    .section-header {
+      margin-bottom: 4rem;
+    }
+    
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      max-width: 700px;
+    }
+    
+    .section-header p {
+      font-size: 1.1rem;
+      color: var(--text-2);
+      max-width: 600px;
+    }
+    
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .problem-grid { grid-template-columns: 1fr; }
+    }
+    
+    .problem-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red) 0%, transparent 100%);
+    }
+    
+    .problem-card .number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+      line-height: 1;
+    }
+    
+    .problem-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .problem-card p {
+      font-size: 0.95rem;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+    
+    /* Regulatory Section */
+    .regulatory-section {
+      padding: 6rem 2rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .reg-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .reg-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .reg-header p {
+      color: var(--text-3);
+    }
+    
+    .reg-timeline {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .reg-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      flex: 1;
+      min-width: 280px;
+      max-width: 320px;
+      position: relative;
+    }
+    
+    .reg-card.active {
+      border-color: var(--red);
+      box-shadow: 0 0 30px rgba(239,68,68,0.1);
+    }
+    
+    .reg-card.active::before {
+      content: 'NOW';
+      position: absolute;
+      top: -10px;
+      right: 1rem;
+      background: var(--red);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+    
+    .reg-year {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .reg-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    
+    .reg-card .full-name {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      margin-bottom: 1rem;
+    }
+    
+    .reg-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    
+    .reg-stat .num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text);
+    }
+    
+    .reg-stat .desc {
+      font-size: 0.8rem;
+      color: var(--text-3);
+    }
+    
+    /* Solution Section */
+    .solution-section {
+      padding: 8rem 2rem;
+      background: var(--bg);
+    }
+    
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    
+    @media (max-width: 900px) {
+      .solution-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    @media (max-width: 600px) {
+      .solution-grid { grid-template-columns: 1fr; }
+    }
+    
+    .solution-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: all 0.2s;
+    }
+    
+    .solution-card:hover {
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+    
+    .solution-card .icon {
+      width: 40px;
+      height: 40px;
+      background: var(--green-glow);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    
+    .solution-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .solution-card p {
+      font-size: 0.9rem;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+    
+    /* Dashboard */
+    .dashboard-section {
+      padding: 8rem 2rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .dashboard-frame {
+      background: var(--bg);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 
+        0 0 0 1px var(--border),
+        0 20px 50px -15px rgba(0,0,0,0.5),
+        0 0 100px -20px var(--green-glow);
+    }
+    
+    .dashboard-chrome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .chrome-dots {
+      display: flex;
+      gap: 6px;
+    }
+    
+    .chrome-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg-5);
+    }
+    
+    .chrome-dot.red { background: #ff5f57; }
+    .chrome-dot.yellow { background: #febc2e; }
+    .chrome-dot.green { background: #28c840; }
+    
+    .chrome-title {
+      font-size: 0.75rem;
+      color: var(--text-4);
+    }
+    
+    .chrome-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .dashboard-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 500px;
+    }
+    
+    @media (max-width: 800px) {
+      .dashboard-body { grid-template-columns: 1fr; }
+      .dashboard-sidebar { display: none; }
+    }
+    
+    .dashboard-sidebar {
+      background: var(--bg-2);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem;
+    }
+    
+    .sidebar-section {
+      margin-bottom: 1.5rem;
+    }
+    
+    .sidebar-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+    
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--text-3);
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-bottom: 0.25rem;
+    }
+    
+    .sidebar-item:hover {
+      background: var(--bg-4);
+      color: var(--text-2);
+    }
+    
+    .sidebar-item.active {
+      background: var(--green-glow);
+      color: var(--green);
+    }
+    
+    .sidebar-item .icon {
+      font-size: 1rem;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .dashboard-main {
+      padding: 1.5rem;
+      background: var(--bg-3);
+    }
+    
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .main-header h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    .period-select {
+      display: flex;
+      gap: 0.25rem;
+      background: var(--bg-4);
+      padding: 0.25rem;
+      border-radius: 6px;
+    }
+    
+    .period-btn {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border: none;
+      background: transparent;
+      color: var(--text-3);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .period-btn.active {
+      background: var(--bg-5);
+      color: var(--text);
+    }
+    
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    @media (max-width: 900px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    .stat-card {
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    
+    .stat-card .label {
+      font-size: 0.7rem;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-card .value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    
+    .stat-card .value.green { color: var(--green); }
+    
+    .stat-card .change {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .stat-card .change.positive { color: var(--green); }
+    .stat-card .change.negative { color: var(--red); }
+    
+    .charts-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
+    }
+    
+    @media (max-width: 900px) {
+      .charts-row { grid-template-columns: 1fr; }
+    }
+    
+    .chart-card {
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    
+    .chart-card .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .chart-card .card-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    /* Emissions Chart */
+    .emissions-chart {
+      height: 180px;
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      padding-top: 1rem;
+    }
+    
+    .chart-bar-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .chart-bar-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: center;
+    }
+    
+    .chart-bar {
+      width: 80%;
+      border-radius: 3px 3px 0 0;
+      transition: all 0.3s ease;
+    }
+    
+    .chart-bar.scope1 { background: var(--green); }
+    .chart-bar.scope2 { background: var(--teal); }
+    .chart-bar.scope3 { background: var(--emerald); opacity: 0.6; }
+    
+    .chart-label {
+      font-size: 0.65rem;
+      color: var(--text-4);
+    }
+    
+    /* Scope Breakdown */
+    .scope-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .scope-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .scope-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    
+    .scope-color.s1 { background: var(--green); }
+    .scope-color.s2 { background: var(--teal); }
+    .scope-color.s3 { background: var(--emerald); opacity: 0.6; }
+    
+    .scope-info {
+      flex: 1;
+    }
+    
+    .scope-info .name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+    
+    .scope-info .desc {
+      font-size: 0.7rem;
+      color: var(--text-4);
+    }
+    
+    .scope-value {
+      text-align: right;
+    }
+    
+    .scope-value .num {
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    .scope-value .pct {
+      font-size: 0.7rem;
+      color: var(--text-4);
+    }
+    
+    /* API Section */
+    .api-section {
+      padding: 8rem 2rem;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    
+    .api-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    @media (max-width: 900px) {
+      .api-grid { 
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+    
+    .api-content h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    
+    .api-content p {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .api-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .api-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-2);
+    }
+    
+    .api-feature .check {
+      width: 20px;
+      height: 20px;
+      background: var(--green-glow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+    
+    .code-block {
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--bg-4);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .code-header .lang {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      font-weight: 500;
+    }
+    
+    .code-header .copy-btn {
+      font-size: 0.7rem;
+      color: var(--text-4);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .code-header .copy-btn:hover { color: var(--text-2); }
+    
+    pre {
+      padding: 1.25rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+    
+    .c { color: var(--text-4); }
+    .k { color: var(--purple); }
+    .s { color: var(--green-2); }
+    .n { color: var(--orange); }
+    .p { color: var(--blue); }
+    .f { color: var(--teal); }
+    
+    /* Pricing */
+    .pricing-section {
+      padding: 8rem 2rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    @media (max-width: 800px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+    }
+    
+    .pricing-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: relative;
+    }
+    
+    .pricing-card.featured {
+      border-color: var(--green);
+      box-shadow: 0 0 40px var(--green-glow);
+    }
+    
+    .pricing-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--green);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+    
+    .pricing-card .tier {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .pricing-card .price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .pricing-card .price .amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    
+    .pricing-card .price .period {
+      color: var(--text-3);
+      font-size: 0.9rem;
+    }
+    
+    .pricing-card .desc {
+      font-size: 0.85rem;
+      color: var(--text-3);
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+    
+    .pricing-card ul {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    
+    .pricing-card li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-2);
+      padding: 0.4rem 0;
+    }
+    
+    .pricing-card li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-top: 0.1rem;
+    }
+    
+    .pricing-card .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+      padding: 8rem 2rem;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    
+    @media (max-width: 800px) {
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+    
+    .faq-column h3 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .faq-item {
+      margin-bottom: 2rem;
+    }
+    
+    .faq-item h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .faq-item p {
+      font-size: 0.9rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+    
+    .faq-item p strong {
+      color: var(--text-2);
+    }
+    
+    /* CTA */
+    .cta-section {
+      padding: 8rem 2rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 60%;
+      background: radial-gradient(ellipse 50% 80% at 50% 100%, var(--green-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .cta-section h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    
+    .cta-section p {
+      font-size: 1.1rem;
+      color: var(--text-2);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+    
+    .cta-section .btn {
+      position: relative;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-3);
+      text-decoration: none;
+    }
+    
+    .footer-links a:hover { color: var(--text-2); }
+    
+    .footer-right {
+      font-size: 0.8rem;
+      color: var(--text-4);
+    }
+    
+    .footer-right a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    
+    /* Mobile nav */
+    @media (max-width: 768px) {
+      .nav-links a:not(.btn) { display: none; }
+      .hero { padding-top: 7rem; }
+      .hero-proof { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="logo">
+      <div class="logo-icon">C</div>
+      CarbonOS
+    </a>
+    <div class="nav-links">
+      <a href="#product">Product</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">Investors</a>
+      <a href="#" class="btn btn-ghost">Login</a>
+      <a href="#" class="btn btn-primary">Get API Key</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-eyebrow anim">
+      <span class="dot"></span>
+      Carbon accounting infrastructure
+    </div>
+    <h1 class="anim d1">
+      The API for<br><span class="highlight">carbon accounting</span>
+    </h1>
+    <p class="hero-sub anim d2">
+      CSRD hits 50,000+ companies in 2025. SEC climate rules follow in 2026. The Big 4 are charging $247K per audit. CarbonOS does it for $499/month—automated, audit-ready, real-time. One integration. All 8 frameworks.
+    </p>
+    <div class="hero-cta anim d3">
+      <a href="#" class="btn btn-primary">Start Building →</a>
+      <a href="#product" class="btn btn-secondary">See the Product</a>
+    </div>
+    <div class="hero-proof anim d4">
+      <div class="proof-item">
+        <span class="value">2,400+</span>
+        <span class="label">Companies</span>
+      </div>
+      <div class="proof-item">
+        <span class="value">47M</span>
+        <span class="label">tCO₂e Tracked</span>
+      </div>
+      <div class="proof-item">
+        <span class="value">8</span>
+        <span class="label">Frameworks</span>
+      </div>
+      <div class="proof-item">
+        <span class="value">99.9%</span>
+        <span class="label">Uptime</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="logos-section">
+    <div class="logos-container">
+      <div class="logos-label">Trusted by sustainability teams at</div>
+      <div class="logos-grid">
+        <span class="logo-item">Patagonia</span>
+        <span class="logo-item">Allbirds</span>
+        <span class="logo-item">Shopify</span>
+        <span class="logo-item">Stripe</span>
+        <span class="logo-item">Notion</span>
+        <span class="logo-item">Figma</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="problem-section">
+    <div class="section-container">
+      <div class="section-header anim">
+        <span class="section-label">The Problem</span>
+        <h2>Carbon accounting is stuck in 1995.</h2>
+        <p>Spreadsheets, consultants, and guesswork. Companies are spending millions to measure what should take minutes.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card anim d1">
+          <div class="number">$247K</div>
+          <h3>Average cost of carbon audit</h3>
+          <p>Big 4 consultants charge premium rates for manual data collection. Every year. Changes? Another engagement.</p>
+        </div>
+        <div class="problem-card anim d2">
+          <div class="number">73%</div>
+          <h3>Of companies miss Scope 3</h3>
+          <p>Supply chain emissions are 70-90% of your footprint. But getting data from 500+ suppliers? Good luck.</p>
+        </div>
+        <div class="problem-card anim d3">
+          <div class="number">6 mo</div>
+          <h3>To produce one report</h3>
+          <p>By the time you've calculated last year's emissions, you've already emitted another year's worth.</p>
+        </div>
+        <div class="problem-card anim d4">
+          <div class="number">8+</div>
+          <h3>Frameworks to comply with</h3>
+          <p>CSRD, SEC, CDP, GRI, TCFD, SBTi, SB 253, ISSB. Same data, reformatted endlessly. Miss one? Fines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="regulatory-section">
+    <div class="section-container">
+      <div class="reg-header anim">
+        <h2>The Regulatory Wave</h2>
+        <p>Compliance isn't optional. The deadlines are here.</p>
+      </div>
+      <div class="reg-timeline">
+        <div class="reg-card active anim d1">
+          <span class="reg-year">2024–2025</span>
+          <h3>EU CSRD</h3>
+          <p class="full-name">Corporate Sustainability Reporting Directive</p>
+          <div class="reg-stat">
+            <span class="num">50,000+</span>
+            <span class="desc">companies affected</span>
+          </div>
+        </div>
+        <div class="reg-card anim d2">
+          <span class="reg-year">2026</span>
+          <h3>SEC Climate</h3>
+          <p class="full-name">Climate-Related Disclosures</p>
+          <div class="reg-stat">
+            <span class="num">All</span>
+            <span class="desc">US public companies</span>
+          </div>
+        </div>
+        <div class="reg-card anim d3">
+          <span class="reg-year">2027</span>
+          <h3>CA SB 253</h3>
+          <p class="full-name">Climate Corporate Data Accountability</p>
+          <div class="reg-stat">
+            <span class="num">$1B+</span>
+            <span class="desc">revenue threshold</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section" id="product">
+    <div class="section-container">
+      <div class="section-header anim">
+        <span class="section-label">The Solution</span>
+        <h2>Carbon accounting that just works.</h2>
+        <p>Connect your data sources once. Get real-time emissions tracking, automatic compliance reports, and reduction pathways.</p>
+      </div>
+      <div class="solution-grid">
+        <div class="solution-card anim d1">
+          <div class="icon">⚡</div>
+          <h3>One Integration</h3>
+          <p>Connect ERP, accounting, travel, and procurement. We calculate emissions automatically from your existing data.</p>
+        </div>
+        <div class="solution-card anim d2">
+          <div class="icon">🔄</div>
+          <h3>Real-Time Tracking</h3>
+          <p>No more annual audits. See emissions as they happen. Make decisions with current data, not year-old guesses.</p>
+        </div>
+        <div class="solution-card anim d3">
+          <div class="icon">🌐</div>
+          <h3>Supplier Network</h3>
+          <p>52,000+ suppliers on our network. Get verified Scope 3 data automatically—no spreadsheets, no chasing.</p>
+        </div>
+        <div class="solution-card anim d4">
+          <div class="icon">📋</div>
+          <h3>All Frameworks</h3>
+          <p>CSRD, SEC, CDP, GRI, TCFD, SBTi. One dataset, every format. Click export, get compliant report.</p>
+        </div>
+        <div class="solution-card anim d5">
+          <div class="icon">🎯</div>
+          <h3>Reduction Pathways</h3>
+          <p>AI identifies your biggest emission sources and recommends actions ranked by impact, cost, and feasibility.</p>
+        </div>
+        <div class="solution-card anim d6">
+          <div class="icon">✅</div>
+          <h3>Audit-Ready</h3>
+          <p>Every calculation documented. Every methodology cited. Full audit trail. When auditors come, you're ready.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="section-container">
+      <div class="section-header anim" style="text-align: center; margin-bottom: 3rem;">
+        <span class="section-label">Dashboard</span>
+        <h2>Your emissions, at a glance.</h2>
+      </div>
+    </div>
+    <div class="dashboard-container anim d2">
+      <div class="dashboard-frame">
+        <div class="dashboard-chrome">
+          <div class="chrome-dots">
+            <span class="chrome-dot red"></span>
+            <span class="chrome-dot yellow"></span>
+            <span class="chrome-dot green"></span>
+          </div>
+          <span class="chrome-title">CarbonOS Dashboard</span>
+          <div class="chrome-actions"></div>
+        </div>
+        <div class="dashboard-body">
+          <div class="dashboard-sidebar">
+            <div class="sidebar-section">
+              <div class="sidebar-label">Overview</div>
+              <div class="sidebar-item active">
+                <span class="icon">📊</span>
+                Dashboard
+              </div>
+              <div class="sidebar-item">
+                <span class="icon">📈</span>
+                Emissions
+              </div>
+              <div class="sidebar-item">
+                <span class="icon">🏭</span>
+                Sources
+              </div>
+            </div>
+            <div class="sidebar-section">
+              <div class="sidebar-label">Compliance</div>
+              <div class="sidebar-item">
+                <span class="icon">📋</span>
+                Reports
+              </div>
+              <div class="sidebar-item">
+                <span class="icon">🎯</span>
+                Targets
+              </div>
+            </div>
+            <div class="sidebar-section">
+              <div class="sidebar-label">Supply Chain</div>
+              <div class="sidebar-item">
+                <span class="icon">🔗</span>
+                Suppliers
+              </div>
+              <div class="sidebar-item">
+                <span class="icon">📦</span>
+                Products
+              </div>
+            </div>
+          </div>
+          <div class="dashboard-main">
+            <div class="main-header">
+              <h2>Emissions Overview</h2>
+              <div class="period-select">
+                <button class="period-btn">Week</button>
+                <button class="period-btn">Month</button>
+                <button class="period-btn active">YTD</button>
+                <button class="period-btn">Year</button>
+              </div>
+            </div>
+            <div class="stats-row">
+              <div class="stat-card">
+                <div class="label">Total Emissions</div>
+                <div class="value">24,847</div>
+                <span class="change positive">↓ 12.3% vs LY</span>
+              </div>
+              <div class="stat-card">
+                <div class="label">Intensity</div>
+                <div class="value">18.2</div>
+                <span class="change positive">↓ 8.1%</span>
+              </div>
+              <div class="stat-card">
+                <div class="label">Suppliers Reporting</div>
+                <div class="value green">847</div>
+                <span class="change positive">+124 this Q</span>
+              </div>
+              <div class="stat-card">
+                <div class="label">Target Progress</div>
+                <div class="value green">67%</div>
+                <span class="change positive">On track</span>
+              </div>
+            </div>
+            <div class="charts-row">
+              <div class="chart-card">
+                <div class="card-header">
+                  <span class="card-title">Monthly Emissions (tCO₂e)</span>
+                </div>
+                <div class="emissions-chart">
+                  <div class="chart-bar-group">
+                    <div class="chart-bar-stack">
+                      <div class="chart-bar scope3" style="height: 80px;"></div>
+                      <div class="chart-bar scope2" style="height: 28px;"></div>
+                      <div class="chart-bar scope1" style="height: 16px;"></div>
+                    </div>
+                    <span class="chart-label">Jan</span>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div class="chart-bar-stack">
+                      <div class="chart-bar scope3" style="height: 85px;"></div>
+                      <div class="chart-bar scope2" style="height: 30px;"></div>
+                      <div class="chart-bar scope1" style="height: 18px;"></div>
+                    </div>
+                    <span class="chart-label">Feb</span>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div class="chart-bar-stack">
+                      <div class="chart-bar scope3" style="height: 78px;"></div>
+                      <div class="chart-bar scope2" style="height: 26px;"></div>
+                      <div class="chart-bar scope1" style="height: 15px;"></div>
+                    </div>
+                    <span class="chart-label">Mar</span>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div class="chart-bar-stack">
+                      <div class="chart-bar scope3" style="height: 72px;"></div>
+                      <div class="chart-bar scope2" style="height: 24px;"></div>
+                      <div class="chart-bar scope1" style="height: 14px;"></div>
+                    </div>
+                    <span class="chart-label">Apr</span>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div class="chart-bar-stack">
+                      <div class="chart-bar scope3" style="height: 68px;"></div>
+                      <div class="chart-bar scope2" style="height: 22px;"></div>
+                      <div class="chart-bar scope1" style="height: 13px;"></div>
+                    </div>
+                    <span class="chart-label">May</span>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div class="chart-bar-stack">
+                      <div class="chart-bar scope3" style="height: 65px;"></div>
+                      <div class="chart-bar scope2" style="height: 20px;"></div>
+                      <div class="chart-bar scope1" style="height: 12px;"></div>
+                    </div>
+                    <span class="chart-label">Jun</span>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div class="chart-bar-stack">
+                      <div class="chart-bar scope3" style="height: 60px;"></div>
+                      <div class="chart-bar scope2" style="height: 18px;"></div>
+                      <div class="chart-bar scope1" style="height: 11px;"></div>
+                    </div>
+                    <span class="chart-label">Jul</span>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-card">
+                <div class="card-header">
+                  <span class="card-title">By Scope</span>
+                </div>
+                <div class="scope-list">
+                  <div class="scope-item">
+                    <div class="scope-color s1"></div>
+                    <div class="scope-info">
+                      <div class="name">Scope 1</div>
+                      <div class="desc">Direct emissions</div>
+                    </div>
+                    <div class="scope-value">
+                      <div class="num">3,726</div>
+                      <div class="pct">15%</div>
+                    </div>
+                  </div>
+                  <div class="scope-item">
+                    <div class="scope-color s2"></div>
+                    <div class="scope-info">
+                      <div class="name">Scope 2</div>
+                      <div class="desc">Purchased energy</div>
+                    </div>
+                    <div class="scope-value">
+                      <div class="num">4,969</div>
+                      <div class="pct">20%</div>
+                    </div>
+                  </div>
+                  <div class="scope-item">
+                    <div class="scope-color s3"></div>
+                    <div class="scope-info">
+                      <div class="name">Scope 3</div>
+                      <div class="desc">Value chain</div>
+                    </div>
+                    <div class="scope-value">
+                      <div class="num">16,152</div>
+                      <div class="pct">65%</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="api-section">
+    <div class="section-container">
+      <div class="api-grid">
+        <div class="api-content anim">
+          <span class="section-label">Developer-First</span>
+          <h2>Built for engineers.</h2>
+          <p>REST API with type-safe SDKs for every language. Calculate emissions programmatically. Embed carbon data in your product. Build sustainability features your customers want.</p>
+          <div class="api-features">
+            <div class="api-feature">
+              <span class="check">✓</span>
+              <span>SDKs for JS, Python, Go, Ruby</span>
+            </div>
+            <div class="api-feature">
+              <span class="check">✓</span>
+              <span>Webhooks for real-time updates</span>
+            </div>
+            <div class="api-feature">
+              <span class="check">✓</span>
+              <span>OpenAPI spec + Postman collection</span>
+            </div>
+            <div class="api-feature">
+              <span class="check">✓</span>
+              <span>99.9% uptime SLA</span>
+            </div>
+          </div>
+        </div>
+        <div class="code-block anim d2">
+          <div class="code-header">
+            <span class="lang">JavaScript</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+          <pre><code><span class="c">// Calculate emissions for a shipment</span>
+<span class="k">const</span> emission = <span class="k">await</span> carbonos.<span class="p">emissions</span>.<span class="f">calculate</span>({
+  <span class="p">type</span>: <span class="s">'freight'</span>,
+  <span class="p">origin</span>: <span class="s">'Shanghai, CN'</span>,
+  <span class="p">destination</span>: <span class="s">'Los Angeles, US'</span>,
+  <span class="p">weight_kg</span>: <span class="n">12500</span>,
+  <span class="p">mode</span>: <span class="s">'ocean'</span>
+});
+
+<span class="c">// Response</span>
+{
+  <span class="p">id</span>: <span class="s">'em_a1b2c3d4'</span>,
+  <span class="p">co2e_kg</span>: <span class="n">2847.5</span>,
+  <span class="p">scope</span>: <span class="n">3</span>,
+  <span class="p">category</span>: <span class="s">'upstream_transportation'</span>,
+  <span class="p">methodology</span>: <span class="s">'GLEC_v3'</span>,
+  <span class="p">confidence</span>: <span class="n">0.94</span>,
+  <span class="p">audit_url</span>: <span class="s">'https://...'</span>
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing-section" id="pricing">
+    <div class="section-container">
+      <div class="section-header anim" style="text-align: center;">
+        <span class="section-label">Pricing</span>
+        <h2>Simple. Predictable. No surprises.</h2>
+        <p>Start free, scale when ready. No per-calculation fees.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card anim d1">
+          <div class="tier">Starter</div>
+          <div class="price">
+            <span class="amount">$0</span>
+            <span class="period">/month</span>
+          </div>
+          <p class="desc">For teams getting started with carbon accounting.</p>
+          <ul>
+            <li>1,000 API calls/month</li>
+            <li>Scope 1 & 2 tracking</li>
+            <li>Basic dashboard</li>
+            <li>1 framework export</li>
+            <li>Community support</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Start Free</a>
+        </div>
+        <div class="pricing-card featured anim d2">
+          <div class="tier">Business</div>
+          <div class="price">
+            <span class="amount">$499</span>
+            <span class="period">/month</span>
+          </div>
+          <p class="desc">Full carbon accounting for growing companies.</p>
+          <ul>
+            <li>Unlimited API calls</li>
+            <li>Full Scope 1, 2 & 3</li>
+            <li>Supplier network access</li>
+            <li>All 8 frameworks</li>
+            <li>Reduction recommendations</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Start Trial</a>
+        </div>
+        <div class="pricing-card anim d3">
+          <div class="tier">Enterprise</div>
+          <div class="price">
+            <span class="amount">Custom</span>
+          </div>
+          <p class="desc">For large organizations with complex needs.</p>
+          <ul>
+            <li>Everything in Business</li>
+            <li>Dedicated CSM</li>
+            <li>Custom integrations</li>
+            <li>On-premise option</li>
+            <li>SLA guarantees</li>
+            <li>Audit support</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section" id="faq">
+    <div class="section-container">
+      <div class="section-header anim">
+        <span class="section-label">Investor FAQ</span>
+        <h2>The hard questions, answered.</h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-column">
+          <h3>Market & Timing</h3>
+          <div class="faq-item anim d1">
+            <h4>Why now?</h4>
+            <p>Three regulatory forcing functions hit simultaneously: EU CSRD (2024), SEC climate rules (2026), and California SB 253 (2027). <strong>50,000+ companies</strong> suddenly need carbon accounting. They can't all hire consultants.</p>
+          </div>
+          <div class="faq-item anim d2">
+            <h4>How big is the market?</h4>
+            <p>Carbon accounting software is <strong>$12B by 2030</strong> (Verdantix). But that understates it—every company eventually needs this. CSRD alone creates $2B+ in new compliance spend.</p>
+          </div>
+          <div class="faq-item anim d3">
+            <h4>What about Persefoni, Watershed?</h4>
+            <p>They're selling to Fortune 500 with 12-month enterprise sales cycles. We're <strong>Stripe to their Oracle</strong>—self-serve, API-first, transparent pricing. Different customer, different motion.</p>
+          </div>
+          <div class="faq-item anim d4">
+            <h4>Can incumbents just add this?</h4>
+            <p>SAP and Salesforce have tried. But carbon accounting requires specialized emission factors, supply chain data, and regulatory expertise. It's not a feature—it's a platform. Their bolt-ons don't work.</p>
+          </div>
+        </div>
+        <div class="faq-column">
+          <h3>Product & Moat</h3>
+          <div class="faq-item anim d1">
+            <h4>What's the moat?</h4>
+            <p><strong>Network effects.</strong> Every company on CarbonOS shares supplier data. 52,000 suppliers reporting means instant Scope 3 for new customers. More customers → better data → more customers.</p>
+          </div>
+          <div class="faq-item anim d2">
+            <h4>How accurate is the data?</h4>
+            <p>Industry-best. We use <strong>1.2M emission factors</strong> from EPA, DEFRA, ecoinvent. Primary data from suppliers beats estimates. Third-party verified methodology. Auditors love us.</p>
+          </div>
+          <div class="faq-item anim d3">
+            <h4>How do you get Scope 3 data?</h4>
+            <p>Three ways: (1) Direct supplier data through our network, (2) spend-based estimates using industry benchmarks, (3) product-level LCA data. We show confidence scores so you know what's measured vs. estimated.</p>
+          </div>
+          <div class="faq-item anim d4">
+            <h4>What's the expansion path?</h4>
+            <p>Start with compliance → add reduction tools → sell carbon credits → become the <strong>operating system for corporate climate</strong>. $499/mo grows to $50K+ as customers mature.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2 class="anim">Compliance is coming.<br>Might as well make it easy.</h2>
+    <p class="anim d1">Join 2,400+ companies already on CarbonOS.</p>
+    <a href="#" class="btn btn-primary anim d2">Get Your API Key →</a>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-left">
+        <a href="#" class="logo">
+          <div class="logo-icon">C</div>
+          CarbonOS
+        </a>
+        <div class="footer-links">
+          <a href="#">Docs</a>
+          <a href="#">Pricing</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <div class="footer-right">
+        Built by <a href="https://2667.io" target="_blank">2667.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.style.opacity = '1';
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.anim').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
