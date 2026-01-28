@@ -7,18 +7,22 @@ import Link from "@components/Link.astro";
 <PageLayout title="Collection" description="The 2667 Collection - NFTs by Shane Sarin">
   <Container>
       <!-- Hero Header -->
-      <div class="rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-8 mb-12 shadow-sm">
-        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-          <img 
-            src="/2667.jpeg" 
-            alt="Bored Ape #2667" 
-            class="w-24 h-24 rounded-2xl object-cover shadow-lg"
-          />
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-900 p-8 mb-12">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="relative flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-cyan-400 to-teal-500 rounded-2xl blur-lg opacity-50"></div>
+            <img 
+              src="/2667.jpeg" 
+              alt="Bored Ape #2667" 
+              class="relative w-24 h-24 rounded-2xl object-cover ring-4 ring-white dark:ring-neutral-700 shadow-xl"
+            />
+          </div>
           <div class="text-center sm:text-left">
             <h1 class="text-3xl sm:text-4xl font-bold text-black dark:text-white">
               The 2667 Collection
             </h1>
-            <p class="text-lg text-neutral-500 dark:text-neutral-400 mt-1">Select Works</p>
+            <p class="text-lg text-neutral-500 dark:text-neutral-400 mt-1 font-medium">Select Works</p>
             <p class="text-sm text-neutral-400 dark:text-neutral-500 mt-3">Curated by Shane Sarin</p>
           </div>
         </div>
