@@ -6,23 +6,40 @@ import { SITE, HOME, SOCIALS } from "@consts";
 ---
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <img src="/profile.jpg" alt="Shane" class=" w-32 h-32 rounded-full mb-6" />
-    <h4 class=" font-semibold text-black dark:text-white">
-      Hi, I'm Shane <span class="text-xl">👋🏻</span> 
-    </h4>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="">
-            Next chapter loading... Former Web3 professional with experience at Consensys and RECUR—helped scale products, navigated market cycles, and curated my art collection, 2667. UNC Chapel Hill alum.
-          </p>
-        </article>
-      </section>
-      <section class=" space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">Let's Connect</h5>
-        <article>
-          <p>If you want to get in touch with me about something or just to say hi, reach out on social media or send me an email.</p>
-        </article>
+    <!-- Hero Header -->
+    <div class="rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-8 mb-12 shadow-sm">
+      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+        <img 
+          src="/profile.jpg" 
+          alt="Shane" 
+          class="w-24 h-24 rounded-2xl object-cover shadow-lg"
+        />
+        <div class="text-center sm:text-left">
+          <h1 class="text-3xl sm:text-4xl font-bold text-black dark:text-white">
+            Hi, I'm Shane <span class="text-2xl">👋🏻</span>
+          </h1>
+          <p class="text-neutral-500 dark:text-neutral-400 mt-2">Web3 · Collector · Builder</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section class="mb-12">
+      <div class="rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-6 shadow-sm">
+        <h2 class="text-xl font-bold text-black dark:text-white mb-3">About</h2>
+        <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+          Next chapter loading... Former Web3 professional with experience at Consensys and RECUR—helped scale products, navigated market cycles, and curated my art collection, 2667. UNC Chapel Hill alum.
+        </p>
+      </div>
+    </section>
+
+    <!-- Connect -->
+    <section>
+      <div class="rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-6 shadow-sm">
+        <h2 class="text-xl font-bold text-black dark:text-white mb-3">Let's Connect</h2>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+          If you want to get in touch with me about something or just to say hi, reach out on social media or send me an email.
+        </p>
         <ul class="flex flex-wrap gap-2">
           {SOCIALS.map(SOCIAL => (
             <li class="flex gap-x-2 text-nowrap">
@@ -34,7 +51,7 @@ import { SITE, HOME, SOCIALS } from "@consts";
             <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>{SITE.EMAIL}</Link>
           </li>
         </ul>
-      </section>
-    </div>
+      </div>
+    </section>
   </Container>
 </PageLayout>
