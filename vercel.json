@@ -1,4 +1,6 @@
 {
-  "buildCommand": "",
-  "outputDirectory": "."
+  "buildCommand": "exit 0",
+  "installCommand": "exit 0",
+  "outputDirectory": ".",
+  "framework": null
 }
