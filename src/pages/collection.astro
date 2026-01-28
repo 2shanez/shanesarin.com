@@ -36,21 +36,24 @@ import Link from "@components/Link.astro";
 
       <!-- The Fungible Collection -->
       <section class="mb-16">
-        <div class="rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-6 mb-8 shadow-sm">
-          <h2 class="text-2xl font-bold text-black dark:text-white">The Fungible Collection</h2>
-          <p class="text-neutral-500 dark:text-neutral-400 font-medium mt-1">by Pak</p>
-          <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">A groundbreaking collection that redefined our understanding of value in digital art. Released via Sotheby's in April 2021, The Fungible challenged collectors to consider what makes something valuable.</p>
-          <Link href="https://www.sothebys.com/en/digital-catalogues/the-fungible-collection-by-pak" external class="inline-block mt-4">Learn more →</Link>
+        <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyan-50 to-neutral-50 dark:from-cyan-900/20 dark:to-neutral-800/50 p-6 mb-8">
+          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative">
+            <h2 class="text-2xl font-bold text-black dark:text-white">The Fungible Collection</h2>
+            <p class="text-cyan-600 dark:text-cyan-400 font-medium mt-1">by Pak</p>
+            <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">A groundbreaking collection that redefined our understanding of value in digital art. Released via Sotheby's in April 2021, The Fungible challenged collectors to consider what makes something valuable.</p>
+            <Link href="https://www.sothebys.com/en/digital-catalogues/the-fungible-collection-by-pak" external class="inline-block mt-4">Learn more →</Link>
+          </div>
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/ACube.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">A Cube</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#481/5148</p>
@@ -58,12 +61,12 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/FiveCubes.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Five Cubes</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#424/571</p>
@@ -71,12 +74,12 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/Ten_Cubes.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Ten Cubes</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#100/247</p>
@@ -84,12 +87,12 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/Twenty_Cubes.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Twenty Cubes</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#20/120</p>
@@ -97,12 +100,12 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/Complexity.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Complexity</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#59/100</p>
@@ -111,8 +114,8 @@ import Link from "@components/Link.astro";
         </div>
 
         <!-- Fun fact callout -->
-        <div class="mt-8 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
-          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+        <div class="mt-8 p-5 rounded-xl bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20 border border-cyan-200 dark:border-cyan-800/50">
+          <p class="text-sm text-cyan-800 dark:text-cyan-200">
             <span class="font-semibold">🏆 Fun fact:</span> I placed second in Pak's contest to predict the total sales for The Fungible drop. The final total was $16.8M—I guessed $16.69M. 😎
           </p>
         </div>
@@ -126,21 +129,24 @@ import Link from "@components/Link.astro";
 
       <!-- The Title Collection -->
       <section class="mb-16">
-        <div class="rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-6 mb-8 shadow-sm">
-          <h2 class="text-2xl font-bold text-black dark:text-white">The Title</h2>
-          <p class="text-neutral-500 dark:text-neutral-400 font-medium mt-1">by Pak</p>
-          <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">Released in December 2020, The Title is a conceptual NFT collection built around a single repeated image sold at different prices, with only the token's name changing. Each NFT shares the same artwork, but variations in title and scarcity highlight how value in crypto art often stems more from ownership, labeling, and perceived rarity than from visual difference. One work in the series, pointedly named "The Unsold," carried a $1,000,000 list price, sharpening the project's critique of speculation and value in the NFT space.</p>
-          <Link href="https://www.niftygateway.com/collections/thetitle/" external class="inline-block mt-4">Learn more →</Link>
+        <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyan-50 to-neutral-50 dark:from-cyan-900/20 dark:to-neutral-800/50 p-6 mb-8">
+          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative">
+            <h2 class="text-2xl font-bold text-black dark:text-white">The Title</h2>
+            <p class="text-cyan-600 dark:text-cyan-400 font-medium mt-1">by Pak</p>
+            <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">Released in December 2020, The Title is a conceptual NFT collection built around a single repeated image sold at different prices, with only the token's name changing. Each NFT shares the same artwork, but variations in title and scarcity highlight how value in crypto art often stems more from ownership, labeling, and perceived rarity than from visual difference. One work in the series, pointedly named "The Unsold," carried a $1,000,000 list price, sharpening the project's critique of speculation and value in the NFT space.</p>
+            <Link href="https://www.niftygateway.com/collections/thetitle/" external class="inline-block mt-4">Learn more →</Link>
+          </div>
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/TheFlipper.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">The Flipper</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#66/99</p>
@@ -148,8 +154,8 @@ import Link from "@components/Link.astro";
           </div>
         </div>
 
-        <div class="mt-8 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
-          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+        <div class="mt-8 p-5 rounded-xl bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20 border border-cyan-200 dark:border-cyan-800/50">
+          <p class="text-sm text-cyan-800 dark:text-cyan-200">
             <span class="font-semibold">👀 Notice anything?</span> Check out the edition number...
           </p>
         </div>
@@ -157,21 +163,24 @@ import Link from "@components/Link.astro";
 
       <!-- Ash Chapter One: Carbon -->
       <section class="mb-16">
-        <div class="rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-6 mb-8 shadow-sm">
-          <h2 class="text-2xl font-bold text-black dark:text-white">Ash Chapter One: Carbon</h2>
-          <p class="text-neutral-500 dark:text-neutral-400 font-medium mt-1">by Pak</p>
-          <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">Released in January 2022 as the first drop in Pak's ASH project, Ash Chapter One: Carbon includes one unique 1-of-1 NFT and 999 editioned NFTs. It uses a burn system where users burn ASH tokens to create, upgrade, or delete the artworks. This setup makes NFTs part of a changing system of value, where burned items leave behind ash that acts as both money and a symbol of how value changes in digital art.</p>
-          <Link href="https://burn.art/drops/carbon" external class="inline-block mt-4">Learn more →</Link>
+        <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyan-50 to-neutral-50 dark:from-cyan-900/20 dark:to-neutral-800/50 p-6 mb-8">
+          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative">
+            <h2 class="text-2xl font-bold text-black dark:text-white">Ash Chapter One: Carbon</h2>
+            <p class="text-cyan-600 dark:text-cyan-400 font-medium mt-1">by Pak</p>
+            <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">Released in January 2022 as the first drop in Pak's ASH project, Ash Chapter One: Carbon includes one unique 1-of-1 NFT and 999 editioned NFTs. It uses a burn system where users burn ASH tokens to create, upgrade, or delete the artworks. This setup makes NFTs part of a changing system of value, where burned items leave behind ash that acts as both money and a symbol of how value changes in digital art.</p>
+            <Link href="https://burn.art/drops/carbon" external class="inline-block mt-4">Learn more →</Link>
+          </div>
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/Carbon.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Carbon</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#434/999</p>
@@ -179,12 +188,12 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/TheGoldVanguard.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">The Gold Vanguard</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#763/999</p>
@@ -192,12 +201,12 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/CheapCarbon.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Cheap Carbon</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#515/999</p>
@@ -208,21 +217,24 @@ import Link from "@components/Link.astro";
 
       <!-- Ash Chapter Two: Metamorphosis -->
       <section class="mb-16">
-        <div class="rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-6 mb-8 shadow-sm">
-          <h2 class="text-2xl font-bold text-black dark:text-white">Ash Chapter Two: Metamorphosis</h2>
-          <p class="text-neutral-500 dark:text-neutral-400 font-medium mt-1">by Pak (featuring 30 artists)</p>
-          <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">Released in March 2022 as the second drop in Pak's ASH project, Ash Chapter Two: Metamorphosis offers an edition of 7500 tokens. Each wallet can mint up to 10 tokens revealing art from 30 creators like Pak, Paris Hilton, and Mad Dog Jones (250 per creator), with mechanics to combine any 5 tokens to morph one—destroying 4 to reduce supply and enable high-tier burns. This setup turns initial artworks into evolving forms, probing how scarcity, destruction, and adaptation redefine value in digital art.</p>
-          <Link href="https://burn.art/drops/metamorphosis" external class="inline-block mt-4">Learn more →</Link>
+        <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyan-50 to-neutral-50 dark:from-cyan-900/20 dark:to-neutral-800/50 p-6 mb-8">
+          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative">
+            <h2 class="text-2xl font-bold text-black dark:text-white">Ash Chapter Two: Metamorphosis</h2>
+            <p class="text-cyan-600 dark:text-cyan-400 font-medium mt-1">by Pak (featuring 30 artists)</p>
+            <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">Released in March 2022 as the second drop in Pak's ASH project, Ash Chapter Two: Metamorphosis offers an edition of 7500 tokens. Each wallet can mint up to 10 tokens revealing art from 30 creators like Pak, Paris Hilton, and Mad Dog Jones (250 per creator), with mechanics to combine any 5 tokens to morph one—destroying 4 to reduce supply and enable high-tier burns. This setup turns initial artworks into evolving forms, probing how scarcity, destruction, and adaptation redefine value in digital art.</p>
+            <Link href="https://burn.art/drops/metamorphosis" external class="inline-block mt-4">Learn more →</Link>
+          </div>
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/ThatRoom.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">That Room</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#97/250</p>
@@ -230,12 +242,12 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/MonstrousVermin.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Monstrous Vermin</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Pak</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#213/250</p>
@@ -243,12 +255,12 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/SunlightOveraCity.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Sunlight Over a City, 2022</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">LIŔONA</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#240/250</p>
@@ -256,12 +268,12 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-square overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/IridescentImagination.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Iridescent Imagination</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Mad Dog Jones</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#243/250</p>
@@ -272,21 +284,24 @@ import Link from "@components/Link.astro";
 
       <!-- The 2020 Collection: Beeple Everydays -->
       <section class="mb-16">
-        <div class="rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-6 mb-8 shadow-sm">
-          <h2 class="text-2xl font-bold text-black dark:text-white">The 2020 Collection: Beeple Everydays</h2>
-          <p class="text-neutral-500 dark:text-neutral-400 font-medium mt-1">by Beeple</p>
-          <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">Released on NiftyGateway in December 2020, The 2020 Collection assembles 722 unique NFTs from Beeple's daily "Everydays" series, transforming one-a-day surreal visions into a cyberpunk NFT archive. Works span editions like "BULL RUN" (271 pieces), "INTO THE ETHER" (207 pieces), "INFECTED" (123 pieces), and "Beeple Everydays - Raw" (100 pieces).</p>
-          <Link href="https://beeple-collect.com/collection-all/2020-collection/" external class="inline-block mt-4">Learn more →</Link>
+        <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyan-50 to-neutral-50 dark:from-cyan-900/20 dark:to-neutral-800/50 p-6 mb-8">
+          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative">
+            <h2 class="text-2xl font-bold text-black dark:text-white">The 2020 Collection: Beeple Everydays</h2>
+            <p class="text-cyan-600 dark:text-cyan-400 font-medium mt-1">by Beeple</p>
+            <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">Released on NiftyGateway in December 2020, The 2020 Collection assembles 722 unique NFTs from Beeple's daily "Everydays" series, transforming one-a-day surreal visions into a cyberpunk NFT archive. Works span editions like "BULL RUN" (271 pieces), "INTO THE ETHER" (207 pieces), "INFECTED" (123 pieces), and "Beeple Everydays - Raw" (100 pieces).</p>
+            <Link href="https://beeple-collect.com/collection-all/2020-collection/" external class="inline-block mt-4">Learn more →</Link>
+          </div>
         </div>
         
         <div class="max-w-md">
           <div class="group">
-            <div class="aspect-video overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-video overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <source src="/collection/Bullrun.mp4" type="video/mp4" />
               </video>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">BULL RUN</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Beeple</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#14/271</p>
@@ -297,18 +312,21 @@ import Link from "@components/Link.astro";
 
       <!-- EVERYDAY ARTIFACTS -->
       <section class="mb-16">
-        <div class="rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-6 mb-8 shadow-sm">
-          <h2 class="text-2xl font-bold text-black dark:text-white">EVERYDAY ARTIFACTS</h2>
-          <p class="text-neutral-500 dark:text-neutral-400 font-medium mt-1">by Beeple</p>
-          <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">During the grand opening of BEEPLE STUDIOS on March 11, 2023, Beeple unleashed a dramatic cascade of papers from the ceiling, concealing among them 100 special physical artifacts—each etched with a unique yellow barcode redeemable for exclusive NFTs drawn from his iconic daily "Everydays" series. I was lucky enough to catch edition #14/100 and even got Beeple to sign the physical version.</p>
+        <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyan-50 to-neutral-50 dark:from-cyan-900/20 dark:to-neutral-800/50 p-6 mb-8">
+          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative">
+            <h2 class="text-2xl font-bold text-black dark:text-white">EVERYDAY ARTIFACTS</h2>
+            <p class="text-cyan-600 dark:text-cyan-400 font-medium mt-1">by Beeple</p>
+            <p class="text-neutral-600 dark:text-neutral-300 mt-3 leading-relaxed">During the grand opening of BEEPLE STUDIOS on March 11, 2023, Beeple unleashed a dramatic cascade of papers from the ceiling, concealing among them 100 special physical artifacts—each etched with a unique yellow barcode redeemable for exclusive NFTs drawn from his iconic daily "Everydays" series. I was lucky enough to catch edition #14/100 and even got Beeple to sign the physical version.</p>
+          </div>
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
           <div class="group">
-            <div class="aspect-[3/4] overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-[3/4] overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <img src="/collection/everydayartifact.png" alt="Everyday Artifact NFT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">EVERYDAY ARTIFACT</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Beeple</p>
               <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">#14/100</p>
@@ -316,18 +334,18 @@ import Link from "@components/Link.astro";
           </div>
 
           <div class="group">
-            <div class="aspect-[3/4] overflow-hidden rounded-xl bg-black shadow-md">
+            <div class="aspect-[3/4] overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700">
               <img src="/collection/everydayartifact-signed.jpg" alt="Signed Physical Artifact" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
-            <div class="mt-4">
+            <div class="mt-4 px-1">
               <h3 class="font-semibold text-black dark:text-white">Signed Physical</h3>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">Beeple</p>
             </div>
           </div>
         </div>
 
-        <div class="mt-8 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
-          <p class="text-sm text-neutral-700 dark:text-neutral-300 italic">
+        <div class="mt-8 p-5 rounded-xl bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20 border border-cyan-200 dark:border-cyan-800/50">
+          <p class="text-sm text-cyan-800 dark:text-cyan-200 italic">
             "Extravaluable Green Dot!" — Beeple
           </p>
         </div>
