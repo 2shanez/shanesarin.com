@@ -9,7 +9,8 @@ import inter600 from "@fontsource/inter/files/inter-latin-600-normal.woff2";
 import lora400 from "@fontsource/lora/files/lora-latin-400-normal.woff2";
 import lora600 from "@fontsource/lora/files/lora-latin-600-normal.woff2";
 
-import { ClientRouter } from "astro:transitions";
+// View transitions disabled to prevent flash
+// import { ClientRouter } from "astro:transitions";
 import { SITE } from "@consts";
 
 interface Props {
@@ -57,21 +58,12 @@ const { title, description, image = "/profile.jpg" } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<ClientRouter  />
+<!-- View transitions disabled -->
 
 <!-- RSS Link -->
 <link rel="alternate" type="application/rss+xml" title={SITE.NAME} href={new URL("rss.xml", Astro.site)} />
 
-<script>
-  import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
-  document.addEventListener("astro:before-swap", (e) =>
-    [
-      ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        "link[as=\"font\"]"
-      ),
-    ].forEach((link) => link.remove())
-  );
-</script>
+<!-- Transition scripts removed -->
 
 <script is:inline>
   function init() {
@@ -115,22 +107,10 @@ const { title, description, image = "/profile.jpg" } = Astro.props;
   }
 
   function animate() {
+    // Animations disabled - show all content immediately
     const animateElements = document.querySelectorAll(".animate");
-    
-    // Wait for next frame to ensure CSS is fully applied
-    requestAnimationFrame(() => {
-      // Enable transitions
-      document.documentElement.classList.add("ready");
-      
-      // Small delay to ensure transitions are active before animating
-      requestAnimationFrame(() => {
-        animateElements.forEach((element, index) => {
-          // Stagger with minimal JS delay
-          setTimeout(() => {
-            element.classList.add("show");
-          }, index * 60);
-        });
-      });
+    animateElements.forEach((element) => {
+      element.classList.add("show");
     });
   }
 
@@ -189,9 +169,5 @@ const { title, description, image = "/profile.jpg" } = Astro.props;
   }
 
   document.addEventListener("DOMContentLoaded", () => init());
-  document.addEventListener("astro:after-swap", () => {
-    document.documentElement.classList.remove("ready");
-    init();
-  });
   preloadTheme();
 </script>

@@ -15,6 +15,15 @@ const { title, description } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <script is:inline>
+      // Immediately set theme to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
     <Head title={`${title} | ${SITE.NAME}`} description={description} />
   </head>
   <body>
