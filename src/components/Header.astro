@@ -10,41 +10,43 @@ const pathname = Astro.url.pathname;
       <a href="/" class="font-medium text-black dark:text-white hover:opacity-70">
         {SITE.NAME}
       </a>
-      <nav class="flex items-center gap-1">
-        <a 
-          href="/work" 
-          class:list={[
-            "px-3 py-1.5 rounded-full text-sm font-medium",
-            pathname.startsWith("/work") 
-              ? "bg-black dark:bg-white text-white dark:text-black" 
-              : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
-          ]}
-        >
-          Work
-        </a>
-        <a 
-          href="/projects" 
-          class:list={[
-            "px-3 py-1.5 rounded-full text-sm font-medium",
-            pathname.startsWith("/projects") 
-              ? "bg-black dark:bg-white text-white dark:text-black" 
-              : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
-          ]}
-        >
-          Projects
-        </a>
-        <a 
-          href="/collection" 
-          class:list={[
-            "px-3 py-1.5 rounded-full text-sm font-medium",
-            pathname.startsWith("/collection") 
-              ? "bg-black dark:bg-white text-white dark:text-black" 
-              : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
-          ]}
-        >
-          2667
-        </a>
-        <div class="flex items-center gap-0 ml-2 pl-2 border-l border-neutral-200 dark:border-neutral-700">
+      <div class="flex items-center gap-4">
+        <nav class="flex items-center gap-1">
+          <a 
+            href="/work" 
+            class:list={[
+              "px-3 py-1.5 rounded-full text-sm font-medium",
+              pathname.startsWith("/work") 
+                ? "bg-black dark:bg-white text-white dark:text-black" 
+                : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
+            ]}
+          >
+            Work
+          </a>
+          <a 
+            href="/projects" 
+            class:list={[
+              "px-3 py-1.5 rounded-full text-sm font-medium",
+              pathname.startsWith("/projects") 
+                ? "bg-black dark:bg-white text-white dark:text-black" 
+                : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
+            ]}
+          >
+            Projects
+          </a>
+          <a 
+            href="/collection" 
+            class:list={[
+              "px-3 py-1.5 rounded-full text-sm font-medium",
+              pathname.startsWith("/collection") 
+                ? "bg-black dark:bg-white text-white dark:text-black" 
+                : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
+            ]}
+          >
+            2667
+          </a>
+        </nav>
+        <div class="flex items-center gap-0 pl-3 border-l border-neutral-200 dark:border-neutral-700">
           <button
             id="light-theme-button"
             aria-label="Light theme"
@@ -116,7 +118,7 @@ const pathname = Astro.url.pathname;
             </svg>
           </button>
         </div>
-      </nav>
+      </div>
     </div>
   </Container>
 </header>
