@@ -1,0 +1,71 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { dateRange } from "@lib/utils";
+
+type Props = {
+  entry: CollectionEntry<"work">;
+  Content: any;
+}
+
+const { entry, Content } = Astro.props;
+
+// Map company slugs to accent colors
+const companyMeta: Record<string, { accent: string }> = {
+  'consensys': { accent: '#8B5CF6' },
+  'recur': { accent: '#06B6D4' },
+  'infosys': { accent: '#3B82F6' },
+};
+
+const meta = companyMeta[entry.slug] || { accent: '#6B7280' };
+---
+
+<div class="group relative block">
+  <div class="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 backdrop-blur-sm transition-all duration-500 ease-out hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-lg dark:hover:shadow-2xl dark:hover:shadow-neutral-900/50">
+    
+    <!-- Subtle gradient glow on hover -->
+    <div 
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+      style={`background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${meta.accent}08, transparent 40%);`}
+    ></div>
+    
+    <!-- Top accent line -->
+    <div 
+      class="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+      style={`background: linear-gradient(90deg, transparent, ${meta.accent}, transparent);`}
+    ></div>
+    
+    <div class="relative p-5">
+      <!-- Header: Logo + Company + Role -->
+      <div class="flex items-start gap-4 mb-4">
+        {entry.data.logo && (
+          <img 
+            src={entry.data.logo} 
+            alt={entry.data.company} 
+            class="w-12 h-12 rounded-lg object-cover flex-shrink-0 border border-neutral-100 dark:border-neutral-800"
+          />
+        )}
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <h3 class="text-base font-semibold text-neutral-900 dark:text-white">
+              {entry.data.company}
+            </h3>
+            <span class="text-xs text-neutral-400 dark:text-neutral-500 font-medium whitespace-nowrap">
+              {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+            </span>
+          </div>
+          <span 
+            class="inline-flex items-center px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md"
+            style={`background: ${meta.accent}15; color: ${meta.accent};`}
+          >
+            {entry.data.role}
+          </span>
+        </div>
+      </div>
+      
+      <!-- Description -->
+      <div class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed prose prose-sm dark:prose-invert max-w-none">
+        <Content />
+      </div>
+    </div>
+  </div>
+</div>
