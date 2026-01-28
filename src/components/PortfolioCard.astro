@@ -7,29 +7,29 @@ type Props = {
 
 const { entry } = Astro.props;
 
-// Map project slugs to categories and accent colors
-const projectMeta: Record<string, { category: string; accent: string }> = {
-  'moltbot-setup': { category: 'AI', accent: '#8B5CF6' },
-  'veritas': { category: 'Social', accent: '#3B82F6' },
-  'civitas': { category: 'GovTech', accent: '#10B981' },
-  'prism': { category: 'Infrastructure', accent: '#EC4899' },
-  'haven': { category: 'Web3', accent: '#F59E0B' },
-  'medgraph': { category: 'Healthcare', accent: '#EF4444' },
-  'carbonos': { category: 'Climate', accent: '#22C55E' },
-  'sentinel': { category: 'Security', accent: '#64748B' },
-  'casebrief': { category: 'Legal', accent: '#6366F1' },
-  'muse': { category: 'Creator', accent: '#F472B6' },
-  'aegis': { category: 'AI', accent: '#06B6D4' },
+// Map project slugs to emoji icons, categories and accent colors
+const projectMeta: Record<string, { icon: string; category: string; accent: string }> = {
+  'moltbot-setup': { icon: '🤖', category: 'AI', accent: '#8B5CF6' },
+  'veritas': { icon: '🎓', category: 'Social', accent: '#3B82F6' },
+  'civitas': { icon: '🏛️', category: 'GovTech', accent: '#10B981' },
+  'prism': { icon: '🔮', category: 'Infrastructure', accent: '#EC4899' },
+  'haven': { icon: '🛡️', category: 'Web3', accent: '#F59E0B' },
+  'medgraph': { icon: '🏥', category: 'Healthcare', accent: '#EF4444' },
+  'carbonos': { icon: '🌱', category: 'Climate', accent: '#22C55E' },
+  'sentinel': { icon: '🔒', category: 'Security', accent: '#64748B' },
+  'casebrief': { icon: '⚖️', category: 'Legal', accent: '#6366F1' },
+  'muse': { icon: '🎨', category: 'Creator', accent: '#F472B6' },
+  'aegis': { icon: '🌐', category: 'AI', accent: '#06B6D4' },
 };
 
-const meta = projectMeta[entry.slug] || { category: 'Project', accent: '#6B7280' };
+const meta = projectMeta[entry.slug] || { icon: '📁', category: 'Project', accent: '#6B7280' };
 ---
 
 <a 
   href={`/projects/${entry.slug}`} 
   class="group relative block"
 >
-  <div class="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 backdrop-blur-sm transition-all duration-500 ease-out hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-lg dark:hover:shadow-2xl dark:hover:shadow-neutral-900/50">
+  <div class="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 backdrop-blur-sm transition-all duration-500 ease-out hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-lg dark:hover:shadow-2xl dark:hover:shadow-neutral-900/50 h-full">
     
     <!-- Subtle gradient glow on hover -->
     <div 
@@ -43,37 +43,37 @@ const meta = projectMeta[entry.slug] || { category: 'Project', accent: '#6B7280'
       style={`background: linear-gradient(90deg, transparent, ${meta.accent}, transparent);`}
     ></div>
     
-    <div class="relative p-6">
-      <!-- Header: Category + Status -->
-      <div class="flex items-center justify-between mb-4">
-        <span 
-          class="inline-flex items-center px-2 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-md"
-          style={`background: ${meta.accent}15; color: ${meta.accent};`}
-        >
-          {meta.category}
-        </span>
-        <span class="text-[10px] font-medium uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
-          Concept
-        </span>
+    <div class="relative p-5 flex flex-col h-full">
+      <!-- Header: Emoji + Category -->
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">{meta.icon}</span>
+          <span 
+            class="inline-flex items-center px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md"
+            style={`background: ${meta.accent}15; color: ${meta.accent};`}
+          >
+            {meta.category}
+          </span>
+        </div>
       </div>
       
       <!-- Title -->
-      <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2 group-hover:text-neutral-700 dark:group-hover:text-neutral-100 transition-colors duration-300">
+      <h3 class="text-base font-semibold text-neutral-900 dark:text-white mb-2 group-hover:text-neutral-700 dark:group-hover:text-neutral-100 transition-colors duration-300">
         {entry.data.title}
       </h3>
       
       <!-- Description -->
-      <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 leading-relaxed mb-6">
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 leading-relaxed flex-1">
         {entry.data.description}
       </p>
       
       <!-- Footer -->
-      <div class="flex items-center justify-between pt-4 border-t border-neutral-100 dark:border-neutral-800">
+      <div class="flex items-center justify-between pt-4 mt-4 border-t border-neutral-100 dark:border-neutral-800">
         <span class="text-xs text-neutral-400 dark:text-neutral-500 font-medium">
-          {entry.data.date.toLocaleDateString('en-US', { year: 'numeric' })}
+          {entry.data.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
         </span>
         <span class="flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300">
-          Explore
+          View
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             class="h-3.5 w-3.5 transform group-hover:translate-x-0.5 transition-transform duration-300" 
