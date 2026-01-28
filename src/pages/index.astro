@@ -6,40 +6,38 @@ import { SITE, HOME, SOCIALS } from "@consts";
 ---
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <div class="mb-8">
+    <div class="flex items-center gap-5 mb-10">
       <img 
         src="/profile.jpg" 
         alt="Shane" 
-        class="w-32 h-32 rounded-full mb-6"
+        class="w-20 h-20 rounded-full shadow-md"
       />
-      <h1 class="font-semibold text-black dark:text-white">
-        Hi, I'm Shane <span class="text-xl">👋🏻</span>
-      </h1>
+      <div>
+        <h1 class="text-2xl font-bold text-black dark:text-white">
+          Shane Sarin
+        </h1>
+        <p class="text-neutral-500 dark:text-neutral-400">Web3 · Collector · Builder</p>
+      </div>
     </div>
 
-    <div class="space-y-16">
+    <div class="space-y-12">
       <section>
-        <p class="text-neutral-700 dark:text-neutral-300">
+        <p class="text-neutral-700 dark:text-neutral-300 leading-relaxed">
           Next chapter loading... Former Web3 professional with experience at Consensys and RECUR—helped scale products, navigated market cycles, and curated my art collection, <Link href="/collection">2667</Link>. UNC Chapel Hill alum.
         </p>
       </section>
 
-      <section class="space-y-4">
-        <h2 class="font-semibold text-black dark:text-white">Let's Connect</h2>
-        <p class="text-neutral-700 dark:text-neutral-300">
-          If you want to get in touch with me about something or just to say hi, reach out on social media or send me an email.
+      <section class="space-y-3">
+        <h2 class="text-lg font-semibold text-black dark:text-white">Let's Connect</h2>
+        <p class="text-neutral-600 dark:text-neutral-400">
+          Reach out on social media or send me an email.
         </p>
-        <ul class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-3 pt-1">
           {SOCIALS.map(SOCIAL => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>{SOCIAL.NAME}</Link>
-              {"/"}
-            </li>
+            <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`} class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white">{SOCIAL.NAME}</Link>
           ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>{SITE.EMAIL}</Link>
-          </li>
-        </ul>
+          <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`} class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white">{SITE.EMAIL}</Link>
+        </div>
       </section>
     </div>
   </Container>
