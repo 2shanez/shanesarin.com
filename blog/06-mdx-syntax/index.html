@@ -40,22 +40,10 @@
   }
 
   function animate() {
+    // Animations disabled - show all content immediately
     const animateElements = document.querySelectorAll(".animate");
-    
-    // Wait for next frame to ensure CSS is fully applied
-    requestAnimationFrame(() => {
-      // Enable transitions
-      document.documentElement.classList.add("ready");
-      
-      // Small delay to ensure transitions are active before animating
-      requestAnimationFrame(() => {
-        animateElements.forEach((element, index) => {
-          // Stagger with minimal JS delay
-          setTimeout(() => {
-            element.classList.add("show");
-          }, index * 60);
-        });
-      });
+    animateElements.forEach((element) => {
+      element.classList.add("show");
     });
   }
 
@@ -141,7 +129,7 @@ Back to blog
 <span class="line"></span>
 <span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#79B8FF">DateComp</span><span style="color:#B392F0"> date</span><span style="color:#E1E4E8">={</span><span style="color:#F97583">new</span><span style="color:#B392F0"> Date</span><span style="color:#E1E4E8">()} /&gt;</span></span></code></pre>
 
-<time datetime="2026-01-28T15:43:37.532Z"> Jan 28, 2026 </time>
+<time datetime="2026-01-28T15:45:47.685Z"> Jan 28, 2026 </time>
 <hr/>
 <h3 id="example-2">Example 2</h3>
 <p>Importing a component from a relative path to your content.</p>

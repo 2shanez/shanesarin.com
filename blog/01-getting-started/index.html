@@ -40,22 +40,10 @@
   }
 
   function animate() {
+    // Animations disabled - show all content immediately
     const animateElements = document.querySelectorAll(".animate");
-    
-    // Wait for next frame to ensure CSS is fully applied
-    requestAnimationFrame(() => {
-      // Enable transitions
-      document.documentElement.classList.add("ready");
-      
-      // Small delay to ensure transitions are active before animating
-      requestAnimationFrame(() => {
-        animateElements.forEach((element, index) => {
-          // Stagger with minimal JS delay
-          setTimeout(() => {
-            element.classList.add("show");
-          }, index * 60);
-        });
-      });
+    animateElements.forEach((element) => {
+      element.classList.add("show");
     });
   }
 
