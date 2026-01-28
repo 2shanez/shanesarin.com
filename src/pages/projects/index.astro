@@ -8,63 +8,23 @@ import { PROJECTS } from "@consts";
 const projects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-// Count by category
-const categories = projects.reduce((acc, p) => {
-  const cat = p.slug;
-  return acc;
-}, {});
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
   <Container>
-    <div class="space-y-12">
-      <!-- Header Section -->
-      <header class="space-y-4">
-        <div class="flex items-center gap-3 mb-2">
-          <div class="h-px flex-1 bg-gradient-to-r from-neutral-200 dark:from-neutral-800 to-transparent"></div>
-          <span class="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">Portfolio</span>
-          <div class="h-px flex-1 bg-gradient-to-l from-neutral-200 dark:from-neutral-800 to-transparent"></div>
-        </div>
-        <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white tracking-tight text-center">
-          Projects
-        </h1>
-        <p class="text-neutral-500 dark:text-neutral-400 text-center max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-          Concepts and explorations across AI, infrastructure, and emerging technology.
-        </p>
-        
-        <!-- Stats bar -->
-        <div class="flex items-center justify-center gap-8 pt-4">
-          <div class="text-center">
-            <div class="text-2xl font-bold text-neutral-900 dark:text-white">{projects.length}</div>
-            <div class="text-[10px] font-medium uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Projects</div>
-          </div>
-          <div class="w-px h-8 bg-neutral-200 dark:bg-neutral-800"></div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-neutral-900 dark:text-white">8</div>
-            <div class="text-[10px] font-medium uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Sectors</div>
-          </div>
-          <div class="w-px h-8 bg-neutral-200 dark:bg-neutral-800"></div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-neutral-900 dark:text-white">2026</div>
-            <div class="text-[10px] font-medium uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Active</div>
-          </div>
-        </div>
-      </header>
+    <div class="space-y-8">
+      <!-- Header -->
+      <div class="">
+        <h1 class="text-3xl font-bold text-black dark:text-white mb-2">Projects</h1>
+        <p class="text-black/60 dark:text-white/60">A collection of ideas, prototypes, and experiments.</p>
+      </div>
       
       <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <PortfolioCard entry={project} />
         ))}
       </div>
-      
-      <!-- Footer note -->
-      <footer class="text-center pt-8 border-t border-neutral-100 dark:border-neutral-800">
-        <p class="text-xs text-neutral-400 dark:text-neutral-500">
-          Have an idea or want to collaborate? <a href="mailto:shanesarin@gmail.com" class="underline hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors">Get in touch</a>
-        </p>
-      </footer>
     </div>
   </Container>
 </PageLayout>
