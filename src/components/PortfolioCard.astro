@@ -7,74 +7,85 @@ type Props = {
 
 const { entry } = Astro.props;
 
-// Map project slugs to emoji icons and categories
-const projectMeta: Record<string, { icon: string; category: string; color: string }> = {
-  'moltbot-setup': { icon: '🤖', category: 'AI Tools', color: 'from-violet-500 to-purple-600' },
-  'veritas': { icon: '🎓', category: 'Social', color: 'from-indigo-500 to-blue-600' },
-  'civitas': { icon: '🏛️', category: 'GovTech', color: 'from-emerald-500 to-teal-600' },
-  'prism': { icon: '🔮', category: 'Infrastructure', color: 'from-purple-500 to-pink-600' },
-  'haven': { icon: '🛡️', category: 'Web3', color: 'from-amber-500 to-orange-600' },
-  'medgraph': { icon: '🏥', category: 'Healthcare', color: 'from-red-500 to-rose-600' },
-  'carbonos': { icon: '🌱', category: 'Climate', color: 'from-green-500 to-emerald-600' },
-  'sentinel': { icon: '🛡️', category: 'Security', color: 'from-slate-500 to-zinc-600' },
-  'casebrief': { icon: '⚖️', category: 'Legal', color: 'from-blue-500 to-indigo-600' },
-  'muse': { icon: '🎨', category: 'Creator', color: 'from-pink-500 to-rose-600' },
-  'aegis': { icon: '🌐', category: 'AI Agents', color: 'from-cyan-500 to-blue-600' },
+// Map project slugs to categories and accent colors
+const projectMeta: Record<string, { category: string; accent: string }> = {
+  'moltbot-setup': { category: 'AI', accent: '#8B5CF6' },
+  'veritas': { category: 'Social', accent: '#3B82F6' },
+  'civitas': { category: 'GovTech', accent: '#10B981' },
+  'prism': { category: 'Infrastructure', accent: '#EC4899' },
+  'haven': { category: 'Web3', accent: '#F59E0B' },
+  'medgraph': { category: 'Healthcare', accent: '#EF4444' },
+  'carbonos': { category: 'Climate', accent: '#22C55E' },
+  'sentinel': { category: 'Security', accent: '#64748B' },
+  'casebrief': { category: 'Legal', accent: '#6366F1' },
+  'muse': { category: 'Creator', accent: '#F472B6' },
+  'aegis': { category: 'AI', accent: '#06B6D4' },
 };
 
-const meta = projectMeta[entry.slug] || { icon: '📁', category: 'Project', color: 'from-gray-500 to-gray-600' };
+const meta = projectMeta[entry.slug] || { category: 'Project', accent: '#6B7280' };
 ---
 
 <a 
   href={`/projects/${entry.slug}`} 
-  class="group relative flex flex-col overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 hover:border-black/20 dark:hover:border-white/20 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-white/5"
-  style="transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;"
-  onmouseenter="this.style.transform='translateY(-6px)'"
-  onmouseleave="this.style.transform='translateY(0)'"
+  class="group relative block"
 >
-  <!-- Gradient Header -->
-  <div class={`h-24 bg-gradient-to-br ${meta.color} flex items-center justify-center relative overflow-hidden`}>
-    <!-- Pattern overlay -->
-    <div class="absolute inset-0 opacity-20">
-      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
-    </div>
-    <!-- Icon -->
-    <span class="text-5xl relative z-10" style="transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">{meta.icon}</span>
-    <style>
-      a:hover span.text-5xl { transform: scale(1.15); }
-    </style>
-  </div>
-  
-  <!-- Content -->
-  <div class="flex flex-col flex-1 p-5">
-    <!-- Category Badge -->
-    <div class="mb-2">
-      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-black/5 dark:bg-white/10 text-black/70 dark:text-white/70">
-        {meta.category}
-      </span>
-    </div>
+  <div class="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 backdrop-blur-sm transition-all duration-500 ease-out hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-lg dark:hover:shadow-2xl dark:hover:shadow-neutral-900/50">
     
-    <!-- Title -->
-    <h3 class="font-semibold text-lg text-black dark:text-white mb-2 group-hover:text-black dark:group-hover:text-white transition-colors">
-      {entry.data.title}
-    </h3>
+    <!-- Subtle gradient glow on hover -->
+    <div 
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+      style={`background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${meta.accent}08, transparent 40%);`}
+    ></div>
     
-    <!-- Description -->
-    <p class="text-sm text-black/60 dark:text-white/60 line-clamp-2 flex-1">
-      {entry.data.description}
-    </p>
+    <!-- Top accent line -->
+    <div 
+      class="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+      style={`background: linear-gradient(90deg, transparent, ${meta.accent}, transparent);`}
+    ></div>
     
-    <!-- Footer -->
-    <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5 flex items-center justify-between">
-      <span class="text-xs text-black/40 dark:text-white/40">
-        {entry.data.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-      </span>
-      <span class="text-sm font-medium text-black/60 dark:text-white/60 group-hover:text-black dark:group-hover:text-white transition-colors flex items-center gap-1">
-        View
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </span>
+    <div class="relative p-6">
+      <!-- Header: Category + Status -->
+      <div class="flex items-center justify-between mb-4">
+        <span 
+          class="inline-flex items-center px-2 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-md"
+          style={`background: ${meta.accent}15; color: ${meta.accent};`}
+        >
+          {meta.category}
+        </span>
+        <span class="text-[10px] font-medium uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
+          Concept
+        </span>
+      </div>
+      
+      <!-- Title -->
+      <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2 group-hover:text-neutral-700 dark:group-hover:text-neutral-100 transition-colors duration-300">
+        {entry.data.title}
+      </h3>
+      
+      <!-- Description -->
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 leading-relaxed mb-6">
+        {entry.data.description}
+      </p>
+      
+      <!-- Footer -->
+      <div class="flex items-center justify-between pt-4 border-t border-neutral-100 dark:border-neutral-800">
+        <span class="text-xs text-neutral-400 dark:text-neutral-500 font-medium">
+          {entry.data.date.toLocaleDateString('en-US', { year: 'numeric' })}
+        </span>
+        <span class="flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300">
+          Explore
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="h-3.5 w-3.5 transform group-hover:translate-x-0.5 transition-transform duration-300" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+      </div>
     </div>
   </div>
 </a>
