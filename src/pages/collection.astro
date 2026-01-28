@@ -6,19 +6,30 @@ import Link from "@components/Link.astro";
 
 <PageLayout title="Collection" description="The 2667 Collection - NFTs by Shane Sarin">
   <Container>
-      <div class="space-y-6">
-        <div>
-          <h1 class="text-3xl font-bold text-black dark:text-white flex items-center gap-3">
+      <!-- Hero Header -->
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-900 p-8 mb-8">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="relative flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-cyan-400 to-teal-500 rounded-2xl blur-lg opacity-50"></div>
             <img 
               src="/2667.jpeg" 
               alt="Bored Ape #2667" 
-              class="w-10 h-10 rounded-lg object-cover"
+              class="relative w-24 h-24 rounded-2xl object-cover ring-4 ring-white dark:ring-neutral-700 shadow-xl"
             />
-            The 2667 Collection
-          </h1>
-          <p class="text-lg text-neutral-500 dark:text-neutral-400 mt-1">Select Works</p>
+          </div>
+          <div class="text-center sm:text-left">
+            <h1 class="text-3xl sm:text-4xl font-bold text-black dark:text-white">
+              The 2667 Collection
+            </h1>
+            <p class="text-lg text-neutral-500 dark:text-neutral-400 mt-1 font-medium">Select Works</p>
+            <p class="text-sm text-neutral-400 dark:text-neutral-500 mt-3">Curated by Shane Sarin</p>
+          </div>
         </div>
-        <p class="text-lg text-neutral-700 dark:text-neutral-300">
+      </div>
+
+      <div class="space-y-6">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed">
           2667 is more than a number—it's the edition of the Bored Ape that became one of the defining pieces in my journey as a collector. I started collecting NFTs to connect with groundbreaking digital artists and be part of a cultural shift in how we create, share, and value art. My collection reflects that journey—featuring work from visionaries like Pak and Beeple alongside a growing list of other creators I believe in. For me, it's never been about flipping or chasing the next big drop; it's about building a collection that tells a story and supports the artists shaping the future of digital creativity.
         </p>
       </div>
