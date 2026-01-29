@@ -9,29 +9,27 @@ type Props = {
 
 const { entry, Content } = Astro.props;
 
-// Map company slugs to accent colors
-const companyMeta: Record<string, { accent: string }> = {
-  'consensys': { accent: '#B4FF00' },
-  'recur': { accent: '#FFFFFF' },
-  'infosys': { accent: '#3B82F6' },
+// Map company slugs to accent colors (light and dark mode)
+const companyMeta: Record<string, { light: string; dark: string }> = {
+  'consensys': { light: '#65A300', dark: '#B4FF00' },
+  'recur': { light: '#0891B2', dark: '#FFFFFF' },
+  'infosys': { light: '#2563EB', dark: '#3B82F6' },
 };
 
-const meta = companyMeta[entry.slug] || { accent: '#6B7280' };
+const meta = companyMeta[entry.slug] || { light: '#525252', dark: '#6B7280' };
 ---
 
-<div class="group relative block">
+<div class="group relative block" style={`--accent-light: ${meta.light}; --accent-dark: ${meta.dark};`}>
   <div class="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 backdrop-blur-sm transition-all duration-500 ease-out hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-lg dark:hover:shadow-2xl dark:hover:shadow-neutral-900/50">
     
     <!-- Subtle gradient glow on hover -->
     <div 
-      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-      style={`background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${meta.accent}08, transparent 40%);`}
+      class="accent-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
     ></div>
     
     <!-- Top accent line -->
     <div 
-      class="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-      style={`background: linear-gradient(90deg, transparent, ${meta.accent}, transparent);`}
+      class="accent-line absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
     ></div>
     
     <div class="relative p-5">
@@ -54,8 +52,7 @@ const meta = companyMeta[entry.slug] || { accent: '#6B7280' };
             </span>
           </div>
           <span 
-            class="inline-flex items-center px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md"
-            style={`background: ${meta.accent}15; color: ${meta.accent};`}
+            class="accent-badge inline-flex items-center px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md"
           >
             {entry.data.role}
           </span>
@@ -69,3 +66,31 @@ const meta = companyMeta[entry.slug] || { accent: '#6B7280' };
     </div>
   </div>
 </div>
+
+<style>
+  .accent-badge {
+    background: color-mix(in srgb, var(--accent-light) 15%, transparent);
+    color: var(--accent-light);
+  }
+  
+  .accent-glow {
+    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in srgb, var(--accent-light) 3%, transparent), transparent 40%);
+  }
+  
+  .accent-line {
+    background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+  }
+  
+  :global(.dark) .accent-badge {
+    background: color-mix(in srgb, var(--accent-dark) 15%, transparent);
+    color: var(--accent-dark);
+  }
+  
+  :global(.dark) .accent-glow {
+    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in srgb, var(--accent-dark) 3%, transparent), transparent 40%);
+  }
+  
+  :global(.dark) .accent-line {
+    background: linear-gradient(90deg, transparent, var(--accent-dark), transparent);
+  }
+</style>
