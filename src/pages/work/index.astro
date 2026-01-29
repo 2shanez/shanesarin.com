@@ -31,12 +31,12 @@ const companyMeta: Record<string, { accent: string }> = {
       <section class="space-y-6">
         <div class="terminal-intro font-mono text-xs text-neutral-500 dark:text-neutral-500">
           <div class="terminal-line" style="--delay: 0">
-            <span class="text-green-500 dark:text-green-400">&gt;</span>
+            <span class="ape-green">&gt;</span>
             <span class="typing-text"> loading career.log...</span>
             <span class="cursor">▋</span>
           </div>
           <div class="terminal-line" style="--delay: 1">
-            <span class="text-green-500 dark:text-green-400">&gt;</span>
+            <span class="ape-green">&gt;</span>
             <span class="typing-text"> entries: </span>
             <span class="status-ready text-cyan-500 dark:text-cyan-400">{work.length}</span>
             <span class="cursor final">▋</span>
@@ -136,7 +136,7 @@ const companyMeta: Record<string, { accent: string }> = {
 
       <!-- Footer -->
       <section class="font-mono text-xs text-neutral-400 dark:text-neutral-600 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-        <p><span class="text-green-500 dark:text-green-400">//</span> next chapter loading...</p>
+        <p><span class="ape-green">//</span> next chapter loading...</p>
       </section>
 
       </div><!-- end page-content -->
@@ -146,6 +146,10 @@ const companyMeta: Record<string, { accent: string }> = {
 </PageLayout>
 
 <style>
+  .ape-green {
+    color: #2EE59D;
+  }
+  
   .terminal-intro .terminal-line {
     opacity: 0;
     animation: lineAppear 0.1s ease forwards;
@@ -172,7 +176,7 @@ const companyMeta: Record<string, { accent: string }> = {
     animation: cursorBlink 0.7s step-end 3, cursorHide 0.1s ease 2.1s forwards;
     animation-delay: calc(var(--delay) * 0.8s);
     margin-left: 1px;
-    color: rgb(34 197 94);
+    color: #2EE59D;
   }
   
   .terminal-intro .cursor:not(.final) {
