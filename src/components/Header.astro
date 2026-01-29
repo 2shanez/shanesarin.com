@@ -92,16 +92,17 @@ const pathname = Astro.url.pathname;
           ]}
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-14 w-auto stroke-current opacity-50 group-hover:opacity-100 dark:stroke-[#2EE59D] transition-opacity duration-300" viewBox="0 0 40 80" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Blockchain key - clean blocks forming key bow -->
-            <rect x="10" y="4" width="20" height="18" rx="2"></rect>
-            <rect x="14" y="8" width="12" height="10" rx="1"></rect>
-            <!-- Small blocks on sides (subtle blockchain nod) -->
-            <rect x="4" y="8" width="6" height="6" rx="1" stroke-width="1.5"></rect>
-            <rect x="30" y="8" width="6" height="6" rx="1" stroke-width="1.5"></rect>
+            <!-- Ornate trefoil bow -->
+            <circle cx="20" cy="12" r="8"></circle>
+            <circle cx="12" cy="18" r="5"></circle>
+            <circle cx="28" cy="18" r="5"></circle>
+            <circle cx="20" cy="12" r="3"></circle>
             <!-- Shaft -->
-            <line x1="20" y1="22" x2="20" y2="68"></line>
+            <line x1="20" y1="23" x2="20" y2="68"></line>
+            <rect x="18" y="26" width="4" height="6" rx="1"></rect>
             <!-- Key teeth -->
-            <path d="M20 68 L20 76 L30 76 L30 70 L26 70 L26 64 L22 64"></path>
+            <path d="M20 68 L20 75 L28 75 L28 68"></path>
+            <path d="M20 62 L26 62 L26 58 L20 58"></path>
           </svg>
           <span class="text-[10px] font-mono uppercase tracking-[0.15em] dark:text-[#2EE59D]">2667</span>
         </a>
