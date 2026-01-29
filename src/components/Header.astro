@@ -92,23 +92,16 @@ const pathname = Astro.url.pathname;
           ]}
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-14 w-auto stroke-current opacity-50 group-hover:opacity-100 dark:stroke-[#2EE59D] transition-opacity duration-300" viewBox="0 0 40 80" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Blockchain key bow - connected blocks -->
-            <rect x="12" y="4" width="16" height="14" rx="2"></rect>
-            <rect x="4" y="10" width="10" height="10" rx="1"></rect>
-            <rect x="26" y="10" width="10" height="10" rx="1"></rect>
-            <!-- Chain links connecting blocks -->
-            <line x1="14" y1="15" x2="12" y2="15" stroke-width="1.5"></line>
-            <line x1="26" y1="15" x2="28" y2="15" stroke-width="1.5"></line>
-            <ellipse cx="13" cy="15" rx="2" ry="3" stroke-width="1"></ellipse>
-            <ellipse cx="27" cy="15" rx="2" ry="3" stroke-width="1"></ellipse>
-            <!-- Inner keyhole block -->
-            <rect x="16" y="7" width="8" height="8" rx="1"></rect>
+            <!-- Blockchain key - clean blocks forming key bow -->
+            <rect x="10" y="4" width="20" height="18" rx="2"></rect>
+            <rect x="14" y="8" width="12" height="10" rx="1"></rect>
+            <!-- Small blocks on sides (subtle blockchain nod) -->
+            <rect x="4" y="8" width="6" height="6" rx="1" stroke-width="1.5"></rect>
+            <rect x="30" y="8" width="6" height="6" rx="1" stroke-width="1.5"></rect>
             <!-- Shaft -->
             <line x1="20" y1="22" x2="20" y2="68"></line>
-            <rect x="17" y="26" width="6" height="6" rx="1"></rect>
             <!-- Key teeth -->
-            <path d="M20 68 L20 75 L28 75 L28 68"></path>
-            <path d="M20 62 L26 62 L26 58 L20 58"></path>
+            <path d="M20 68 L20 76 L30 76 L30 70 L26 70 L26 64 L22 64"></path>
           </svg>
           <span class="text-[10px] font-mono uppercase tracking-[0.15em] dark:text-[#2EE59D]">2667</span>
         </a>
