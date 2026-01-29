@@ -6,26 +6,26 @@ const pathname = Astro.url.pathname;
 ---
 <header>
   <Container>
-    <div class="flex justify-between items-center py-3 md:py-4">
+    <div class="flex justify-between items-center py-3">
       <!-- Shane/Home -->
-      <a href="/" class="group flex flex-col items-center gap-1 md:gap-2 text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white transition-colors duration-300">
-        <img src="/ape-icon.png" alt="Ape" class="h-8 md:h-14 w-auto object-contain dark:invert opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
-        <span class="text-[10px] md:text-xs font-mono uppercase tracking-[0.15em] md:tracking-[0.2em]">{SITE.NAME}</span>
+      <a href="/" class="group flex flex-col items-center gap-1.5 text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white transition-colors duration-300">
+        <img src="/ape-icon.png" alt="Ape" class="h-6 md:h-10 w-auto object-contain dark:invert opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+        <span class="text-[10px] font-mono uppercase tracking-[0.15em]">{SITE.NAME}</span>
       </a>
       
       <!-- Nav Items -->
-      <nav class="flex items-center gap-4 md:gap-10">
+      <nav class="flex items-center gap-6 md:gap-8">
         <!-- Work -->
         <a 
           href="/work" 
           class:list={[
-            "group flex flex-col items-center gap-1 md:gap-2 transition-all duration-300",
+            "group flex flex-col items-center gap-1.5 transition-all duration-300",
             pathname.startsWith("/work") 
               ? "text-[#2EE59D]" 
               : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
           ]}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-14 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 64" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 md:h-10 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 64" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="6" y="22" width="52" height="34" rx="3" ry="3"></rect>
             <path d="M22 22V16c0-3 2-5 5-5h10c3 0 5 2 5 5v6"></path>
             <rect x="27" y="30" width="10" height="8" rx="1"></rect>
@@ -33,20 +33,20 @@ const pathname = Astro.url.pathname;
             <line x1="6" y1="38" x2="27" y2="38"></line>
             <line x1="37" y1="38" x2="58" y2="38"></line>
           </svg>
-          <span class="text-[10px] md:text-xs font-mono uppercase tracking-[0.15em] md:tracking-[0.2em]">Work</span>
+          <span class="text-[10px] font-mono uppercase tracking-[0.15em]">Work</span>
         </a>
         
         <!-- Projects -->
         <a 
           href="/projects" 
           class:list={[
-            "group flex flex-col items-center gap-1 md:gap-2 transition-all duration-300",
+            "group flex flex-col items-center gap-1.5 transition-all duration-300",
             pathname.startsWith("/projects") 
               ? "text-[#2EE59D]" 
               : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
           ]}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-14 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 64" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 md:h-10 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 64" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M32 6c-11 0-18 8-18 18 0 7 4 12 8 16 2 2 3 4 3 7v3h14v-3c0-3 1-5 3-7 4-4 8-9 8-16 0-10-7-18-18-18z"></path>
             <path d="M26 28c0 0 2 4 6 4s6-4 6-4" stroke-width="1"></path>
             <line x1="32" y1="32" x2="32" y2="22"></line>
@@ -55,48 +55,42 @@ const pathname = Astro.url.pathname;
             <rect x="25" y="54" width="14" height="4" rx="1"></rect>
             <path d="M28 58v2c0 1 1 2 2 2h4c1 0 2-1 2-2v-2"></path>
           </svg>
-          <span class="text-[10px] md:text-xs font-mono uppercase tracking-[0.15em] md:tracking-[0.2em]">Projects</span>
+          <span class="text-[10px] font-mono uppercase tracking-[0.15em]">Projects</span>
         </a>
         
         <!-- 2667 Collection -->
         <a 
           href="/collection" 
           class:list={[
-            "group flex flex-col items-center gap-1 md:gap-2 transition-all duration-300",
+            "group flex flex-col items-center gap-1.5 transition-all duration-300",
             pathname.startsWith("/collection") 
               ? "text-[#2EE59D]" 
               : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
           ]}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-14 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 64" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Ornate key bow (top decorative part) -->
-            <ellipse cx="18" cy="18" rx="12" ry="14"></ellipse>
-            <ellipse cx="18" cy="18" rx="6" ry="7"></ellipse>
-            <!-- Decorative flourishes on bow -->
-            <path d="M10 8 Q6 12 10 18" stroke-width="1"></path>
-            <path d="M26 8 Q30 12 26 18" stroke-width="1"></path>
-            <path d="M14 6 Q18 2 22 6" stroke-width="1"></path>
-            <!-- Key shaft -->
-            <line x1="18" y1="32" x2="18" y2="58"></line>
-            <!-- Shaft decorative bands -->
-            <line x1="14" y1="36" x2="22" y2="36" stroke-width="2"></line>
-            <line x1="15" y1="42" x2="21" y2="42" stroke-width="1"></line>
-            <!-- Key bit (teeth) -->
-            <path d="M18 58 L18 62 L28 62 L28 56 L24 56 L24 52 L20 52 L20 58"></path>
-            <line x1="22" y1="58" x2="28" y2="58"></line>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 md:h-10 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 64" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Simple elegant key -->
+            <!-- Bow (circular top with heart/clover cutout) -->
+            <circle cx="20" cy="20" r="12"></circle>
+            <circle cx="20" cy="20" r="5"></circle>
+            <!-- Shaft -->
+            <line x1="32" y1="20" x2="58" y2="20"></line>
+            <!-- Teeth -->
+            <path d="M50 20 L50 28 L54 28 L54 24 L58 24 L58 20"></path>
+            <line x1="44" y1="20" x2="44" y2="26"></line>
           </svg>
-          <span class="text-[10px] md:text-xs font-mono uppercase tracking-[0.15em] md:tracking-[0.2em]">2667</span>
+          <span class="text-[10px] font-mono uppercase tracking-[0.15em]">2667</span>
         </a>
       </nav>
       
       <!-- Theme Toggles -->
-      <div class="flex items-center gap-0 pl-3 md:pl-6 border-l border-neutral-200 dark:border-neutral-700">
+      <div class="flex items-center gap-0 pl-3 md:pl-4 border-l border-neutral-200 dark:border-neutral-700">
         <button
           id="light-theme-button"
           aria-label="Light theme"
-          class="group size-7 md:size-9 flex items-center justify-center rounded-full"
+          class="group size-7 flex items-center justify-center rounded-full"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 md:size-5 stroke-current group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -111,18 +105,18 @@ const pathname = Astro.url.pathname;
         <button
           id="dark-theme-button"
           aria-label="Dark theme"
-          class="group size-7 md:size-9 flex items-center justify-center rounded-full"
+          class="group size-7 flex items-center justify-center rounded-full"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 md:size-5 stroke-current group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
         <button
           id="system-theme-button"
           aria-label="System theme"
-          class="group size-7 md:size-9 flex items-center justify-center rounded-full hidden md:flex"
+          class="group size-7 items-center justify-center rounded-full hidden md:flex"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 md:size-5 stroke-current group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
             <line x1="8" y1="21" x2="16" y2="21"></line>
             <line x1="12" y1="17" x2="12" y2="21"></line>
