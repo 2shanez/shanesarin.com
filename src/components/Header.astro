@@ -25,13 +25,24 @@ const pathname = Astro.url.pathname;
               : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
           ]}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-14 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 64" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="6" y="22" width="52" height="34" rx="3" ry="3"></rect>
-            <path d="M22 22V16c0-3 2-5 5-5h10c3 0 5 2 5 5v6"></path>
-            <rect x="27" y="30" width="10" height="8" rx="1"></rect>
-            <line x1="32" y1="30" x2="32" y2="26"></line>
-            <line x1="6" y1="38" x2="27" y2="38"></line>
-            <line x1="37" y1="38" x2="58" y2="38"></line>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-14 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 72" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Ornate vintage briefcase -->
+            <!-- Main body with curved top -->
+            <path d="M4 28 Q4 24 8 24 L56 24 Q60 24 60 28 L60 62 Q60 66 56 66 L8 66 Q4 66 4 62 Z"></path>
+            <!-- Handle -->
+            <path d="M24 24 L24 16 Q24 10 32 10 Q40 10 40 16 L40 24"></path>
+            <path d="M28 24 L28 18 Q28 14 32 14 Q36 14 36 18 L36 24"></path>
+            <!-- Decorative center clasp -->
+            <ellipse cx="32" cy="45" rx="8" ry="6"></ellipse>
+            <circle cx="32" cy="45" r="3"></circle>
+            <!-- Decorative straps -->
+            <line x1="4" y1="36" x2="24" y2="36"></line>
+            <line x1="40" y1="36" x2="60" y2="36"></line>
+            <line x1="4" y1="54" x2="24" y2="54"></line>
+            <line x1="40" y1="54" x2="60" y2="54"></line>
+            <!-- Corner details -->
+            <circle cx="12" cy="30" r="2" stroke-width="1"></circle>
+            <circle cx="52" cy="30" r="2" stroke-width="1"></circle>
           </svg>
           <span class="text-[10px] font-mono uppercase tracking-[0.15em]">Work</span>
         </a>
@@ -46,14 +57,26 @@ const pathname = Astro.url.pathname;
               : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
           ]}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-14 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 64" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M32 6c-11 0-18 8-18 18 0 7 4 12 8 16 2 2 3 4 3 7v3h14v-3c0-3 1-5 3-7 4-4 8-9 8-16 0-10-7-18-18-18z"></path>
-            <path d="M26 28c0 0 2 4 6 4s6-4 6-4" stroke-width="1"></path>
-            <line x1="32" y1="32" x2="32" y2="22"></line>
-            <path d="M28 24l4-4 4 4" stroke-width="1"></path>
-            <rect x="25" y="50" width="14" height="4" rx="1"></rect>
-            <rect x="25" y="54" width="14" height="4" rx="1"></rect>
-            <path d="M28 58v2c0 1 1 2 2 2h4c1 0 2-1 2-2v-2"></path>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-14 w-auto stroke-current opacity-50 group-hover:opacity-100 transition-opacity duration-300" viewBox="0 0 64 80" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Ornate vintage lightbulb -->
+            <!-- Bulb glass with elegant curve -->
+            <path d="M32 4 Q12 4 12 28 Q12 40 20 48 Q24 52 24 58 L40 58 Q40 52 44 48 Q52 40 52 28 Q52 4 32 4"></path>
+            <!-- Inner filament ornate design -->
+            <path d="M28 20 Q32 16 36 20" stroke-width="1"></path>
+            <path d="M26 28 Q32 22 38 28" stroke-width="1"></path>
+            <line x1="32" y1="20" x2="32" y2="36"></line>
+            <path d="M28 32 L32 36 L36 32" stroke-width="1"></path>
+            <!-- Decorative base/screw cap -->
+            <rect x="24" y="58" width="16" height="4" rx="1"></rect>
+            <path d="M26 62 L26 66 Q26 68 28 68 L36 68 Q38 68 38 66 L38 62"></path>
+            <line x1="24" y1="64" x2="40" y2="64" stroke-width="1"></line>
+            <line x1="25" y1="67" x2="39" y2="67" stroke-width="1"></line>
+            <!-- Decorative rays -->
+            <line x1="6" y1="28" x2="2" y2="28" stroke-width="1"></line>
+            <line x1="58" y1="28" x2="62" y2="28" stroke-width="1"></line>
+            <line x1="10" y1="12" x2="6" y2="8" stroke-width="1"></line>
+            <line x1="54" y1="12" x2="58" y2="8" stroke-width="1"></line>
+            <line x1="32" y1="0" x2="32" y2="-4" stroke-width="1"></line>
           </svg>
           <span class="text-[10px] font-mono uppercase tracking-[0.15em]">Projects</span>
         </a>
