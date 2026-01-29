@@ -6,47 +6,65 @@ const pathname = Astro.url.pathname;
 ---
 <header>
   <Container>
-    <div class="flex flex-wrap gap-y-2 justify-between items-center">
+    <div class="flex flex-wrap gap-y-4 justify-between items-center">
       <a href="/" class="font-semibold text-black dark:text-white hover:opacity-70">
         {SITE.NAME}
       </a>
       <div class="flex items-center gap-4">
-        <nav class="flex items-center gap-1">
+        <nav class="flex items-center gap-6">
+          <!-- Work -->
           <a 
             href="/work" 
             class:list={[
-              "px-3 py-1.5 rounded-full text-sm font-medium",
+              "group flex flex-col items-center gap-1.5 transition-colors duration-300",
               pathname.startsWith("/work") 
-                ? "bg-black dark:bg-white text-white dark:text-black" 
-                : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
+                ? "text-[#2EE59D]" 
+                : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
             ]}
           >
-            Work
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            <span class="text-xs font-mono uppercase tracking-wider">Work</span>
           </a>
+          
+          <!-- Projects -->
           <a 
             href="/projects" 
             class:list={[
-              "px-3 py-1.5 rounded-full text-sm font-medium",
+              "group flex flex-col items-center gap-1.5 transition-colors duration-300",
               pathname.startsWith("/projects") 
-                ? "bg-black dark:bg-white text-white dark:text-black" 
-                : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
+                ? "text-[#2EE59D]" 
+                : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
             ]}
           >
-            Projects
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+            <span class="text-xs font-mono uppercase tracking-wider">Projects</span>
           </a>
+          
+          <!-- 2667 Collection -->
           <a 
             href="/collection" 
             class:list={[
-              "px-3 py-1.5 rounded-full text-sm font-medium",
+              "group flex flex-col items-center gap-1.5 transition-colors duration-300",
               pathname.startsWith("/collection") 
-                ? "bg-black dark:bg-white text-white dark:text-black" 
-                : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
+                ? "text-[#2EE59D]" 
+                : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
             ]}
           >
-            2667
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            <span class="text-xs font-mono uppercase tracking-wider">2667</span>
           </a>
         </nav>
-        <div class="flex items-center gap-0 pl-3 border-l border-neutral-200 dark:border-neutral-700">
+        
+        <div class="flex items-center gap-0 pl-4 border-l border-neutral-200 dark:border-neutral-700">
           <button
             id="light-theme-button"
             aria-label="Light theme"
