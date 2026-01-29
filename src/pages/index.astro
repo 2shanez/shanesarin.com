@@ -107,6 +107,23 @@ import { SITE, HOME, SOCIALS } from "@consts";
             transform: translateY(0);
           }
         }
+        
+        /* Brand colors with light/dark support */
+        .consensys-brand {
+          color: #65A300;
+        }
+        
+        .recur-brand {
+          color: #0891B2;
+        }
+        
+        :global(.dark) .consensys-brand {
+          color: #B4FF00;
+        }
+        
+        :global(.dark) .recur-brand {
+          color: #FFFFFF;
+        }
       </style>
 
       <!-- All content wrapper -->
@@ -146,7 +163,7 @@ import { SITE, HOME, SOCIALS } from "@consts";
           <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
         </div>
         <p class="text-neutral-700 dark:text-neutral-300 leading-relaxed">
-          Former Web3 professional with experience at <span class="font-semibold text-black dark:text-white">Consensys</span> and <span class="font-semibold text-black dark:text-white">RECUR</span>—helped scale products, navigated market cycles, and curated my art collection, <Link href="/collection" underline={false} class="ape-green hover:underline">2667</Link>. UNC Chapel Hill alum 🐏
+          Former Web3 professional with experience at <span class="font-semibold consensys-brand">Consensys</span> and <span class="font-semibold recur-brand">RECUR</span>—helped scale products, navigated market cycles, and curated my art collection, <Link href="/collection" underline={false} class="ape-green hover:underline">2667</Link>. UNC Chapel Hill alum 🐏
         </p>
       </section>
 
