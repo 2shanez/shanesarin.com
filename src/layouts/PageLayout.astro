@@ -27,10 +27,26 @@ const { title, description } = Astro.props;
     <Head title={`${title} | ${SITE.NAME}`} description={description} />
   </head>
   <body>
-    <Header />
+    <div class="header-fade">
+      <Header />
+    </div>
     <main>
       <slot />
     </main>
     <Footer />
+    
+    <style>
+      .header-fade {
+        opacity: 0;
+        animation: headerReveal 0.6s ease forwards;
+        animation-delay: 2s;
+      }
+      
+      @keyframes headerReveal {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
   </body>
 </html>
