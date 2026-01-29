@@ -90,7 +90,7 @@ import { SITE, HOME, SOCIALS } from "@consts";
           to { opacity: 0; }
         }
         
-        .content-section {
+        .page-content {
           opacity: 0;
           transform: translateY(10px);
           animation: contentReveal 0.6s ease forwards;
@@ -105,8 +105,11 @@ import { SITE, HOME, SOCIALS } from "@consts";
         }
       </style>
 
+      <!-- All content wrapper -->
+      <div class="page-content">
+
       <!-- Hero Section -->
-      <section class="space-y-6 content-section">
+      <section class="space-y-6">
         <div class="flex items-start gap-6">
           <img 
             src="/profile.jpg" 
@@ -125,14 +128,14 @@ import { SITE, HOME, SOCIALS } from "@consts";
       </section>
 
       <!-- Thesis Statement -->
-      <section class="border-l-2 border-cyan-500 dark:border-cyan-400 pl-6 py-2 content-section">
+      <section class="border-l-2 border-cyan-500 dark:border-cyan-400 pl-6 py-2">
         <p class="text-xl md:text-2xl font-semibold text-black dark:text-white leading-relaxed">
           Building at the intersection of <span class="text-cyan-600 dark:text-cyan-400">crypto</span>, <span class="text-violet-600 dark:text-violet-400">AI</span>, and <span class="text-amber-600 dark:text-amber-400">culture</span>.
         </p>
       </section>
 
       <!-- Background -->
-      <section class="space-y-6 content-section">
+      <section class="space-y-6">
         <div class="flex items-center gap-3">
           <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">01</span>
           <h2 class="font-bold text-black dark:text-white tracking-tight">BACKGROUND</h2>
@@ -144,7 +147,7 @@ import { SITE, HOME, SOCIALS } from "@consts";
       </section>
 
       <!-- What I Believe -->
-      <section class="space-y-6 content-section">
+      <section class="space-y-6">
         <div class="flex items-center gap-3">
           <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">02</span>
           <h2 class="font-bold text-black dark:text-white tracking-tight">WHAT I BELIEVE</h2>
@@ -171,7 +174,7 @@ import { SITE, HOME, SOCIALS } from "@consts";
       </section>
 
       <!-- Current Focus -->
-      <section class="space-y-6 content-section">
+      <section class="space-y-6">
         <div class="flex items-center gap-3">
           <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">03</span>
           <h2 class="font-bold text-black dark:text-white tracking-tight">CURRENT FOCUS</h2>
@@ -191,7 +194,7 @@ import { SITE, HOME, SOCIALS } from "@consts";
       </section>
 
       <!-- Connect -->
-      <section class="space-y-6 content-section">
+      <section class="space-y-6">
         <div class="flex items-center gap-3">
           <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">04</span>
           <h2 class="font-bold text-black dark:text-white tracking-tight">CONNECT</h2>
@@ -221,9 +224,11 @@ import { SITE, HOME, SOCIALS } from "@consts";
       </section>
 
       <!-- Footer terminal -->
-      <section class="font-mono text-xs text-neutral-400 dark:text-neutral-600 pt-8 border-t border-neutral-200 dark:border-neutral-800 content-section">
+      <section class="font-mono text-xs text-neutral-400 dark:text-neutral-600 pt-8 border-t border-neutral-200 dark:border-neutral-800">
         <p><span class="text-green-500 dark:text-green-400">//</span> end of transmission</p>
       </section>
+
+      </div><!-- end page-content -->
 
     </div>
   </Container>
