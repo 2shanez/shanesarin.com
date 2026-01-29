@@ -28,21 +28,18 @@ const companyMeta: Record<string, { light: string; dark: string }> = {
     <div class="space-y-12">
       
       <!-- Terminal header -->
-      <section class="space-y-6">
-        <div class="terminal-intro font-mono text-xs text-neutral-500 dark:text-neutral-500">
-          <div class="terminal-line" style="--delay: 0">
-            <span class="ape-green">&gt;</span>
-            <span class="typing-text"> loading career.log...</span>
-            <span class="cursor">▋</span>
-          </div>
-          <div class="terminal-line" style="--delay: 1">
-            <span class="ape-green">&gt;</span>
-            <span class="typing-text"> entries: </span>
-            <span class="status-ready ape-green">{work.length}</span>
-            <span class="cursor final">▋</span>
-          </div>
+      <section class="terminal-intro font-mono text-xs text-neutral-500 dark:text-neutral-500">
+        <div class="terminal-line" style="--delay: 0">
+          <span class="ape-green">&gt;</span>
+          <span class="typing-text"> loading career.log...</span>
+          <span class="cursor">▋</span>
         </div>
-        
+        <div class="terminal-line" style="--delay: 1">
+          <span class="ape-green">&gt;</span>
+          <span class="typing-text"> entries: </span>
+          <span class="status-ready ape-green">{work.length}</span>
+          <span class="cursor final">▋</span>
+        </div>
       </section>
 
       <!-- All content wrapper -->
