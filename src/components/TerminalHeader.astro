@@ -1,0 +1,84 @@
+---
+interface Props {
+  lines: { text: string; highlight?: string }[];
+  delay?: number;
+}
+
+const { lines, delay = 0 } = Astro.props;
+---
+
+<div class="terminal-header font-mono text-xs text-neutral-500 dark:text-neutral-500 space-y-1">
+  {lines.map((line, index) => (
+    <p 
+      class="terminal-line opacity-0"
+      style={`animation-delay: ${delay + (index * 400)}ms`}
+    >
+      <span class="text-green-500 dark:text-green-400">//</span>
+      <span class="terminal-text">{line.text}</span>
+      {line.highlight && (
+        <span class="text-cyan-500 dark:text-cyan-400">{line.highlight}</span>
+      )}
+      <span class="terminal-cursor">▋</span>
+    </p>
+  ))}
+</div>
+
+<style>
+  .terminal-line {
+    animation: fadeIn 0.3s ease forwards, typeIn 0.5s steps(20) forwards;
+  }
+
+  .terminal-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 0.5s steps(30) forwards;
+  }
+
+  .terminal-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    color: rgb(34 197 94); /* green-500 */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes typing {
+    from {
+      max-width: 0;
+    }
+    to {
+      max-width: 100%;
+    }
+  }
+
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Hide cursor on all but last visible line */
+  .terminal-line:not(:last-child) .terminal-cursor {
+    animation: blink 1s step-end 3, fadeOut 0.3s ease 3s forwards;
+  }
+
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+    }
+  }
+</style>
