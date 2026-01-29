@@ -30,7 +30,7 @@ const { title, description } = Astro.props;
     <div class="header-fade">
       <Header />
     </div>
-    <main class="pt-32">
+    <main class="pt-36">
       <slot />
     </main>
     <Footer />
@@ -45,6 +45,13 @@ const { title, description } = Astro.props;
         opacity: 0;
         animation: headerReveal 0.6s ease forwards;
         animation-delay: 2s;
+        background: white;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      
+      :global(.dark) .header-fade {
+        background: #0a0a0a;
+        border-bottom: 1px solid #262626;
       }
       
       @keyframes headerReveal {
