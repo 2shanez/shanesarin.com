@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import WorkCard from "@components/WorkCard.astro";
+import { dateRange } from "@lib/utils";
 import { WORK } from "@consts";
 
 const collection = (await getCollection("work"))
@@ -14,23 +14,118 @@ const work = await Promise.all(
     return { ...item, Content };
   })
 );
+
+// Map company slugs to accent colors
+const companyMeta: Record<string, { accent: string }> = {
+  'consensys': { accent: '#8B5CF6' },
+  'recur': { accent: '#06B6D4' },
+  'infosys': { accent: '#3B82F6' },
+};
 ---
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <Container>
-    <div class="space-y-8">
-      <!-- Header -->
-      <div>
-        <h1 class="text-3xl font-bold text-black dark:text-white mb-2">Work</h1>
-        <p class="text-black/60 dark:text-white/60">Where I have worked and what I have done.</p>
-      </div>
+    <div class="space-y-12">
       
-      <!-- Work Cards -->
-      <div class="flex flex-col gap-4">
-        {work.map(entry => (
-          <WorkCard entry={entry} Content={entry.Content} />
-        ))}
-      </div>
+      <!-- Terminal header -->
+      <section class="space-y-6">
+        <div class="font-mono text-xs text-neutral-500 dark:text-neutral-500 space-y-1">
+          <p><span class="text-green-500 dark:text-green-400">//</span> loading career.log...</p>
+          <p><span class="text-green-500 dark:text-green-400">//</span> entries: <span class="text-cyan-500 dark:text-cyan-400">{work.length}</span></p>
+        </div>
+        
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-black dark:text-white tracking-tight">Work</h1>
+          <p class="text-neutral-500 dark:text-neutral-400 mt-2">Where I've been and what I've built.</p>
+        </div>
+      </section>
+
+      <!-- Timeline -->
+      <section class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-[23px] top-0 bottom-0 w-px bg-neutral-200 dark:bg-neutral-800 hidden sm:block"></div>
+        
+        <div class="space-y-8">
+          {work.map((entry, index) => {
+            const meta = companyMeta[entry.slug] || { accent: '#6B7280' };
+            const num = String(index + 1).padStart(2, '0');
+            
+            return (
+              <div class="relative flex gap-6">
+                
+                <!-- Timeline dot -->
+                <div class="hidden sm:flex flex-shrink-0 w-12 justify-center">
+                  <div 
+                    class="w-3 h-3 rounded-full ring-4 ring-white dark:ring-neutral-950 z-10"
+                    style={`background: ${meta.accent};`}
+                  ></div>
+                </div>
+                
+                <!-- Card -->
+                <div class="flex-1 group">
+                  <div class="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300">
+                    
+                    <!-- Hover glow -->
+                    <div 
+                      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                      style={`background: radial-gradient(600px circle at 50% 50%, ${meta.accent}08, transparent 40%);`}
+                    ></div>
+                    
+                    <!-- Top accent line -->
+                    <div 
+                      class="absolute top-0 left-0 right-0 h-[2px]"
+                      style={`background: linear-gradient(90deg, ${meta.accent}, transparent);`}
+                    ></div>
+                    
+                    <div class="relative p-6">
+                      
+                      <!-- Header -->
+                      <div class="flex items-start gap-4 mb-4">
+                        {entry.data.logo && (
+                          <img 
+                            src={entry.data.logo} 
+                            alt={entry.data.company} 
+                            class="w-12 h-12 rounded-lg object-cover flex-shrink-0 border border-neutral-100 dark:border-neutral-800"
+                          />
+                        )}
+                        <div class="flex-1 min-w-0">
+                          <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1">
+                            <h3 class="text-lg font-semibold text-black dark:text-white">
+                              {entry.data.company}
+                            </h3>
+                            <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">
+                              {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+                            </span>
+                          </div>
+                          <span 
+                            class="inline-flex items-center px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md"
+                            style={`background: ${meta.accent}20; color: ${meta.accent};`}
+                          >
+                            {entry.data.role}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <!-- Description -->
+                      <div class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed prose prose-sm dark:prose-invert max-w-none">
+                        <entry.Content />
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section class="font-mono text-xs text-neutral-400 dark:text-neutral-600 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+        <p><span class="text-green-500 dark:text-green-400">//</span> next chapter loading...</p>
+      </section>
+
     </div>
   </Container>
 </PageLayout>

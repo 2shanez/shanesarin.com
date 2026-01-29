@@ -6,8 +6,18 @@ import Link from "@components/Link.astro";
 
 <PageLayout title="Collection" description="The 2667 Collection - NFTs by Shane Sarin">
   <Container>
+      <div class="space-y-12">
+      
+      <!-- Terminal header -->
+      <section class="space-y-6">
+        <div class="font-mono text-xs text-neutral-500 dark:text-neutral-500 space-y-1">
+          <p><span class="text-green-500 dark:text-green-400">//</span> loading collection...</p>
+          <p><span class="text-green-500 dark:text-green-400">//</span> vault: <span class="text-cyan-500 dark:text-cyan-400">2667</span></p>
+        </div>
+      </section>
+
       <!-- Hero Header -->
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-900 p-8 mb-12">
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-900 p-8">
         <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
         <div class="relative flex flex-col sm:flex-row items-center sm:items-start gap-6">
           <div class="relative">
@@ -19,16 +29,16 @@ import Link from "@components/Link.astro";
             />
           </div>
           <div class="text-center sm:text-left">
-            <h1 class="text-3xl sm:text-4xl font-bold text-black dark:text-white">
+            <h1 class="text-3xl sm:text-4xl font-bold text-black dark:text-white tracking-tight">
               The 2667 Collection
             </h1>
             <p class="text-lg text-black dark:text-white mt-1 font-bold tracking-tight">Select Works</p>
-            <p class="text-sm text-neutral-700 dark:text-neutral-200 mt-3 font-medium">Curated by Shane Sarin</p>
+            <p class="font-mono text-sm text-neutral-500 dark:text-neutral-400 mt-3">curated by shane.sarin</p>
           </div>
         </div>
       </div>
 
-      <div class="mb-12">
+      <div class="">
         <p class="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed">
           2667 is more than a number—it's the edition of the Bored Ape that became one of the defining pieces in my journey as a collector. I started collecting NFTs to connect with groundbreaking digital artists and be part of a cultural shift in how we create, share, and value art. My collection reflects that journey—featuring work from visionaries like Pak and Beeple alongside a growing list of other creators I believe in. For me, it's never been about flipping or chasing the next big drop; it's about building a collection that tells a story and supports the artists shaping the future of digital creativity.
         </p>
@@ -330,6 +340,12 @@ import Link from "@components/Link.astro";
         </div>
       </section>
 
+      <!-- Footer -->
+      <section class="font-mono text-xs text-neutral-400 dark:text-neutral-600 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+        <p><span class="text-green-500 dark:text-green-400">//</span> collection.complete</p>
+      </section>
+
+      </div>
   </Container>
 </PageLayout>
 

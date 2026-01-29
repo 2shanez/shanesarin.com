@@ -6,41 +6,135 @@ import { SITE, HOME, SOCIALS } from "@consts";
 ---
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <div class="space-y-6">
-      <section>
-        <img 
-          src="/profile.jpg" 
-          alt="Shane" 
-          class="w-28 h-28 rounded-2xl mb-6"
-        />
-        <div class="font-semibold text-black dark:text-white">
-          Hi, I'm Shane 👋🏻
+    <div class="space-y-16">
+      
+      <!-- Terminal-style intro -->
+      <section class="font-mono text-xs text-neutral-500 dark:text-neutral-500 space-y-1">
+        <p><span class="text-green-500 dark:text-green-400">//</span> initializing...</p>
+        <p><span class="text-green-500 dark:text-green-400">//</span> loading profile: shane.sarin</p>
+        <p><span class="text-green-500 dark:text-green-400">//</span> status: <span class="text-cyan-500 dark:text-cyan-400">ready</span></p>
+      </section>
+
+      <!-- Hero Section -->
+      <section class="space-y-6">
+        <div class="flex items-start gap-6">
+          <img 
+            src="/profile.jpg" 
+            alt="Shane" 
+            class="w-24 h-24 rounded-2xl ring-2 ring-neutral-200 dark:ring-neutral-700"
+          />
+          <div class="space-y-2">
+            <h1 class="text-3xl md:text-4xl font-bold text-black dark:text-white tracking-tight">
+              Shane Sarin
+            </h1>
+            <p class="font-mono text-sm text-neutral-500 dark:text-neutral-400">
+              builder · collector · explorer
+            </p>
+          </div>
         </div>
       </section>
 
-      <section>
-        <p class="text-neutral-700 dark:text-neutral-300">
-          Next chapter loading... Former Web3 professional with experience at Consensys and RECUR—helped scale products, navigated market cycles, and curated my art collection, <Link href="/collection" underline={false}>2667</Link>. UNC Chapel Hill alum 🐏
+      <!-- Thesis Statement -->
+      <section class="border-l-2 border-cyan-500 dark:border-cyan-400 pl-6 py-2">
+        <p class="text-xl md:text-2xl font-semibold text-black dark:text-white leading-relaxed">
+          Building at the intersection of <span class="text-cyan-600 dark:text-cyan-400">crypto</span>, <span class="text-violet-600 dark:text-violet-400">AI</span>, and <span class="text-amber-600 dark:text-amber-400">culture</span>.
         </p>
       </section>
 
-      <section class="space-y-3">
-        <div class="font-semibold text-black dark:text-white">Let's Connect</div>
-        <p class="text-neutral-700 dark:text-neutral-300">
-          If you want to get in touch with me about something or just to say hi, reach out on social media or send me an email.
+      <!-- Background -->
+      <section class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">01</span>
+          <h2 class="font-bold text-black dark:text-white tracking-tight">BACKGROUND</h2>
+          <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
+        </div>
+        <p class="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+          Former Web3 professional with experience at <span class="font-semibold text-black dark:text-white">Consensys</span> and <span class="font-semibold text-black dark:text-white">RECUR</span>—helped scale products, navigated market cycles, and curated my art collection, <Link href="/collection" underline={false} class="text-cyan-600 dark:text-cyan-400 hover:underline">2667</Link>. UNC Chapel Hill alum 🐏
         </p>
-        <ul class="flex flex-wrap gap-2">
-          {SOCIALS.map(SOCIAL => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>{SOCIAL.NAME}</Link>
-              {"/"}
-            </li>
-          ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>{SITE.EMAIL}</Link>
-          </li>
-        </ul>
       </section>
+
+      <!-- What I Believe -->
+      <section class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">02</span>
+          <h2 class="font-bold text-black dark:text-white tracking-tight">WHAT I BELIEVE</h2>
+          <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+            <p class="font-mono text-xs text-cyan-600 dark:text-cyan-400 mb-2">// on crypto</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">The best crypto products don't feel like crypto. They just work better.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+            <p class="font-mono text-xs text-violet-600 dark:text-violet-400 mb-2">// on AI</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">AI amplifies human capability. The winners will be those who learn to collaborate with it.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+            <p class="font-mono text-xs text-amber-600 dark:text-amber-400 mb-2">// on culture</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Collecting is curation. What you collect signals what you believe in.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+            <p class="font-mono text-xs text-green-600 dark:text-green-400 mb-2">// on building</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Ship fast, learn faster. The best ideas come from doing, not planning.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Current Focus -->
+      <section class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">03</span>
+          <h2 class="font-bold text-black dark:text-white tracking-tight">CURRENT FOCUS</h2>
+          <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
+        </div>
+        <div class="font-mono text-sm space-y-2">
+          <p class="text-neutral-600 dark:text-neutral-400">
+            <span class="text-green-500">→</span> Exploring the next chapter
+          </p>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            <span class="text-green-500">→</span> Building <Link href="/projects" class="text-cyan-600 dark:text-cyan-400 hover:underline">ideas</Link> across AI, infra, and consumer
+          </p>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            <span class="text-green-500">→</span> Curating the <Link href="/collection" class="text-cyan-600 dark:text-cyan-400 hover:underline">2667 collection</Link>
+          </p>
+        </div>
+      </section>
+
+      <!-- Connect -->
+      <section class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">04</span>
+          <h2 class="font-bold text-black dark:text-white tracking-tight">CONNECT</h2>
+          <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          {SOCIALS.map(SOCIAL => (
+            <a 
+              href={SOCIAL.HREF} 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-sm font-medium text-neutral-700 dark:text-neutral-300 transition-colors"
+            >
+              {SOCIAL.NAME}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          ))}
+          <a 
+            href={`mailto:${SITE.EMAIL}`}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-sm font-medium text-neutral-700 dark:text-neutral-300 transition-colors"
+          >
+            {SITE.EMAIL}
+          </a>
+        </div>
+      </section>
+
+      <!-- Footer terminal -->
+      <section class="font-mono text-xs text-neutral-400 dark:text-neutral-600 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+        <p><span class="text-green-500 dark:text-green-400">//</span> end of transmission</p>
+      </section>
+
     </div>
   </Container>
 </PageLayout>
