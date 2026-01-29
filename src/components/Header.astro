@@ -9,8 +9,8 @@ const pathname = Astro.url.pathname;
     <div class="flex justify-between items-center py-2">
       <!-- Shane/Home -->
       <a href="/" class="group flex flex-col items-center gap-1.5 text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white transition-colors duration-300">
-        <img src="/ape-icon.png" alt="Ape" class="h-12 md:h-20 w-auto object-contain dark:invert dark:sepia dark:saturate-[1000%] dark:hue-rotate-[90deg] opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
-        <span class="text-[10px] font-mono uppercase tracking-[0.15em]">{SITE.NAME}</span>
+        <img src="/ape-icon.png" alt="Ape" class="h-12 md:h-20 w-auto object-contain dark:[filter:invert(1)_sepia(1)_saturate(50)_hue-rotate(80deg)_brightness(0.7)] opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+        <span class="text-[10px] font-mono uppercase tracking-[0.15em] dark:text-[#2EE59D]">{SITE.NAME}</span>
       </a>
       
       <!-- Nav Items -->
@@ -44,7 +44,7 @@ const pathname = Astro.url.pathname;
             <circle cx="12" cy="30" r="2" stroke-width="1"></circle>
             <circle cx="52" cy="30" r="2" stroke-width="1"></circle>
           </svg>
-          <span class="text-[10px] font-mono uppercase tracking-[0.15em]">Work</span>
+          <span class="text-[10px] font-mono uppercase tracking-[0.15em] dark:text-[#2EE59D]">Work</span>
         </a>
         
         <!-- Projects -->
@@ -78,7 +78,7 @@ const pathname = Astro.url.pathname;
             <line x1="54" y1="12" x2="58" y2="8" stroke-width="1"></line>
             <line x1="32" y1="0" x2="32" y2="-4" stroke-width="1"></line>
           </svg>
-          <span class="text-[10px] font-mono uppercase tracking-[0.15em]">Projects</span>
+          <span class="text-[10px] font-mono uppercase tracking-[0.15em] dark:text-[#2EE59D]">Projects</span>
         </a>
         
         <!-- 2667 Collection -->
@@ -104,7 +104,7 @@ const pathname = Astro.url.pathname;
             <path d="M20 68 L20 75 L28 75 L28 68"></path>
             <path d="M20 62 L26 62 L26 58 L20 58"></path>
           </svg>
-          <span class="text-[10px] font-mono uppercase tracking-[0.15em]">2667</span>
+          <span class="text-[10px] font-mono uppercase tracking-[0.15em] dark:text-[#2EE59D]">2667</span>
         </a>
       </nav>
       
