@@ -44,14 +44,14 @@ const projectMeta: Record<string, { icon: string; category: string; accent: stri
           </div>
         </div>
         
-        <div>
+        <div class="content-section">
           <h1 class="text-3xl md:text-4xl font-bold text-black dark:text-white tracking-tight">Projects</h1>
           <p class="text-neutral-500 dark:text-neutral-400 mt-2">Ideas, prototypes, and experiments across emerging technology.</p>
         </div>
       </section>
 
       <!-- Projects List -->
-      <section class="space-y-6">
+      <section class="space-y-6 content-section">
         {projects.map((project, index) => {
           const meta = projectMeta[project.slug] || { icon: '📁', category: 'Project', accent: '#6B7280' };
           const num = String(index + 1).padStart(2, '0');
@@ -114,7 +114,7 @@ const projectMeta: Record<string, { icon: string; category: string; accent: stri
       </section>
 
       <!-- Footer -->
-      <section class="font-mono text-xs text-neutral-400 dark:text-neutral-600 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+      <section class="font-mono text-xs text-neutral-400 dark:text-neutral-600 pt-8 border-t border-neutral-200 dark:border-neutral-800 content-section">
         <p><span class="text-green-500 dark:text-green-400">//</span> more ideas loading...</p>
       </section>
 
@@ -189,5 +189,19 @@ const projectMeta: Record<string, { icon: string; category: string; accent: stri
   
   @keyframes cursorHide {
     to { opacity: 0; }
+  }
+  
+  .content-section {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: contentReveal 0.6s ease forwards;
+    animation-delay: 2s;
+  }
+  
+  @keyframes contentReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
