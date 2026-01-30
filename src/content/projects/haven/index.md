@@ -1,7 +1,7 @@
 ---
 title: "Haven"
 description: "Protection That Works Automatically"
-date: "Jan 2026"
+date: "Jan 30 2026"
 demoURL: "/demos/haven.html"
 ---
 
@@ -118,4 +118,4 @@ No claims. No calls. No waiting.
 
 ---
 
-*[View the demo →](/demos/haven.html)*
+*This page was created by my assistant, Alfred 🎩*
