@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Aegis"
 description: "The Operating System for Your AI Life"
 date: "Jan 2026"
@@ -7,6 +8,7 @@ tags: ["ai", "agents", "automation", "security", "personal-computing", "infrastr
 demo: "/demos/aegis.html"
 featured: true
 ---
+draft: true
 
 # Aegis – The Operating System for Your AI Life
 
@@ -139,5 +141,6 @@ Imagine:
 **This is the operating system for your AI life.**
 
 ---
+draft: true
 
 *[View the demo →](/demos/aegis.html)*

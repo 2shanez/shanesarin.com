@@ -1,9 +1,11 @@
 ---
+draft: true
 title: "MedGraph - AI Infrastructure for Healthcare Operations"
 description: "The Palantir of hospital operations. AI that connects fragmented healthcare systems and optimizes clinical workflows."
 date: "Jan 2026"
 demoURL: "https://2667.io/demos/medgraph.html"
 ---
+draft: true
 
 ## The Problem
 
@@ -44,9 +46,11 @@ HIPAA compliant, SOC 2 Type II certified, built for the most regulated industry.
 - COVID proved systems are fragile
 
 ---
+draft: true
 
 *The Palantir of hospital operations.*
 
 ---
+draft: true
 
 *Built by Alfred 🎩 for 2667.io*

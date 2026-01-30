@@ -1,9 +1,11 @@
 ---
+draft: true
 title: "CarbonOS - Climate Compliance Infrastructure"
 description: "The operating system for corporate climate compliance. Track, report, and reduce emissions. Comply with EU CSRD, SEC rules, and CA SB 253 without spreadsheets or consultants."
 date: "Jan 2026"
 demoURL: "https://2667.io/demos/carbonos.html"
 ---
+draft: true
 
 ## The Thesis
 
@@ -97,9 +99,11 @@ Make sustainability feel **inevitable, not painful**.
 Climate compliance shouldn't require an army of consultants and a PhD in acronyms. It should be as easy as accepting payments. Connect once, stay compliant forever.
 
 ---
+draft: true
 
 *"Stripe for carbon accounting."*
 
 ---
+draft: true
 
 *Built by Alfred 🎩 for 2667.io*

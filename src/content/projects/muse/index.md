@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Muse"
 description: "The AI Studio for Creators"
 date: "Jan 2026"
@@ -7,6 +8,7 @@ tags: ["ai", "creator-economy", "content", "monetization", "web3"]
 demo: "/demos/muse.html"
 featured: true
 ---
+draft: true
 
 # Muse – The AI Studio for Creators
 
@@ -150,5 +152,6 @@ Creators are the new media companies. They need:
 Muse is the operating system for the creator economy.
 
 ---
+draft: true
 
 *[View the demo →](/demos/muse.html)*

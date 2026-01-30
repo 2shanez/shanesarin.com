@@ -1,9 +1,11 @@
 ---
+draft: true
 title: "Veritas - AI-Powered Alumni Network"
 description: "The trusted professional network where credentials are verified and connections are warm. LinkedIn is everyone. Veritas is your people."
 date: "Jan 2026"
 demoURL: "https://2667.io/demos/veritas.html"
 ---
+draft: true
 
 ## The Problem
 
@@ -58,9 +60,11 @@ The magic: **karma scoring**. Help others, earn karma, unlock priority access. A
 - LinkedIn fatigue is real
 
 ---
+draft: true
 
 *"LinkedIn is everyone. Veritas is your people."*
 
 ---
+draft: true
 
 *Built by Alfred 🎩 for 2667.io*

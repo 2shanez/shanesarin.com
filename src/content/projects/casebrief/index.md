@@ -1,9 +1,11 @@
 ---
+draft: true
 title: "CaseBrief - AI Legal Workflow Platform"
 description: "The AI associate that never sleeps. Automate legal research, contract analysis, discovery, and brief drafting. 10x lawyer productivity while maintaining the accuracy clients demand."
 date: "Jan 2026"
 demoURL: "https://2667.io/demos/casebrief.html"
 ---
+draft: true
 
 ## The Problem
 
@@ -95,9 +97,11 @@ We make the pilot easy: guaranteed 20% time savings or money back.
 - Associate salaries at all-time high ($225K starting at BigLaw)
 
 ---
+draft: true
 
 *"The AI associate that never sleeps."*
 
 ---
+draft: true
 
 *A 2667.io venture*

@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Sentinel"
 description: "AI-Native Defense & Security Platform"
 date: "Jan 2026"
@@ -7,6 +8,7 @@ tags: ["ai", "defense", "security", "government", "enterprise", "cyber"]
 demo: "/demos/sentinel.html"
 featured: true
 ---
+draft: true
 
 # Sentinel – The Anduril of Cyber Defense
 
@@ -131,5 +133,6 @@ Every organization—from government agencies to critical infrastructure to ente
 The future of national security runs on Sentinel.
 
 ---
+draft: true
 
 *[View the demo →](/demos/sentinel.html)*

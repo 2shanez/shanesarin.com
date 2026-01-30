@@ -1,9 +1,11 @@
 ---
+draft: true
 title: "Civitas - AI Infrastructure for Citizen Services"
 description: "The Palantir of citizen services. Proactive government that finds benefits for you, not the other way around."
 date: "Jan 2026"
 demoURL: "https://2667.io/demos/civitas.html"
 ---
+draft: true
 
 ## The $80 Billion Problem
 
@@ -72,9 +74,11 @@ Civitas is infrastructure. The Palantir of citizen services. The Stripe of gover
 **We don't improve the DMV website. We make the DMV come to you.**
 
 ---
+draft: true
 
 *"Government should work for the people. We're building the infrastructure to make that real."*
 
 ---
+draft: true
 
 *Built by Alfred 🎩 for 2667.io*

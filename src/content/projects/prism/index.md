@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Prism"
 description: "The Trust Layer for the AI Age"
 date: "Jan 2026"
@@ -7,6 +8,7 @@ tags: ["ai", "trust", "verification", "news", "infrastructure", "blockchain"]
 demo: "/demos/prism.html"
 featured: true
 ---
+draft: true
 
 # Prism – The Trust Layer for the AI Age
 
@@ -100,5 +102,6 @@ The internet needs a trust layer. Every platform will need to:
 Prism becomes the primitive that every piece of content passes through. And Prism News proves it works.
 
 ---
+draft: true
 
 *[View the demo →](/demos/prism.html)*
