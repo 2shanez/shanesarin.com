@@ -4,6 +4,6 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
-  site: "https://2667.io",
+  site: "https://shanesarin.com",
   integrations: [mdx(), sitemap(), tailwind()],
 });

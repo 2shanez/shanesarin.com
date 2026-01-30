@@ -1,7 +1,7 @@
 import type { Site, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
-  NAME: "Shane",
+  NAME: "Shane Sarin",
   EMAIL: "shanesarin@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 0,
   NUM_WORKS_ON_HOMEPAGE: 0,
@@ -9,8 +9,8 @@ export const SITE: Site = {
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "Shane Sarin",
+  TITLE: "Shane Sarin",
+  DESCRIPTION: "Shane Sarin — builder, collector, explorer. Building at the intersection of crypto, AI, and culture. Former Consensys and RECUR. UNC Chapel Hill alum.",
 };
 
 export const BLOG: Metadata = {
