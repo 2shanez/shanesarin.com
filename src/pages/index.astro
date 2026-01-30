@@ -29,125 +29,6 @@ import { SITE, HOME, SOCIALS } from "@consts";
       </section>
 
       <style>
-        .ticker-wrapper {
-          overflow: hidden;
-          width: 100%;
-        }
-        .ticker-track {
-          display: flex;
-          gap: 1.5rem;
-          animation: ticker-scroll 25s linear infinite;
-          width: max-content;
-        }
-        .ticker-track:hover {
-          animation-play-state: paused;
-        }
-        @keyframes ticker-scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .ticker-item {
-          display: flex;
-          align-items: center;
-          gap: 0.25rem;
-          white-space: nowrap;
-          font-size: 11px;
-        }
-        .ticker-icon {
-          width: 12px !important;
-          height: 12px !important;
-          max-width: 12px !important;
-          max-height: 12px !important;
-          border-radius: 50%;
-          flex-shrink: 0;
-        }
-        .ticker-symbol {
-          font-weight: 600;
-          color: #171717;
-        }
-        :global(.dark) .ticker-symbol {
-          color: #fafafa;
-        }
-        .ticker-price {
-          color: #525252;
-        }
-        :global(.dark) .ticker-price {
-          color: #a3a3a3;
-        }
-        .ticker-change {
-          display: flex;
-          align-items: center;
-          gap: 2px;
-        }
-        .ticker-up { color: #22c55e; }
-        .ticker-down { color: #ef4444; }
-      </style>
-
-      <script is:inline>
-        async function fetchPrices() {
-          try {
-            const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h');
-            const coins = await res.json();
-            
-            const formatPrice = function(price) { 
-              if (price >= 1000) return '$' + price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-              if (price >= 1) return '$' + price.toFixed(2);
-              return '$' + price.toFixed(4);
-            };
-            
-            let html = '';
-            coins.forEach(function(coin) {
-              const change = coin.price_change_percentage_24h;
-              const isUp = change >= 0;
-              const arrow = isUp ? '▲' : '▼';
-              const changeClass = isUp ? 'ticker-up' : 'ticker-down';
-              const changeText = Math.abs(change).toFixed(2) + '%';
-              
-              html += '<div class="ticker-item">';
-              html += '<img src="' + coin.image + '" alt="' + coin.symbol + '" class="ticker-icon" style="width:12px;height:12px;max-width:12px;" />';
-              html += '<span class="ticker-symbol">' + coin.symbol.toUpperCase() + '</span>';
-              html += '<span class="ticker-price">' + formatPrice(coin.current_price) + '</span>';
-              html += '<span class="ticker-change ' + changeClass + '">' + arrow + ' ' + changeText + '</span>';
-              html += '</div>';
-            });
-            
-            // Duplicate for seamless loop
-            const tickerContent = document.getElementById('ticker-content');
-            if (tickerContent) {
-              tickerContent.innerHTML = html + html;
-            }
-          } catch (e) {
-            console.log('Price fetch failed:', e);
-            // Don't clear existing content on error
-          }
-        }
-        
-        // Prevent any other scripts from modifying ticker
-        window.tickerInitialized = true;
-        
-        var tickerLoaded = false;
-        
-        function initTicker() {
-          if (tickerLoaded) return;
-          tickerLoaded = true;
-          
-          setTimeout(function() {
-            var ticker = document.getElementById('price-ticker');
-            if (ticker) ticker.style.opacity = '1';
-            fetchPrices();
-            // Refresh every 2 minutes
-            setInterval(fetchPrices, 120000);
-          }, 2500);
-        }
-        
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', initTicker);
-        } else {
-          initTicker();
-        }
-      </script>
-
-      <style>
         .ape-green {
           color: #2EE59D;
         }
@@ -227,19 +108,7 @@ import { SITE, HOME, SOCIALS } from "@consts";
           }
         }
         
-        .ticker-section {
-          transition: opacity 0.5s ease;
-        }
       </style>
-
-      <!-- Live Price Ticker (outside page-content to avoid opacity conflict) -->
-      <section id="price-ticker" class="ticker-section overflow-hidden border-y border-neutral-200 dark:border-neutral-800 py-1 -mx-4 px-4 bg-neutral-50 dark:bg-neutral-900/50" style="opacity: 0; transition: opacity 0.5s ease;">
-        <div class="ticker-wrapper">
-          <div id="ticker-content" class="ticker-track">
-            <span class="text-neutral-500 text-sm">Loading prices...</span>
-          </div>
-        </div>
-      </section>
 
       <!-- All content wrapper -->
       <div class="page-content space-y-10">
