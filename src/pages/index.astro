@@ -121,19 +121,25 @@ import { SITE, HOME, SOCIALS } from "@consts";
           }
         }
         
-        // Fetch on load (after terminal animation)
-        setTimeout(function() {
-          const ticker = document.getElementById('price-ticker');
-          if (ticker) ticker.style.opacity = '1';
-          fetchPrices();
-        }, 2500);
+        // Show ticker and fetch on load
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(function() {
+            const ticker = document.getElementById('price-ticker');
+            if (ticker) ticker.style.opacity = '1';
+            fetchPrices();
+          }, 2500);
+          
+          // Refresh every 2 minutes
+          setInterval(fetchPrices, 120000);
+        });
         
-        // Refresh every 2 minutes
-        setInterval(fetchPrices, 120000);
-        
-        // Also try fetching immediately in case animation already done
-        if (document.readyState === 'complete') {
-          fetchPrices();
+        // Backup: if DOM already loaded
+        if (document.readyState !== 'loading') {
+          setTimeout(function() {
+            const ticker = document.getElementById('price-ticker');
+            if (ticker) ticker.style.opacity = '1';
+            fetchPrices();
+          }, 2500);
         }
       </script>
 
