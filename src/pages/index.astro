@@ -28,6 +28,69 @@ import { SITE, HOME, SOCIALS } from "@consts";
         </div>
       </section>
 
+      <!-- Live Price Ticker -->
+      <section id="price-ticker" class="ticker-section font-mono text-xs opacity-0">
+        <div class="flex flex-wrap gap-4 text-neutral-500 dark:text-neutral-500">
+          <div class="flex items-center gap-2">
+            <span class="text-orange-500">₿</span>
+            <span>BTC</span>
+            <span id="btc-price" class="text-neutral-400 dark:text-neutral-400">--</span>
+            <span id="btc-change" class="text-neutral-500">--%</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-blue-400">◆</span>
+            <span>ETH</span>
+            <span id="eth-price" class="text-neutral-400 dark:text-neutral-400">--</span>
+            <span id="eth-change" class="text-neutral-500">--%</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-blue-500">⬡</span>
+            <span>LINK</span>
+            <span id="link-price" class="text-neutral-400 dark:text-neutral-400">--</span>
+            <span id="link-change" class="text-neutral-500">--%</span>
+          </div>
+        </div>
+      </section>
+
+      <script>
+        async function fetchPrices() {
+          try {
+            const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,chainlink&vs_currencies=usd&include_24hr_change=true');
+            const data = await res.json();
+            
+            const format = (price) => price >= 1000 ? `$${(price/1000).toFixed(1)}k` : `$${price.toFixed(2)}`;
+            const formatChange = (change) => {
+              const sign = change >= 0 ? '+' : '';
+              return `${sign}${change.toFixed(1)}%`;
+            };
+            const changeClass = (change) => change >= 0 ? 'text-green-500' : 'text-red-500';
+            
+            document.getElementById('btc-price').textContent = format(data.bitcoin.usd);
+            document.getElementById('btc-change').textContent = formatChange(data.bitcoin.usd_24h_change);
+            document.getElementById('btc-change').className = changeClass(data.bitcoin.usd_24h_change);
+            
+            document.getElementById('eth-price').textContent = format(data.ethereum.usd);
+            document.getElementById('eth-change').textContent = formatChange(data.ethereum.usd_24h_change);
+            document.getElementById('eth-change').className = changeClass(data.ethereum.usd_24h_change);
+            
+            document.getElementById('link-price').textContent = format(data.chainlink.usd);
+            document.getElementById('link-change').textContent = formatChange(data.chainlink.usd_24h_change);
+            document.getElementById('link-change').className = changeClass(data.chainlink.usd_24h_change);
+          } catch (e) {
+            console.log('Price fetch failed:', e);
+          }
+        }
+        
+        // Fetch on load (after terminal animation)
+        setTimeout(() => {
+          fetchPrices();
+          document.getElementById('price-ticker').style.opacity = '1';
+        }, 2800);
+        
+        // Refresh every 60 seconds
+        setInterval(fetchPrices, 60000);
+      </script>
+
       <style>
         .ape-green {
           color: #2EE59D;
@@ -106,6 +169,10 @@ import { SITE, HOME, SOCIALS } from "@consts";
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        
+        .ticker-section {
+          transition: opacity 0.5s ease;
         }
       </style>
 
