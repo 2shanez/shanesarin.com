@@ -118,28 +118,32 @@ import { SITE, HOME, SOCIALS } from "@consts";
             }
           } catch (e) {
             console.log('Price fetch failed:', e);
+            // Don't clear existing content on error
           }
         }
         
-        // Show ticker and fetch on load
-        document.addEventListener('DOMContentLoaded', function() {
-          setTimeout(function() {
-            const ticker = document.getElementById('price-ticker');
-            if (ticker) ticker.style.opacity = '1';
-            fetchPrices();
-          }, 2500);
-          
-          // Refresh every 2 minutes
-          setInterval(fetchPrices, 120000);
-        });
+        // Prevent any other scripts from modifying ticker
+        window.tickerInitialized = true;
         
-        // Backup: if DOM already loaded
-        if (document.readyState !== 'loading') {
+        var tickerLoaded = false;
+        
+        function initTicker() {
+          if (tickerLoaded) return;
+          tickerLoaded = true;
+          
           setTimeout(function() {
-            const ticker = document.getElementById('price-ticker');
+            var ticker = document.getElementById('price-ticker');
             if (ticker) ticker.style.opacity = '1';
             fetchPrices();
+            // Refresh every 2 minutes
+            setInterval(fetchPrices, 120000);
           }, 2500);
+        }
+        
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initTicker);
+        } else {
+          initTicker();
         }
       </script>
 
