@@ -29,57 +29,75 @@ import { SITE, HOME, SOCIALS } from "@consts";
       </section>
 
       <!-- Live Price Ticker -->
-      <section id="price-ticker" class="ticker-section font-mono text-xs opacity-0">
-        <div class="flex flex-wrap gap-4 text-neutral-500 dark:text-neutral-500">
-          <div class="flex items-center gap-2">
-            <span class="text-orange-500">₿</span>
-            <span>BTC</span>
-            <span id="btc-price" class="text-neutral-400 dark:text-neutral-400">--</span>
-            <span id="btc-change" class="text-neutral-500">--%</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-blue-400">◆</span>
-            <span>ETH</span>
-            <span id="eth-price" class="text-neutral-400 dark:text-neutral-400">--</span>
-            <span id="eth-change" class="text-neutral-500">--%</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-blue-500">⬡</span>
-            <span>LINK</span>
-            <span id="link-price" class="text-neutral-400 dark:text-neutral-400">--</span>
-            <span id="link-change" class="text-neutral-500">--%</span>
+      <section id="price-ticker" class="ticker-section font-mono text-xs opacity-0 overflow-hidden">
+        <div class="ticker-wrapper">
+          <div id="ticker-content" class="ticker-track flex gap-8 text-neutral-500 dark:text-neutral-500">
+            <span class="text-neutral-600 dark:text-neutral-400">Loading prices...</span>
           </div>
         </div>
       </section>
 
+      <style>
+        .ticker-wrapper {
+          overflow: hidden;
+          width: 100%;
+        }
+        .ticker-track {
+          display: flex;
+          animation: ticker-scroll 40s linear infinite;
+          width: max-content;
+        }
+        .ticker-track:hover {
+          animation-play-state: paused;
+        }
+        @keyframes ticker-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .ticker-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          white-space: nowrap;
+        }
+      </style>
+
       <script is:inline>
         async function fetchPrices() {
           try {
-            const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,chainlink&vs_currencies=usd&include_24hr_change=true');
-            const data = await res.json();
+            const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h');
+            const coins = await res.json();
             
-            const format = function(price) { return price >= 1000 ? '$' + (price/1000).toFixed(1) + 'k' : '$' + price.toFixed(2); };
+            const format = function(price) { 
+              if (price >= 1000) return '$' + (price/1000).toFixed(1) + 'k';
+              if (price >= 1) return '$' + price.toFixed(2);
+              return '$' + price.toFixed(4);
+            };
             const formatChange = function(change) {
+              if (change === null || change === undefined) return '--';
               const sign = change >= 0 ? '+' : '';
               return sign + change.toFixed(1) + '%';
             };
-            const changeClass = function(change) { return change >= 0 ? 'text-green-500' : 'text-red-500'; };
+            const changeClass = function(change) { 
+              if (change === null || change === undefined) return 'text-neutral-500';
+              return change >= 0 ? 'text-green-500' : 'text-red-500'; 
+            };
             
-            const btcPrice = document.getElementById('btc-price');
-            const btcChange = document.getElementById('btc-change');
-            const ethPrice = document.getElementById('eth-price');
-            const ethChange = document.getElementById('eth-change');
-            const linkPrice = document.getElementById('link-price');
-            const linkChange = document.getElementById('link-change');
+            let html = '';
+            coins.forEach(function(coin) {
+              html += '<div class="ticker-item">';
+              html += '<img src="' + coin.image + '" alt="' + coin.symbol + '" class="w-4 h-4 rounded-full" />';
+              html += '<span class="text-neutral-300 uppercase">' + coin.symbol + '</span>';
+              html += '<span class="text-neutral-400">' + format(coin.current_price) + '</span>';
+              html += '<span class="' + changeClass(coin.price_change_percentage_24h) + '">' + formatChange(coin.price_change_percentage_24h) + '</span>';
+              html += '</div>';
+            });
             
-            if (btcPrice) btcPrice.textContent = format(data.bitcoin.usd);
-            if (btcChange) { btcChange.textContent = formatChange(data.bitcoin.usd_24h_change); btcChange.className = changeClass(data.bitcoin.usd_24h_change); }
-            
-            if (ethPrice) ethPrice.textContent = format(data.ethereum.usd);
-            if (ethChange) { ethChange.textContent = formatChange(data.ethereum.usd_24h_change); ethChange.className = changeClass(data.ethereum.usd_24h_change); }
-            
-            if (linkPrice) linkPrice.textContent = format(data.chainlink.usd);
-            if (linkChange) { linkChange.textContent = formatChange(data.chainlink.usd_24h_change); linkChange.className = changeClass(data.chainlink.usd_24h_change); }
+            // Duplicate for seamless loop
+            const tickerContent = document.getElementById('ticker-content');
+            if (tickerContent) {
+              tickerContent.innerHTML = html + html;
+            }
           } catch (e) {
             console.log('Price fetch failed:', e);
           }
@@ -92,8 +110,8 @@ import { SITE, HOME, SOCIALS } from "@consts";
           if (ticker) ticker.style.opacity = '1';
         }, 2800);
         
-        // Refresh every 60 seconds
-        setInterval(fetchPrices, 60000);
+        // Refresh every 2 minutes
+        setInterval(fetchPrices, 120000);
       </script>
 
       <style>
