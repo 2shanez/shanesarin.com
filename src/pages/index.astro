@@ -29,10 +29,10 @@ import { SITE, HOME, SOCIALS } from "@consts";
       </section>
 
       <!-- Live Price Ticker -->
-      <section id="price-ticker" class="ticker-section font-mono text-xs opacity-0 overflow-hidden">
+      <section id="price-ticker" class="ticker-section opacity-0 overflow-hidden border-y border-neutral-200 dark:border-neutral-800 py-2 -mx-4 px-4 bg-neutral-50 dark:bg-neutral-900/50">
         <div class="ticker-wrapper">
-          <div id="ticker-content" class="ticker-track flex gap-8 text-neutral-500 dark:text-neutral-500">
-            <span class="text-neutral-600 dark:text-neutral-400">Loading prices...</span>
+          <div id="ticker-content" class="ticker-track">
+            <span class="text-neutral-500 text-sm">Loading...</span>
           </div>
         </div>
       </section>
@@ -44,7 +44,8 @@ import { SITE, HOME, SOCIALS } from "@consts";
         }
         .ticker-track {
           display: flex;
-          animation: ticker-scroll 40s linear infinite;
+          gap: 2rem;
+          animation: ticker-scroll 60s linear infinite;
           width: max-content;
         }
         .ticker-track:hover {
@@ -59,7 +60,33 @@ import { SITE, HOME, SOCIALS } from "@consts";
           align-items: center;
           gap: 0.5rem;
           white-space: nowrap;
+          font-size: 0.875rem;
         }
+        .ticker-icon {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+        }
+        .ticker-symbol {
+          font-weight: 600;
+          color: #171717;
+        }
+        :global(.dark) .ticker-symbol {
+          color: #fafafa;
+        }
+        .ticker-price {
+          color: #525252;
+        }
+        :global(.dark) .ticker-price {
+          color: #a3a3a3;
+        }
+        .ticker-change {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+        }
+        .ticker-up { color: #22c55e; }
+        .ticker-down { color: #ef4444; }
       </style>
 
       <script is:inline>
@@ -68,28 +95,25 @@ import { SITE, HOME, SOCIALS } from "@consts";
             const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h');
             const coins = await res.json();
             
-            const format = function(price) { 
-              if (price >= 1000) return '$' + (price/1000).toFixed(1) + 'k';
+            const formatPrice = function(price) { 
+              if (price >= 1000) return '$' + price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
               if (price >= 1) return '$' + price.toFixed(2);
               return '$' + price.toFixed(4);
-            };
-            const formatChange = function(change) {
-              if (change === null || change === undefined) return '--';
-              const sign = change >= 0 ? '+' : '';
-              return sign + change.toFixed(1) + '%';
-            };
-            const changeClass = function(change) { 
-              if (change === null || change === undefined) return 'text-neutral-500';
-              return change >= 0 ? 'text-green-500' : 'text-red-500'; 
             };
             
             let html = '';
             coins.forEach(function(coin) {
+              const change = coin.price_change_percentage_24h;
+              const isUp = change >= 0;
+              const arrow = isUp ? '▲' : '▼';
+              const changeClass = isUp ? 'ticker-up' : 'ticker-down';
+              const changeText = Math.abs(change).toFixed(2) + '%';
+              
               html += '<div class="ticker-item">';
-              html += '<img src="' + coin.image + '" alt="' + coin.symbol + '" class="w-4 h-4 rounded-full" />';
-              html += '<span class="text-neutral-300 uppercase">' + coin.symbol + '</span>';
-              html += '<span class="text-neutral-400">' + format(coin.current_price) + '</span>';
-              html += '<span class="' + changeClass(coin.price_change_percentage_24h) + '">' + formatChange(coin.price_change_percentage_24h) + '</span>';
+              html += '<img src="' + coin.image + '" alt="' + coin.symbol + '" class="ticker-icon" />';
+              html += '<span class="ticker-symbol">' + coin.symbol.toUpperCase() + '</span>';
+              html += '<span class="ticker-price">' + formatPrice(coin.current_price) + '</span>';
+              html += '<span class="ticker-change ' + changeClass + '">' + arrow + ' ' + changeText + '</span>';
               html += '</div>';
             });
             
