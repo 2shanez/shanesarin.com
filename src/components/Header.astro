@@ -8,8 +8,25 @@ const pathname = Astro.url.pathname;
   <Container>
     <div class="flex justify-between items-center py-2">
       <!-- Shane/Home -->
-      <a href="/" class="group flex flex-col items-center gap-1.5 text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white transition-colors duration-300">
-        <img src="/ape-icon.png" alt="Ape" class="h-12 md:h-20 w-auto object-contain dark:[filter:invert(1)_sepia(1)_saturate(50)_hue-rotate(80deg)_brightness(0.7)] opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+      <a 
+        href="/" 
+        class:list={[
+          "group flex flex-col items-center gap-1.5 transition-colors duration-300",
+          pathname === "/" 
+            ? "text-[#2EE59D]" 
+            : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
+        ]}
+      >
+        <img 
+          src="/ape-icon.png" 
+          alt="Ape" 
+          class:list={[
+            "h-12 md:h-20 w-auto object-contain transition-opacity duration-300",
+            pathname === "/" 
+              ? "opacity-100 [filter:invert(0.5)_sepia(1)_saturate(50)_hue-rotate(80deg)_brightness(0.9)] dark:[filter:invert(1)_sepia(1)_saturate(50)_hue-rotate(80deg)_brightness(0.7)]" 
+              : "opacity-50 group-hover:opacity-100 dark:[filter:invert(1)_sepia(1)_saturate(50)_hue-rotate(80deg)_brightness(0.7)]"
+          ]}
+        />
         <span class="text-[10px] font-mono uppercase tracking-[0.15em] dark:text-[#2EE59D]">{SITE.NAME}</span>
       </a>
       
