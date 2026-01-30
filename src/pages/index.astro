@@ -54,9 +54,12 @@ import { SITE, HOME, SOCIALS } from "@consts";
           font-size: 11px;
         }
         .ticker-icon {
-          width: 12px;
-          height: 12px;
+          width: 12px !important;
+          height: 12px !important;
+          max-width: 12px !important;
+          max-height: 12px !important;
           border-radius: 50%;
+          flex-shrink: 0;
         }
         .ticker-symbol {
           font-weight: 600;
@@ -101,7 +104,7 @@ import { SITE, HOME, SOCIALS } from "@consts";
               const changeText = Math.abs(change).toFixed(2) + '%';
               
               html += '<div class="ticker-item">';
-              html += '<img src="' + coin.image + '" alt="' + coin.symbol + '" class="ticker-icon" />';
+              html += '<img src="' + coin.image + '" alt="' + coin.symbol + '" class="ticker-icon" style="width:12px;height:12px;max-width:12px;" />';
               html += '<span class="ticker-symbol">' + coin.symbol.toUpperCase() + '</span>';
               html += '<span class="ticker-price">' + formatPrice(coin.current_price) + '</span>';
               html += '<span class="ticker-change ' + changeClass + '">' + arrow + ' ' + changeText + '</span>';
