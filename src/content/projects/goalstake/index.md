@@ -81,7 +81,13 @@ You choose when you stake:
 
 ## Revenue Model
 
-**Yield-as-revenue**: All staked funds are deposited into DeFi yield protocols (Aave, Compound) while locked. Platform earns the yield, users keep their principal (if they win).
+**Yield-as-revenue**: All staked funds are deposited into DeFi yield protocols (Aave, Compound) while locked. The platform earns the yield — users pay nothing.
+
+**Winners get paid twice:**
+1. Their original stake back
+2. A share of the loser pool — the more people fail, the more winners earn
+
+This creates a sustainable flywheel: users are motivated to win, losers fund the rewards, and the platform takes only the yield.
 
 | TVL | Annual Yield Revenue |
 |-----|---------------------|
