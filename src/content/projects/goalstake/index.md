@@ -3,6 +3,7 @@ title: "GoalStake - Bet on Your Goals"
 description: "Stake money on your goals. Hit them, keep it. Miss them, lose it. Verified by oracles, settled automatically."
 date: "Jan 31 2026"
 demoURL: "https://github.com/2shanez"
+draft: true
 ---
 
 # GoalStake — Bet on Your Goals
