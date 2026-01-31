@@ -1,11 +1,11 @@
 ---
-title: "GoalStake - Bet on Your Fitness"
-description: "Stake money on your fitness goals. Hit them, keep it. Miss them, lose it. Verified by oracles, settled automatically."
+title: "GoalStake - Bet on Your Goals"
+description: "Stake money on your goals. Hit them, keep it. Miss them, lose it. Verified by oracles, settled automatically."
 date: "Jan 31 2026"
 demoURL: "https://github.com/2shanez"
 ---
 
-# GoalStake — Bet on Yourself
+# GoalStake — Bet on Your Goals
 
 **GoalStake** is a fitness accountability platform where you stake real money on your goals. Hit them, you keep your stake. Miss them, you lose it. No willpower required — just consequences.
 
