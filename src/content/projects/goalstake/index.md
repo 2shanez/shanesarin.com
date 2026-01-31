@@ -113,7 +113,7 @@ Move-to-earn failed because "earn tokens for walking" is inflationary and unsust
 
 Stake-to-commit works because it's **zero-sum**: you're not earning new tokens, you're keeping your own money (or losing it to someone who worked harder).
 
-The money comes from losers and yield — not token inflation.
+The money comes from losers — not token inflation.
 
 ## Roadmap
 
