@@ -115,53 +115,30 @@
 Back to projects
  </div> </a> </div> <div class="space-y-1 my-10"> <div class=" flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2026-01-31T00:00:00.000Z"> Jan 31, 2026 </time> </div>
 &bull;
-<div class="font-base text-sm"> 4 min read </div> </div> <div class=" text-2xl font-semibold text-black dark:text-white"> GoalStake - Bet on Your Goals </div> <nav class=" flex gap-1"> <a href="https://github.com/2shanez" target="_blank" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white underline underline-offset-2"> 
+<div class="font-base text-sm"> 5 min read </div> </div> <div class=" text-2xl font-semibold text-black dark:text-white"> GoalStake - Bet on Your Goals </div> <nav class=" flex gap-1"> <a href="https://github.com/2shanez" target="_blank" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white underline underline-offset-2"> 
 demo
  </a>   </nav> </div> <article class=""> <h1 id="goalstake--bet-on-your-goals">GoalStake — Bet on Your Goals</h1>
-<p><strong>GoalStake</strong> is a fitness accountability platform where you stake real money on your goals. Hit them, you keep your stake. Miss them, you lose it. No willpower required — just consequences.</p>
-<p>Powered by Chainlink oracles and smart contracts, your fitness data is verified automatically and payouts happen without human intervention.</p>
+<p><strong>GoalStake</strong> is a commitment platform where you stake real money on your goals. Hit them, you keep your stake. Miss them, you lose it. No willpower required — just consequences.</p>
+<p>Powered by Chainlink oracles and smart contracts, your progress is verified automatically and payouts happen without human intervention.</p>
+<p><strong>Launching with fitness. Expanding to every goal that can be measured.</strong></p>
 <h2 id="the-problem">The Problem</h2>
-<p>Fitness apps don’t work because there are no real consequences. You can ignore a notification. You can’t ignore losing $100.</p>
+<p>Goals fail because there are no real consequences. You can ignore a notification. You can’t ignore losing $100.</p>
 <ul>
 <li><strong>81%</strong> of New Year’s resolutions fail by February</li>
-<li><strong>67%</strong> of gym memberships go unused</li>
-<li><strong>$397M</strong> spent annually on fitness apps people abandon</li>
+<li><strong>92%</strong> of people never achieve their goals</li>
+<li><strong>$10B+</strong> spent annually on self-improvement apps people abandon</li>
 </ul>
 <p>The missing ingredient isn’t information or motivation. It’s <strong>skin in the game</strong>.</p>
 <h2 id="how-it-works">How It Works</h2>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1. Set a goal → "Run 20 miles this week"</span></span>
 <span class="line"><span>2. Stake money → $100 USDC</span></span>
-<span class="line"><span>3. Connect Strava/Apple Health</span></span>
-<span class="line"><span>4. Chainlink verifies your activity</span></span>
-<span class="line"><span>5. Challenge ends:</span></span>
+<span class="line"><span>3. Connect your data source (Strava, Apple Health, etc.)</span></span>
+<span class="line"><span>4. Chainlink verifies your progress</span></span>
+<span class="line"><span>5. Deadline hits:</span></span>
 <span class="line"><span>   ✅ Hit goal → Get your $100 back (+ bonus from loser pool)</span></span>
 <span class="line"><span>   ❌ Miss goal → Money redistributed to winners</span></span></code></pre>
-<h2 id="why-chainlink">Why Chainlink</h2>
-<p>This doesn’t work without trustless verification.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Component</th><th>Chainlink Service</th></tr></thead><tbody><tr><td><strong>Fitness data</strong></td><td>Functions (pulls Strava/Apple Health APIs)</td></tr><tr><td><strong>Auto-settlement</strong></td><td>Automation (triggers at challenge end)</td></tr><tr><td><strong>Cross-chain stakes</strong></td><td>CCIP (stake from any chain)</td></tr></tbody></table>
-<p>No human decides if you hit your goal. The oracle checks, the contract settles, the money moves.</p>
-<h2 id="challenge-types">Challenge Types</h2>
+<h2 id="phase-1-fitness">Phase 1: Fitness</h2>
+<p>We’re starting with fitness because the data is clean and verifiable.</p>
 
 
 
@@ -198,6 +175,74 @@ demo
 
 
 <table><thead><tr><th>Challenge</th><th>Metric</th><th>Data Source</th></tr></thead><tbody><tr><td>Running</td><td>Miles/week</td><td>Strava, Garmin</td></tr><tr><td>Steps</td><td>Daily average</td><td>Apple Health, Fitbit</td></tr><tr><td>Workouts</td><td>Sessions/week</td><td>Apple Health, Strava</td></tr><tr><td>Cycling</td><td>Miles/week</td><td>Strava, Garmin</td></tr><tr><td>Active calories</td><td>Daily average</td><td>Apple Watch, Whoop</td></tr></tbody></table>
+<h2 id="future-categories">Future Categories</h2>
+<p>GoalStake expands to any goal with verifiable data:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Category</th><th>Example Goal</th><th>Data Source</th></tr></thead><tbody><tr><td><strong>Learning</strong></td><td>Complete Coursera course</td><td>Coursera API</td></tr><tr><td><strong>Reading</strong></td><td>Finish 4 books/month</td><td>Goodreads, Kindle</td></tr><tr><td><strong>Sleep</strong></td><td>7+ hours for 30 days</td><td>Oura, Whoop</td></tr><tr><td><strong>Screen time</strong></td><td>Under 2hr/day</td><td>iOS Screen Time</td></tr><tr><td><strong>Meditation</strong></td><td>10 min/day streak</td><td>Headspace, Calm</td></tr><tr><td><strong>Coding</strong></td><td>Ship commits daily</td><td>GitHub API</td></tr></tbody></table>
+<h2 id="why-chainlink">Why Chainlink</h2>
+<p>This doesn’t work without trustless verification.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Component</th><th>Chainlink Service</th></tr></thead><tbody><tr><td><strong>Activity data</strong></td><td>Functions (pulls APIs)</td></tr><tr><td><strong>Auto-settlement</strong></td><td>Automation (triggers at deadline)</td></tr><tr><td><strong>Cross-chain stakes</strong></td><td>CCIP (stake from any chain)</td></tr></tbody></table>
+<p>No human decides if you hit your goal. The oracle checks, the contract settles, the money moves.</p>
 <h2 id="where-loser-money-goes">Where Loser Money Goes</h2>
 <p>You choose when you stake:</p>
 <ul>
@@ -267,39 +312,40 @@ demo
 
 
 
-<table><thead><tr><th>Product</th><th>Model</th><th>Gap</th></tr></thead><tbody><tr><td><strong>StickK</strong></td><td>Web2 commitment contracts</td><td>Honor system, centralized</td></tr><tr><td><strong>STEPN</strong></td><td>Move-to-earn</td><td>Inflationary, Ponzi dynamics</td></tr><tr><td><strong>Gym memberships</strong></td><td>Monthly fee</td><td>No accountability</td></tr><tr><td><strong>Fitness apps</strong></td><td>Freemium</td><td>Easy to ignore</td></tr><tr><td><strong>GoalStake</strong></td><td>Stake-to-commit</td><td>Trustless, sustainable, real stakes</td></tr></tbody></table>
+<table><thead><tr><th>Product</th><th>Model</th><th>Gap</th></tr></thead><tbody><tr><td><strong>StickK</strong></td><td>Web2 commitment contracts</td><td>Honor system, centralized</td></tr><tr><td><strong>STEPN</strong></td><td>Move-to-earn</td><td>Inflationary, Ponzi dynamics</td></tr><tr><td><strong>Beeminder</strong></td><td>Pledge money on goals</td><td>Web2, no DeFi yield</td></tr><tr><td><strong>Fitness apps</strong></td><td>Freemium</td><td>Easy to ignore</td></tr><tr><td><strong>GoalStake</strong></td><td>Stake-to-commit</td><td>Trustless, multi-category, sustainable</td></tr></tbody></table>
 <h2 id="the-insight">The Insight</h2>
 <p>Move-to-earn failed because “earn tokens for walking” is inflationary and unsustainable.</p>
 <p>Stake-to-commit works because it’s <strong>zero-sum</strong>: you’re not earning new tokens, you’re keeping your own money (or losing it to someone who worked harder).</p>
 <p>The money comes from losers and yield — not token inflation.</p>
 <h2 id="roadmap">Roadmap</h2>
-<h3 id="phase-1-running">Phase 1: Running</h3>
+<h3 id="phase-1-fitness-1">Phase 1: Fitness</h3>
 <ul>
 <li>Strava integration</li>
-<li>Single challenge type</li>
+<li>Running, cycling, workout challenges</li>
 <li>Crypto-native users</li>
 </ul>
-<h3 id="phase-2-expand">Phase 2: Expand</h3>
+<h3 id="phase-2-expand-activities">Phase 2: Expand Activities</h3>
 <ul>
-<li>Multiple activities</li>
 <li>Apple Health, Garmin, Whoop</li>
+<li>Steps, calories, sleep</li>
 <li>Mobile app</li>
 </ul>
-<h3 id="phase-3-social">Phase 3: Social</h3>
+<h3 id="phase-3-new-categories">Phase 3: New Categories</h3>
 <ul>
-<li>Friend challenges</li>
-<li>Team competitions</li>
-<li>Leaderboards</li>
+<li>Learning (Coursera, Udemy)</li>
+<li>Reading (Goodreads)</li>
+<li>Habits (screen time, meditation)</li>
 </ul>
 <h3 id="phase-4-mainstream">Phase 4: Mainstream</h3>
 <ul>
 <li>Fiat on-ramp</li>
-<li>Sponsored challenges (Nike, Adidas)</li>
-<li>White-label for gyms</li>
+<li>Sponsored challenges</li>
+<li>B2B corporate wellness</li>
+<li>White-label API</li>
 </ul>
 <h2 id="the-vision">The Vision</h2>
-<p>Fitness shouldn’t be about motivation. It should be about economics.</p>
+<p>Goals shouldn’t rely on motivation. They should rely on economics.</p>
 <p>When your wallet is on the line, you show up. When showing up means getting paid, you keep coming back.</p>
-<p><strong>GoalStake: Where working out pays off — literally.</strong></p>
+<p><strong>GoalStake: Bet on your goals. Prove yourself. Get paid.</strong></p>
 <hr>
 <p><em>This page was created by my assistant, Alfred 🎩</em></p> </article>  </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="group flex items-center gap-2 px-3 py-1.5 font-mono text-sm text-neutral-500 dark:text-neutral-400 border border-neutral-300 dark:border-neutral-700 rounded-md hover:border-[#2EE59D] hover:text-[#2EE59D] transition-colors duration-300"> <span>back_to_top</span> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4 stroke-2 fill-none stroke-current group-hover:stroke-[#2EE59D] transition-colors duration-300"> <line x1="12" y1="19" x2="12" y2="5"></line> <polyline points="5 12 12 5 19 12"></polyline> </svg> </button> </div> </div>  </div> </footer>  </body> </html>
