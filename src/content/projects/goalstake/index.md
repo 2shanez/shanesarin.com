@@ -1,13 +1,13 @@
 ---
-title: "StakeUp - Bet on Your Fitness"
+title: "GoalStake - Bet on Your Fitness"
 description: "Stake money on your fitness goals. Hit them, keep it. Miss them, lose it. Verified by oracles, settled automatically."
 date: "Jan 31 2026"
 demoURL: "https://github.com/2shanez"
 ---
 
-# StakeUp — Bet on Yourself
+# GoalStake — Bet on Yourself
 
-**StakeUp** is a fitness accountability platform where you stake real money on your goals. Hit them, you keep your stake. Miss them, you lose it. No willpower required — just consequences.
+**GoalStake** is a fitness accountability platform where you stake real money on your goals. Hit them, you keep your stake. Miss them, you lose it. No willpower required — just consequences.
 
 Powered by Chainlink oracles and smart contracts, your fitness data is verified automatically and payouts happen without human intervention.
 
@@ -84,7 +84,7 @@ Plus: Premium subscriptions, sponsored challenges, B2B corporate wellness.
 | **STEPN** | Move-to-earn | Inflationary, Ponzi dynamics |
 | **Gym memberships** | Monthly fee | No accountability |
 | **Fitness apps** | Freemium | Easy to ignore |
-| **StakeUp** | Stake-to-commit | Trustless, sustainable, real stakes |
+| **GoalStake** | Stake-to-commit | Trustless, sustainable, real stakes |
 
 ## The Insight
 
@@ -122,7 +122,7 @@ Fitness shouldn't be about motivation. It should be about economics.
 
 When your wallet is on the line, you show up. When showing up means getting paid, you keep coming back.
 
-**StakeUp: Where working out pays off — literally.**
+**GoalStake: Where working out pays off — literally.**
 
 ---
 
