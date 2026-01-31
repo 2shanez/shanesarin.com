@@ -78,8 +78,6 @@ You choose when you stake:
 
 - **Winner pool** — Split among everyone who hit their goals
 - **Charity** — Donated to selected nonprofit
-- **Burn** — Pure loss (maximum motivation)
-- **Friend** — Goes to your accountability partner
 
 ## Revenue Model
 
