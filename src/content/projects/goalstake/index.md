@@ -7,17 +7,19 @@ demoURL: "https://github.com/2shanez"
 
 # GoalStake — Bet on Your Goals
 
-**GoalStake** is a fitness accountability platform where you stake real money on your goals. Hit them, you keep your stake. Miss them, you lose it. No willpower required — just consequences.
+**GoalStake** is a commitment platform where you stake real money on your goals. Hit them, you keep your stake. Miss them, you lose it. No willpower required — just consequences.
 
-Powered by Chainlink oracles and smart contracts, your fitness data is verified automatically and payouts happen without human intervention.
+Powered by Chainlink oracles and smart contracts, your progress is verified automatically and payouts happen without human intervention.
+
+**Launching with fitness. Expanding to every goal that can be measured.**
 
 ## The Problem
 
-Fitness apps don't work because there are no real consequences. You can ignore a notification. You can't ignore losing $100.
+Goals fail because there are no real consequences. You can ignore a notification. You can't ignore losing $100.
 
 - **81%** of New Year's resolutions fail by February
-- **67%** of gym memberships go unused
-- **$397M** spent annually on fitness apps people abandon
+- **92%** of people never achieve their goals
+- **$10B+** spent annually on self-improvement apps people abandon
 
 The missing ingredient isn't information or motivation. It's **skin in the game**.
 
@@ -26,26 +28,16 @@ The missing ingredient isn't information or motivation. It's **skin in the game*
 ```
 1. Set a goal → "Run 20 miles this week"
 2. Stake money → $100 USDC
-3. Connect Strava/Apple Health
-4. Chainlink verifies your activity
-5. Challenge ends:
+3. Connect your data source (Strava, Apple Health, etc.)
+4. Chainlink verifies your progress
+5. Deadline hits:
    ✅ Hit goal → Get your $100 back (+ bonus from loser pool)
    ❌ Miss goal → Money redistributed to winners
 ```
 
-## Why Chainlink
+## Phase 1: Fitness
 
-This doesn't work without trustless verification.
-
-| Component | Chainlink Service |
-|-----------|-------------------|
-| **Fitness data** | Functions (pulls Strava/Apple Health APIs) |
-| **Auto-settlement** | Automation (triggers at challenge end) |
-| **Cross-chain stakes** | CCIP (stake from any chain) |
-
-No human decides if you hit your goal. The oracle checks, the contract settles, the money moves.
-
-## Challenge Types
+We're starting with fitness because the data is clean and verifiable.
 
 | Challenge | Metric | Data Source |
 |-----------|--------|-------------|
@@ -54,6 +46,31 @@ No human decides if you hit your goal. The oracle checks, the contract settles, 
 | Workouts | Sessions/week | Apple Health, Strava |
 | Cycling | Miles/week | Strava, Garmin |
 | Active calories | Daily average | Apple Watch, Whoop |
+
+## Future Categories
+
+GoalStake expands to any goal with verifiable data:
+
+| Category | Example Goal | Data Source |
+|----------|--------------|-------------|
+| **Learning** | Complete Coursera course | Coursera API |
+| **Reading** | Finish 4 books/month | Goodreads, Kindle |
+| **Sleep** | 7+ hours for 30 days | Oura, Whoop |
+| **Screen time** | Under 2hr/day | iOS Screen Time |
+| **Meditation** | 10 min/day streak | Headspace, Calm |
+| **Coding** | Ship commits daily | GitHub API |
+
+## Why Chainlink
+
+This doesn't work without trustless verification.
+
+| Component | Chainlink Service |
+|-----------|-------------------|
+| **Activity data** | Functions (pulls APIs) |
+| **Auto-settlement** | Automation (triggers at deadline) |
+| **Cross-chain stakes** | CCIP (stake from any chain) |
+
+No human decides if you hit your goal. The oracle checks, the contract settles, the money moves.
 
 ## Where Loser Money Goes
 
@@ -82,9 +99,9 @@ Plus: Premium subscriptions, sponsored challenges, B2B corporate wellness.
 |---------|-------|-----|
 | **StickK** | Web2 commitment contracts | Honor system, centralized |
 | **STEPN** | Move-to-earn | Inflationary, Ponzi dynamics |
-| **Gym memberships** | Monthly fee | No accountability |
+| **Beeminder** | Pledge money on goals | Web2, no DeFi yield |
 | **Fitness apps** | Freemium | Easy to ignore |
-| **GoalStake** | Stake-to-commit | Trustless, sustainable, real stakes |
+| **GoalStake** | Stake-to-commit | Trustless, multi-category, sustainable |
 
 ## The Insight
 
@@ -96,33 +113,34 @@ The money comes from losers and yield — not token inflation.
 
 ## Roadmap
 
-### Phase 1: Running
+### Phase 1: Fitness
 - Strava integration
-- Single challenge type
+- Running, cycling, workout challenges
 - Crypto-native users
 
-### Phase 2: Expand
-- Multiple activities
+### Phase 2: Expand Activities
 - Apple Health, Garmin, Whoop
+- Steps, calories, sleep
 - Mobile app
 
-### Phase 3: Social
-- Friend challenges
-- Team competitions
-- Leaderboards
+### Phase 3: New Categories
+- Learning (Coursera, Udemy)
+- Reading (Goodreads)
+- Habits (screen time, meditation)
 
 ### Phase 4: Mainstream
 - Fiat on-ramp
-- Sponsored challenges (Nike, Adidas)
-- White-label for gyms
+- Sponsored challenges
+- B2B corporate wellness
+- White-label API
 
 ## The Vision
 
-Fitness shouldn't be about motivation. It should be about economics.
+Goals shouldn't rely on motivation. They should rely on economics.
 
 When your wallet is on the line, you show up. When showing up means getting paid, you keep coming back.
 
-**GoalStake: Where working out pays off — literally.**
+**GoalStake: Bet on your goals. Prove yourself. Get paid.**
 
 ---
 
