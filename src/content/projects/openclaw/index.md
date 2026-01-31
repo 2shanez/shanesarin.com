@@ -1,16 +1,16 @@
 ---
-title: "Moltbot - Personal AI Assistant"
+title: "OpenClaw - Personal AI Assistant"
 description: "Self-hosted AI assistant connected to GitHub, web search, and more."
 date: "Jan 31 2026"
 demoURL: "https://github.com/clawdbot/clawdbot"
 repoURL: "https://github.com/2shanez/2shanez.github.io"
 ---
 
-My personal AI assistant setup using [Moltbot](https://clawdbot.com) — an open-source, self-hosted AI agent that connects to your tools and messaging platforms.
+My personal AI assistant setup using [OpenClaw](https://clawdbot.com) — an open-source, self-hosted AI agent that connects to your tools and messaging platforms.
 
-## 🤖 What is Moltbot?
+## 🤖 What is OpenClaw?
 
-Moltbot is an AI assistant that runs on your own server and can:
+OpenClaw is an AI assistant that runs on your own server and can:
 - Connect to messaging apps (Telegram, Discord, WhatsApp, iMessage, etc.)
 - Execute commands and write code
 - Control browsers for automation

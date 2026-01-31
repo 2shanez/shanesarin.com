@@ -3,6 +3,7 @@ title: "Haven"
 description: "Protection That Works Automatically"
 date: "Jan 30 2026"
 demoURL: "/demos/haven.html"
+draft: true
 ---
 
 # Haven – Protection That Works Automatically
