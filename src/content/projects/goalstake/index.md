@@ -13,7 +13,7 @@ draft: false
 
 Powered by Chainlink oracles on Base, your progress is verified automatically via Strava and payouts happen without human intervention.
 
-🟢 **Live now at [goalstake.co](https://goalstake.co)**
+🎯 **Live now at [goalstake.co](https://goalstake.co)**
 
 **Starting with fitness. Expanding to every goal that can be measured.**
 
