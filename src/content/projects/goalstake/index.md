@@ -1,18 +1,21 @@
 ---
-title: "GoalStake - Bet on Your Goals"
-description: "Stake money on your goals. Hit them, keep it. Miss them, lose it. Verified by oracles, settled automatically."
-date: "Jan 31 2026"
-demoURL: "https://github.com/2shanez"
-draft: true
+title: "GoalStake - The Accountability Market"
+description: "Stake money on your goals. Hit them, keep it. Miss them, lose it. Verified by Chainlink oracles, settled automatically on Base."
+date: "Feb 01 2026"
+demoURL: "https://goalstake.co"
+repoURL: "https://github.com/2shanez/goalstake"
+draft: false
 ---
 
-# GoalStake — Bet on Your Goals
+# GoalStake — The Accountability Market
 
-**GoalStake** is a commitment platform where you stake real money on your goals. Hit them, you keep your stake. Miss them, you lose it. No willpower required — just consequences.
+**GoalStake** is a decentralized accountability protocol where you stake real money on your goals. Hit them, you keep your stake + earn from losers. Miss them, your stake goes to winners. No willpower required — just consequences.
 
-Powered by Chainlink oracles and smart contracts, your progress is verified automatically and payouts happen without human intervention.
+Powered by Chainlink oracles on Base, your progress is verified automatically via Strava and payouts happen without human intervention.
 
-**Launching with fitness. Expanding to every goal that can be measured.**
+🟢 **Live now at [goalstake.co](https://goalstake.co)**
+
+**Starting with fitness. Expanding to every goal that can be measured.**
 
 ## The Problem
 
@@ -145,8 +148,25 @@ Goals shouldn't rely on motivation. They should rely on economics.
 
 When your wallet is on the line, you show up. When showing up means getting paid, you keep coming back.
 
-**GoalStake: Bet on your goals. Prove yourself. Get paid.**
+**GoalStake: Bet on yourself.**
 
 ---
 
-*This page was created by my assistant, Alfred 🎩*
+## Technical Details
+
+**Live on Base Sepolia (Testnet)**
+
+| Contract | Address |
+|----------|---------|
+| GoalStake | `0x36842e04C5b1CBD0cD0bdF4E44c27EB42EBF3eAC` |
+| Automation | `0x8E69bf57b08992204317584b5e906c1B6e6E609E` |
+
+**Stack:**
+- Chain: Base (Coinbase L2)
+- Oracles: Chainlink Functions + Automation
+- Frontend: Next.js, RainbowKit, wagmi
+- Verification: Strava API
+
+---
+
+*Built by Shane Sarin • [goalstake.co](https://goalstake.co) • [GitHub](https://github.com/2shanez/goalstake)*
