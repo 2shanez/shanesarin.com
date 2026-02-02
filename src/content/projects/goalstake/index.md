@@ -77,10 +77,7 @@ No human decides if you hit your goal. The oracle checks, the contract settles, 
 
 ## Where Loser Money Goes
 
-You choose when you stake:
-
-- **Winner pool** — Split among everyone who hit their goals
-- **Charity** — Donated to selected nonprofit
+Loser stakes are split evenly among winners. The more people fail, the more winners earn.
 
 ## Revenue Model
 
