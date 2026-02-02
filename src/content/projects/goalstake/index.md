@@ -14,7 +14,7 @@ draft: false
 
 Powered by Chainlink oracles on Base, your progress is verified automatically via Strava and payouts happen without human intervention.
 
-**Starting with fitness. Expanding to every goal that can be measured.**
+**Starting with fitness. Expanding to any goal that can be verified.**
 
 ## The Problem
 
@@ -30,13 +30,15 @@ The missing ingredient isn't information or motivation. It's **skin in the game*
 
 ```
 1. Join a goal → Pick from curated challenges
-2. Stake money → $100 USDC
+2. Stake USDC → Choose your amount ($5-$200 depending on goal)
 3. Connect your data source (Strava, Apple Health, etc.)
 4. Chainlink verifies your progress
 5. Deadline hits:
-   ✅ Hit goal → Get your $100 back (+ bonus from loser pool)
-   ❌ Miss goal → Money redistributed to winners
+   ✅ Hit goal → Get your stake back + proportional bonus
+   ❌ Miss goal → Stake distributed to winners
 ```
+
+**Stake-weighted payouts:** The more you stake, the larger your share of the loser pool. Stake $100 in a pool where total winner stakes are $500? You get 20% of what losers put up.
 
 ## Phase 1: Fitness
 
@@ -77,7 +79,17 @@ No human decides if you hit your goal. The oracle checks, the contract settles, 
 
 ## Where Loser Money Goes
 
-Loser stakes are split evenly among winners. The more people fail, the more winners earn.
+Loser stakes are distributed to winners **proportionally based on stake size**. Stake more = earn more. The more people fail, the more winners earn.
+
+## Stake Tiers
+
+| Goal Type | Stake Range |
+|-----------|-------------|
+| Daily | $5 – $50 |
+| Weekly | $10 – $100 |
+| Monthly | $20 – $200 |
+
+10x max:min ratio keeps rewards meaningful while preventing whale domination.
 
 ## Revenue Model
 
