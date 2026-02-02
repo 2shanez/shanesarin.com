@@ -29,7 +29,7 @@ The missing ingredient isn't information or motivation. It's **skin in the game*
 ## How It Works
 
 ```
-1. Set a goal → "Run 20 miles this week"
+1. Join a goal → Pick from curated challenges
 2. Stake money → $100 USDC
 3. Connect your data source (Strava, Apple Health, etc.)
 4. Chainlink verifies your progress
