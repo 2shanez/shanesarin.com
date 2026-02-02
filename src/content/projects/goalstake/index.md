@@ -1,5 +1,5 @@
 ---
-title: "GoalStake - The Accountability Market"
+title: "GoalStake - The Commitment Market"
 description: "Stake money on your goals. Hit them, keep it. Miss them, lose it. Verified by Chainlink oracles, settled automatically on Base."
 date: "Feb 01 2026"
 status: "concepts"
@@ -8,9 +8,9 @@ repoURL: "https://github.com/2shanez/goalstake"
 draft: false
 ---
 
-# GoalStake — The Accountability Market
+# GoalStake — The Commitment Market
 
-**GoalStake** is a decentralized accountability protocol where you stake real money on your goals. Hit them, you keep your stake + earn from losers. Miss them, your stake goes to winners. No willpower required — just consequences.
+**GoalStake** is a decentralized commitment protocol where you stake real money on your goals. Hit them, you keep your stake + earn from losers. Miss them, your stake goes to winners. No willpower required — just consequences.
 
 Powered by Chainlink oracles on Base, your progress is verified automatically via Strava and payouts happen without human intervention.
 
