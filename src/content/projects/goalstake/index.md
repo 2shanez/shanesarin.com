@@ -2,6 +2,7 @@
 title: "GoalStake - The Accountability Market"
 description: "Stake money on your goals. Hit them, keep it. Miss them, lose it. Verified by Chainlink oracles, settled automatically on Base."
 date: "Feb 01 2026"
+status: "concepts"
 demoURL: "https://goalstake.co"
 repoURL: "https://github.com/2shanez/goalstake"
 draft: false
