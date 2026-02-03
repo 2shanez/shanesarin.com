@@ -5,7 +5,7 @@ date: "Feb 01 2026"
 status: "concepts"
 demoURL: "https://goalstake.co"
 repoURL: "https://github.com/2shanez/goalstake"
-draft: false
+draft: true
 ---
 
 # GoalStake — The Commitment Market
