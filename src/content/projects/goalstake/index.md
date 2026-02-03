@@ -166,13 +166,13 @@ When your wallet is on the line, you show up. When showing up means getting paid
 
 | Contract | Address |
 |----------|---------|
-| GoalStake | `0x36842e04C5b1CBD0cD0bdF4E44c27EB42EBF3eAC` |
+| GoalStakeV2 | `0x615f7165f0ae886319cc0dc2754fe85b14c51b53` |
 | Automation | `0x8E69bf57b08992204317584b5e906c1B6e6E609E` |
 
 **Stack:**
 - Chain: Base (Coinbase L2)
 - Oracles: Chainlink Functions + Automation
-- Frontend: Next.js, RainbowKit, wagmi
+- Frontend: Next.js, Privy (embedded wallets), wagmi
 - Verification: Strava API
 
 ---
