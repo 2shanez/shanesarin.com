@@ -253,13 +253,56 @@ Same contract. Different oracles. Infinite use cases.
 
 ---
 
+## Security & Transparency
+
+**Security:**
+- Challenge funds held in audited ERC20 (USDC)
+- Oracle limited to verification calls only
+- Owner functions limited to parameter updates
+- No upgradability (immutable MVP)
+
+**Known Limitations:**
+- Strava data can be spoofed — future multi-source verification planned
+- MVP contracts are unaudited — professional audit before mainnet
+- Early stage product — expect bugs and iterations
+
+*Stake only what you can afford to lose.*
+
+---
+
+## Why Now?
+
+1. **Post-Polymarket legitimacy** — Prediction markets are mainstream
+2. **Base ecosystem growth** — Coinbase distribution, low fees
+3. **Chainlink Functions maturity** — Reliable off-chain compute
+4. **Consumer crypto moment** — People ready for useful dApps
+
+The infrastructure is ready. The psychology is proven. The market is waiting.
+
+---
+
 ## The Vision
+
+Vaada becomes the commitment layer for the internet.
+
+Every commitment — fitness, learning, work, habits — can have financial stakes attached. Not as punishment, but as commitment devices that help people become who they want to be.
+
+**We're not building a fitness app. We're building The Commitment Market.**
 
 **Polymarket** is where you bet on the world.
 **Vaada** is where you bet on yourself.
 
-Accountability shouldn't rely on willpower. It should rely on economics.
+---
+
+## Links
+
+- 🔗 **Website:** [vaada.io](https://vaada.io)
+- 💻 **GitHub:** [github.com/2shanez/vaada](https://github.com/2shanez/vaada)
+- 🐦 **Twitter:** [@vaaborhood](https://twitter.com/vaaborhood)
+- 📧 **Contact:** shane@vaada.io
 
 ---
+
+*"Bet on yourself."*
 
 *Built by Shane Sarin — UNC Chapel Hill, Consensys, RECUR*
