@@ -129,6 +129,92 @@ This ensures fair reward distribution while preventing whale domination.
 
 ---
 
+## Platform Revenue
+
+- All staked USDC is deposited into yield protocols (Aave, Compound)
+- Platform earns interest on TVL while funds are locked
+- Users get their full stakes back; platform keeps the yield
+
+**This creates:**
+- **Zero-fee UX** — users keep 100% of winnings
+- **Sustainable revenue** — scales with TVL and challenge duration
+- **Aligned incentives** — platform benefits from more stakes locked longer
+
+*0% platform fee at launch. Future fees (if any) will be introduced transparently.*
+
+---
+
+## Why Crypto?
+
+| Traditional Apps | Vaada |
+|------------------|-------|
+| "Challenges" with no stakes | Real money on the line |
+| Trust the company | Trust the code |
+| Refunds available | No refunds, no excuses |
+| Single jurisdiction | Global, permissionless |
+| Centralized custody | Self-custody, transparent |
+
+Crypto enables:
+- **Programmable money** — Automatic, trustless settlement
+- **Global access** — Anyone with a wallet can participate
+- **Transparency** — All stakes and outcomes on-chain
+- **Composability** — Future integrations with DeFi, social, NFTs
+
+---
+
+## Market Opportunity
+
+Commitment isn't a feature — it's a market.
+
+Every coach, gym buddy, AA sponsor, and accountability partner proves demand exists. People pay for someone to hold them to their word. **Vaada makes that programmable.**
+
+**Market signals:**
+- $15B+ spent on personal coaching annually
+- Commitment partners are the #1 predictor of goal success
+- 2x completion rates when money is on the line
+- Prediction markets proved crypto + stakes + outcomes = massive engagement
+
+**Adjacent markets:**
+- Fitness/wellness: $96B
+- Prediction markets: $65B
+- Habit/productivity apps: $12B
+- Corporate wellness: $56B
+
+Vaada isn't competing in these markets. We're creating **The Commitment Market** — a new category where commitment meets capital.
+
+---
+
+## Competitive Landscape
+
+| Competitor | Model | Limitation |
+|------------|-------|------------|
+| StickK | Pledge to charity | No upside for winners |
+| Beeminder | Pay when you fail | Centralized, no community |
+| DietBet | Weight loss pools | Single vertical, Web2 |
+| Strava | Social fitness | No financial stakes |
+| Polymarket | Predict others | Can't bet on yourself |
+
+**Vaada's edge:** Bet on yourself + crypto-native + automated verification.
+
+---
+
+## Expansion Verticals
+
+Vaada starts with fitness but the model applies to any verifiable commitment:
+
+| Vertical | Verification Source |
+|----------|---------------------|
+| Fitness | Strava, Apple Health, Garmin |
+| Coding | GitHub commits, contributions |
+| Learning | Duolingo, course completions |
+| Finance | Plaid (savings goals) |
+| Content | YouTube uploads, Twitter posts |
+| Location | GPS check-ins (gym, office) |
+
+Same contract. Different oracles. Infinite use cases.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -142,14 +228,28 @@ This ensures fair reward distribution while preventing whale domination.
 
 ---
 
-## Status
+## Roadmap
 
-- ✅ Smart contracts deployed (Base Sepolia)
-- ✅ Chainlink Functions + Automation wired
-- ✅ Frontend live at vaada.io
-- ✅ Strava OAuth integration
-- 🔄 E2E verification in progress
-- ⏳ Mainnet launch coming soon
+**Phase 1: Foundation (Current)**
+- ✅ Core staking contract deployed
+- ✅ Strava integration (OAuth + on-chain token)
+- ✅ Chainlink Functions verification
+- ✅ Chainlink Automation triggers
+- ✅ Anti-cheat filter (manual entries blocked)
+- ✅ Privy wallet integration
+- 🔄 First 100 users
+
+**Phase 2: Growth**
+- Multi-platform verification (GitHub, YouTube, Duolingo)
+- Social features (friends, groups, leagues)
+- Mobile app
+- 10,000 users / $1M TVL
+
+**Phase 3: Scale**
+- B2B (corporate wellness, creator commitments)
+- SDK for third-party integrations
+- Token/governance (if aligned)
+- 100,000 users / $10M TVL
 
 ---
 
@@ -162,4 +262,4 @@ Accountability shouldn't rely on willpower. It should rely on economics.
 
 ---
 
-*Built by Shane Sarin*
+*Built by Shane Sarin — UNC Chapel Hill, Consensys, RECUR*
