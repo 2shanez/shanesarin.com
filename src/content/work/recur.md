@@ -1,6 +1,6 @@
 ---
 company: "RECUR"
-role: "Founding Business Analyst"
+role: "Analyst"
 dateStart: "01/01/2021"
 dateEnd: "12/31/2022"
 logo: "/logos/recur.jpg"
