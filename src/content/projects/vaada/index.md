@@ -303,8 +303,6 @@ We're not building a fitness app. We're building **The Commitment Market**.
 
 - 🔗 **Website**: [vaada.io](https://vaada.io)
 - 💻 **GitHub**: [github.com/2shanez/vaada](https://github.com/2shanez/vaada)
-- 🐦 **Twitter**: [@vaaborhood](https://twitter.com/vaaborhood)
-- 📧 **Contact**: shane@vaada.io
 
 ---
 
