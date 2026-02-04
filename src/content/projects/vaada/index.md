@@ -85,7 +85,7 @@ Vaada is the first product built on this primitive. It won't be the last.
 ```
 User Stakes USDC
        ↓
-   GoalStake.sol (holds funds, tracks goals)
+   VaadaStake.sol (holds funds, tracks goals)
        ↓
    Deadline Reached
        ↓
