@@ -2,7 +2,7 @@
 
 Personal portfolio and project showcase.
 
-🔗 **Live:** [2667.io](https://2667.io)
+🔗 **Live:** [shanesarin.com](https://shanesarin.com)
 
 ---
 
