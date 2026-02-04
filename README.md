@@ -1,64 +1,61 @@
-![Astro Nano](_astro_nano.png)
+# 2667.io
 
-Astro Nano is a static, minimalist, lightweight, lightning fast portfolio and blog theme.
+Personal portfolio and project showcase.
 
-Built with Astro, Tailwind and Typescript, an no frameworks.
+🔗 **Live:** [2667.io](https://2667.io)
 
-It was designed as an even more minimal theme than my popular theme [Astro Sphere](https://github.com/markhorn-dev/astro-sphere)
+---
 
-## 🚀 Deploy your own
+## Projects
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/markhorn-dev/astro-nano)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/markhorn-dev/astro-nano)
+- **[Vaada](https://vaada.io)** — Commitment market. Stake money on your goals, keep your promise or lose it.
+- **Aegis** — AI-powered compliance monitoring
+- **CarbonOS** — Carbon credit marketplace
+- **Civitas** — AI infrastructure for government
+- **Haven** — Mental health support platform
+- **Prism** — Trust layer for AI-generated content
+- And more...
 
-## 📋 Features
+---
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
+## Tech Stack
 
-## 💯 Lighthouse score
-![Astro Nano Lighthouse Score](_lighthouse.png)
+- **Framework:** [Astro](https://astro.build)
+- **Styling:** Tailwind CSS
+- **Hosting:** Vercel
+- **Domain:** 2667.io
 
-## 🕊️ Lightweight
-No frameworks or added bulk
+---
 
-## ⚡︎ Fast
-Rendered in ~40ms on localhost
+## Local Development
 
-## 📄 Configuration
+```bash
+# Install dependencies
+pnpm install
 
-The blog posts on the demo serve as the documentation and configuration.
+# Start dev server
+pnpm dev
 
-## 💻 Commands
+# Build for production
+pnpm build
+```
 
-All commands are run from the root of the project, from a terminal:
+---
 
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
+## Structure
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run dev:network`     | Starts local dev server on local network         |
-| `npm run sync`            | Generates TypeScript types for all Astro modules.|
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run preview:network` | Preview build on local network                   |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run lint`            | Run ESLint                                       |
-| `npm run lint:fix`        | Auto-fix ESLint issues                           |
+```
+src/
+├── components/     # Reusable UI components
+├── content/
+│   ├── blog/       # Blog posts
+│   ├── projects/   # Project pages
+│   └── work/       # Work experience
+├── layouts/        # Page layouts
+├── pages/          # Routes
+└── styles/         # Global styles
+```
 
-## 🏛️ License
+---
 
-MIT
+Built by [Shane Sarin](https://linkedin.com/in/shanesarin)
