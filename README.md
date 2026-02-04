@@ -1,4 +1,4 @@
-# 2667.io
+# Shane Sarin
 
 Personal portfolio and project showcase.
 
@@ -23,7 +23,7 @@ Personal portfolio and project showcase.
 - **Framework:** [Astro](https://astro.build)
 - **Styling:** Tailwind CSS
 - **Hosting:** Vercel
-- **Domain:** 2667.io
+- **Domain:** shanesarin.com
 
 ---
 
