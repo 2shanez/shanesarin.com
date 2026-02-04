@@ -303,9 +303,3 @@ We're not building a fitness app. We're building **The Commitment Market**.
 
 - 🔗 **Website**: [vaada.io](https://vaada.io)
 - 💻 **GitHub**: [github.com/2shanez/vaada](https://github.com/2shanez/vaada)
-
----
-
-*"Bet on yourself."*
-
-*Built by Shane Sarin — UNC Chapel Hill, Consensys, RECUR*
