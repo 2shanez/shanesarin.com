@@ -4,7 +4,7 @@ description: "Stake money on your goals. Keep your promise, keep your stake + ea
 date: "Feb 04 2026"
 demoURL: "https://vaada.io"
 repoURL: "https://github.com/2shanez/vaada"
-draft: false
+draft: true
 ---
 
 # Vaada — The Commitment Market
