@@ -1,5 +1,5 @@
 ---
-title: "vaada — Stake Your Word"
+title: "vaada — keep your promise"
 description: "A commitment market where you stake money on promises. Keep your vaada, keep your stake. Break it, and those who kept theirs earn from you."
 date: "Feb 08 2026"
 status: "development"
@@ -8,9 +8,11 @@ repoURL: "https://github.com/2shanez/vaada"
 draft: false
 ---
 
-# vaada — The Commitment Market
+# 🤝 The Commitment Market
 
-**vaada** (Hindi for "promise") is a decentralized commitment protocol where you stake real money on your promises. Keep your vaada, keep your stake + earn from those who don't. Break it, your stake goes to those who kept theirs.
+> *vaada (वादा) — Hindi for "promise"*
+
+A decentralized protocol where you stake real money on your promises. Keep your vaada, keep your stake + earn from those who don't. Break it, your stake goes to those who kept theirs.
 
 Powered by Chainlink oracles on Base, your progress is verified automatically via Strava and payouts happen without human intervention.
 
