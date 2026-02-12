@@ -1,5 +1,5 @@
 ---
-title: "vaada — keep your promise"
+title: "Vaada — keep your promise"
 description: "A commitment market where you stake money on promises. Keep your vaada, keep your stake + earn from those who don't."
 date: "Feb 08 2026"
 status: "development"
