@@ -1,20 +1,20 @@
 ---
-title: "Vaada - The Commitment Market"
-description: "Stake money on your goals. Keep your promise, keep your stake + earn from those who don't. Verified by Chainlink oracles."
-date: "Feb 04 2026"
+title: "vaada — keep your promise"
+description: "A commitment market where you stake money on promises. Keep your vaada, keep your stake + earn from those who don't."
+date: "Feb 08 2026"
+status: "development"
 demoURL: "https://vaada.io"
 repoURL: "https://github.com/2shanez/vaada"
+draft: true
 ---
 
-# Vaada — The Commitment Market
+# 🤝 The Commitment Market
 
-**Vaada** is a decentralized commitment protocol that allows users to stake money on personal goals. Users commit USDC to fitness challenges verified by Strava data through Chainlink oracles. Hit your goal, keep your stake plus earn from those who didn't. Miss it, your stake goes to the winners.
+> *vaada (वादा) — Hindi for "promise"*
+
+Vaada is a decentralized commitment protocol that allows users to stake money on personal goals. Users commit USDC to fitness challenges verified by Strava data through Chainlink oracles. Hit your goal, keep your stake plus earn from those who didn't. Miss it, your stake goes to the winners.
 
 This is the "put your money where your mouth is" protocol.
-
-*"Vaada" means "promise" in Hindi.*
-
-🔗 **Live:** [vaada.io](https://vaada.io)
 
 ---
 
@@ -59,32 +59,18 @@ Before now, you could:
 With Vaada:
 - You program automatic, trustless consequences for *your own* verified actions
 
-**The machine decides.** No disputes. No "I forgot to log it." No referee. The oracle fetches your data, the contract evaluates the outcome, the money moves. This pattern — verifiable real-world outcomes triggering on-chain settlement — is new.
+**The machine decides.** No disputes. No "I forgot to log it." No referee. The oracle fetches your data, the contract evaluates the outcome, the money moves.
 
 The innovation isn't "fitness app with crypto." It's **verifiable real-world outcomes as a smart contract primitive.**
-
-This unlocks consequences for any behavior with a data source:
-
-| Domain | Data Source | Consequence |
-|--------|-------------|-------------|
-| Fitness | Strava, Apple Health | Stake on miles, workouts |
-| Learning | Coursera, Duolingo | Stake on course completion |
-| Productivity | GitHub, Linear | Stake on shipping code |
-| Health | Oura, Whoop | Stake on sleep, recovery |
-| Sobriety | Wearables, biomarkers | Stake on streaks |
-
-Vaada is the first product built on this primitive. It won't be the last.
 
 ---
 
 ## How It Works
 
-### Smart Contract Architecture
-
 ```
 User Stakes USDC
        ↓
-   VaadaStake.sol (holds funds, tracks goals)
+   VaadaStake.sol (holds funds, tracks challenges)
        ↓
    Deadline Reached
        ↓
@@ -92,7 +78,7 @@ User Stakes USDC
        ↓
    Chainlink Functions (fetches Strava API)
        ↓
-   verifyGoal(id, actualMiles)
+   verifyChallenge(id, actualMiles)
        ↓
    Settlement (winner paid, loser slashed)
 ```
@@ -100,72 +86,16 @@ User Stakes USDC
 ### Economic Model
 
 **For Users:**
-- **Winners**: Receive stake back + proportional share of loser pool (based on stake size)
+- **Winners**: Receive stake back + proportional share of loser pool
 - **Losers**: Stake distributed to winners weighted by their stakes
 - **Fee**: 0% — platform never touches user stakes
 
 **Stake-Weighted Payouts:**
-Winners receive bonus proportional to their stake. If you stake more, you earn more from the loser pool.
-
 ```
 Your Bonus = (Your Stake / Total Winner Stakes) × Loser Pool
 ```
 
 Example: If you stake $100 and total winner stakes are $500, you get 20% of the loser pool.
-
-**Tiered Stakes (10x ratio):**
-| Goal Type | Min | Max |
-|-----------|-----|-----|
-| Test | $1 | $10 |
-| Daily | $5 | $50 |
-| Weekly | $10 | $100 |
-| Monthly | $20 | $200 |
-
-This ensures fair reward distribution while preventing whale domination.
-
-**Platform Revenue:**
-- All staked USDC is deposited into yield protocols (Aave, Compound, etc.)
-- Platform earns interest on TVL while funds are locked
-- Users get their full stakes back; platform keeps the yield
-
-This creates:
-- **Zero-fee UX** — users keep 100% of winnings
-- **Sustainable revenue** — scales with TVL and challenge duration
-- **Aligned incentives** — platform benefits from more stakes locked longer
-
-**Fee Policy:**
-0% platform fee at launch. Future fees (if any) will be introduced transparently as the protocol scales.
-
-### Platform Cost Structure
-
-Operating Vaada requires Chainlink (oracle verification) and Base (gas) costs per goal settlement:
-
-| Component | Cost per Goal |
-|-----------|--------------|
-| Chainlink Functions | ~$0.10–0.50 |
-| Chainlink Automation | ~$0.05–0.20 |
-| Base gas | ~$0.01–0.05 |
-| **Total per verification** | **~$0.15–0.75** |
-
-**Scaling projections:**
-
-| Users | Verifications/mo | Chainlink Cost | Hosting | Total |
-|-------|-----------------|----------------|---------|-------|
-| 10 | 40 | ~$20 | Free | ~$20 |
-| 100 | 400 | ~$200 | Free | ~$200 |
-| 1,000 | 4,000 | ~$2,000 | $20 | ~$2,020 |
-| 10,000 | 40,000 | ~$20,000 | $20 | ~$20,020 |
-
-**Unit economics at scale (1,000 users):**
-- Average stake: $20, failure rate: 30%
-- Platform fee (5% of failed stakes): ~$1.80 revenue per participant per goal
-- 1,000 users × 4 goals/month = **~$7,200/mo revenue** vs **~$2,000/mo cost**
-- **Gross margin: ~72%**
-
-**Key cost advantages:**
-- Verification is per-goal, not per-user — more participants = lower cost per user
-- Base L2 gas stays cheap regardless of scale
-- Chainlink enterprise pricing available at volume
 
 ---
 
@@ -179,29 +109,15 @@ Operating Vaada requires Chainlink (oracle verification) and Base (gas) costs pe
 | Single jurisdiction | Global, permissionless |
 | Centralized custody | Self-custody, transparent |
 
-Crypto enables:
-- **Programmable money** — Automatic, trustless settlement
-- **Global access** — Anyone with a wallet can participate
-- **Transparency** — All stakes and outcomes on-chain
-- **Composability** — Future integrations with DeFi, social, NFTs
-
 ---
 
 ## Market Opportunity
-
-### The Commitment Market
 
 Commitment isn't a feature — it's a **market**.
 
 Every coach, gym buddy, AA sponsor, and accountability partner proves demand exists. People pay for someone to hold them to their word. Vaada makes that programmable.
 
-**Market signals:**
-- $15B+ spent on personal coaching annually
-- Commitment partners are the #1 predictor of goal success
-- 2x completion rates when money is on the line (behavioral econ)
-- Prediction markets just proved crypto + stakes + outcomes = massive engagement
-
-**Adjacent markets we pull from:**
+**Adjacent markets:**
 - Fitness/wellness: **$96B**
 - Prediction markets: **$65B**
 - Habit/productivity apps: **$12B**
@@ -223,17 +139,31 @@ Vaada isn't competing in these markets. We're creating **The Commitment Market**
 
 ---
 
+## Expansion Verticals
+
+Vaada starts with fitness but the model applies to any verifiable commitment:
+
+| Vertical | Verification Source |
+|----------|---------------------|
+| **Fitness** | Strava, Apple Health, Garmin |
+| **Coding** | GitHub commits, contributions |
+| **Learning** | Duolingo, course completions |
+| **Finance** | Plaid (savings goals) |
+| **Content** | YouTube uploads, Twitter posts |
+
+Same contract. Different oracles. Infinite use cases.
+
+---
+
 ## Roadmap
 
 ### Phase 1: Foundation (Current)
-- [x] Core staking contract deployed (GoalStakeV3)
-- [x] Strava integration (OAuth + verification)
-- [x] Fitbit integration (OAuth + steps verification)
+- [x] Core staking contract (GoalStakeV3 deployed)
+- [x] Strava integration (OAuth + on-chain token storage)
 - [x] Chainlink Functions verification
 - [x] Chainlink Automation for triggers
 - [x] Anti-cheat filter (manual entries blocked)
 - [x] Privy wallet integration (email/Google login)
-- [x] Goal types (STRAVA_MILES, FITBIT_STEPS)
 - [ ] First 100 users
 
 ### Phase 2: Growth
@@ -250,61 +180,21 @@ Vaada isn't competing in these markets. We're creating **The Commitment Market**
 
 ---
 
-## Expansion Verticals
-
-Vaada starts with fitness but the model applies to any verifiable commitment:
-
-| Vertical | Verification Source |
-|----------|---------------------|
-| **Fitness** | Strava, Apple Health, Garmin |
-| **Coding** | GitHub commits, contributions |
-| **Learning** | Duolingo, course completions |
-| **Finance** | Plaid (savings goals) |
-| **Content** | YouTube uploads, Twitter posts |
-| **Location** | GPS check-ins (gym, office) |
-
-Same contract. Different oracles. Infinite use cases.
-
----
-
 ## Technical Details
 
 ### Contracts (Base Sepolia)
 
-- **GoalStakeV3**: `0xE570BE5EC4039e2b256ADb1e02F6E595eCE921B9`
-- **AutomationV3**: `0x70e8B14ea74ceEB62c2205bc9d4a9D76bAEc1aa6`
-- **NewUserChallenge**: `0x28D2b6Eb9AF9F0c489a20a1Df6F24b37137A2E15`
-- **USDC**: `0x036CbD53842c5426634e7929541eC2318f3dCF7e`
+| Contract | Address |
+|----------|---------|
+| GoalStakeV3 | `0x13b8eaEb7F7927527CE1fe7A600f05e61736d217` |
+| AutomationV3 | `0xB10fCE97fc6eE84ff7772Bc44A651Dd076F7180D` |
 
 ### Stack
 
 - **Chain**: Base (Coinbase L2)
 - **Oracles**: Chainlink Functions + Automation
-- **Frontend**: Next.js, Privy (embedded wallets), wagmi
+- **Frontend**: Next.js, Privy, wagmi
 - **Verification**: Strava API via Chainlink
-
-### Security Considerations
-
-- Goal funds held in audited ERC20 (USDC)
-- Oracle limited to verification calls only
-- Owner functions limited to parameter updates
-- No upgradability (immutable MVP)
-
-### Known Limitations & Risks
-
-**Data Integrity:**
-- Strava data can be spoofed (GPS spoofing, fake activities)
-- Single data source creates single point of failure
-- *Future mitigation:* Multi-source verification (Strava + Apple Health + GPS trail analysis)
-
-**Smart Contract:**
-- MVP contracts are unaudited
-- Mainnet deployment will require professional audit
-- Bug bounty program planned for launch
-
-**General:**
-- Early stage product — expect bugs and iterations
-- Not financial advice — stake only what you can afford to lose
 
 ---
 
@@ -332,7 +222,4 @@ We're not building a fitness app. We're building **The Commitment Market**.
 
 ---
 
-## Links
-
-- 🔗 **Website**: [vaada.io](https://vaada.io)
-- 💻 **GitHub**: [github.com/2shanez/vaada](https://github.com/2shanez/vaada)
+*Built by Shane Sarin • [vaada.io](https://vaada.io) • [GitHub](https://github.com/2shanez/vaada)*
