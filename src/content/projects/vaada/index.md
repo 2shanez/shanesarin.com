@@ -169,18 +169,6 @@ Same contract. Different oracles. Infinite use cases.
 - [x] Goal types (STRAVA_MILES, FITBIT_STEPS)
 - [ ] First 100 users
 
-### Phase 2: Growth
-- [ ] Multi-platform verification (GitHub, YouTube, Duolingo)
-- [ ] Social features (friends, groups, leagues)
-- [ ] Mobile app
-- [ ] 10,000 users / $1M TVL
-
-### Phase 3: Scale
-- [ ] B2B (corporate wellness, creator commitments)
-- [ ] SDK for third-party integrations
-- [ ] Token/governance (if aligned)
-- [ ] 100,000 users / $10M TVL
-
 ---
 
 ## Technical Details
