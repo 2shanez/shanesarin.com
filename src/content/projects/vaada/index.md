@@ -5,7 +5,6 @@ date: "Feb 08 2026"
 status: "development"
 demoURL: "https://vaada.io"
 repoURL: "https://github.com/2shanez/vaada"
-draft: true
 ---
 
 # 🤝 The Commitment Market
