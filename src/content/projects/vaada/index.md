@@ -4,7 +4,6 @@ description: "Stake money on your goals. Keep your promise, keep your stake + ea
 date: "Feb 04 2026"
 demoURL: "https://vaada.io"
 repoURL: "https://github.com/2shanez/vaada"
-draft: true
 ---
 
 # Vaada — The Commitment Market
@@ -227,12 +226,14 @@ Vaada isn't competing in these markets. We're creating **The Commitment Market**
 ## Roadmap
 
 ### Phase 1: Foundation (Current)
-- [x] Core staking contract deployed
-- [x] Strava integration (OAuth + on-chain token storage)
+- [x] Core staking contract deployed (GoalStakeV3)
+- [x] Strava integration (OAuth + verification)
+- [x] Fitbit integration (OAuth + steps verification)
 - [x] Chainlink Functions verification
 - [x] Chainlink Automation for triggers
 - [x] Anti-cheat filter (manual entries blocked)
 - [x] Privy wallet integration (email/Google login)
+- [x] Goal types (STRAVA_MILES, FITBIT_STEPS)
 - [ ] First 100 users
 
 ### Phase 2: Growth
@@ -270,8 +271,9 @@ Same contract. Different oracles. Infinite use cases.
 
 ### Contracts (Base Sepolia)
 
-- **GoalStakeV3**: `0x13b8eaEb7F7927527CE1fe7A600f05e61736d217`
-- **Automation**: `0xB10fCE97fc6eE84ff7772Bc44A651Dd076F7180D`
+- **GoalStakeV3**: `0xE570BE5EC4039e2b256ADb1e02F6E595eCE921B9`
+- **AutomationV3**: `0x70e8B14ea74ceEB62c2205bc9d4a9D76bAEc1aa6`
+- **NewUserChallenge**: `0x28D2b6Eb9AF9F0c489a20a1Df6F24b37137A2E15`
 - **USDC**: `0x036CbD53842c5426634e7929541eC2318f3dCF7e`
 
 ### Stack
