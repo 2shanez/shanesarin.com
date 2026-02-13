@@ -3,6 +3,7 @@ title: "Vaada — keep your promise"
 description: "A commitment market where you stake money on promises. Keep your vaada, keep your stake + earn from those who don't."
 date: "Feb 08 2026"
 status: "development"
+draft: true
 demoURL: "https://vaada.io"
 repoURL: "https://github.com/2shanez/vaada"
 ---
