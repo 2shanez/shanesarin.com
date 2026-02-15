@@ -5,7 +5,7 @@ date: "Feb 15 2026"
 status: "live"
 demoURL: "https://vaada.io"
 repoURL: "https://github.com/2shanez/vaada"
-draft: false
+draft: true
 ---
 
 # 🤝 The Promise Market
@@ -38,8 +38,8 @@ Behavioral economics shows loss aversion is 2x stronger than gain motivation. Pe
 
 Vaada creates **financial commitment** for personal goals:
 
-1. **Stake** — Commit $20 USDC to a fitness goal (e.g., "10K steps today")
-2. **Perform** — Complete your activity on Fitbit or Strava
+1. **Stake** — Commit USDC to a fitness goal (e.g., "Run 10 miles this week")
+2. **Perform** — Complete your activity on Strava or Fitbit
 3. **Verify** — Chainlink Functions automatically fetch your fitness data
 4. **Settle** — Hit your goal = stake returned + bonus from losers. Miss = stake distributed to winners.
 
@@ -74,8 +74,6 @@ User Stakes USDC
        ↓
    VaadaV3.sol (holds funds, tracks challenges)
        ↓
-   USDC deposited to Morpho Vault (~4.9% APY)
-       ↓
    Deadline Reached
        ↓
    Chainlink Automation (triggers verification)
@@ -94,10 +92,12 @@ User Stakes USDC
 - **Losers**: Stake distributed to winners weighted by their stakes
 - **Fee**: 0% — platform never touches user stakes
 
-**Platform Revenue:**
-- Staked USDC earns yield in Morpho vault (~4.9% APY)
-- Users get full stakes back; platform keeps the yield
-- Zero-fee UX with sustainable revenue
+**Stake-Weighted Payouts:**
+```
+Your Bonus = (Your Stake / Total Winner Stakes) × Loser Pool
+```
+
+Example: If you stake $100 and total winner stakes are $500, you get 20% of the loser pool.
 
 ---
 
@@ -125,24 +125,19 @@ Every coach, gym buddy, AA sponsor, and accountability partner proves demand exi
 - Habit/productivity apps: **$12B**
 - Corporate wellness: **$56B**
 
-Vaada isn't competing in these markets. We're creating **The Promise Market** — a new category where commitment meets capital.
+Vaada isn't competing in these markets. We're creating **The Commitment Market** — a new category where commitment meets capital.
 
-**Polymarket** is where you bet on the world.  
-**Vaada** is where you bet on yourself.
+### Competitive Landscape
 
----
+| Competitor | Model | Limitation |
+|------------|-------|------------|
+| StickK | Pledge to charity | No upside for winners |
+| Beeminder | Pay when you fail | Centralized, no community |
+| DietBet | Weight loss pools | Single vertical, Web2 |
+| Strava | Social fitness | No financial stakes |
+| Polymarket | Predict others | Can't bet on yourself |
 
-## Features
-
-- ✅ Fitbit integration (steps)
-- ✅ Strava integration (miles)
-- ✅ Chainlink oracle verification
-- ✅ Morpho vault yield on locked stakes
-- ✅ Stake-weighted payouts
-- ✅ Privy auth (email/Google/wallet)
-- ✅ Profile names & leaderboards
-- ✅ Anti-cheat (device-recorded only)
-- ✅ Live on Base Mainnet
+**Vaada's edge**: Bet on yourself + crypto-native + automated verification.
 
 ---
 
@@ -154,12 +149,29 @@ Vaada starts with fitness but the model applies to any verifiable commitment:
 |----------|---------------------|
 | **Fitness (Steps)** | Fitbit ✅ |
 | **Fitness (Running)** | Strava ✅ |
-| **Coding** | GitHub commits |
-| **Learning** | Duolingo, Coursera |
+| **Fitness (Future)** | Apple Health, Garmin, Whoop |
+| **Coding** | GitHub commits, contributions |
+| **Learning** | Duolingo, course completions |
 | **Finance** | Plaid (savings goals) |
-| **Content** | YouTube, Twitter |
+| **Content** | YouTube uploads, Twitter posts |
 
 Same contract. Different oracles. Infinite use cases.
+
+---
+
+## Roadmap
+
+### Phase 1: Foundation (Current)
+- [x] Core staking contract (VaadaV3 deployed)
+- [x] Fitbit integration (steps verification)
+- [x] Strava integration (miles verification)
+- [x] Chainlink Functions verification
+- [x] Chainlink Automation for triggers
+- [x] Anti-cheat filter (manual entries blocked)
+- [x] Privy wallet integration (email/Google login)
+- [x] Goal types (FITBIT_STEPS, STRAVA_MILES)
+- [x] Base mainnet launch
+- [ ] First 100 users
 
 ---
 
@@ -170,16 +182,26 @@ Same contract. Different oracles. Infinite use cases.
 | Contract | Address |
 |----------|---------|
 | VaadaV3 | `0xAc67E863221B703CEE9B440a7beFe71EA8725434` |
-| AutomationV3 | `0xA6BcEcA41fCF743324a864F47dd03F0D3806341D` |
-| NewUserChallenge | `0x7a2959ff82aeF587A6B8491A1816bb4BA7aEE554` |
+| GoalStakeAutomationV3 | `0xA6BcEcA41fCF743324a864F47dd03F0D3806341D` |
+| NewUserChallenge | `0x65010ef348b8f274540342b50fc8582c217F8e5c` |
 
 ### Stack
 
-- **Chain**: Base (Coinbase L2) — Mainnet
+- **Chain**: Base (Coinbase L2)
 - **Oracles**: Chainlink Functions + Automation
-- **Yield**: Morpho Vault
-- **Frontend**: Next.js 16, Privy, wagmi
-- **Verification**: Fitbit + Strava APIs via Chainlink
+- **Frontend**: Next.js, Privy, wagmi
+- **Verification**: Fitbit/Strava API via Chainlink
+
+---
+
+## Why Now?
+
+1. **Post-Polymarket legitimacy** — Prediction markets are mainstream
+2. **Base ecosystem growth** — Coinbase distribution, low fees
+3. **Chainlink Functions maturity** — Reliable off-chain compute
+4. **Consumer crypto moment** — People ready for useful dApps
+
+The infrastructure is ready. The psychology is proven. The market is waiting.
 
 ---
 
@@ -189,8 +211,11 @@ Vaada becomes the **commitment layer for the internet**.
 
 Every commitment — fitness, learning, work, habits — can have financial stakes attached. Not as punishment, but as **commitment devices** that help people become who they want to be.
 
-We're not building a fitness app. We're building **The Promise Market**.
+We're not building a fitness app. We're building **The Commitment Market**.
+
+**Polymarket** is where you bet on the world.
+**Vaada** is where you bet on yourself.
 
 ---
 
-*Built by Shane Sarin • [vaada.io](https://vaada.io) • [GitHub](https://github.com/2shanez/vaada)*
+*Built by Shane Sarin • [vaada.io](https://vaada.io)*
