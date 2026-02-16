@@ -9,7 +9,7 @@ comingSoon: true
 
 > *vaada (वादा) — Hindi for "promise"*
 
-Vaada is a decentralized commitment protocol that allows users to stake money on personal goals. Users commit USDC to fitness challenges verified by Fitbit or Strava data through Chainlink oracles. Hit your goal, keep your stake plus earn from those who didn't. Miss it, your stake goes to the winners.
+Vaada is a decentralized commitment protocol that allows users to stake money on personal goals. Users commit USDC to fitness challenges verified automatically through Fitbit or Strava data. Hit your goal, keep your stake plus earn from those who didn't. Miss it, your stake goes to the winners.
 
 This is the "put your money where your mouth is" protocol.
 
@@ -37,7 +37,7 @@ Vaada creates **financial commitment** for personal goals:
 
 1. **Stake** — Commit USDC to a fitness goal (e.g., "Run 10 miles this week")
 2. **Perform** — Complete your activity on Strava or Fitbit
-3. **Verify** — Chainlink Functions automatically fetch your fitness data
+3. **Verify** — Your fitness data is fetched and verified automatically
 4. **Settle** — Hit your goal = stake returned + bonus from losers. Miss = stake distributed to winners.
 
 No middleman. No refunds. No excuses.
@@ -58,7 +58,7 @@ Before now, you could:
 With Vaada:
 - You program automatic, trustless consequences for *your own* verified actions
 
-**The machine decides.** No disputes. No "I forgot to log it." No referee. The oracle fetches your data, the contract evaluates the outcome, the money moves.
+**The machine decides.** No disputes. No "I forgot to log it." No referee. Your fitness data is fetched automatically, the contract evaluates the outcome, the money moves.
 
 The innovation isn't "fitness app with crypto." It's **verifiable real-world outcomes as a smart contract primitive.**
 
@@ -73,9 +73,9 @@ User Stakes USDC
        ↓
    Deadline Reached
        ↓
-   Chainlink Automation (triggers verification)
+   Backend Verifier (triggers verification)
        ↓
-   Chainlink Functions (fetches Fitbit/Strava API)
+   Fetch Fitbit/Strava API
        ↓
    verifyChallenge(id, actualValue)
        ↓
@@ -152,7 +152,7 @@ Vaada starts with fitness but the model applies to any verifiable commitment:
 | **Finance** | Plaid (savings goals) |
 | **Content** | YouTube uploads, Twitter posts |
 
-Same contract. Different oracles. Infinite use cases.
+Same contract. Different data sources. Infinite use cases.
 
 ---
 
@@ -162,8 +162,8 @@ Same contract. Different oracles. Infinite use cases.
 - [x] Core staking contract (VaadaV3 deployed)
 - [x] Fitbit integration (steps verification)
 - [x] Strava integration (miles verification)
-- [x] Chainlink Functions verification
-- [x] Chainlink Automation for triggers
+- [x] Automatic verification via Fitbit/Strava API
+- [x] Backend verifier for instant settlement
 - [x] Anti-cheat filter (manual entries blocked)
 - [x] Privy wallet integration (email/Google login)
 - [x] Goal types (FITBIT_STEPS, STRAVA_MILES)
@@ -185,9 +185,9 @@ Same contract. Different oracles. Infinite use cases.
 ### Stack
 
 - **Chain**: Base (Coinbase L2)
-- **Oracles**: Chainlink Functions + Automation
 - **Frontend**: Next.js, Privy, wagmi
-- **Verification**: Fitbit/Strava API via Chainlink
+- **Verification**: Fitbit/Strava API
+- **RPC**: Alchemy
 
 ---
 
@@ -195,8 +195,8 @@ Same contract. Different oracles. Infinite use cases.
 
 1. **Post-Polymarket legitimacy** — Prediction markets are mainstream
 2. **Base ecosystem growth** — Coinbase distribution, low fees
-3. **Chainlink Functions maturity** — Reliable off-chain compute
-4. **Consumer crypto moment** — People ready for useful dApps
+3. **Consumer crypto moment** — People ready for useful dApps
+4. **Fitness tracker ubiquity** — Everyone has step data
 
 The infrastructure is ready. The psychology is proven. The market is waiting.
 
