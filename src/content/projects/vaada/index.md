@@ -1,11 +1,8 @@
 ---
 title: "vaada — the promise market"
-description: "Stake money on your promises. Keep your vaada, keep your stake + earn from those who don't. Live on Base mainnet."
+description: "Stake money on your promises. More details soon."
 date: "Feb 15 2026"
-status: "live"
-demoURL: "https://vaada.io"
-repoURL: "https://github.com/2shanez/vaada"
-draft: true
+comingSoon: true
 ---
 
 # 🤝 The Promise Market
