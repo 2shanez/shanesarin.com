@@ -190,10 +190,10 @@ Use the `![title](./image.*)` pattern relative to the same folder as the markdow
 Use the `![title](/image.*)` pattern relative to the public folder. No period.
 
 ```md
-![Patrick Starfish](/patrick.webp)
+![Patrick Starfish](/images/patrick.webp)
 ```
 
-![Patrick Starfish](/patrick.webp)
+![Patrick Starfish](/images/patrick.webp)
 
 ---
 
