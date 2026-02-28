@@ -30,14 +30,9 @@ Personal portfolio and project showcase.
 ## Local Development
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Start dev server
-pnpm dev
-
-# Build for production
-pnpm build
+npm install
+npm run dev
+npm run build
 ```
 
 ---

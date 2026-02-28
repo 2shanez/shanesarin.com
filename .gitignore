@@ -29,3 +29,4 @@ Thumbs.db
 # Vercel
 .vercel/
 public/collection/original_backup/
+.vscode/
