@@ -206,21 +206,76 @@ const pathname = Astro.url.pathname;
         </button>
         <!-- Login / Dashboard -->
         <a
+          id="auth-link"
           href="/login"
-          class:list={[
-            "group flex items-center justify-center ml-1",
-            pathname.startsWith("/dashboard") || pathname.startsWith("/login")
-              ? "text-[#2EE59D]"
-              : "text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white"
-          ]}
+          class="group flex items-center justify-center ml-1 text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white transition-all duration-300"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 md:h-8 w-auto stroke-current opacity-50 group-hover:opacity-100 dark:stroke-[#2EE59D] transition-opacity duration-300" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            <circle cx="12" cy="16" r="1"></circle>
+          <!-- Locked state (logged out) -->
+          <svg id="lock-closed" xmlns="http://www.w3.org/2000/svg" class="h-6 md:h-8 w-auto stroke-current opacity-50 group-hover:opacity-100 dark:stroke-[#2EE59D] transition-all duration-500" viewBox="0 0 48 48" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Lock body with ornate detail -->
+            <rect x="10" y="24" width="28" height="20" rx="3"></rect>
+            <rect x="14" y="28" width="20" height="12" rx="1.5" stroke-width="0.75" opacity="0.3"></rect>
+            <!-- Shackle -->
+            <path d="M16 24V16a8 8 0 0 1 16 0v8"></path>
+            <!-- Keyhole -->
+            <circle cx="24" cy="33" r="3"></circle>
+            <path d="M24 36v3"></path>
+            <!-- Ornate rivets -->
+            <circle cx="14" cy="27" r="1" stroke-width="0.75"></circle>
+            <circle cx="34" cy="27" r="1" stroke-width="0.75"></circle>
+            <circle cx="14" cy="41" r="1" stroke-width="0.75"></circle>
+            <circle cx="34" cy="41" r="1" stroke-width="0.75"></circle>
+          </svg>
+          <!-- Unlocked state (logged in) -->
+          <svg id="lock-open" xmlns="http://www.w3.org/2000/svg" class="h-6 md:h-8 w-auto transition-all duration-500 hidden" viewBox="0 0 48 48" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: #2EE59D;">
+            <!-- Lock body -->
+            <rect x="10" y="24" width="28" height="20" rx="3"></rect>
+            <rect x="14" y="28" width="20" height="12" rx="1.5" stroke-width="0.75" opacity="0.3"></rect>
+            <!-- Shackle (open/lifted) -->
+            <path d="M16 24V16a8 8 0 0 1 16 0v2"></path>
+            <!-- Keyhole (glowing) -->
+            <circle cx="24" cy="33" r="3" style="fill: #2EE59D; opacity: 0.25;"></circle>
+            <circle cx="24" cy="33" r="3"></circle>
+            <path d="M24 36v3"></path>
+            <!-- Ornate rivets -->
+            <circle cx="14" cy="27" r="1" stroke-width="0.75"></circle>
+            <circle cx="34" cy="27" r="1" stroke-width="0.75"></circle>
+            <circle cx="14" cy="41" r="1" stroke-width="0.75"></circle>
+            <circle cx="34" cy="41" r="1" stroke-width="0.75"></circle>
           </svg>
         </a>
       </div>
     </div>
   </Container>
 </header>
+
+<script>
+  function updateLockState() {
+    const isLoggedIn = sessionStorage.getItem('dash_auth') === 'true';
+    const lockClosed = document.getElementById('lock-closed');
+    const lockOpen = document.getElementById('lock-open');
+    const authLink = document.getElementById('auth-link');
+
+    if (!lockClosed || !lockOpen || !authLink) return;
+
+    if (isLoggedIn) {
+      lockClosed.classList.add('hidden');
+      lockOpen.classList.remove('hidden');
+      authLink.href = '/dashboard';
+      authLink.classList.remove('text-neutral-400', 'dark:text-neutral-500');
+      authLink.classList.add('text-[#2EE59D]');
+    } else {
+      lockClosed.classList.remove('hidden');
+      lockOpen.classList.add('hidden');
+      authLink.href = '/login';
+      authLink.classList.add('text-neutral-400', 'dark:text-neutral-500');
+      authLink.classList.remove('text-[#2EE59D]');
+    }
+  }
+
+  updateLockState();
+  // Re-check when tab regains focus (e.g. after login in another tab)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) updateLockState();
+  });
+</script>
