@@ -7,21 +7,21 @@ import PageLayout from "@layouts/PageLayout.astro";
     <div id="dashboard" class="space-y-8">
 
       <!-- Header -->
-      <section class="flex items-start sm:items-center justify-between gap-4">
-        <div class="space-y-1 min-w-0">
+      <section>
+        <div class="flex items-center justify-between gap-4">
           <h1 class="text-2xl md:text-3xl font-bold text-black dark:text-white tracking-tight">
             Dashboard
           </h1>
-          <p class="font-mono text-xs text-neutral-400 dark:text-neutral-500">
-            tracking progress across active workstreams
-          </p>
+          <button
+            id="logout-btn"
+            class="shrink-0 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-sm font-mono text-neutral-600 dark:text-neutral-400 transition-colors"
+          >
+            logout
+          </button>
         </div>
-        <button
-          id="logout-btn"
-          class="shrink-0 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-sm font-mono text-neutral-600 dark:text-neutral-400 transition-colors"
-        >
-          logout
-        </button>
+        <p class="font-mono text-xs text-neutral-400 dark:text-neutral-500 mt-1">
+          tracking progress across active workstreams
+        </p>
       </section>
 
       <!-- Stats Overview -->
@@ -33,19 +33,19 @@ import PageLayout from "@layouts/PageLayout.astro";
       <section class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
 
         <!-- MBA / Master Programs -->
-        <div class="space-y-4">
+        <div class="flex flex-col">
           <div class="flex items-center gap-3">
             <span class="font-mono text-xs text-violet-500">01</span>
-            <h2 class="font-bold text-black dark:text-white tracking-tight text-sm">MBA / MASTER PROGRAMS</h2>
+            <h2 class="font-bold text-black dark:text-white tracking-tight text-sm whitespace-nowrap">MBA / MASTERS</h2>
             <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
           </div>
-          <p class="font-mono text-[10px] text-neutral-400 dark:text-neutral-600 leading-relaxed">
-            school applications &middot; essays &middot; interviews &middot; decisions
+          <p class="font-mono text-[10px] text-neutral-400 dark:text-neutral-600 mt-3 h-4">
+            schools &middot; essays &middot; interviews &middot; decisions
           </p>
-          <div id="mba-items" class="space-y-2">
+          <div id="mba-items" class="space-y-2 mt-4 flex-1">
             <!-- Items populated by JS -->
           </div>
-          <div class="flex gap-2 min-w-0">
+          <div class="flex gap-2 min-w-0 mt-4">
             <input
               type="text"
               id="mba-input"
@@ -57,19 +57,19 @@ import PageLayout from "@layouts/PageLayout.astro";
         </div>
 
         <!-- Vaada -->
-        <div class="space-y-4">
+        <div class="flex flex-col">
           <div class="flex items-center gap-3">
             <span class="font-mono text-xs text-[#2EE59D]">02</span>
-            <h2 class="font-bold text-black dark:text-white tracking-tight text-sm">VAADA</h2>
+            <h2 class="font-bold text-black dark:text-white tracking-tight text-sm whitespace-nowrap">VAADA</h2>
             <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
           </div>
-          <p class="font-mono text-[10px] text-neutral-400 dark:text-neutral-600 leading-relaxed">
+          <p class="font-mono text-[10px] text-neutral-400 dark:text-neutral-600 mt-3 h-4">
             features &middot; milestones &middot; bugs &middot; launches
           </p>
-          <div id="vaada-items" class="space-y-2">
+          <div id="vaada-items" class="space-y-2 mt-4 flex-1">
             <!-- Items populated by JS -->
           </div>
-          <div class="flex gap-2 min-w-0">
+          <div class="flex gap-2 min-w-0 mt-4">
             <input
               type="text"
               id="vaada-input"
@@ -81,19 +81,19 @@ import PageLayout from "@layouts/PageLayout.astro";
         </div>
 
         <!-- Product Jobs -->
-        <div class="space-y-4">
+        <div class="flex flex-col">
           <div class="flex items-center gap-3">
             <span class="font-mono text-xs text-cyan-500">03</span>
-            <h2 class="font-bold text-black dark:text-white tracking-tight text-sm">PRODUCT JOBS</h2>
+            <h2 class="font-bold text-black dark:text-white tracking-tight text-sm whitespace-nowrap">PRODUCT JOBS</h2>
             <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
           </div>
-          <p class="font-mono text-[10px] text-neutral-400 dark:text-neutral-600 leading-relaxed">
+          <p class="font-mono text-[10px] text-neutral-400 dark:text-neutral-600 mt-3 h-4">
             applications &middot; screens &middot; interviews &middot; offers
           </p>
-          <div id="jobs-items" class="space-y-2">
+          <div id="jobs-items" class="space-y-2 mt-4 flex-1">
             <!-- Items populated by JS -->
           </div>
-          <div class="flex gap-2 min-w-0">
+          <div class="flex gap-2 min-w-0 mt-4">
             <input
               type="text"
               id="jobs-input"
