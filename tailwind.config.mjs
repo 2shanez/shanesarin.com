@@ -6,6 +6,11 @@ export default {
   content: [
     "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
   ],
+  safelist: [
+    // Dashboard dynamic classes
+    'text-violet-500', 'text-green-500', 'text-cyan-500',
+    'bg-violet-500', 'bg-green-500', 'bg-cyan-500',
+  ],
   theme: {
     extend: {
       fontFamily: {

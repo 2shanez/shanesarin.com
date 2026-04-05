@@ -1,0 +1,368 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+---
+<PageLayout title="Dashboard" description="Personal tracking dashboard">
+  <Container>
+    <div id="dashboard" class="space-y-8">
+
+      <!-- Header -->
+      <section class="flex items-center justify-between">
+        <div class="space-y-1">
+          <h1 class="text-2xl md:text-3xl font-bold text-black dark:text-white tracking-tight">
+            Dashboard
+          </h1>
+          <p class="font-mono text-xs text-neutral-400 dark:text-neutral-500">
+            tracking progress across active workstreams
+          </p>
+        </div>
+        <button
+          id="logout-btn"
+          class="px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-sm font-mono text-neutral-600 dark:text-neutral-400 transition-colors"
+        >
+          logout
+        </button>
+      </section>
+
+      <!-- Stats Overview -->
+      <section id="stats-bar" class="grid grid-cols-3 gap-4">
+        <!-- Populated by JS -->
+      </section>
+
+      <!-- Three Columns -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- MBA / Master Programs -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs text-violet-500">01</span>
+            <h2 class="font-bold text-black dark:text-white tracking-tight text-sm">MBA / MASTER PROGRAMS</h2>
+            <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
+          </div>
+          <div id="mba-items" class="space-y-2">
+            <!-- Items populated by JS -->
+          </div>
+          <div class="flex gap-2">
+            <input
+              type="text"
+              id="mba-input"
+              placeholder="add school or task..."
+              class="flex-1 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-transparent"
+            />
+            <button data-category="mba" class="add-btn px-3 py-2 rounded-lg bg-violet-500 hover:bg-violet-600 text-white text-sm font-mono transition-colors">+</button>
+          </div>
+          <select id="mba-status-select" class="hidden w-full px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono">
+            <option value="not-started">Not Started</option>
+            <option value="in-progress">In Progress</option>
+            <option value="submitted">Submitted</option>
+            <option value="accepted">Accepted</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+
+        <!-- Vaada -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs text-[#2EE59D]">02</span>
+            <h2 class="font-bold text-black dark:text-white tracking-tight text-sm">VAADA</h2>
+            <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
+          </div>
+          <div id="vaada-items" class="space-y-2">
+            <!-- Items populated by JS -->
+          </div>
+          <div class="flex gap-2">
+            <input
+              type="text"
+              id="vaada-input"
+              placeholder="add task or milestone..."
+              class="flex-1 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-[#2EE59D] focus:border-transparent"
+            />
+            <button data-category="vaada" class="add-btn px-3 py-2 rounded-lg bg-[#2EE59D] hover:bg-[#26c987] text-black text-sm font-mono transition-colors">+</button>
+          </div>
+        </div>
+
+        <!-- Product Jobs -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs text-cyan-500">03</span>
+            <h2 class="font-bold text-black dark:text-white tracking-tight text-sm">PRODUCT JOBS</h2>
+            <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
+          </div>
+          <div id="jobs-items" class="space-y-2">
+            <!-- Items populated by JS -->
+          </div>
+          <div class="flex gap-2">
+            <input
+              type="text"
+              id="jobs-input"
+              placeholder="add company or task..."
+              class="flex-1 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-transparent"
+            />
+            <button data-category="jobs" class="add-btn px-3 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-mono transition-colors">+</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Footer -->
+      <section class="font-mono text-xs text-neutral-400 dark:text-neutral-600 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+        <p><span class="text-[#2EE59D]">//</span> data stored locally in your browser</p>
+      </section>
+
+    </div>
+  </Container>
+</PageLayout>
+
+<script>
+  // Auth check
+  if (sessionStorage.getItem('dash_auth') !== 'true') {
+    window.location.href = '/login';
+  }
+
+  // Logout
+  document.getElementById('logout-btn')?.addEventListener('click', () => {
+    sessionStorage.removeItem('dash_auth');
+    window.location.href = '/login';
+  });
+
+  // --- Data Layer ---
+  interface DashItem {
+    id: string;
+    text: string;
+    status: 'not-started' | 'in-progress' | 'done' | 'submitted' | 'accepted' | 'rejected';
+    createdAt: string;
+    notes: string;
+  }
+
+  interface DashData {
+    mba: DashItem[];
+    vaada: DashItem[];
+    jobs: DashItem[];
+  }
+
+  const STATUS_LABELS: Record<string, string> = {
+    'not-started': 'Not Started',
+    'in-progress': 'In Progress',
+    'done': 'Done',
+    'submitted': 'Submitted',
+    'accepted': 'Accepted',
+    'rejected': 'Rejected',
+  };
+
+  const STATUS_COLORS: Record<string, string> = {
+    'not-started': 'bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300',
+    'in-progress': 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400',
+    'done': 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400',
+    'submitted': 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400',
+    'accepted': 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400',
+    'rejected': 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400',
+  };
+
+  const CATEGORY_STATUSES: Record<string, string[]> = {
+    mba: ['not-started', 'in-progress', 'submitted', 'accepted', 'rejected'],
+    vaada: ['not-started', 'in-progress', 'done'],
+    jobs: ['not-started', 'in-progress', 'submitted', 'accepted', 'rejected'],
+  };
+
+  const CATEGORY_COLORS: Record<string, string> = {
+    mba: 'violet',
+    vaada: 'green',
+    jobs: 'cyan',
+  };
+
+  function loadData(): DashData {
+    const raw = localStorage.getItem('dash_data');
+    if (raw) return JSON.parse(raw);
+    return { mba: [], vaada: [], jobs: [] };
+  }
+
+  function saveData(data: DashData) {
+    localStorage.setItem('dash_data', JSON.stringify(data));
+  }
+
+  function generateId(): string {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  }
+
+  // --- Rendering ---
+  function renderStats(data: DashData) {
+    const statsBar = document.getElementById('stats-bar')!;
+    const categories = [
+      { key: 'mba', label: 'MBA / Masters', color: 'violet' },
+      { key: 'vaada', label: 'Vaada', color: 'green' },
+      { key: 'jobs', label: 'Product Jobs', color: 'cyan' },
+    ];
+
+    statsBar.innerHTML = categories.map(cat => {
+      const items = data[cat.key as keyof DashData];
+      const total = items.length;
+      const completed = items.filter(i => ['done', 'accepted', 'submitted'].includes(i.status)).length;
+      const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+      return `
+        <div class="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+          <p class="font-mono text-xs text-${cat.color}-500 mb-1">${cat.label}</p>
+          <p class="text-2xl font-bold text-black dark:text-white">${total}</p>
+          <div class="flex items-center gap-2 mt-2">
+            <div class="flex-1 h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-700 overflow-hidden">
+              <div class="h-full rounded-full bg-${cat.color}-500 transition-all duration-500" style="width: ${pct}%"></div>
+            </div>
+            <span class="font-mono text-xs text-neutral-400">${pct}%</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderItems(category: keyof DashData, data: DashData) {
+    const container = document.getElementById(`${category}-items`)!;
+    const items = data[category];
+
+    if (items.length === 0) {
+      container.innerHTML = `
+        <p class="font-mono text-xs text-neutral-400 dark:text-neutral-600 py-4 text-center">
+          no items yet
+        </p>
+      `;
+      return;
+    }
+
+    container.innerHTML = items.map(item => `
+      <div class="group p-3 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors" data-id="${item.id}">
+        <div class="flex items-start justify-between gap-2">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-black dark:text-white truncate">${escapeHtml(item.text)}</p>
+            <div class="flex items-center gap-2 mt-1.5">
+              <button
+                class="status-cycle-btn inline-flex px-2 py-0.5 rounded-full text-[10px] font-mono ${STATUS_COLORS[item.status]} cursor-pointer hover:opacity-80 transition-opacity"
+                data-category="${category}"
+                data-id="${item.id}"
+              >
+                ${STATUS_LABELS[item.status]}
+              </button>
+              <span class="font-mono text-[10px] text-neutral-400">${new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+            </div>
+            ${item.notes ? `<p class="mt-1.5 text-xs text-neutral-500 dark:text-neutral-400 line-clamp-2">${escapeHtml(item.notes)}</p>` : ''}
+          </div>
+          <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="note-btn p-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+              data-category="${category}"
+              data-id="${item.id}"
+              title="Add note"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </button>
+            <button
+              class="delete-btn p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/30 text-neutral-400 hover:text-red-500 transition-colors"
+              data-category="${category}"
+              data-id="${item.id}"
+              title="Delete"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function escapeHtml(text: string): string {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function renderAll() {
+    const data = loadData();
+    renderStats(data);
+    renderItems('mba', data);
+    renderItems('vaada', data);
+    renderItems('jobs', data);
+  }
+
+  // --- Event Handlers ---
+
+  // Add items
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = (btn as HTMLElement).dataset.category as keyof DashData;
+      const input = document.getElementById(`${category}-input`) as HTMLInputElement;
+      const text = input.value.trim();
+      if (!text) return;
+
+      const data = loadData();
+      data[category].push({
+        id: generateId(),
+        text,
+        status: 'not-started',
+        createdAt: new Date().toISOString(),
+        notes: '',
+      });
+      saveData(data);
+      input.value = '';
+      renderAll();
+    });
+  });
+
+  // Enter key to add
+  ['mba', 'vaada', 'jobs'].forEach(cat => {
+    document.getElementById(`${cat}-input`)?.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Enter') {
+        document.querySelector(`.add-btn[data-category="${cat}"]`)?.dispatchEvent(new Event('click'));
+      }
+    });
+  });
+
+  // Event delegation for dynamic buttons
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const btn = target.closest('.status-cycle-btn, .delete-btn, .note-btn') as HTMLElement | null;
+    if (!btn) return;
+
+    const category = btn.dataset.category as keyof DashData;
+    const id = btn.dataset.id!;
+    const data = loadData();
+    const item = data[category].find(i => i.id === id);
+    if (!item) return;
+
+    if (btn.classList.contains('status-cycle-btn')) {
+      const statuses = CATEGORY_STATUSES[category];
+      const currentIdx = statuses.indexOf(item.status);
+      item.status = statuses[(currentIdx + 1) % statuses.length] as DashItem['status'];
+      saveData(data);
+      renderAll();
+    }
+
+    if (btn.classList.contains('delete-btn')) {
+      data[category] = data[category].filter(i => i.id !== id);
+      saveData(data);
+      renderAll();
+    }
+
+    if (btn.classList.contains('note-btn')) {
+      const note = prompt('Add a note:', item.notes || '');
+      if (note !== null) {
+        item.notes = note;
+        saveData(data);
+        renderAll();
+      }
+    }
+  });
+
+  // Initial render
+  renderAll();
+</script>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
