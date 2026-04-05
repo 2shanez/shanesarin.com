@@ -254,7 +254,7 @@ const pathname = Astro.url.pathname;
     const isLoggedIn = sessionStorage.getItem('dash_auth') === 'true';
     const lockClosed = document.getElementById('lock-closed');
     const lockOpen = document.getElementById('lock-open');
-    const authLink = document.getElementById('auth-link');
+    const authLink = document.getElementById('auth-link') as HTMLAnchorElement | null;
 
     if (!lockClosed || !lockOpen || !authLink) return;
 

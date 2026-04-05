@@ -164,12 +164,6 @@ import PageLayout from "@layouts/PageLayout.astro";
     jobs: ['not-started', 'in-progress', 'submitted', 'accepted', 'rejected'],
   };
 
-  const CATEGORY_COLORS: Record<string, string> = {
-    mba: 'violet',
-    vaada: 'green',
-    jobs: 'cyan',
-  };
-
   function loadData(): DashData {
     const raw = localStorage.getItem('dash_data');
     if (raw) return JSON.parse(raw);
@@ -181,7 +175,7 @@ import PageLayout from "@layouts/PageLayout.astro";
   }
 
   function generateId(): string {
-    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    return Date.now().toString(36) + Math.random().toString(36).substring(2);
   }
 
   // --- Rendering ---
