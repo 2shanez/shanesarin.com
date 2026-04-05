@@ -7,8 +7,8 @@ import PageLayout from "@layouts/PageLayout.astro";
     <div id="dashboard" class="space-y-8">
 
       <!-- Header -->
-      <section class="flex items-center justify-between">
-        <div class="space-y-1">
+      <section class="flex items-start sm:items-center justify-between gap-4">
+        <div class="space-y-1 min-w-0">
           <h1 class="text-2xl md:text-3xl font-bold text-black dark:text-white tracking-tight">
             Dashboard
           </h1>
@@ -18,19 +18,19 @@ import PageLayout from "@layouts/PageLayout.astro";
         </div>
         <button
           id="logout-btn"
-          class="px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-sm font-mono text-neutral-600 dark:text-neutral-400 transition-colors"
+          class="shrink-0 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-sm font-mono text-neutral-600 dark:text-neutral-400 transition-colors"
         >
           logout
         </button>
       </section>
 
       <!-- Stats Overview -->
-      <section id="stats-bar" class="grid grid-cols-3 gap-4">
+      <section id="stats-bar" class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         <!-- Populated by JS -->
       </section>
 
       <!-- Three Columns -->
-      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
 
         <!-- MBA / Master Programs -->
         <div class="space-y-4">
@@ -42,12 +42,12 @@ import PageLayout from "@layouts/PageLayout.astro";
           <div id="mba-items" class="space-y-2">
             <!-- Items populated by JS -->
           </div>
-          <div class="flex gap-2">
+          <div class="flex gap-2 min-w-0">
             <input
               type="text"
               id="mba-input"
               placeholder="add school or task..."
-              class="flex-1 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-transparent"
+              class="flex-1 min-w-0 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-transparent"
             />
             <button data-category="mba" class="add-btn px-3 py-2 rounded-lg bg-violet-500 hover:bg-violet-600 text-white text-sm font-mono transition-colors">+</button>
           </div>
@@ -70,12 +70,12 @@ import PageLayout from "@layouts/PageLayout.astro";
           <div id="vaada-items" class="space-y-2">
             <!-- Items populated by JS -->
           </div>
-          <div class="flex gap-2">
+          <div class="flex gap-2 min-w-0">
             <input
               type="text"
               id="vaada-input"
               placeholder="add task or milestone..."
-              class="flex-1 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-[#2EE59D] focus:border-transparent"
+              class="flex-1 min-w-0 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-[#2EE59D] focus:border-transparent"
             />
             <button data-category="vaada" class="add-btn px-3 py-2 rounded-lg bg-[#2EE59D] hover:bg-[#26c987] text-black text-sm font-mono transition-colors">+</button>
           </div>
@@ -91,12 +91,12 @@ import PageLayout from "@layouts/PageLayout.astro";
           <div id="jobs-items" class="space-y-2">
             <!-- Items populated by JS -->
           </div>
-          <div class="flex gap-2">
+          <div class="flex gap-2 min-w-0">
             <input
               type="text"
               id="jobs-input"
               placeholder="add company or task..."
-              class="flex-1 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-transparent"
+              class="flex-1 min-w-0 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-transparent"
             />
             <button data-category="jobs" class="add-btn px-3 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-mono transition-colors">+</button>
           </div>
