@@ -39,6 +39,9 @@ import PageLayout from "@layouts/PageLayout.astro";
             <h2 class="font-bold text-black dark:text-white tracking-tight text-sm">MBA / MASTER PROGRAMS</h2>
             <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
           </div>
+          <p class="font-mono text-[10px] text-neutral-400 dark:text-neutral-600 leading-relaxed">
+            school applications &middot; essays &middot; interviews &middot; decisions
+          </p>
           <div id="mba-items" class="space-y-2">
             <!-- Items populated by JS -->
           </div>
@@ -46,18 +49,11 @@ import PageLayout from "@layouts/PageLayout.astro";
             <input
               type="text"
               id="mba-input"
-              placeholder="add school or task..."
+              placeholder="e.g. Stanford GSB, Wharton..."
               class="flex-1 min-w-0 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-transparent"
             />
             <button data-category="mba" class="add-btn px-3 py-2 rounded-lg bg-violet-500 hover:bg-violet-600 text-white text-sm font-mono transition-colors">+</button>
           </div>
-          <select id="mba-status-select" class="hidden w-full px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono">
-            <option value="not-started">Not Started</option>
-            <option value="in-progress">In Progress</option>
-            <option value="submitted">Submitted</option>
-            <option value="accepted">Accepted</option>
-            <option value="rejected">Rejected</option>
-          </select>
         </div>
 
         <!-- Vaada -->
@@ -67,6 +63,9 @@ import PageLayout from "@layouts/PageLayout.astro";
             <h2 class="font-bold text-black dark:text-white tracking-tight text-sm">VAADA</h2>
             <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
           </div>
+          <p class="font-mono text-[10px] text-neutral-400 dark:text-neutral-600 leading-relaxed">
+            features &middot; milestones &middot; bugs &middot; launches
+          </p>
           <div id="vaada-items" class="space-y-2">
             <!-- Items populated by JS -->
           </div>
@@ -74,7 +73,7 @@ import PageLayout from "@layouts/PageLayout.astro";
             <input
               type="text"
               id="vaada-input"
-              placeholder="add task or milestone..."
+              placeholder="e.g. onboarding flow, v2 launch..."
               class="flex-1 min-w-0 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-[#2EE59D] focus:border-transparent"
             />
             <button data-category="vaada" class="add-btn px-3 py-2 rounded-lg bg-[#2EE59D] hover:bg-[#26c987] text-black text-sm font-mono transition-colors">+</button>
@@ -88,6 +87,9 @@ import PageLayout from "@layouts/PageLayout.astro";
             <h2 class="font-bold text-black dark:text-white tracking-tight text-sm">PRODUCT JOBS</h2>
             <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
           </div>
+          <p class="font-mono text-[10px] text-neutral-400 dark:text-neutral-600 leading-relaxed">
+            applications &middot; screens &middot; interviews &middot; offers
+          </p>
           <div id="jobs-items" class="space-y-2">
             <!-- Items populated by JS -->
           </div>
@@ -95,7 +97,7 @@ import PageLayout from "@layouts/PageLayout.astro";
             <input
               type="text"
               id="jobs-input"
-              placeholder="add company or task..."
+              placeholder="e.g. Stripe PM, Figma APM..."
               class="flex-1 min-w-0 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm text-black dark:text-white font-mono focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-transparent"
             />
             <button data-category="jobs" class="add-btn px-3 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-mono transition-colors">+</button>
@@ -126,10 +128,14 @@ import PageLayout from "@layouts/PageLayout.astro";
   });
 
   // --- Data Layer ---
+  type MbaStatus = 'researching' | 'essays' | 'submitted' | 'interview' | 'waitlisted' | 'accepted' | 'rejected';
+  type VaadaStatus = 'backlog' | 'in-progress' | 'review' | 'shipped' | 'blocked';
+  type JobStatus = 'saved' | 'applied' | 'phone-screen' | 'interview' | 'final-round' | 'offer' | 'rejected';
+
   interface DashItem {
     id: string;
     text: string;
-    status: 'not-started' | 'in-progress' | 'done' | 'submitted' | 'accepted' | 'rejected';
+    status: string;
     createdAt: string;
     notes: string;
   }
@@ -140,28 +146,73 @@ import PageLayout from "@layouts/PageLayout.astro";
     jobs: DashItem[];
   }
 
-  const STATUS_LABELS: Record<string, string> = {
-    'not-started': 'Not Started',
-    'in-progress': 'In Progress',
-    'done': 'Done',
+  // --- MBA / Master Programs ---
+  const MBA_STATUSES: MbaStatus[] = ['researching', 'essays', 'submitted', 'interview', 'waitlisted', 'accepted', 'rejected'];
+  const MBA_LABELS: Record<MbaStatus, string> = {
+    'researching': 'Researching',
+    'essays': 'Writing Essays',
     'submitted': 'Submitted',
+    'interview': 'Interview',
+    'waitlisted': 'Waitlisted',
     'accepted': 'Accepted',
     'rejected': 'Rejected',
   };
-
-  const STATUS_COLORS: Record<string, string> = {
-    'not-started': 'bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300',
-    'in-progress': 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400',
-    'done': 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400',
+  const MBA_COLORS: Record<MbaStatus, string> = {
+    'researching': 'bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400',
+    'essays': 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400',
     'submitted': 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400',
+    'interview': 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400',
+    'waitlisted': 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400',
     'accepted': 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400',
     'rejected': 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400',
   };
+  const MBA_PROGRESS: MbaStatus[] = ['submitted', 'interview', 'waitlisted', 'accepted'];
 
-  const CATEGORY_STATUSES: Record<string, string[]> = {
-    mba: ['not-started', 'in-progress', 'submitted', 'accepted', 'rejected'],
-    vaada: ['not-started', 'in-progress', 'done'],
-    jobs: ['not-started', 'in-progress', 'submitted', 'accepted', 'rejected'],
+  // --- Vaada ---
+  const VAADA_STATUSES: VaadaStatus[] = ['backlog', 'in-progress', 'review', 'shipped', 'blocked'];
+  const VAADA_LABELS: Record<VaadaStatus, string> = {
+    'backlog': 'Backlog',
+    'in-progress': 'In Progress',
+    'review': 'In Review',
+    'shipped': 'Shipped',
+    'blocked': 'Blocked',
+  };
+  const VAADA_COLORS: Record<VaadaStatus, string> = {
+    'backlog': 'bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300',
+    'in-progress': 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400',
+    'review': 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400',
+    'shipped': 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400',
+    'blocked': 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400',
+  };
+  const VAADA_PROGRESS: VaadaStatus[] = ['shipped'];
+
+  // --- Product Jobs ---
+  const JOB_STATUSES: JobStatus[] = ['saved', 'applied', 'phone-screen', 'interview', 'final-round', 'offer', 'rejected'];
+  const JOB_LABELS: Record<JobStatus, string> = {
+    'saved': 'Saved',
+    'applied': 'Applied',
+    'phone-screen': 'Phone Screen',
+    'interview': 'Interview',
+    'final-round': 'Final Round',
+    'offer': 'Offer',
+    'rejected': 'Rejected',
+  };
+  const JOB_COLORS: Record<JobStatus, string> = {
+    'saved': 'bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300',
+    'applied': 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-400',
+    'phone-screen': 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400',
+    'interview': 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400',
+    'final-round': 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400',
+    'offer': 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400',
+    'rejected': 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400',
+  };
+  const JOB_PROGRESS: JobStatus[] = ['applied', 'phone-screen', 'interview', 'final-round', 'offer'];
+
+  // Category config map
+  const CATEGORY_CONFIG: Record<string, { statuses: string[]; labels: Record<string, string>; colors: Record<string, string>; progressStatuses: string[]; defaultStatus: string }> = {
+    mba: { statuses: MBA_STATUSES, labels: MBA_LABELS, colors: MBA_COLORS, progressStatuses: MBA_PROGRESS, defaultStatus: 'researching' },
+    vaada: { statuses: VAADA_STATUSES, labels: VAADA_LABELS, colors: VAADA_COLORS, progressStatuses: VAADA_PROGRESS, defaultStatus: 'backlog' },
+    jobs: { statuses: JOB_STATUSES, labels: JOB_LABELS, colors: JOB_COLORS, progressStatuses: JOB_PROGRESS, defaultStatus: 'saved' },
   };
 
   function loadData(): DashData {
@@ -182,27 +233,38 @@ import PageLayout from "@layouts/PageLayout.astro";
   function renderStats(data: DashData) {
     const statsBar = document.getElementById('stats-bar')!;
     const categories = [
-      { key: 'mba', label: 'MBA / Masters', color: 'violet' },
-      { key: 'vaada', label: 'Vaada', color: 'green' },
-      { key: 'jobs', label: 'Product Jobs', color: 'cyan' },
+      { key: 'mba', label: 'MBA / Masters', color: 'violet', icon: '🎓', statLabel: 'schools' },
+      { key: 'vaada', label: 'Vaada', color: 'green', icon: '🚀', statLabel: 'tasks' },
+      { key: 'jobs', label: 'Product Jobs', color: 'cyan', icon: '💼', statLabel: 'applications' },
     ];
 
     statsBar.innerHTML = categories.map(cat => {
       const items = data[cat.key as keyof DashData];
+      const config = CATEGORY_CONFIG[cat.key];
       const total = items.length;
-      const completed = items.filter(i => ['done', 'accepted', 'submitted'].includes(i.status)).length;
-      const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+      const progressed = items.filter(i => config.progressStatuses.includes(i.status)).length;
+      const pct = total > 0 ? Math.round((progressed / total) * 100) : 0;
+
+      // Count by key statuses for a mini breakdown
+      const activeCount = items.filter(i => !['rejected'].includes(i.status)).length;
 
       return `
         <div class="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
-          <p class="font-mono text-xs text-${cat.color}-500 mb-1">${cat.label}</p>
-          <p class="text-2xl font-bold text-black dark:text-white">${total}</p>
+          <div class="flex items-center justify-between mb-1">
+            <p class="font-mono text-xs text-${cat.color}-500">${cat.label}</p>
+            <span class="text-sm">${cat.icon}</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <p class="text-2xl font-bold text-black dark:text-white">${total}</p>
+            <p class="font-mono text-[10px] text-neutral-400">${cat.statLabel}</p>
+          </div>
           <div class="flex items-center gap-2 mt-2">
             <div class="flex-1 h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-700 overflow-hidden">
               <div class="h-full rounded-full bg-${cat.color}-500 transition-all duration-500" style="width: ${pct}%"></div>
             </div>
-            <span class="font-mono text-xs text-neutral-400">${pct}%</span>
+            <span class="font-mono text-[10px] text-neutral-400">${progressed}/${total}</span>
           </div>
+          <p class="font-mono text-[10px] text-neutral-400 mt-1.5">${activeCount} active</p>
         </div>
       `;
     }).join('');
@@ -211,12 +273,21 @@ import PageLayout from "@layouts/PageLayout.astro";
   function renderItems(category: keyof DashData, data: DashData) {
     const container = document.getElementById(`${category}-items`)!;
     const items = data[category];
+    const config = CATEGORY_CONFIG[category];
+
+    const emptyMessages: Record<string, string> = {
+      mba: 'add schools you\'re targeting',
+      vaada: 'add features & milestones to track',
+      jobs: 'add roles you\'re eyeing',
+    };
 
     if (items.length === 0) {
       container.innerHTML = `
-        <p class="font-mono text-xs text-neutral-400 dark:text-neutral-600 py-4 text-center">
-          no items yet
-        </p>
+        <div class="py-6 text-center">
+          <p class="font-mono text-xs text-neutral-400 dark:text-neutral-600">
+            ${emptyMessages[category]}
+          </p>
+        </div>
       `;
       return;
     }
@@ -226,13 +297,13 @@ import PageLayout from "@layouts/PageLayout.astro";
         <div class="flex items-start justify-between gap-2">
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-black dark:text-white truncate">${escapeHtml(item.text)}</p>
-            <div class="flex items-center gap-2 mt-1.5">
+            <div class="flex items-center gap-2 mt-1.5 flex-wrap">
               <button
-                class="status-cycle-btn inline-flex px-2 py-0.5 rounded-full text-[10px] font-mono ${STATUS_COLORS[item.status]} cursor-pointer hover:opacity-80 transition-opacity"
+                class="status-cycle-btn inline-flex px-2 py-0.5 rounded-full text-[10px] font-mono ${config.colors[item.status] || 'bg-neutral-200 text-neutral-600'} cursor-pointer hover:opacity-80 transition-opacity"
                 data-category="${category}"
                 data-id="${item.id}"
               >
-                ${STATUS_LABELS[item.status]}
+                ${config.labels[item.status] || item.status}
               </button>
               <span class="font-mono text-[10px] text-neutral-400">${new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
             </div>
@@ -285,6 +356,7 @@ import PageLayout from "@layouts/PageLayout.astro";
   document.querySelectorAll('.add-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const category = (btn as HTMLElement).dataset.category as keyof DashData;
+      const config = CATEGORY_CONFIG[category];
       const input = document.getElementById(`${category}-input`) as HTMLInputElement;
       const text = input.value.trim();
       if (!text) return;
@@ -293,7 +365,7 @@ import PageLayout from "@layouts/PageLayout.astro";
       data[category].push({
         id: generateId(),
         text,
-        status: 'not-started',
+        status: config.defaultStatus,
         createdAt: new Date().toISOString(),
         notes: '',
       });
@@ -325,9 +397,9 @@ import PageLayout from "@layouts/PageLayout.astro";
     if (!item) return;
 
     if (btn.classList.contains('status-cycle-btn')) {
-      const statuses = CATEGORY_STATUSES[category];
-      const currentIdx = statuses.indexOf(item.status);
-      item.status = statuses[(currentIdx + 1) % statuses.length] as DashItem['status'];
+      const config = CATEGORY_CONFIG[category];
+      const currentIdx = config.statuses.indexOf(item.status);
+      item.status = config.statuses[(currentIdx + 1) % config.statuses.length];
       saveData(data);
       renderAll();
     }
