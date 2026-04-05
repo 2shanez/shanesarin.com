@@ -1,5 +1,5 @@
 ---
-title: "vaada — the promise market"
+title: "vaada - the commitment market"
 description: "Stake money on your promises. More details soon."
 date: "Feb 15 2026"
 comingSoon: true
