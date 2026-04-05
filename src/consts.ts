@@ -10,7 +10,7 @@ export const SITE: Site = {
 
 export const HOME: Metadata = {
   TITLE: "Shane Sarin",
-  DESCRIPTION: "Shane Sarin — builder, collector, explorer. Buidling at the intersection of consumer, AI, and culture. Former Consensys and RECUR. UNC Chapel Hill alum.",
+  DESCRIPTION: "Shane Sarin — builder, collector, explorer. Building at the intersection of consumer, AI, and culture. Former Consensys and RECUR. UNC Chapel Hill alum.",
 };
 
 export const BLOG: Metadata = {
