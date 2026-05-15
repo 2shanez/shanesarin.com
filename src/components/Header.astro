@@ -167,10 +167,10 @@ const pathname = Astro.url.pathname;
           class="group flex items-center justify-center"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 md:h-8 w-auto stroke-current opacity-50 group-hover:opacity-100 dark:stroke-[#2EE59D] transition-opacity duration-300" viewBox="0 0 48 48" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Ornate sun -->
+            <!-- Sun with dots at all 8 ray ends -->
             <circle cx="24" cy="24" r="8"></circle>
             <circle cx="24" cy="24" r="4" stroke-width="1"></circle>
-            <!-- Ornate rays -->
+            <!-- Cardinal rays -->
             <line x1="24" y1="4" x2="24" y2="12"></line>
             <line x1="24" y1="36" x2="24" y2="44"></line>
             <line x1="4" y1="24" x2="12" y2="24"></line>
@@ -180,11 +180,16 @@ const pathname = Astro.url.pathname;
             <line x1="32.49" y1="32.49" x2="38.14" y2="38.14"></line>
             <line x1="9.86" y1="38.14" x2="15.51" y2="32.49"></line>
             <line x1="32.49" y1="15.51" x2="38.14" y2="9.86"></line>
-            <!-- Small decorative dots at ray ends -->
+            <!-- Dots at cardinal ray ends -->
             <circle cx="24" cy="4" r="1.5" stroke-width="1"></circle>
             <circle cx="24" cy="44" r="1.5" stroke-width="1"></circle>
             <circle cx="4" cy="24" r="1.5" stroke-width="1"></circle>
             <circle cx="44" cy="24" r="1.5" stroke-width="1"></circle>
+            <!-- Dots at diagonal ray ends -->
+            <circle cx="9.86" cy="9.86" r="1.5" stroke-width="1"></circle>
+            <circle cx="38.14" cy="38.14" r="1.5" stroke-width="1"></circle>
+            <circle cx="9.86" cy="38.14" r="1.5" stroke-width="1"></circle>
+            <circle cx="38.14" cy="9.86" r="1.5" stroke-width="1"></circle>
           </svg>
         </button>
         <button
@@ -193,15 +198,12 @@ const pathname = Astro.url.pathname;
           class="group flex items-center justify-center"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 md:h-8 w-auto stroke-current opacity-50 group-hover:opacity-100 dark:stroke-[#2EE59D] transition-opacity duration-300" viewBox="0 0 48 48" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Ornate crescent moon -->
+            <!-- Crescent moon -->
             <path d="M36 24c0 8.84-7.16 16-16 16-2.63 0-5.11-.64-7.3-1.77A16 16 0 0 0 36 24c0-5.05-2.34-9.56-6-12.5A15.9 15.9 0 0 1 36 24z"></path>
-            <!-- Stars -->
+            <!-- External stars only -->
             <circle cx="38" cy="12" r="1.5" stroke-width="1"></circle>
             <circle cx="42" cy="20" r="1" stroke-width="1"></circle>
             <circle cx="34" cy="8" r="1" stroke-width="1"></circle>
-            <!-- Decorative detail on moon -->
-            <circle cx="22" cy="18" r="2" stroke-width="1"></circle>
-            <circle cx="18" cy="28" r="1.5" stroke-width="1"></circle>
           </svg>
         </button>
         <!-- Login / Dashboard -->
