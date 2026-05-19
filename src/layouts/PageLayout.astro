@@ -2,6 +2,7 @@
 import Head from "@components/Head.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+import Analytics from "@components/Analytics.astro";
 import { SITE } from "@consts";
 
 type Props = {
@@ -25,6 +26,7 @@ const { title, description } = Astro.props;
       })();
     </script>
     <Head title={`${title} | ${SITE.NAME}`} description={description} />
+    <Analytics />
   </head>
   <body>
     <div class="header-fade">
